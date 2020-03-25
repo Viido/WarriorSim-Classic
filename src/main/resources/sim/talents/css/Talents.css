@@ -1,0 +1,41 @@
+.talent-button{
+    -fx-pref-width: 38px;
+    -fx-pref-height: 38px;
+    -fx-max-width: 38px;
+    -fx-max-height: 38px;
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-border-image-source: url(/images/talent/default.png);
+    -fx-border-image-repeat: no-repeat;
+    -fx-border-image-insets: -3px;
+    -fx-border-image-width: 10px;
+    -fx-border-image-slice: 10px;
+    -fx-focus-traversable: false;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+.talent-button:hover{
+    -fx-border-image-source: url(/images/talent/hilite.png);
+    -fx-border-image-insets: -3px;
+    -fx-border-image-width: 10px;
+    -fx-border-image-slice: 10px;
+}
+
+.talent-border{
+    -fx-background-image: url(/images/talent/border.gif);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: -84px, 0px;
+}
+
+.talent-bubble{
+    -fx-background-image: url(/images/talent/bubble2.png);
+    -fx-text-fill: rgb(23, 253, 23);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-translate-x: 20;
+    -fx-translate-y: 19;
+}
+
+.
+

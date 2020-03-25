@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root fx:id="button" type="javafx.scene.control.Button" styleClass="talent-button" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <graphic>
+        <StackPane fx:id="stackpane" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" prefHeight="42.0" prefWidth="42.0">
+            <children>
+                <Label fx:id="label1" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" prefHeight="42.0" prefWidth="42.0" styleClass="talent-border" />
+                <Label fx:id="label2" maxHeight="23.0" maxWidth="22.0" minHeight="23.0" minWidth="22.0" prefHeight="23.0" prefWidth="22.0" text="0" styleClass="talent-bubble" />
+            </children>
+        </StackPane>
+    </graphic>
+</fx:root>
+
