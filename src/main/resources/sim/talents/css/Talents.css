@@ -21,6 +21,9 @@
     -fx-border-image-width: 10px;
     -fx-border-image-slice: 10px;
 }
+.talent-button:disabled{
+    -fx-opacity: 1;
+}
 
 .talent-border{
     -fx-background-image: url(/images/talent/border.gif);
@@ -36,6 +39,4 @@
     -fx-translate-x: 20;
     -fx-translate-y: 19;
 }
-
-.
 

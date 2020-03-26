@@ -1,10 +1,10 @@
 package sim.talents;
 
 import com.google.gson.annotations.SerializedName;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import java.util.ArrayList;
 
 public class Talent {
     @SerializedName(value = "i")
@@ -17,25 +17,25 @@ public class Talent {
     private int[] spellIds;
     @SerializedName(value = "d")
     private String[] descriptions;
-    private int x;
-    private int y;
+    @SerializedName(value = "x")
+    private int col;
+    @SerializedName(value = "y")
+    private int row;
     @SerializedName(value = "iconname")
     private String img;
 
-    private int points = 0;
-    private int reqPoints;
+    private IntegerProperty points;
+    private TalentTier talentTier;
+    private Talent reqTalent;
+    private BooleanProperty available;
+    private BooleanProperty reqMaxed;
+    private BooleanProperty locked;
 
-    public Talent(int id, String name, int max, int[] spellIds, String[] descriptions, int x, int y, String img) {
-        this.id = id;
-        this.name = name;
-        this.max = max;
-        this.spellIds = spellIds;
-        this.descriptions = descriptions;
-        this.x = x;
-        this.y = y;
-        this.img = img;
-
-        reqPoints = y * 5;
+    public Talent(){
+        points = new SimpleIntegerProperty(0);
+        available = new SimpleBooleanProperty(false);
+        reqMaxed = new SimpleBooleanProperty(true);
+        locked = new SimpleBooleanProperty(false);
     }
 
     public int getId() {
@@ -78,20 +78,20 @@ public class Talent {
         this.descriptions = descriptions;
     }
 
-    public int getX() {
-        return x;
+    public int getCol() {
+        return col;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public String getImg() {
@@ -103,20 +103,110 @@ public class Talent {
     }
 
     public int getPoints() {
+        return points.get();
+    }
+
+    public IntegerProperty pointsProperty() {
         return points;
     }
 
     public void setPoints(int points) {
-        this.points = points;
+        this.points.set(points);
     }
 
-    public int getReqPoints() {
-        return reqPoints;
+
+    public void addPoint(){
+        if(points.get() < max){
+            points.set(points.get() + 1);
+        }
     }
 
-    public void setReqPoints(int reqPoints) {
-        this.reqPoints = reqPoints;
+    public void removePoint(){
+        if(points.get() > 0 ){
+            points.set(points.get() - 1);
+        }
     }
+
+    public TalentTier getTalentTier() {
+        return talentTier;
+    }
+
+    public void setTalentTier(TalentTier talentTier) {
+        this.talentTier = talentTier;
+
+        if(talentTier.getTier() == 0){
+            available.set(true);
+        }
+
+        talentTier.availableProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue && reqMaxed.get()){
+                available.set(true);
+            }else{
+                available.set(false);
+            }
+        });
+    }
+
+    public Talent getReqTalent() {
+        return reqTalent;
+    }
+
+    public void setReqTalent(Talent reqTalent) {
+        this.reqTalent = reqTalent;
+        reqMaxed.set(false);
+
+
+        reqTalent.pointsProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue() == reqTalent.getMax()){
+                reqMaxed.set(true);
+            }else{
+                reqMaxed.set(false);
+            }
+
+            if(newValue.intValue() == reqTalent.getMax() && talentTier.isAvailable()){
+                available.set(true);
+            }else{
+                available.set(false);
+            }
+        });
+
+        pointsProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue() > 0){
+                reqTalent.setLocked(true);
+            }else{
+                reqTalent.setLocked(false);
+            }
+        });
+    }
+
+    public boolean isReqMaxed() {
+        return available.get();
+    }
+
+    public BooleanProperty reqMaxedProperty() {
+        return available;
+    }
+
+    public boolean isAvailable() {
+        return available.get();
+    }
+
+    public BooleanProperty availableProperty() {
+        return available;
+    }
+
+    public boolean isLocked() {
+        return locked.get();
+    }
+
+    public BooleanProperty lockedProperty() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked.set(locked);
+    }
+
 
 }
 

@@ -1,15 +1,10 @@
 package sim;
 
-import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sim.talents.TalentTree;
-import sim.talents.TalentsController;
-
-import java.io.InputStreamReader;
 
 public class Main extends Application {
 

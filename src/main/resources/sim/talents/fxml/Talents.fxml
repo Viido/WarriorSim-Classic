@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="420.0" maxWidth="720.0" minHeight="420.0" minWidth="720.0" prefHeight="420.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sim.talents.TalentsController">
+<StackPane fx:id="sp" maxHeight="420.0" maxWidth="720.0" minHeight="420.0" minWidth="720.0" prefHeight="420.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sim.talents.TalentsController">
     <children>
         <HBox fillHeight="false">
             <children>
@@ -15,7 +15,7 @@
                                 <Image url="@/images/talent/classes/backgrounds/warrior_1.jpg" />
                             </image>
                         </ImageView>
-                        <GridPane fx:id="armsTree" gridLinesVisible="true" pickOnBounds="false">
+                        <GridPane fx:id="armsTree" pickOnBounds="false">
                             <columnConstraints>
                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
@@ -34,7 +34,7 @@
                         </GridPane>
                     </children>
                 </StackPane>
-                <StackPane>
+                <StackPane fx:id="sp2">
                     <children>
                         <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
                             <image>
@@ -60,7 +60,7 @@
                   </GridPane>
                     </children>
                 </StackPane>
-                <StackPane>
+                <StackPane fx:id="sp3">
                     <children>
                         <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
                             <image>
