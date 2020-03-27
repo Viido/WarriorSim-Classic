@@ -14,6 +14,8 @@ public class TalentArrow extends Canvas {
     Image arrowGrey = new Image("images/talent/arrows/down_grey.png");
 
     public TalentArrow(Talent talent1, Talent talent2){
+        setDisable(true);
+
         this.talent1 = talent1;
         this.talent2 = talent2;
 

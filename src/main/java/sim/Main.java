@@ -14,9 +14,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("talents/fxml/Talents.fxml"));
 
         primaryStage.setTitle("WarriorSim Classic");
-        primaryStage.setScene(new Scene(root, 720, 420));
-        primaryStage.getScene().getStylesheets().add(getClass().getResource("talents/css/Talents.css").toExternalForm());
+        primaryStage.setScene(new Scene(root, 850, 510));
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/app/warrior-wow-icon.png").toExternalForm()));
+        primaryStage.setResizable(false);
 
         primaryStage.show();
     }

@@ -1,3 +1,8 @@
+* {
+    baseColor: #282828;
+    secondaryColor: #383838;
+}
+
 .talent-button{
     -fx-pref-width: 38px;
     -fx-pref-height: 38px;
@@ -13,16 +18,12 @@
     -fx-focus-traversable: false;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-color: transparent;
 }
-.talent-button:hover{
+.talent-button:hover {
     -fx-border-image-source: url(/images/talent/hilite.png);
     -fx-border-image-insets: -3px;
     -fx-border-image-width: 10px;
     -fx-border-image-slice: 10px;
-}
-.talent-button:disabled{
-    -fx-opacity: 1;
 }
 
 .talent-border{
@@ -38,5 +39,32 @@
     -fx-alignment: center;
     -fx-translate-x: 20;
     -fx-translate-y: 19;
+}
+
+.talent-label{
+    -fx-background-color: baseColor;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.talent-pane{
+    -fx-border-color: secondaryColor;
+    -fx-border-width: 2px;
+    -fx-border-insets: -2;
+}
+
+BorderPane{
+    -fx-background-color: baseColor;
+}
+
+.reset-button{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-opacity: 50%;
+}
+
+.reset-button:hover{
+    -fx-opacity: 100%;
 }
 

@@ -31,8 +31,6 @@ public class TalentButton extends Button {
             throw new RuntimeException(exception);
         }
 
-        this.getStyleClass().add("talent-button");
-
         talent.availableProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
                 setAvailable();
@@ -78,8 +76,10 @@ public class TalentButton extends Button {
     }
 
     private void setUnmaxed(){
-        label1.setStyle("-fx-background-position: -84px, 0px;");
-        label2.setStyle("-fx-text-fill: rgb(23, 253, 23);");
+        if(talent.isAvailable()){
+            label1.setStyle("-fx-background-position: -84px, 0px;");
+            label2.setStyle("-fx-text-fill: rgb(23, 253, 23);");
+        }
     }
 
     private void onMouseClicked(MouseEvent e){

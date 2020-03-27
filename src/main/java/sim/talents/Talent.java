@@ -212,6 +212,8 @@ public class Talent {
         return req;
     }
 
-
+    public void setAvailable(boolean available) {
+        this.available.set(available);
+    }
 }
 
