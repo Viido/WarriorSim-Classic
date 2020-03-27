@@ -21,6 +21,8 @@ public class Talent {
     private int col;
     @SerializedName(value = "y")
     private int row;
+    @SerializedName(value = "r")
+    private int[] req;
     @SerializedName(value = "iconname")
     private String img;
 
@@ -155,7 +157,6 @@ public class Talent {
         this.reqTalent = reqTalent;
         reqMaxed.set(false);
 
-
         reqTalent.pointsProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() == reqTalent.getMax()){
                 reqMaxed.set(true);
@@ -205,6 +206,10 @@ public class Talent {
 
     public void setLocked(boolean locked) {
         this.locked.set(locked);
+    }
+
+    public int[] getReq() {
+        return req;
     }
 
 

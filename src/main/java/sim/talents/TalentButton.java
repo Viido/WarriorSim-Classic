@@ -19,8 +19,6 @@ public class TalentButton extends Button {
     private Talent talent;
     private Talents talents;
 
-    private BooleanProperty available = new SimpleBooleanProperty(true);
-
     public TalentButton(Talent talent, Talents talents) {
         this.talent = talent;
         this.talents = talents;
@@ -36,12 +34,6 @@ public class TalentButton extends Button {
 
         this.getStyleClass().add("talent-button");
 
-        if(talent.isAvailable()){
-            setAvailable();
-        }else{
-            setUnavailable();
-        }
-
         talent.availableProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
                 setAvailable();
@@ -50,14 +42,11 @@ public class TalentButton extends Button {
             }
         });
 
-        available.addListener((observable, oldValue, newValue) -> {
-            if(newValue){
-                setAvailable();
-            }else{
-                setUnavailable();
-            }
-        });
-
+        if(talent.isAvailable()){
+            setAvailable();
+        }else{
+            setUnavailable();
+        }
 
         this.setOnMouseClicked(this::onMouseClicked);
 
@@ -74,11 +63,11 @@ public class TalentButton extends Button {
         talents.pointsProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() == 51){
                 if(talent.availableProperty().get() && talent.getPoints() == 0){
-                    available.set(false);
+                    talent.availableProperty().set(false);
                 }
             }else if(oldValue.intValue() == 51){
-                if(talent.availableProperty().get() && talent.getTalentTier().isAvailable()){
-                    available.set(true);
+                if(talent.getTalentTier().isAvailable()){
+                    talent.availableProperty().set(true);
                 }
             }
         });
@@ -96,7 +85,7 @@ public class TalentButton extends Button {
 
     private void onMouseClicked(MouseEvent e){
         if(e.getButton() == MouseButton.PRIMARY){
-            if(talents.getPoints() < 51){
+            if(talents.getPoints() < 51 && talent.isAvailable()){
                 talent.addPoint();
             }
         }else if (e.getButton() == MouseButton.SECONDARY){
@@ -110,14 +99,12 @@ public class TalentButton extends Button {
         this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ ".jpg);");
         label1.setStyle("-fx-background-position: -84px, 0px;");
         label2.setVisible(true);
-        this.setDisable(false);
     }
 
     public void setUnavailable(){
         label1.setStyle("-fx-background-position: 0px, 0px;");
         this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ "_grey.jpg);");
         label2.setVisible(false);
-        this.setDisable(true);
     }
 
     public Talent getTalent() {

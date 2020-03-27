@@ -25,56 +25,87 @@ public class TalentsController implements Initializable {
 
 
     Talents talents;
-    HashMap<Talent, TalentButton> talentButtons = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addTalents();
+        initModel();
+        initTalentButtons();
+        initArrows();
     }
 
-    public void addTalents(){
+    private void initTalentButtons(){
+        GridPane[] gridPanes = {armsTree, furyTree, protTree};
+
+        for(int i = 0; i < 3; i++){
+            for (Talent talent : talents.getTalentTrees().get(i).getTalents()){
+                TalentButton talentButton = new TalentButton(talent, talents);
+
+                gridPanes[i].add(talentButton, talent.getCol(), talent.getRow());
+            }
+        }
+    }
+
+    private void initModel(){
         Gson gson = new Gson();
         talents = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/talents.json")), Talents.class);
 
-        setReqTalents();
+        for(TalentTree talentTree : talents.getTalentTrees()){
+            talentTree.setTalentTiers();
+            talentTree.setPointsBinding();
 
-        GridPane[] gridPanes = {armsTree, furyTree, protTree};
-        StackPane[] stackPanes = {sp1, sp2, sp3};
-
-
-        for(int i = 0; i < talents.getTalentTrees().size(); i++){
-            talents.getTalentTrees().get(i).setTalentTiers();
-            talents.getTalentTrees().get(i).setPointsBinding();
-
-            Talent[] talentList = talents.getTalentTrees().get(i).getTalents();
-
-            for (Talent talent : talentList) {
-                talent.setTalentTier(talents.getTalentTrees().get(i).getTier(talent.getRow()));
-                TalentButton tb = new TalentButton(talent, talents);
-
-                if (talent.getReqTalent() != null) {
-                    stackPanes[i].getChildren().add(new TalentArrow(talentButtons.get(talent.getReqTalent()), tb));
-                }
-                talentButtons.put(talent, tb);
-                gridPanes[i].add(tb, talent.getCol(), talent.getRow());
+            for(Talent talent : talentTree.getTalents()){
+                talent.setTalentTier(talentTree.getTier(talent.getRow()));
             }
         }
+
+        setReqTalents();
 
         talents.setPointsBinding();
     }
 
-    private void setReqTalents(){
-        talents.getTalent(0,2,2).setReqTalent(talents.getTalent(0, 2, 0));
-        talents.getTalent(0,1,2).setReqTalent(talents.getTalent(0, 1, 1));
-        talents.getTalent(0,2,3).setReqTalent(talents.getTalent(0, 2, 2));
-        talents.getTalent(0,1,6).setReqTalent(talents.getTalent(0, 1, 4));
+    private void initArrows(){
+        StackPane[] stackPanes = {sp1, sp2, sp3};
 
-        talents.getTalent(1,2,5).setReqTalent(talents.getTalent(1, 2, 3));
-        talents.getTalent(1,1,6).setReqTalent(talents.getTalent(1, 1, 4));
-
-        talents.getTalent(2,1,2).setReqTalent(talents.getTalent(2, 1, 0));
-        talents.getTalent(2,1,6).setReqTalent(talents.getTalent(2, 1, 4));
+        for(int i = 0; i < 3; i++){
+            for(Talent t : talents.getTalentTrees().get(i).getTalents()){
+                if(t.getReqTalent() != null){
+                    stackPanes[i].getChildren().add(new TalentArrow(t.getReqTalent(), t));
+                }
+            }
+        }
     }
 
+    private void setReqTalents(){
+        List<Talent> dependencies = new ArrayList<>();
+
+        for(Talent t : talents.getTalents()){
+            if(t.getReq() != null){
+                dependencies.add(t);
+            }
+        }
+
+        for(Talent t : dependencies){
+            t.setReqTalent(findReq(0, t.getReq()[0], t.getTalentTier().getTalentTree().getTier(0)));
+        }
+    }
+
+    private Talent findReq(int counter, int dependency, TalentTier talentTier){
+        for(Talent t : talentTier.getTalents()){
+            if(counter == dependency){
+                return t;
+            }
+            counter++;
+
+            if(counter > dependency){
+                return null;
+            }
+        }
+
+        if(talentTier.getNext() == null){
+            return null;
+        }
+
+        return findReq(counter, dependency, talentTier.getNext());
+    }
 }
 

@@ -7,20 +7,20 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 
 public class TalentArrow extends Canvas {
-    private TalentButton talent1;
-    private TalentButton talent2;
+    private Talent talent1;
+    private Talent talent2;
 
     Image arrow = new Image("images/talent/arrows/down.png");
     Image arrowGrey = new Image("images/talent/arrows/down_grey.png");
 
-    public TalentArrow(TalentButton talent1, TalentButton talent2){
+    public TalentArrow(Talent talent1, Talent talent2){
         this.talent1 = talent1;
         this.talent2 = talent2;
 
         drawArrow(arrowGrey);
 
-        talent2.getTalent().availableProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue && talent1.getTalent().getPoints() == talent1.getTalent().getMax()){
+        talent2.availableProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue && talent1.getPoints() == talent1.getMax()){
                 drawArrow(arrow);
             }else{
                 drawArrow(arrowGrey);
@@ -31,9 +31,9 @@ public class TalentArrow extends Canvas {
     private void drawArrow(Image image){
         clearCanvas();
 
-        int startX = talent1.getTalent().getCol() * 60 + 30;
-        int startY = talent1.getTalent().getRow() * 60 + 49;
-        int endY = talent2.getTalent().getRow() * 60 + 16;
+        int startX = talent1.getCol() * 60 + 30;
+        int startY = talent1.getRow() * 60 + 49;
+        int endY = talent2.getRow() * 60 + 16;
 
         PixelReader reader = image.getPixelReader();
 
