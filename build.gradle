@@ -36,7 +36,7 @@ jlink{
         // Set the environment property BADASS_JLINK_JPACKAGE_HOME or explicitly configure the below property
         jpackageHome = 'C:/Program Files/AdoptOpenJDK/jdk-14.0.0.36-hotspot'
         installerOptions = ['--win-per-user-install', '--win-dir-chooser']
-        //imageOptions = ['--icon', 'src/main/resources/images/sim/warrior.ico']
+        imageOptions = ['--icon', 'src/main/resources/images/sim/warrior_wow_icon.ico']
     }
 }
 
