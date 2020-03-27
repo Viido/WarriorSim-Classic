@@ -136,7 +136,7 @@ public class Talent {
     public void setTalentTier(TalentTier talentTier) {
         this.talentTier = talentTier;
 
-        if(talentTier.getTier() == 0){
+        if(talentTier.getRow() == 0){
             available.set(true);
         }
 

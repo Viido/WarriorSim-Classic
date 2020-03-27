@@ -1,6 +1,5 @@
 package sim.talents;
 
-import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -120,7 +119,7 @@ public class TalentButton extends Button {
         }
 
 
-        if(highestActive.getTier() == 0){
+        if(highestActive.getRow() == 0){
             return true;
         }
 
@@ -128,15 +127,15 @@ public class TalentButton extends Button {
             return true;
         }
 
-        if(nextTier.getPoints() > 0 && talent.getTalentTier().getCumulativePoints() == nextTier.getTier() * 5){
+        if(nextTier.getPoints() > 0 && talent.getTalentTier().getCumulativePoints() == nextTier.getRow() * 5){
             return false;
         }
 
-        if(highestActive.getPrev().getCumulativePoints() == highestActive.getTier() * 5 && highestActive != talent.getTalentTier()){
+        if(highestActive.getPrev().getCumulativePoints() == highestActive.getRow() * 5 && highestActive != talent.getTalentTier()){
             return false;
         }
 
-        if(highestActive.getPrev().getCumulativePoints() == highestActive.getTier() * 5 - 1){
+        if(highestActive.getPrev().getCumulativePoints() == highestActive.getRow() * 5 - 1){
             return false;
         }
 

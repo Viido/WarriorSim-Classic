@@ -10,36 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalentTier {
-    private List<Talent> talents;
-    private IntegerProperty points;
-    private NumberBinding pointsBinding;
-    private BooleanProperty locked;
-    private BooleanProperty available;
-
-    private int tier;
-
+    private List<Talent> talents = new ArrayList<>();
     private TalentTier prev;
     private TalentTier next;
     private TalentTree talentTree;
+    private int row;
 
-    private IntegerProperty cumulativePoints;
+    private IntegerProperty points = new SimpleIntegerProperty(0);
+    private IntegerProperty cumulativePoints = new SimpleIntegerProperty(0);
+    private BooleanProperty locked = new SimpleBooleanProperty(false);
+    private BooleanProperty available = new SimpleBooleanProperty(false);
 
-    public TalentTier(TalentTree talentTree){
+    public TalentTier(TalentTree talentTree, int row){
         this.talentTree = talentTree;
-        talents = new ArrayList<>();
-        points = new SimpleIntegerProperty(0);
-        locked = new SimpleBooleanProperty(false);
-        available = new SimpleBooleanProperty(false);
-        cumulativePoints = new SimpleIntegerProperty(0);
+        this.row = row;
 
-        cumulativePoints.bind(pointsProperty());
+        if(row == 0){
+            available.set(true);
+        }
     }
 
     public List<Talent> getTalents() {
         return talents;
     }
 
-    public void setPointsBinding(){
+    public void bindPoints(){
+        NumberBinding pointsBinding = null;
+
         for(Talent t : talents){
             if(pointsBinding == null){
                 pointsBinding = t.pointsProperty().add(0);
@@ -52,7 +49,19 @@ public class TalentTier {
     }
 
     public void bindCumulativePoints(){
-        cumulativePoints.bind(prev.cumulativePoints.add(points));
+        if(row == 0){
+            cumulativePoints.bind(points);
+        }else{
+            cumulativePoints.bind(prev.cumulativePoints.add(points));
+
+            cumulativePoints.addListener((observable, oldValue, newValue) -> {
+                if (newValue.intValue() >= row * 5) {
+                    available.set(true);
+                } else if (newValue.intValue() < row * 5) {
+                    available.set(false);
+                }
+            });
+        }
     }
 
 
@@ -96,15 +105,8 @@ public class TalentTier {
         return cumulativePoints;
     }
 
-    public void setTier(int tier) {
-        if(tier == 0){
-            availableProperty().set(true);
-        }
-        this.tier = tier;
-    }
-
-    public int getTier() {
-        return tier;
+    public int getRow() {
+        return row;
     }
 
     public void setAvailable(boolean available) {

@@ -13,7 +13,6 @@ public class Talents {
     @SerializedName(value = "tree")
     private List<TalentTree> talentTrees;
     private IntegerProperty points;
-    private NumberBinding pointsBinding;
 
     public Talents(){
         points = new SimpleIntegerProperty(0);
@@ -49,7 +48,9 @@ public class Talents {
         return talents;
     }
 
-    public void setPointsBinding(){
+    public void bindPoints(){
+        NumberBinding pointsBinding = null;
+
         for(TalentTree t : talentTrees){
             if(pointsBinding == null){
                 pointsBinding = t.pointsProperty().add(0);
@@ -64,6 +65,4 @@ public class Talents {
     public Talent getTalent(int tree, int col, int row){
         return talentTrees.get(tree).getTalent(col, row);
     }
-
-
 }

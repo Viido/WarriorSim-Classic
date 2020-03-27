@@ -14,10 +14,9 @@ public class TalentTree {
     @SerializedName(value = "t")
     private Talent[] talents;
 
-    private IntegerProperty points;
-    private NumberBinding pointsBinding;
-
     private List<TalentTier> talentTiers;
+
+    private IntegerProperty points;
 
     public TalentTree(){
         points = new SimpleIntegerProperty(0);
@@ -66,7 +65,9 @@ public class TalentTree {
         this.points.set(points);
     }
 
-    public void setPointsBinding(){
+    public void bindPoints(){
+        NumberBinding pointsBinding = null;
+
         for(Talent t : talents){
             if(pointsBinding == null){
                 pointsBinding = t.pointsProperty().add(0);
@@ -78,46 +79,6 @@ public class TalentTree {
         points.bind(pointsBinding);
     }
 
-    public void setTalentTiers(){
-        for(int i = 0; i < 7; i++){
-            talentTiers.add(new TalentTier(this));
-            talentTiers.get(i).setTier(i);
-        }
-
-        for(Talent t : talents){
-            talentTiers.get(t.getRow()).getTalents().add(t);
-        }
-
-        for(int i = 0; i < 7; i++){
-            if(i < 6){
-                talentTiers.get(i).setNext(talentTiers.get(i + 1));
-            }
-
-            if(i > 0){
-                talentTiers.get(i).setPrev(talentTiers.get(i - 1));
-            }
-        }
-
-        for(TalentTier t : talentTiers){
-            t.setPointsBinding();
-            if(t.getPrev() != null){
-                t.bindCumulativePoints();
-            }
-
-
-
-            if(t.getTier() != 0){
-                t.cumulativePointsProperty().addListener((observable, oldValue, newValue) -> {
-                    if(newValue.intValue() >= t.getTier() * 5){
-                        t.setAvailable(true);
-                    }else if(newValue.intValue() < t.getTier() * 5){
-                        t.setAvailable(false);
-                    }
-                });
-            }
-        }
-    }
-
     public TalentTier getHighestActiveTier(){
         for(int i = 6; i >= 0; i--){
             if(talentTiers.get(i).getPoints() > 0){
@@ -126,6 +87,14 @@ public class TalentTree {
         }
 
         return talentTiers.get(0);
+    }
+
+    public List<TalentTier> getTalentTiers() {
+        return talentTiers;
+    }
+
+    public void setTalentTiers(List<TalentTier> talentTiers) {
+        this.talentTiers = talentTiers;
     }
 }
 

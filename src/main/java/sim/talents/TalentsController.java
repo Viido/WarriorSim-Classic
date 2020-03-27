@@ -23,7 +23,6 @@ public class TalentsController implements Initializable {
     @FXML
     StackPane sp3;
 
-
     Talents talents;
 
     @Override
@@ -49,18 +48,14 @@ public class TalentsController implements Initializable {
         Gson gson = new Gson();
         talents = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/talents.json")), Talents.class);
 
-        for(TalentTree talentTree : talents.getTalentTrees()){
-            talentTree.setTalentTiers();
-            talentTree.setPointsBinding();
-
-            for(Talent talent : talentTree.getTalents()){
-                talent.setTalentTier(talentTree.getTier(talent.getRow()));
-            }
-        }
-
+        setTalentTiers();
         setReqTalents();
 
-        talents.setPointsBinding();
+        for(TalentTree talentTree : talents.getTalentTrees()){
+            talentTree.bindPoints();
+        }
+
+        talents.bindPoints();
     }
 
     private void initArrows(){
@@ -75,6 +70,38 @@ public class TalentsController implements Initializable {
         }
     }
 
+    private void setTalentTiers(){
+        for(TalentTree talentTree : talents.getTalentTrees()) {
+            List<TalentTier> talentTiers = new ArrayList<>();
+
+            for(int i = 0; i < 7; i++){
+                talentTiers.add(new TalentTier(talentTree, i));
+            }
+
+            for(Talent talent : talentTree.getTalents()){
+                talentTiers.get(talent.getRow()).getTalents().add(talent);
+                talent.setTalentTier(talentTiers.get(talent.getRow()));
+            }
+
+            for (int i = 0; i < 7; i++) {
+                if (i < 6) {
+                    talentTiers.get(i).setNext(talentTiers.get(i + 1));
+                }
+
+                if (i > 0) {
+                    talentTiers.get(i).setPrev(talentTiers.get(i - 1));
+                }
+            }
+
+            for (TalentTier talentTier : talentTiers) {
+                talentTier.bindPoints();
+                talentTier.bindCumulativePoints();
+            }
+
+            talentTree.setTalentTiers(talentTiers);
+        }
+    }
+
     private void setReqTalents(){
         List<Talent> dependencies = new ArrayList<>();
 
@@ -85,7 +112,7 @@ public class TalentsController implements Initializable {
         }
 
         for(Talent t : dependencies){
-            t.setReqTalent(findReq(0, t.getReq()[0], t.getTalentTier().getTalentTree().getTier(0)));
+            t.setReqTalent(Objects.requireNonNull(findReq(0, t.getReq()[0], t.getTalentTier().getTalentTree().getTier(0))));
         }
     }
 
