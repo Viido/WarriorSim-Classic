@@ -1,11 +1,30 @@
 package sim.talents;
 
+import com.jfoenix.controls.JFXTooltip;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
+import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
+import javafx.stage.PopupWindow;
+import javafx.stage.Window;
+import javafx.util.Duration;
+import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
 
@@ -17,10 +36,14 @@ public class TalentButton extends Button {
 
     private Talent talent;
     private Talents talents;
+    private StringProperty description = new SimpleStringProperty();
 
     public TalentButton(Talent talent, Talents talents) {
         this.talent = talent;
         this.talents = talents;
+
+        description.set(talent.getDescriptions()[0]);
+
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/TalentButton.fxml"));
@@ -64,11 +87,44 @@ public class TalentButton extends Button {
                 }
             }else if(oldValue.intValue() == 51){
                 if(talent.getTalentTier().isAvailable()){
-                    talent.availableProperty().set(true);
+                    if(talent.getReqTalent() != null){
+                        if(talent.isReqMaxed()){
+                            talent.availableProperty().set(true);
+                        }
+                    }else{
+                        talent.availableProperty().set(true);
+                    }
                 }
             }
         });
+
+        setDescription();
     }
+
+    private void setDescription(){
+        talent.pointsProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue() > 0){
+                description.set(talent.getDescriptions()[newValue.intValue() - 1]);
+            }
+        });
+
+        JFXTooltip tooltip = new JFXTooltip();
+        tooltip.setPos(Pos.TOP_RIGHT);
+        tooltip.setMargin(-30);
+
+        tooltip.setShowDelay(Duration.ZERO);
+
+
+        StringProperty descriptionProperty = new SimpleStringProperty();
+
+        descriptionProperty.bind(Bindings.concat(talent.getName(), "\nRank ", talent.pointsProperty(), "/", talent.getMax(), "\n", description));
+
+        tooltip.textProperty().bind(descriptionProperty);
+
+        this.setOnMouseEntered(e -> tooltip.show(this, 0, 0));
+        this.setOnMouseExited(e -> tooltip.hide());
+    }
+
 
     private void setMaxed(){
         label1.setStyle("-fx-background-position: -42px, 0px;");

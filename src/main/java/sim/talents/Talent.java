@@ -1,10 +1,7 @@
 package sim.talents;
 
 import com.google.gson.annotations.SerializedName;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 
 public class Talent {
     @SerializedName(value = "i")
@@ -164,7 +161,7 @@ public class Talent {
                 reqMaxed.set(false);
             }
 
-            if(newValue.intValue() == reqTalent.getMax() && talentTier.isAvailable()){
+            if(newValue.intValue() == reqTalent.getMax() && talentTier.isAvailable() && talentTier.getTalentTree().getAllTalents().getPoints() < 51){
                 available.set(true);
             }else{
                 available.set(false);

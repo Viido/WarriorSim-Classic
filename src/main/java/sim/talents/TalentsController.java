@@ -11,8 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -48,17 +46,20 @@ public class TalentsController implements Initializable {
     Button resetTree2;
     @FXML
     Button resetTree3;
+    @FXML
+    StackPane main;
 
 
     Talents talents;
+    Map<Talent, TalentButton> talentButtons = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initModel();
-        initTalentButtons();
         initArrows();
         initLabels();
         initResetButtons();
+        initTalentButtons();
     }
 
     private void initResetButtons(){
@@ -102,7 +103,7 @@ public class TalentsController implements Initializable {
         for(int i = 0; i < 3; i++){
             for (Talent talent : talents.getTalentTrees().get(i).getTalents()){
                 TalentButton talentButton = new TalentButton(talent, talents);
-
+                talentButtons.put(talent, talentButton);
                 talentGrids[i].add(talentButton, talent.getCol(), talent.getRow());
             }
         }
@@ -118,7 +119,6 @@ public class TalentsController implements Initializable {
         List<TalentTree> talentTrees = talents.getTalentTrees();
 
         talentBuildString.bind(Bindings.concat("Warrior (", talentTrees.get(0).pointsProperty(), "/", talentTrees.get(1).pointsProperty(), "/", talentTrees.get(2).pointsProperty(), ")"));
-
         talentBuild.textProperty().bind(talentBuildString);
 
         remainingPoints.textProperty().bind(Bindings.concat("Remaining points: ", Bindings.subtract(51, talents.pointsProperty()).asString()));
@@ -179,6 +179,7 @@ public class TalentsController implements Initializable {
             }
 
             talentTree.setTalentTiers(talentTiers);
+            talentTree.setAllTalents(talents);
         }
     }
 

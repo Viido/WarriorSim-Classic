@@ -15,6 +15,7 @@ public class TalentTree {
     private Talent[] talents;
 
     private List<TalentTier> talentTiers;
+    private Talents allTalents;
 
     private IntegerProperty points;
 
@@ -95,6 +96,14 @@ public class TalentTree {
 
     public void setTalentTiers(List<TalentTier> talentTiers) {
         this.talentTiers = talentTiers;
+    }
+
+    public void setAllTalents(Talents talents){
+        this.allTalents = talents;
+    }
+
+    public Talents getAllTalents(){
+        return allTalents;
     }
 }
 
