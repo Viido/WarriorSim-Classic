@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="5.0" styleClass="item-box" stylesheets="@../css/Items.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sim.items.ItemsController">
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+    <HBox spacing="5.0">
+        <VBox fx:id="leftItems" />
+      <JFXTabPane fx:id="tabPane" maxHeight="378.0" maxWidth="276.0" minHeight="378.0" minWidth="276.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Items">
+               <content>
+                   <JFXListView fx:id="itemSelect" styleClass="item-select">
+                   </JFXListView>
+               </content>
+            </Tab>
+             <Tab text="Enchants">
+                 <content>
+                     <JFXListView fx:id="enchantSelect" styleClass="item-select">
+                     </JFXListView>
+                 </content>
+             </Tab>
+         </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXTabPane>
+        <VBox fx:id="rightItems" />
+    </HBox>
+</VBox>

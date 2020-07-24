@@ -1,0 +1,65 @@
+* {
+    baseColor: #282828;
+    secondaryColor: #383838;
+}
+
+.item-button{
+    -fx-pref-width: 38px;
+    -fx-pref-height: 38px;
+    -fx-max-width: 38px;
+    -fx-max-height: 38px;
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-border-image-source: url(/images/talent/default.png);
+    -fx-border-image-repeat: no-repeat;
+    -fx-border-image-insets: -3px;
+    -fx-border-image-width: 10px;
+    -fx-border-image-slice: 10px;
+    -fx-focus-traversable: false;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 36px;
+}
+.item-button:hover {
+    -fx-border-image-source: url(/images/talent/hilite.png);
+    -fx-border-image-insets: -3px;
+    -fx-border-image-width: 10px;
+    -fx-border-image-slice: 10px;
+}
+
+.item-border{
+    -fx-background-image: url(/images/talent/border.gif);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0px, 0px;
+}
+
+.item-box{
+    -fx-background-color: baseColor;
+}
+
+.item-select{
+    -fx-background-color: baseColor;
+    -fx-border-color: secondaryColor;
+}
+
+.item-select .list-cell{
+    -fx-background-color: baseColor;
+    -fx-border-color: secondaryColor;
+    -fx-border-insets: -1 -1 -1 -1;
+}
+
+.item-select .list-cell:hover{
+    -fx-background-color: secondaryColor;
+}
+
+.item-select .scroll-bar{
+    -fx-background-color: baseColor;
+}
+
+.item-select .scroll-bar .thumb{
+    -fx-background-color: secondaryColor;
+}
+
+.jfx-tab-pane .tab-header-background{
+    -fx-background-color: baseColor;
+}

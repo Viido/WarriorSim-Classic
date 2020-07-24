@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <Button fx:id="itemSlot" styleClass="item-button">
+        <graphic>
+            <StackPane fx:id="stackpane" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" prefHeight="42.0" prefWidth="42.0">
+                <children>
+                    <Label fx:id="label1" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" prefHeight="42.0" prefWidth="42.0" styleClass="item-border" />
+                </children>
+            </StackPane>
+        </graphic>
+    </Button>
+</fx:root>

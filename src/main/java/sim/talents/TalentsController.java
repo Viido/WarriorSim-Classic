@@ -53,6 +53,8 @@ public class TalentsController implements Initializable {
     Talents talents;
     Map<Talent, TalentButton> talentButtons = new HashMap<>();
 
+    // TODO: Rework talent availability, there are some bugs with tiers and required talents
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initModel();

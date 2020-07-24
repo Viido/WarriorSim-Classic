@@ -41,6 +41,17 @@
     -fx-translate-y: 19;
 }
 
+.talent-description{
+   /* -fx-max-width: 100;
+    -fx-max-height: 50;
+    -fx-pref-width: 100;
+    -fx-pref-height: 50;
+    -fx-min-width: 100;
+    -fx-min-height: 50;*/
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
 .talent-label{
     -fx-background-color: baseColor;
     -fx-text-fill: white;

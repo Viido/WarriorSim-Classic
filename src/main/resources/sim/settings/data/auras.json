@@ -1,0 +1,398 @@
+{
+  "auras": [
+    {
+      "id": 22888,
+      "name": "Rallying Cry of the Dragonslayer",
+      "type": "world",
+      "spellCrit": 10,
+      "crit": 5,
+      "ap": 140,
+      "icon": "inv_misc_head_dragon_01",
+      "description": "Increases critical chance of spells by 10%, melee and ranged by 5% and grants 140 attack power. 120 minute duration."
+    },
+    {
+      "id": 24425,
+      "name": "Spirit of Zandalar",
+      "type": "world",
+      "statMod": 15,
+      "icon": "ability_creature_poison_05",
+      "description": "Increases movement speed by 10% and all stats by 15% for 2 hours."
+    },
+    {
+      "id": 15366,
+      "name": "Songflower Serenade",
+      "type": "world",
+      "spellCrit": 5,
+      "crit": 5,
+      "agi": 15,
+      "str": 15,
+      "sta": 15,
+      "icon": "spell_holy_mindvision",
+      "description": "Increases chance for a melee, ranged, or spell critical by 5% and all attributes by 15 for 1 hour."
+    },
+    {
+      "id": 16609,
+      "name": "Warchief's Blessing",
+      "type": "world",
+      "health": 300,
+      "haste": 15,
+      "icon": "spell_arcane_teleportorgrimmar",
+      "description": "Increases hitpoints by 300. 15% haste to melee attacks. 10 mana regen every 5 seconds."
+    },
+    {
+      "id": 22817,
+      "name": "Fengus' Ferocity",
+      "type": "world",
+      "ap": 200,
+      "icon": "spell_nature_undyingstrength",
+      "description": "Attack power increased by 200."
+    },
+    {
+      "id": 22818,
+      "name": "Moldar's Moxie",
+      "type": "world",
+      "staMod": 15,
+      "icon": "spell_nature_massteleport",
+      "description": "Overall Stamina increased by 15%."
+    },
+    {
+      "id": 22820,
+      "name": "Slipkik's Savvy",
+      "type": "world",
+      "spellCrit": 3,
+      "icon": "spell_holy_lesserheal02",
+      "description": "Chance for a critical hit with a spell increased by 3%."
+    },
+    {
+      "id": 23768,
+      "name": "Sayge's Dark Fortune of Damage",
+      "type": "world",
+      "dmgMod": 10,
+      "icon": "inv_misc_orb_02",
+      "description": "Increases damage by 10%."
+    },
+    {
+      "id": 23060,
+      "name": "Battle Squawk",
+      "type": "raid",
+      "haste": 5,
+      "icon": "inv_misc_birdbeck_01",
+      "description": "Attack speed increased by 5%."
+    },
+    {
+      "id": 7165,
+      "name": "Battle Stance",
+      "type": "raid",
+      "group": "stance",
+      "icon": "ability_warrior_offensivestance",
+      "description": "A balanced combat stance that generates rage when the warrior is hit, as well as when the warrior strikes an opponent."
+    },
+    {
+      "id": 71,
+      "name": "Defensive Stance",
+      "type": "raid",
+      "group": "stance",
+      "icon": "ability_warrior_defensivestance",
+      "description": "A defensive combat stance. Decreases damage taken by 10% and damage caused by 10%. Increases threat generated."
+    },
+    {
+      "id": 2458,
+      "name": "Berserker Stance",
+      "type": "raid",
+      "crit": 3,
+      "group": "stance",
+      "icon": "ability_racial_avatar",
+      "description": "An aggressive stance. Critical hit chance is increased by 3% and all damage taken is increased by 10%."
+    },
+    {
+      "id": 24932,
+      "name": "Leader of the Pack",
+      "type": "raid",
+      "crit": 3,
+      "icon": "spell_nature_unyeildingstamina",
+      "description": "Increases ranged and melee critical chance by 3%."
+    },
+    {
+      "id": 9885,
+      "name": "Mark of the Wild",
+      "type": "raid",
+      "armor": 384,
+      "str": 16,
+      "agi": 16,
+      "sta": 16,
+      "fireRes": 27,
+      "natureRes": 27,
+      "frostRes": 27,
+      "arcaneRes": 27,
+      "shadowRes": 27,
+      "icon": "spell_nature_regeneration",
+      "description": "Increases armor by 384, all attributes by 16 and all resistances by 27."
+    },
+    {
+      "id": 10938,
+      "name": "Power Word: Fortitude",
+      "type": "raid",
+      "sta": 70,
+      "icon": "spell_holy_wordfortitude",
+      "description": "Increases Stamina by 54."
+    },
+    {
+      "id": 20906,
+      "name": "Trueshot Aura",
+      "type": "raid",
+      "ap": 100,
+      "icon": "ability_trueshot",
+      "description": "Attack power increased by 100."
+    },
+    {
+      "id": 25898,
+      "name": "Greater Blessing of Kings",
+      "type": "raid",
+      "statMod": 10,
+      "faction": "alliance",
+      "icon": "spell_magic_greaterblessingofkings",
+      "description": "Increases stats by 10%."
+    },
+    {
+      "id": 25782,
+      "name": "Greater Blessing of Might",
+      "type": "raid",
+      "ap": 186,
+      "faction": "alliance",
+      "icon": "spell_holy_greaterblessingofkings",
+      "description": "Increases melee attack power by 186."
+    },
+    {
+      "id": 25895,
+      "name": "Greater Blessing of Salvation",
+      "type": "raid",
+      "faction": "alliance",
+      "icon": "spell_holy_greaterblessingofsalvation",
+      "description": "Reduces threat generated by 30%."
+    },
+    {
+      "id": 10626,
+      "name": "Grace of Air",
+      "type": "raid",
+      "agi": 77,
+      "faction": "horde",
+      "icon": "spell_nature_invisibilitytotem",
+      "description": "Increases Agility by 77."
+    },
+    {
+      "id": 10441,
+      "name": "Strength of Earth",
+      "type": "raid",
+      "str": 70,
+      "faction": "horde",
+      "icon": "spell_nature_earthbindtotem",
+      "description": "Increases Strength by 70."
+    },
+    {
+      "id": 25909,
+      "name": "Tranquil Air",
+      "type": "raid",
+      "faction": "horde",
+      "icon": "spell_nature_brilliance",
+      "description": "Reduces threat caused by 20%."
+    },
+    {
+      "id": 27621,
+      "name": "Windfury Totem",
+      "type": "raid",
+      "faction": "horde",
+      "icon": "spell_nature_windfury",
+      "description": "Summons a Windfury Totem with 5 health at the feet of the caster. The totem enchants all party members main-hand weapons with wind, if they are within 20 yards. Each hit has a 20% chance of granting the attacker 1 extra attacks with 315 extra attack power. Lasts 1.50 min."
+    },
+    {
+      "id": 18262,
+      "name": "Elemental Sharpening Stone",
+      "type": "consumable",
+      "crit": 2,
+      "group": "weapon",
+      "icon": "inv_stone_02",
+      "description": "Increase critical chance on a melee weapon by 2% for 30 minutes."
+    },
+    {
+      "id": 12404,
+      "name": "Dense Sharpening Stone",
+      "type": "consumable",
+      "dmg": 8,
+      "group": "weapon",
+      "icon": "inv_stone_sharpeningstone_05",
+      "description": "Increase sharp weapon damage by 8 for 30 minutes."
+    },
+    {
+      "id": 23122,
+      "name": "Consecrated Sharpening Stone",
+      "type": "consumable",
+      "ap": 100,
+      "group": "weapon",
+      "icon": "inv_stone_sharpeningstone_02",
+      "description": "While applied to target weapon it increases attack power against undead by 100. Lasts for 1 hour."
+    },
+    {
+      "id": 13928,
+      "name": "Grilled Squid",
+      "type": "consumable",
+      "agi": 10,
+      "group": "food",
+      "icon": "inv_misc_fish_13",
+      "description": "Use: Restores 874.8 health over 27 sec. Must remain seated while eating. If you eat for 10 seconds will also increase your Agility by 10 for 10 min."
+    },
+    {
+      "id": 13810,
+      "name": "Blessed Sunfruit",
+      "type": "consumable",
+      "group": "food",
+      "icon": "inv_misc_food_41",
+      "description": "Use: Restores 1933.2 health over 27 sec. Must remain seated while eating. Also increases your Strength by 10 for 10 min."
+    },
+    {
+      "id": 20452,
+      "name": "Smoked Desert Dumplings",
+      "type": "consumable",
+      "group": "food",
+      "icon": "inv_misc_food_64",
+      "description": "Use: Restores 2148 health over 30 sec. Must remain seated while eating. If you spend at least 10 seconds eating you will become well fed and gain 20 Strength for 15 min."
+    },
+    {
+      "id": 9206,
+      "name": "Elixir of Giants",
+      "type": "consumable",
+      "str": 25,
+      "group": "str",
+      "icon": "inv_potion_61",
+      "description": "Use: Increases your Strength by 25 for 1 hour. (3 Sec Cooldown)"
+    },
+    {
+      "id": 12451,
+      "name": "Juju Power",
+      "type": "consumable",
+      "str": 30,
+      "group": "str",
+      "icon": "inv_misc_monsterscales_11",
+      "description": "Use: Increases the target's Strength by 30 for 30 min. (1 Min Cooldown)"
+    },
+    {
+      "id": 12820,
+      "name": "Winterfall Firewater",
+      "type": "consumable",
+      "ap": 35,
+      "group": "food",
+      "icon": "inv_potion_92",
+      "description": "Use: Increases your melee attack power by 35 and size for 20 min. (1 Min Cooldown)"
+    },
+    {
+      "id": 12460,
+      "name": "Juju Might",
+      "type": "consumable",
+      "ap": 40,
+      "group": "food",
+      "icon": "inv_misc_monsterscales_07",
+      "description": "Use: Increases attack power by 40 for 10 min. (1 Min Cooldown)"
+    },
+    {
+      "id": 9187,
+      "name": "Elixir of Greater Agility",
+      "type": "consumable",
+      "group": "agi",
+      "icon": "inv_potion_94",
+      "description": "Use: Increases Agility by 25 for 1 hour. (3 Sec Cooldown)"
+    },
+    {
+      "id": 13452,
+      "name": "Elixir of the Mongoose",
+      "type": "consumable",
+      "agi": 25,
+      "crit": 2,
+      "group": "agi",
+      "icon": "inv_potion_32",
+      "description": "Use: Increases Agility by 25 and chance to get a critical hit by 2% for 1 hour. (3 Sec Cooldown)"
+    },
+    {
+      "id": 8412,
+      "name": "Ground Scorpok Assay",
+      "type": "consumable",
+      "agi": 25,
+      "group": "bl",
+      "icon": "inv_misc_dust_02",
+      "description": "Use: Increases Agility by 25 when consumed. Effect lasts for 60 minutes. (1 Hour Cooldown)"
+    },
+    {
+      "id": 8410,
+      "name": "R.O.I.D.S.",
+      "type": "consumable",
+      "str": 25,
+      "group": "bl",
+      "icon": "inv_stone_15",
+      "description": "Use: Increases Strength by 25 when consumed. Effect lasts for 60 minutes. (1 Hour Cooldown)"
+    },
+    {
+      "id": 23513,
+      "name": "Essence of the Red",
+      "type": "boss",
+      "icon": "spell_fire_lavaspawn",
+      "description": "Restores 500 Mana per second.\nRestores 50 Energy per second.\nGenerates 20 Rage per second."
+    },
+    {
+      "id": 29232,
+      "name": "Fungal Bloom",
+      "type": "boss",
+      "crit": 50,
+      "spellCrit": 50,
+      "icon": "spell_nature_unyeildingstamina",
+      "description": "Critical-hit chance increased by 50%.\nSpell critical-hit chance increased by 60%.\nSpells and abilities cause no threat."
+    },
+    {
+      "id": 11597,
+      "name": "Sunder Armor",
+      "type": "debuff",
+      "armor": 2250,
+      "group": "armor",
+      "icon": "ability_warrior_sunder",
+      "description": "Armor decreased by 2250."
+    },
+    {
+      "id": 11198,
+      "name": "Expose Armor (Improved)",
+      "type": "debuff",
+      "armor": 2550,
+      "group": "armor",
+      "icon": "ability_warrior_riposte",
+      "description": "Armor decreased by 2550."
+    },
+    {
+      "id": 11717,
+      "name": "Curse of Recklessness",
+      "type": "debuff",
+      "armor": 640,
+      "icon": "spell_shadow_unholystrength",
+      "description": "Increases melee attack power by 90 and decreases armor by 640. Target will not flee and will ignore Fear and Horror effects."
+    },
+    {
+      "id": 9907,
+      "name": "Faerie Fire",
+      "type": "debuff",
+      "armor": 505,
+      "icon": "spell_nature_faeriefire",
+      "description": "Decreases armor by 505. Cannot stealth or turn invisible."
+    },
+    {
+      "id": 16928,
+      "name": "Annihilator",
+      "type": "debuff",
+      "armor": 600,
+      "icon": "inv_axe_12",
+      "description": "Armor reduced by 600."
+    },
+    {
+      "id": 9088,
+      "name": "Gift of Arthas",
+      "type": "debuff",
+      "dmg": 8,
+      "icon": "inv_potion_28",
+      "description": "Increases physical damage taken by 8."
+    }
+  ]
+}

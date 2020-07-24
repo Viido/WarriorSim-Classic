@@ -1,0 +1,83 @@
+* {
+    baseColor: #282828;
+    secondaryColor: #383838;
+}
+
+.label{
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.jfx-text-field{
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-alignment: center-right;
+    -fx-min-height: 27;
+    -fx-max-height: 27;
+    -fx-min-width: 75;
+    -fx-max-width: 75;
+}
+
+.jfx-combo-box{
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-alignment: center-right;
+    -fx-min-height: 25;
+    -fx-max-height: 25;
+    -fx-min-width: 75;
+    -fx-max-width: 75;
+}
+
+.jfx-combo-box .arrow-button{
+    -fx-padding: 0;
+    -fx-background-size: 0;
+    -fx-background-position: center-left;
+}
+.jfx-combo-box .arrow-button .arrow{
+    -fx-padding: 0;
+    -fx-background-size: 0;
+    -fx-max-width: 0;
+}
+.jfx-combo-box .list-cell{
+    -fx-text-fill: WHITE;
+    -fx-alignment: center-right;
+    -fx-font-size: 14;
+}
+
+.settingsHBox{
+    -fx-min-height: 30;
+    -fx-max-height: 30;
+}
+
+.jfx-list-view{
+    -fx-background-color: baseColor;
+    -fx-border-color: secondaryColor;
+}
+
+.jfx-list-view .list-cell{
+    -fx-background-color: baseColor;
+    -fx-text-fill: white;
+    -fx-border-color: secondaryColor;
+    -fx-border-insets: -1 -2 -1 -2;
+}
+
+.jfx-list-view .list-cell:hover{
+    -fx-background-color: secondaryColor;
+}
+
+.jfx-list-view .scroll-bar{
+    -fx-background-color: baseColor;
+}
+
+.jfx-list-view .scroll-bar .thumb{
+    -fx-background-color: secondaryColor;
+}
+
+.auraVBox{
+    -fx-min-width: 300;
+    -fx-max-width: 300;
+}
+
+
+

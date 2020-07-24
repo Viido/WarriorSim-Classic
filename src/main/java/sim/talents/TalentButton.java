@@ -108,6 +108,7 @@ public class TalentButton extends Button {
             }
         });
 
+        // TODO: custom tooltip class
         JFXTooltip tooltip = new JFXTooltip();
         tooltip.setPos(Pos.TOP_RIGHT);
         tooltip.setMargin(-30);

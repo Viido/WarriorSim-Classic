@@ -1,0 +1,345 @@
+{
+  "enchants": [
+    {
+      "id": 18329,
+      "name": "Arcanum of Rapidity",
+      "slot": [
+        "head",
+        "legs"
+      ],
+      "haste": 1,
+      "phase": 2,
+      "description": "+1% Haste",
+      "quality": "uncommon"
+    },
+    {
+      "id": 11647,
+      "name": "Lesser Arcanum of Voracity (Agi)",
+      "slot": [
+        "head",
+        "legs"
+      ],
+      "agi": 8,
+      "phase": 1,
+      "description": "+8 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 11645,
+      "name": "Lesser Arcanum of Voracity (Str)",
+      "slot": [
+        "head",
+        "legs"
+      ],
+      "str": 8,
+      "phase": 1,
+      "description": "+8 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 11642,
+      "name": "Lesser Arcanum of Constitution",
+      "slot": [
+        "head",
+        "legs"
+      ],
+      "health": 100,
+      "phase": 1,
+      "description": "+100 Health",
+      "quality": "uncommon"
+    },
+    {
+      "id": 19782,
+      "name": "Presence of Might",
+      "slot": [
+        "head",
+        "legs"
+      ],
+      "sta": 10,
+      "defense": 7,
+      "blockValue": 15,
+      "phase": 1,
+      "description": "+10 Stamina, +7 Defense, +15 Block Value",
+      "quality": "rare"
+    },
+    {
+      "id": 29483,
+      "name": "Might of the Scourge",
+      "slot": [
+        "shoulder"
+      ],
+      "ap": 26,
+      "crit": 1,
+      "phase": 6,
+      "description": "+26 Attack Power, +1% Crit",
+      "quality": "rare"
+    },
+    {
+      "id": 24422,
+      "name": "Zandalar Signet of Might",
+      "slot": [
+        "shoulder"
+      ],
+      "ap": 30,
+      "phase": 4,
+      "description": "+30 Attack Power",
+      "quality": "rare"
+    },
+    {
+      "id": 25084,
+      "spellid": true,
+      "name": "Subtlety",
+      "slot": [
+        "back"
+      ],
+      "phase": 5,
+      "description": "2% Reduced Threat",
+      "quality": "rare"
+    },
+    {
+      "id": 13882,
+      "name": "Lesser Agility",
+      "slot": [
+        "back"
+      ],
+      "agi": 3,
+      "phase": 1,
+      "description": "+3 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20025,
+      "name": "Greater Stats",
+      "slot": [
+        "chest"
+      ],
+      "agi": 4,
+      "str": 4,
+      "sta": 4,
+      "phase": 1,
+      "description": "+4 All Stats",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13941,
+      "name": "Stats",
+      "slot": [
+        "chest"
+      ],
+      "agi": 3,
+      "str": 3,
+      "sta": 3,
+      "phase": 1,
+      "description": "+3 All Stats",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13939,
+      "name": "Greater Strength",
+      "slot": [
+        "wrist"
+      ],
+      "str": 7,
+      "phase": 1,
+      "description": "+7 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20010,
+      "name": "Superior Strength",
+      "slot": [
+        "wrist"
+      ],
+      "str": 9,
+      "phase": 1,
+      "description": "+9 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 25080,
+      "name": "Superior Agility",
+      "slot": [
+        "hands"
+      ],
+      "agi": 15,
+      "phase": 5,
+      "description": "+15 Agility",
+      "quality": "rare"
+    },
+    {
+      "id": 20012,
+      "name": "Greater Agility",
+      "slot": [
+        "hands"
+      ],
+      "agi": 7,
+      "phase": 1,
+      "description": "+7 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20013,
+      "name": "Greater Strength",
+      "slot": [
+        "hands"
+      ],
+      "str": 7,
+      "phase": 1,
+      "description": "+7 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13948,
+      "name": "Minor Haste",
+      "slot": [
+        "hands"
+      ],
+      "haste": 1,
+      "phase": 1,
+      "description": "+1% Haste",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20023,
+      "name": "Greater Agility",
+      "slot": [
+        "feet"
+      ],
+      "agi": 7,
+      "phase": 1,
+      "description": "+7 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13890,
+      "name": "Minor Speed",
+      "slot": [
+        "feet"
+      ],
+      "phase": 1,
+      "description": "Minor Speed",
+      "quality": "uncommon"
+    },
+    {
+      "id": 23800,
+      "name": "Agility",
+      "slot": [
+        "weapon"
+      ],
+      "agi": 15,
+      "phase": 1,
+      "description": "+15 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 23799,
+      "name": "Strength",
+      "slot": [
+        "weapon"
+      ],
+      "str": 15,
+      "phase": 1,
+      "description": "+15 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20034,
+      "spellid": true,
+      "name": "Crusader",
+      "slot": [
+        "weapon"
+      ],
+      "phase": 1,
+      "description": "Crusader",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13898,
+      "spellid": true,
+      "name": "Fiery Weapon",
+      "slot": [
+        "weapon"
+      ],
+      "phase": 1,
+      "description": "Fiery Weapon",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20032,
+      "spellid": true,
+      "name": "Lifestealing",
+      "slot": [
+        "weapon"
+      ],
+      "phase": 1,
+      "description": "Lifestealing",
+      "quality": "rare"
+    },
+    {
+      "id": 20031,
+      "name": "Superior Striking",
+      "slot": [
+        "weapon"
+      ],
+      "bonusdmg": 5,
+      "phase": 1,
+      "description": "+5 Damage",
+      "quality": "uncommon"
+    },
+    {
+      "id": 27837,
+      "name": "2H Agility",
+      "slot": [
+        "2h"
+      ],
+      "agi": 25,
+      "phase": 1,
+      "description": "+25 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20030,
+      "name": "Superior Impact",
+      "slot": [
+        "2h"
+      ],
+      "bonusdmg": 9,
+      "phase": 1,
+      "description": "+9 Damage",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20017,
+      "name": "Greater Stamina",
+      "slot": [
+        "shield"
+      ],
+      "sta": 7,
+      "phase": 1,
+      "description": "+7 Stamina",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13689,
+      "name": "Lesser Block",
+      "slot": [
+        "shield"
+      ],
+      "block": 2,
+      "phase": 1,
+      "description": "+2% Block",
+      "quality": "uncommon"
+    },
+    {
+      "id": 12645,
+      "spellid": true,
+      "name": "Thorium Shield Spike",
+      "slot": [
+        "shield"
+      ],
+      "phase": 1,
+      "description": "Thorium Shield Spike",
+      "quality": "uncommon"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sim.main.MainController" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282828">
+    <HBox>
+        <VBox>
+            <fx:include fx:id="itemsView" source="../../items/fxml/ItemsView.fxml"/>
+            <fx:include fx:id="talentsView" source="../../talents/fxml/Talents.fxml"/>
+        </VBox>
+        <fx:include fx:id="settingsView" source="../../settings/fxml/SettingsView.fxml"/>
+    </HBox>
+</StackPane>

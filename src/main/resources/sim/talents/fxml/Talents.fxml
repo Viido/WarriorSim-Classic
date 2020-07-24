@@ -7,126 +7,130 @@
 
 <BorderPane maxWidth="850.0" prefWidth="850.0" stylesheets="@../css/Talents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sim.talents.TalentsController">
    <center>
-      <HBox fillHeight="false" maxHeight="450.0" maxWidth="720.0" minHeight="450.0" minWidth="720.0" BorderPane.alignment="TOP_LEFT">
-            <children>
-            <VBox alignment="CENTER" styleClass="talent-pane">
-               <children>
-                  <StackPane>
+      <StackPane BorderPane.alignment="TOP_LEFT" fx:id="main">
+         <children>
+            <HBox fillHeight="false" maxHeight="450.0" maxWidth="720.0" minHeight="450.0" minWidth="720.0">
+                  <children>
+                  <VBox alignment="CENTER" styleClass="talent-pane">
                      <children>
-                        <Label fx:id="label1" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Arms" />
-                        <Button fx:id="resetTree1" alignment="CENTER_RIGHT" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" />
-                           </StackPane.margin>
-                        </Button>
+                        <StackPane>
+                           <children>
+                              <Label fx:id="label1" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Arms" />
+                              <Button fx:id="resetTree1" alignment="CENTER_RIGHT" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets right="5.0" />
+                                 </StackPane.margin>
+                              </Button>
+                           </children>
+                        </StackPane>
+                            <StackPane fx:id="pane1" styleClass="talent-pane">
+                                <children>
+                                    <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
+                                        <image>
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_1.jpg" />
+                                        </image>
+                                    </ImageView>
+                                    <GridPane fx:id="tree1" pickOnBounds="false">
+                                        <columnConstraints>
+                                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                        </rowConstraints>
+                                    </GridPane>
+                                </children>
+                            </StackPane>
                      </children>
-                  </StackPane>
-                      <StackPane fx:id="pane1" styleClass="talent-pane">
-                          <children>
-                              <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
-                                  <image>
-                                      <Image url="@/images/talent/classes/backgrounds/warrior_1.jpg" />
-                                  </image>
-                              </ImageView>
-                              <GridPane fx:id="tree1" pickOnBounds="false">
-                                  <columnConstraints>
-                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                                  </columnConstraints>
-                                  <rowConstraints>
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                                  </rowConstraints>
+                  </VBox>
+                  <VBox alignment="CENTER" styleClass="talent-pane">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <Label fx:id="label2" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Fury" />
+                              <Button fx:id="resetTree2" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets right="5.0" />
+                                 </StackPane.margin>
+                              </Button>
+                           </children>
+                        </StackPane>
+                            <StackPane fx:id="pane2" styleClass="talent-pane">
+                                <children>
+                                    <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
+                                        <image>
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_2.jpg" />
+                                        </image>
+                                    </ImageView>
+                              <GridPane fx:id="tree2" pickOnBounds="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                 </rowConstraints>
                               </GridPane>
-                          </children>
-                      </StackPane>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" styleClass="talent-pane">
-               <children>
-                  <StackPane>
-                     <children>
-                        <Label fx:id="label2" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Fury" />
-                        <Button fx:id="resetTree2" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" />
-                           </StackPane.margin>
-                        </Button>
+                                </children>
+                            </StackPane>
                      </children>
-                  </StackPane>
-                      <StackPane fx:id="pane2" styleClass="talent-pane">
-                          <children>
-                              <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
-                                  <image>
-                                      <Image url="@/images/talent/classes/backgrounds/warrior_2.jpg" />
-                                  </image>
-                              </ImageView>
-                        <GridPane fx:id="tree2" pickOnBounds="false">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                           </rowConstraints>
-                        </GridPane>
-                          </children>
-                      </StackPane>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" styleClass="talent-pane">
-               <children>
-                  <StackPane>
+                  </VBox>
+                  <VBox alignment="CENTER" styleClass="talent-pane">
                      <children>
-                        <Label fx:id="label3" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Protection" />
-                        <Button fx:id="resetTree3" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT" />
+                        <StackPane>
+                           <children>
+                              <Label fx:id="label3" alignment="CENTER" prefHeight="30.0" prefWidth="240.0" styleClass="talent-label" text="Protection" />
+                              <Button fx:id="resetTree3" maxHeight="16.0" minHeight="16.0" mnemonicParsing="false" prefHeight="16.0" styleClass="reset-button" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                            <StackPane fx:id="pane3" styleClass="talent-pane">
+                                <children>
+                                    <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
+                                        <image>
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_3.jpg" />
+                                        </image>
+                                    </ImageView>
+                              <GridPane fx:id="tree3" pickOnBounds="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                 </rowConstraints>
+                              </GridPane>
+                                </children>
+                            </StackPane>
                      </children>
-                  </StackPane>
-                      <StackPane fx:id="pane3" styleClass="talent-pane">
-                          <children>
-                              <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
-                                  <image>
-                                      <Image url="@/images/talent/classes/backgrounds/warrior_3.jpg" />
-                                  </image>
-                              </ImageView>
-                        <GridPane fx:id="tree3" pickOnBounds="false">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                           </rowConstraints>
-                        </GridPane>
-                          </children>
-                      </StackPane>
-               </children>
-            </VBox>
-            </children>
-        </HBox>
+                  </VBox>
+                  </children>
+              </HBox>
+         </children>
+      </StackPane>
    </center>
    <bottom>
       <HBox maxHeight="30.0" maxWidth="720.0" minHeight="30.0" prefHeight="30.0" BorderPane.alignment="TOP_LEFT">
