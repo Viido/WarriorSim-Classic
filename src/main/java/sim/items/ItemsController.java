@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import sim.main.Warrior;
+import sim.warrior.Warrior;
 
 import java.io.*;
 import java.net.URL;

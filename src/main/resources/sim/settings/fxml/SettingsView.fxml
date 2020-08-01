@@ -22,69 +22,69 @@
             <children>
                <Label text="Fight Duration" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="60" />
+               <JFXTextField fx:id="fightDuration" text="60" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="35.0" styleClass="settingsHBox">
             <children>
                <Label text="Target Level" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="63" />
+               <JFXTextField fx:id="targetLevel" text="63" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="60.0" styleClass="settingsHBox">
             <children>
                <Label text="Target Armor" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="3731" />
+               <JFXTextField fx:id="targetArmor" text="3731" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="85.0" styleClass="settingsHBox">
             <children>
                <Label text="Target Resistance" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="0" />
+               <JFXTextField fx:id="targetResistance" text="0" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" styleClass="settingsHBox">
             <children>
                <Label text="Initial Rage" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="80" />
+               <JFXTextField fx:id="initialRage" text="80" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" styleClass="settingsHBox">
             <children>
                <Label text="Simulations" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField text="100000" />
+               <JFXTextField fx:id="simulations" text="100000" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" styleClass="settingsHBox">
             <children>
                <Label text="Heroic Strike Rank 9" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXCheckBox />
+               <JFXCheckBox fx:id="heroicStrike9" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="185.0" styleClass="settingsHBox">
             <children>
                <Label text="Battle Shout Rank 7" />
                <Region HBox.hgrow="ALWAYS" />
-               <JFXCheckBox />
+               <JFXCheckBox fx:id="battleShout7" />
             </children>
          </HBox>
       </children>
    </VBox>
    <ScrollPane maxHeight="300.0" minWidth="650.0" stylesheets="@../css/Settings.css">
-      <VBox >
+      <VBox spacing="30.0">
          <HBox spacing="30.0">
-            <VBox fx:id="worldBuffs" styleClass="auraVBox" />
-            <VBox fx:id="debuffs" styleClass="auraVBox" />
+            <VBox fx:id="worldBuffs" styleClass="auraVBox"/>
+            <VBox fx:id="debuffs" styleClass="auraVBox"/>
          </HBox>
          <HBox spacing="30.0">
-            <VBox fx:id="raidBuffs" styleClass="auraVBox" />
-            <VBox fx:id="consumables" styleClass="auraVBox" />
+            <VBox fx:id="raidBuffs" styleClass="auraVBox"/>
+            <VBox fx:id="consumables" styleClass="auraVBox"/>
          </HBox>
       </VBox>
    </ScrollPane>

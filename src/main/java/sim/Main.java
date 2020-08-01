@@ -2,22 +2,20 @@ package sim;
 
 import com.jfoenix.controls.JFXMasonryPane;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sim.items.ItemsController;
-import sim.main.Warrior;
+import sim.settings.Settings;
+import sim.warrior.Warrior;
 import sim.settings.SettingsController;
 import sim.talents.TalentsController;
 
 import java.io.*;
 
 public class Main extends Application {
-    Warrior warrior = new Warrior();
+    Settings settings = new Settings();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -29,9 +27,9 @@ public class Main extends Application {
         FXMLLoader talentsLoader = new FXMLLoader(getClass().getResource("talents/fxml/Talents.fxml"));
         FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("settings/fxml/SettingsView.fxml"));
 
-        ItemsController itemsController = new ItemsController(warrior);
-        TalentsController talentsController = new TalentsController(warrior);
-        SettingsController settingsController = new SettingsController(warrior);
+        ItemsController itemsController = new ItemsController(settings.getWarrior());
+        TalentsController talentsController = new TalentsController(settings.getWarrior());
+        SettingsController settingsController = new SettingsController(settings);
 
         itemsLoader.setController(itemsController);
         talentsLoader.setController(talentsController);
@@ -51,6 +49,7 @@ public class Main extends Application {
 
 
         primaryStage.setOnCloseRequest(e -> {
+            settingsController.saveSettings();
             saveData();
             primaryStage.close();
         });
@@ -65,10 +64,9 @@ public class Main extends Application {
 
     private void saveData(){
         try{
-            FileOutputStream fileOut = new FileOutputStream("warrior.ser", false);
+            FileOutputStream fileOut = new FileOutputStream("settings.ser", false);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-
-            out.writeObject(warrior);
+            out.writeObject(settings);
             out.close();
             fileOut.close();
         }catch(IOException e){
@@ -78,9 +76,9 @@ public class Main extends Application {
 
     private void loadData(){
         try {
-            FileInputStream fileIn = new FileInputStream("warrior.ser");
+            FileInputStream fileIn = new FileInputStream("settings.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            warrior = (Warrior) in.readObject();
+            settings = (Settings) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException | ClassNotFoundException c) {

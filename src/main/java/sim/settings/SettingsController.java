@@ -3,41 +3,33 @@ package sim.settings;
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.stage.PopupWindow;
-import javafx.util.Callback;
-import javafx.util.Duration;
-import sim.items.Enchants;
-import sim.items.Item;
-import sim.items.Items;
-import sim.main.Warrior;
-
-import java.io.IOException;
+import sim.warrior.Warrior;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SettingsController implements Initializable {
     @FXML
     JFXTextField raceSelect;
     @FXML
-    VBox auraList;
-
+    JFXTextField fightDuration;
+    @FXML
+    JFXTextField targetLevel;
+    @FXML
+    JFXTextField targetArmor;
+    @FXML
+    JFXTextField targetResistance;
+    @FXML
+    JFXTextField initialRage;
+    @FXML
+    JFXTextField simulations;
+    @FXML
+    JFXCheckBox heroicStrike9;
+    @FXML
+    JFXCheckBox battleShout7;
     @FXML
     VBox worldBuffs;
     @FXML
@@ -48,17 +40,42 @@ public class SettingsController implements Initializable {
     VBox raidBuffs;
 
     Auras auras;
-
     Warrior warrior;
+    Settings settings;
 
-    public SettingsController(Warrior warrior){
-        this.warrior = warrior;
+    public SettingsController(Settings settings){
+        this.warrior = settings.getWarrior();
+        this.settings = settings;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadSettings();
         initRaceSelect();
         initAuras();
+    }
+
+    public void saveSettings(){
+        settings.setFightDuration(Integer.parseInt(fightDuration.getText()));
+        settings.setTargetLevel(Integer.parseInt(targetLevel.getText()));
+        settings.setTargetArmor(Integer.parseInt(targetArmor.getText()));
+        settings.setTargetResistance(Integer.parseInt(targetResistance.getText()));
+        settings.setInitialRage(Integer.parseInt(initialRage.getText()));
+        settings.setSimulations(Integer.parseInt(simulations.getText()));
+        settings.setHeroicStrike9(heroicStrike9.isSelected());
+        settings.setBattleShout7(battleShout7.isSelected());
+    }
+
+    private void loadSettings(){
+        raceSelect.setText(settings.getRace());
+        fightDuration.setText(settings.getFightDuration() + "");
+        targetLevel.setText(settings.getTargetLevel() + "");
+        targetArmor.setText(settings.getTargetArmor() + "");
+        targetResistance.setText(settings.getTargetResistance() + "");
+        initialRage.setText(settings.getInitialRage() + "");
+        simulations.setText(settings.getSimulations() + "");
+        heroicStrike9.setSelected(settings.isHeroicStrike9());
+        battleShout7.setSelected(settings.isBattleShout7());
     }
 
     private void initRaceSelect(){
@@ -80,6 +97,7 @@ public class SettingsController implements Initializable {
         raceSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null){
                 raceSelect.setText(newValue);
+                settings.setRace(newValue);
                 racePopUp.hide();
             }
         });
@@ -89,21 +107,62 @@ public class SettingsController implements Initializable {
         Gson gson = new Gson();
         auras = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/auras.json")), Auras.class);
 
+        Map<String, List<AuraSelect>> buffGroups = new HashMap<>();
+
         for(Aura aura : auras.getAuras()){
             AuraSelect auraSelect = new AuraSelect(aura, warrior);
 
             if(aura.getType().equals("world")){
                 worldBuffs.getChildren().add(auraSelect);
             }
+
             if(aura.getType().equals("debuff")){
                 debuffs.getChildren().add(auraSelect);
             }
+
             if(aura.getType().equals("raid")){
                 raidBuffs.getChildren().add(auraSelect);
+
             }
+
             if(aura.getType().equals("consumable")){
                 consumables.getChildren().add(auraSelect);
             }
+
+            if(aura.getGroup() != null){
+                if(buffGroups.containsKey(aura.getGroup())){
+                    buffGroups.get(aura.getGroup()).add(auraSelect);
+                }else{
+                    List<AuraSelect> buffs = new ArrayList<>();
+                    buffs.add(auraSelect);
+                    buffGroups.put(aura.getGroup(), buffs);
+                }
+            }
         }
+
+        buffGroups.forEach((key, auraSelects) -> {
+            for(AuraSelect auraSelect : auraSelects){
+                auraSelect.checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
+                    if(newValue){
+                        for(AuraSelect auraSelect1 : auraSelects){
+                            if(auraSelect != auraSelect1){
+                                auraSelect1.checkBox.setSelected(false);
+                            }
+                        }
+                    }
+                });
+                if(auraSelect.aura.getGroup().equals("weapon")){
+                    auraSelect.checkBoxOH.selectedProperty().addListener((obs, oldValue, newValue) -> {
+                        if(newValue){
+                            for(AuraSelect auraSelect1 : auraSelects){
+                                if(auraSelect != auraSelect1){
+                                    auraSelect1.checkBoxOH.setSelected(false);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }

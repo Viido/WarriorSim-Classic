@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTooltip;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
@@ -12,11 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import sim.main.Warrior;
+import sim.warrior.Warrior;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class AuraSelect extends HBox {
@@ -24,6 +21,7 @@ public class AuraSelect extends HBox {
     Label auraInfo;
     @FXML
     JFXCheckBox checkBox;
+    JFXCheckBox checkBoxOH;
 
     Aura aura;
     Warrior warrior;
@@ -41,18 +39,23 @@ public class AuraSelect extends HBox {
         this.aura = aura;
         this.warrior = warrior;
 
-        if(warrior.getActiveAuras().containsKey(aura.getId())){
-            checkBox.setSelected(true);
+        if(aura.getGroup() != null){
+            if(aura.getGroup().equals("weapon")){
+                addOHCheckBox();
+            }
         }
 
-        auraInfo.setText(aura.getName());
+        loadData();
 
+        auraInfo.setText(aura.getName());
 
         ImageView imageView = new ImageView(new Image("images/auras/" + aura.getIcon() + ".png", 32, 32, true, true));
         imageView.setViewport(new Rectangle2D(1, 1, 32, 32));
         auraInfo.setGraphic(imageView);
 
         checkBox.setMinHeight(32);
+        setSpacing(5);
+
 
         JFXTooltip tooltip = new JFXTooltip();
         tooltip.setPos(Pos.TOP_RIGHT);
@@ -72,10 +75,51 @@ public class AuraSelect extends HBox {
 
         checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue){
-                warrior.getActiveAuras().put(aura.getId(), aura);
+                if(checkBoxOH != null){
+                    warrior.setTempEnchantMH(aura);
+                }else{
+                    warrior.getActiveAuras().put(aura.getId(), aura);
+                }
             }else{
-                warrior.getActiveAuras().remove(aura.getId());
+                if(checkBoxOH != null && warrior.getTempEnchantMH().getId() == aura.getId()){
+                    warrior.setTempEnchantMH(null);
+                }else{
+                    warrior.getActiveAuras().remove(aura.getId());
+                }
             }
         });
+    }
+
+    private void addOHCheckBox(){
+        checkBoxOH = new JFXCheckBox();
+        checkBoxOH.setMinHeight(32);
+
+        checkBoxOH.selectedProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue){
+                warrior.setTempEnchantOH(aura);
+            }else if(warrior.getTempEnchantOH().getId() == aura.getId()){
+                warrior.setTempEnchantOH(null);
+            }
+        });
+
+        getChildren().add(checkBoxOH);
+    }
+
+    private void loadData(){
+        if(warrior.getActiveAuras().containsKey(aura.getId())){
+            checkBox.setSelected(true);
+
+        }else if (checkBoxOH != null){
+            if(warrior.getTempEnchantMH() != null){
+                if(warrior.getTempEnchantMH().getId() == aura.getId()){
+                    checkBox.setSelected(true);
+                }
+            }
+            if(warrior.getTempEnchantOH() != null){
+                if(warrior.getTempEnchantOH().getId() == aura.getId()){
+                    checkBoxOH.setSelected(true);
+                }
+            }
+        }
     }
 }

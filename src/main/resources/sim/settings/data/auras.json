@@ -279,7 +279,7 @@
       "name": "Winterfall Firewater",
       "type": "consumable",
       "ap": 35,
-      "group": "food",
+      "group": "ap",
       "icon": "inv_potion_92",
       "description": "Use: Increases your melee attack power by 35 and size for 20 min. (1 Min Cooldown)"
     },
@@ -288,7 +288,7 @@
       "name": "Juju Might",
       "type": "consumable",
       "ap": 40,
-      "group": "food",
+      "group": "ap",
       "icon": "inv_misc_monsterscales_07",
       "description": "Use: Increases attack power by 40 for 10 min. (1 Min Cooldown)"
     },

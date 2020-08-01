@@ -1,4 +1,4 @@
-package sim.main;
+package sim.warrior;
 
 import sim.items.Enchant;
 import sim.items.Item;
@@ -13,6 +13,8 @@ public class Warrior implements Serializable {
     Enchant[] equippedEnchants = new Enchant[17];
     Map<Integer, Aura> activeAuras = new HashMap<>();
     Map<Integer, Integer> activeTalents = new HashMap<>();
+    Aura tempEnchantMH;
+    Aura tempEnchantOH;
 
     public Item[] getEquippedItems() {
         return equippedItems;
@@ -36,5 +38,21 @@ public class Warrior implements Serializable {
 
     public Map<Integer, Integer> getActiveTalents() {
         return activeTalents;
+    }
+
+    public Aura getTempEnchantMH() {
+        return tempEnchantMH;
+    }
+
+    public void setTempEnchantMH(Aura tempEnchantMH) {
+        this.tempEnchantMH = tempEnchantMH;
+    }
+
+    public Aura getTempEnchantOH() {
+        return tempEnchantOH;
+    }
+
+    public void setTempEnchantOH(Aura tempEnchantOH) {
+        this.tempEnchantOH = tempEnchantOH;
     }
 }
