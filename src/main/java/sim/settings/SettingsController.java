@@ -19,6 +19,7 @@ import javafx.util.Duration;
 import sim.items.Enchants;
 import sim.items.Item;
 import sim.items.Items;
+import sim.main.Warrior;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,8 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,6 +48,12 @@ public class SettingsController implements Initializable {
     VBox raidBuffs;
 
     Auras auras;
+
+    Warrior warrior;
+
+    public SettingsController(Warrior warrior){
+        this.warrior = warrior;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,7 +90,8 @@ public class SettingsController implements Initializable {
         auras = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/auras.json")), Auras.class);
 
         for(Aura aura : auras.getAuras()){
-            AuraSelect auraSelect = new AuraSelect(aura);
+            AuraSelect auraSelect = new AuraSelect(aura, warrior);
+
             if(aura.getType().equals("world")){
                 worldBuffs.getChildren().add(auraSelect);
             }

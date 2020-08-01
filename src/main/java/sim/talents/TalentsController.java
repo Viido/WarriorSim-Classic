@@ -2,6 +2,9 @@ package sim.talents;
 
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -11,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import sim.main.Warrior;
+
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -46,22 +51,126 @@ public class TalentsController implements Initializable {
     Button resetTree2;
     @FXML
     Button resetTree3;
-    @FXML
-    StackPane main;
 
+    Talent[] talents;
+    Map<Integer, TalentButton> talentButtons = new HashMap<>();
+    Warrior warrior;
+    List<TalentTree> talentTrees = new ArrayList<>();
 
-    Talents talents;
-    Map<Talent, TalentButton> talentButtons = new HashMap<>();
+    IntegerProperty totalPoints = new SimpleIntegerProperty(0);
 
-    // TODO: Rework talent availability, there are some bugs with tiers and required talents
+    public TalentsController(Warrior warrior){
+        this.warrior = warrior;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initModel();
+        initTalentButtons();
+        bindTalentPoints();
         initArrows();
         initLabels();
         initResetButtons();
-        initTalentButtons();
+        addListeners();
+        loadValues();
+    }
+
+    private void initModel(){
+        Gson gson = new Gson();
+        talents = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/talents.json")), Talent[].class);
+
+        for(int i = 0; i < 3; i++){
+            TalentTree talentTree = new TalentTree();
+            talentTrees.add(talentTree);
+        }
+
+        createTalentTiers();
+    }
+
+    private void createTalentTiers(){
+        for(int i = 0; i < 3; i++) {
+            List<TalentTier> talentTiers = talentTrees.get(i).getTalentTiers();
+
+            for(int j = 0; j < 7; j++){
+                talentTiers.add(new TalentTier(talentTrees.get(i), j));
+            }
+
+            for (int j = 0; j < 7; j++) {
+                if (j < 6) {
+                    talentTiers.get(j).setNext(talentTiers.get(j + 1));
+                }
+
+                if (j > 0) {
+                    talentTiers.get(j).setPrev(talentTiers.get(j - 1));
+                }
+            }
+        }
+    }
+
+    private void initTalentButtons(){
+        GridPane[] talentGrids = {tree1, tree2, tree3};
+
+        for(Talent talent : talents){
+            TalentButton talentButton = new TalentButton(talent, talentTrees.get(talent.getTree()).getTalentTiers().get(talent.getRow()), totalPoints);
+
+            talentButtons.put(talent.getId(), talentButton);
+            talentTrees.get(talent.getTree()).getTalentTiers().get(talent.getRow()).getTalents().add(talentButton);
+
+            if(talent.getReq() != 0){
+                talentButton.setReqTalent(talentTrees.get(talent.getTree()).getTalents().stream()
+                        .filter(x -> x.getTalent().getId() == talent.getReq())
+                        .findAny()
+                        .get());
+            }
+
+            talentGrids[talent.getTree()].add(talentButtons.get(talent.getId()), talent.getCol(), talent.getRow());
+        }
+    }
+
+    private void bindTalentPoints(){
+        NumberBinding pointsBinding = null;
+
+        for(TalentTree talentTree : talentTrees){
+            if(pointsBinding == null){
+                pointsBinding = talentTree.pointsProperty().add(0);
+            }else{
+                pointsBinding = pointsBinding.add(talentTree.pointsProperty());
+            }
+
+            talentTree.bindPoints();
+
+            for(TalentTier talentTier : talentTree.getTalentTiers()){
+                talentTier.bindPoints();
+                talentTier.bindCumulativePoints();
+            }
+        }
+
+        totalPoints.bind(pointsBinding);
+    }
+
+    private void initArrows(){
+        StackPane[] stackPanes = {pane1, pane2, pane3};
+
+        for(int i = 0; i < 3; i++){
+            for(TalentButton t : talentTrees.get(i).getTalents()){
+                if(t.getReqTalent() != null){
+                    stackPanes[i].getChildren().add(new TalentArrow(t.getReqTalent(), t));
+                }
+            }
+        }
+    }
+
+    private void initLabels(){
+        label1.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_1.gif")));
+        label2.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_2.gif")));
+        label3.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_3.gif")));
+
+        StringProperty talentBuildString = new SimpleStringProperty();
+
+        talentBuildString.bind(Bindings.concat("Warrior (", talentTrees.get(0).pointsProperty(), "/", talentTrees.get(1).pointsProperty(), "/", talentTrees.get(2).pointsProperty(), ")"));
+        talentBuild.textProperty().bind(talentBuildString);
+
+        remainingPoints.textProperty().bind(Bindings.concat("Remaining points: ", Bindings.subtract(51, totalPoints).asString()));
     }
 
     private void initResetButtons(){
@@ -76,146 +185,66 @@ public class TalentsController implements Initializable {
     }
 
     private void resetAllTalents(){
-        for(Talent talent : talents.getTalents()){
+        for(TalentButton talent : talentButtons.values()){
             talent.setPoints(0);
         }
     }
 
     private void resetTree1OnAction(){
-        for(Talent talent : talents.getTalentTrees().get(0).getTalents()){
+        for(TalentButton talent : talentTrees.get(0).getTalents()){
             talent.setPoints(0);
         }
     }
 
     private void resetTree2OnAction(){
-        for(Talent talent : talents.getTalentTrees().get(1).getTalents()){
+        for(TalentButton talent : talentTrees.get(1).getTalents()){
             talent.setPoints(0);
         }
     }
 
     private void resetTree3OnAction(){
-        for(Talent talent : talents.getTalentTrees().get(2).getTalents()){
+        for(TalentButton talent : talentTrees.get(2).getTalents()){
             talent.setPoints(0);
         }
     }
 
-    private void initTalentButtons(){
-        GridPane[] talentGrids = {tree1, tree2, tree3};
-
-        for(int i = 0; i < 3; i++){
-            for (Talent talent : talents.getTalentTrees().get(i).getTalents()){
-                TalentButton talentButton = new TalentButton(talent, talents);
-                talentButtons.put(talent, talentButton);
-                talentGrids[i].add(talentButton, talent.getCol(), talent.getRow());
+    private void addListeners(){
+        for(TalentTree talentTree : talentTrees){
+            for(TalentTier talentTier : talentTree.getTalentTiers()){
+                talentTier.availableProperty().addListener((obs, oldValue, newValue) -> {
+                    if(newValue){
+                        for(TalentButton talentButton : talentTier.getTalents()){
+                            if(talentButton.isPointAddable()){
+                                talentButton.setAvailable(true);
+                            }
+                        }
+                    }else{
+                        for(TalentButton talentButton : talentTier.getTalents()){
+                            talentButton.setAvailable(false);
+                        }
+                    }
+                });
             }
         }
-    }
 
-    private void initLabels(){
-        label1.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_1.gif")));
-        label2.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_2.gif")));
-        label3.setGraphic(new ImageView(new Image("images/talent/classes/trees/warrior_3.gif")));
-
-        StringProperty talentBuildString = new SimpleStringProperty();
-
-        List<TalentTree> talentTrees = talents.getTalentTrees();
-
-        talentBuildString.bind(Bindings.concat("Warrior (", talentTrees.get(0).pointsProperty(), "/", talentTrees.get(1).pointsProperty(), "/", talentTrees.get(2).pointsProperty(), ")"));
-        talentBuild.textProperty().bind(talentBuildString);
-
-        remainingPoints.textProperty().bind(Bindings.concat("Remaining points: ", Bindings.subtract(51, talents.pointsProperty()).asString()));
-    }
-
-    private void initModel(){
-        Gson gson = new Gson();
-        talents = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/talents.json")), Talents.class);
-
-        setTalentTiers();
-        setReqTalents();
-
-        for(TalentTree talentTree : talents.getTalentTrees()){
-            talentTree.bindPoints();
-        }
-
-        talents.bindPoints();
-    }
-
-    private void initArrows(){
-        StackPane[] stackPanes = {pane1, pane2, pane3};
-
-        for(int i = 0; i < 3; i++){
-            for(Talent t : talents.getTalentTrees().get(i).getTalents()){
-                if(t.getReqTalent() != null){
-                    stackPanes[i].getChildren().add(new TalentArrow(t.getReqTalent(), t));
+        for(TalentButton talentButton : talentButtons.values()){
+            talentButton.pointsProperty().addListener((obs, oldValue, newValue) -> {
+                if(oldValue.intValue() >= 0){
+                    warrior.getActiveTalents().put(talentButton.getTalent().getId(), newValue.intValue());
                 }
-            }
-        }
-    }
-
-    private void setTalentTiers(){
-        for(TalentTree talentTree : talents.getTalentTrees()) {
-            List<TalentTier> talentTiers = new ArrayList<>();
-
-            for(int i = 0; i < 7; i++){
-                talentTiers.add(new TalentTier(talentTree, i));
-            }
-
-            for(Talent talent : talentTree.getTalents()){
-                talentTiers.get(talent.getRow()).getTalents().add(talent);
-                talent.setTalentTier(talentTiers.get(talent.getRow()));
-            }
-
-            for (int i = 0; i < 7; i++) {
-                if (i < 6) {
-                    talentTiers.get(i).setNext(talentTiers.get(i + 1));
+                if(newValue.intValue() == 0){
+                    warrior.getActiveTalents().remove(talentButton.getTalent().getId());
                 }
-
-                if (i > 0) {
-                    talentTiers.get(i).setPrev(talentTiers.get(i - 1));
-                }
-            }
-
-            for (TalentTier talentTier : talentTiers) {
-                talentTier.bindPoints();
-                talentTier.bindCumulativePoints();
-            }
-
-            talentTree.setTalentTiers(talentTiers);
-            talentTree.setAllTalents(talents);
+            });
         }
     }
 
-    private void setReqTalents(){
-        List<Talent> dependencies = new ArrayList<>();
-
-        for(Talent t : talents.getTalents()){
-            if(t.getReq() != null){
-                dependencies.add(t);
+    private void loadValues(){
+        for(Talent talent : talents){
+            if(warrior.getActiveTalents().containsKey(talent.getId())){
+                talentButtons.get(talent.getId()).setPoints(warrior.getActiveTalents().get(talent.getId()));
             }
         }
-
-        for(Talent t : dependencies){
-            t.setReqTalent(Objects.requireNonNull(findReq(0, t.getReq()[0], t.getTalentTier().getTalentTree().getTier(0))));
-        }
-    }
-
-    private Talent findReq(int counter, int dependency, TalentTier talentTier){
-        for(Talent t : talentTier.getTalents()){
-            if(counter == dependency){
-                return t;
-            }
-            counter++;
-
-            if(counter > dependency){
-                return null;
-            }
-        }
-
-        if(talentTier.getNext() == null){
-            return null;
-        }
-
-        return findReq(counter, dependency, talentTier.getNext());
     }
 }
 

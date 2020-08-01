@@ -1,6 +1,8 @@
 package sim.settings;
 
-public class Aura {
+import java.io.Serializable;
+
+public class Aura implements Serializable {
     private int id;
     private String name;
     private String type;

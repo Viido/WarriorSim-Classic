@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalentTier {
-    private List<Talent> talents = new ArrayList<>();
+    private List<TalentButton> talents = new ArrayList<>();
     private TalentTier prev;
     private TalentTier next;
     private TalentTree talentTree;
@@ -30,14 +30,14 @@ public class TalentTier {
         }
     }
 
-    public List<Talent> getTalents() {
+    public List<TalentButton> getTalents() {
         return talents;
     }
 
     public void bindPoints(){
         NumberBinding pointsBinding = null;
 
-        for(Talent t : talents){
+        for(TalentButton t : talents){
             if(pointsBinding == null){
                 pointsBinding = t.pointsProperty().add(0);
             }else{

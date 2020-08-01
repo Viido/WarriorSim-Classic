@@ -2,11 +2,12 @@ package sim.items;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
-public class Item {
+public class Item implements Serializable {
     private int id;
     private String name;
     private int armor;

@@ -1,5 +1,6 @@
 package sim.main;
 
+import com.jfoenix.controls.JFXMasonryPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
@@ -16,8 +17,10 @@ public class MainController implements Initializable {
     HBox settingsView;
     @FXML
     BorderPane talentsView;
+    @FXML
+    JFXMasonryPane testPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(itemsView.getLayoutX());
     }
 }

@@ -79,5 +79,21 @@
     -fx-max-width: 300;
 }
 
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar{
+    -fx-background-color: baseColor;
+}
+
+.scroll-pane .scroll-bar .thumb{
+    -fx-background-color: secondaryColor;
+}
+
 
 

@@ -2,28 +2,18 @@ package sim.items;
 
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import javafx.stage.PopupWindow;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import sim.talents.Talents;
+import sim.main.Warrior;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class ItemsController implements Initializable {
@@ -40,7 +30,13 @@ public class ItemsController implements Initializable {
     @FXML
     JFXTabPane tabPane;
 
-    List<ItemSlot> itemSlots = new ArrayList<>();
+    ItemSlot[] itemSlots = new ItemSlot[17];
+
+    Warrior warrior;
+
+    public ItemsController(Warrior warrior){
+        this.warrior = warrior;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -121,6 +117,7 @@ public class ItemsController implements Initializable {
     }
 
     private void initItemSlots(){
+
         String[] images = {
                 "itemslot_head.jpg", "itemslot_neck.jpg", "itemslot_shoulder.jpg", "itemslot_chest.jpg", "itemslot_chest.jpg", "itemslot_wrists.jpg", "itemslot_mainhand.jpg",
                 "itemslot_offhand.jpg", "itemslot_ranged.jpg","itemslot_hands.jpg", "itemslot_waist.jpg", "itemslot_legs.jpg", "itemslot_feet.jpg", "itemslot_finger.jpg",
@@ -128,8 +125,9 @@ public class ItemsController implements Initializable {
                 };
 
         for(int i = 0; i < 17; i++){
-            ItemSlot itemSlot = new ItemSlot(items.getItemsBySlot(i), enchants.getEnchantsBySlot(i), itemSelect, enchantSelect, images[i], i);
-            itemSlots.add(itemSlot);
+            ItemSlot itemSlot = new ItemSlot(items.getItemsBySlot(i), enchants.getEnchantsBySlot(i), itemSelect, enchantSelect, images[i], i, warrior);
+            itemSlots[i] = itemSlot;
+            itemSlot.refresh();
 
             if(i < 9){
                 leftItems.getChildren().add(itemSlot);

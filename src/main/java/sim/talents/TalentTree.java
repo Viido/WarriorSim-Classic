@@ -1,6 +1,5 @@
 package sim.talents;
 
-import com.google.gson.annotations.SerializedName;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -9,46 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalentTree {
-    @SerializedName(value = "n")
-    private String name;
-    @SerializedName(value = "t")
-    private Talent[] talents;
+    private List<TalentTier> talentTiers = new ArrayList<>();
 
-    private List<TalentTier> talentTiers;
-    private Talents allTalents;
-
-    private IntegerProperty points;
-
-    public TalentTree(){
-        points = new SimpleIntegerProperty(0);
-        talentTiers = new ArrayList<>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Talent[] getTalents() {
-        return talents;
-    }
-
-    public void setTalents(Talent[] talents) {
-        this.talents = talents;
-    }
-
-    public Talent getTalent(int col, int row){
-        for (Talent t : talents){
-            if(t.getCol() == col && t.getRow() == row){
-                return t;
-            }
-        }
-
-        return null;
-    }
+    private IntegerProperty points = new SimpleIntegerProperty(0);
 
     public int getPoints() {
         return points.get();
@@ -69,7 +31,7 @@ public class TalentTree {
     public void bindPoints(){
         NumberBinding pointsBinding = null;
 
-        for(Talent t : talents){
+        for(TalentTier t : talentTiers){
             if(pointsBinding == null){
                 pointsBinding = t.pointsProperty().add(0);
             }else{
@@ -94,16 +56,14 @@ public class TalentTree {
         return talentTiers;
     }
 
-    public void setTalentTiers(List<TalentTier> talentTiers) {
-        this.talentTiers = talentTiers;
-    }
+    public List<TalentButton> getTalents(){
+        List<TalentButton> talentButtons = new ArrayList<>();
 
-    public void setAllTalents(Talents talents){
-        this.allTalents = talents;
-    }
+        for(TalentTier talentTier : talentTiers){
+            talentButtons.addAll(talentTier.getTalents());
+        }
 
-    public Talents getAllTalents(){
-        return allTalents;
+        return talentButtons;
     }
 }
 

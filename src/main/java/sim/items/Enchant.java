@@ -2,7 +2,9 @@ package sim.items;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Enchant {
+import java.io.Serializable;
+
+public class Enchant implements Serializable {
     private int id;
     @SerializedName(value = "spellid")
     private boolean spellId;
