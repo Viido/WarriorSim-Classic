@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.jfoenix:jfoenix:9.0.9'
 }
 
 javafx{
@@ -26,11 +27,34 @@ javafx{
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
+run {
+    jvmArgs = [
+            "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
+            "--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix",
+            "--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix",
+            "--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix",
+            "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
+            "--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix",
+            "--add-exports=javafx.graphics/com.sun.javafx.scene=com.jfoenix",
+    ]
+}
+
 mainClassName = 'warriorSim.Classic/sim.Main'
+
 jlink{
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = 'WarriorSim Classic'
+
+        jvmArgs = [
+                "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
+                "--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix",
+                "--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix",
+                "--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix",
+                "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
+                "--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix",
+
+        ]
     }
     jpackage {
         // Set the environment property BADASS_JLINK_JPACKAGE_HOME or explicitly configure the below property
