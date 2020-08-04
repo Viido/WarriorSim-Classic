@@ -19,6 +19,8 @@ public class Enchant implements Serializable {
     private int blockValue;
     private int ap;
     private int crit;
+    @SerializedName(value = "health")
+    private int hp;
     @SerializedName(value = "bonusdmg")
     private int bonusDmg;
     private String description;
@@ -151,6 +153,10 @@ public class Enchant implements Serializable {
 
     public void setPhase(int phase) {
         this.phase = phase;
+    }
+
+    public int getHp() {
+        return hp;
     }
 
     @Override

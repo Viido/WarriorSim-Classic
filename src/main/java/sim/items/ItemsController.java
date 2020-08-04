@@ -34,6 +34,7 @@ public class ItemsController implements Initializable {
 
     Warrior warrior;
 
+    // TODO Blizzlike tooltips, faction restricted items, item filters and sorting options
     public ItemsController(Warrior warrior){
         this.warrior = warrior;
     }
@@ -90,6 +91,12 @@ public class ItemsController implements Initializable {
                     }
                 };
                 return cell;
+            }
+        });
+
+        enchantSelect.idProperty().addListener((obs, oldValue, newValue) -> {
+            if(tabPane.getSelectionModel().getSelectedIndex() == 1){
+                tabPane.getSelectionModel().select(0);
             }
         });
 
@@ -176,5 +183,11 @@ public class ItemsController implements Initializable {
         return "";
     }
 
+    public JFXListView<Item> getItemSelect() {
+        return itemSelect;
+    }
 
+    public JFXListView<Enchant> getEnchantSelect() {
+        return enchantSelect;
+    }
 }

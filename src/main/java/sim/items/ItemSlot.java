@@ -51,11 +51,14 @@ public class ItemSlot extends HBox {
         this.enchantView = enchantView;
         this.id = id;
         this.warrior = warrior;
-        this.setMaxSize(175, 42);
-        this.setMinSize(175, 42);
+        this.setMaxSize(300, 42);
+        this.setMinSize(300, 42);
         VBox itemInfo = new VBox();
 
-        //itemName.setWrapText(true);
+        itemName.getStyleClass().clear();
+        enchantName.getStyleClass().clear();
+
+        enchantName.setStyle("");
         enchantName.setTextFill(Paint.valueOf("#1eff00"));
 
         if(enchantList != null){
@@ -65,7 +68,6 @@ public class ItemSlot extends HBox {
         }
         
         if(id < 9){
-            //this.getChildren().add(0, itemName);
             this.getChildren().add(0, itemInfo);
             this.setAlignment(Pos.TOP_RIGHT);
             itemInfo.setAlignment(Pos.TOP_RIGHT);
@@ -75,7 +77,6 @@ public class ItemSlot extends HBox {
             enchantName.setTextAlignment(TextAlignment.RIGHT);
         }else{
             this.getChildren().add(itemInfo);
-            //this.getChildren().add(itemName);
             itemName.setStyle("-fx-padding: 0 0 0 5");
             enchantName.setStyle("-fx-padding: 0 0 0 5");
         }
@@ -83,30 +84,24 @@ public class ItemSlot extends HBox {
 
         itemSlot.setOnMouseClicked(e -> {
             itemView.getSelectionModel().clearSelection();
-            itemView.setItems(FXCollections.observableArrayList(itemList));
             itemView.setId(String.valueOf(id));
-
-            setEnchantList();
+            itemView.setItems(FXCollections.observableArrayList(itemList));
 
             enchantView.setId(String.valueOf(id));
+            setEnchantList();
         });
-
-
-        // TODO custom tooltip class
 
         tooltip.setPos(Pos.TOP_RIGHT);
         tooltip.setMargin(-30);
 
         tooltip.setShowDelay(Duration.ZERO);
 
-
-
         itemSlot.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
         itemView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != oldValue && newValue != null){
                 if(itemView.getId().equals(String.valueOf(id))){
                     setSelectedItem(newValue);
-                    warrior.getEquippedItems()[id] = selectedItem;
+                    warrior.equipItem(id, selectedItem);
 
                     setEnchantList();
                 }
@@ -117,7 +112,7 @@ public class ItemSlot extends HBox {
         enchantView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if(enchantView.getId().equals(String.valueOf(id)) && newValue != null){
                 setSelectedEnchant(newValue);
-                warrior.getEquippedEnchants()[id] = selectedEnchant;
+                warrior.equipEnchant(id, selectedEnchant);
             }
         }));
     }

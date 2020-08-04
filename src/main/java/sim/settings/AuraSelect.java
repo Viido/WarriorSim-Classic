@@ -72,35 +72,11 @@ public class AuraSelect extends HBox {
         auraInfo.setOnMouseExited(e -> {
             tooltip.hide();
         });
-
-        checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue){
-                if(checkBoxOH != null){
-                    warrior.setTempEnchantMH(aura);
-                }else{
-                    warrior.getActiveAuras().put(aura.getId(), aura);
-                }
-            }else{
-                if(checkBoxOH != null && warrior.getTempEnchantMH().getId() == aura.getId()){
-                    warrior.setTempEnchantMH(null);
-                }else{
-                    warrior.getActiveAuras().remove(aura.getId());
-                }
-            }
-        });
     }
 
     private void addOHCheckBox(){
         checkBoxOH = new JFXCheckBox();
         checkBoxOH.setMinHeight(32);
-
-        checkBoxOH.selectedProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue){
-                warrior.setTempEnchantOH(aura);
-            }else if(warrior.getTempEnchantOH().getId() == aura.getId()){
-                warrior.setTempEnchantOH(null);
-            }
-        });
 
         getChildren().add(checkBoxOH);
     }
@@ -121,5 +97,13 @@ public class AuraSelect extends HBox {
                 }
             }
         }
+    }
+
+    public JFXCheckBox getCheckBox(){
+        return checkBox;
+    }
+
+    public JFXCheckBox getCheckBoxOH(){
+        return checkBoxOH;
     }
 }

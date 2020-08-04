@@ -7,7 +7,7 @@
       "agi": 21,
       "sta": 38,
       "skill": 6,
-      "skillType": "daggers",
+      "skillType": "dagger",
       "phase": 4,
       "icon": "inv_helmet_17",
       "quality": "epic"
@@ -69,7 +69,7 @@
       "agi": 5,
       "sta": 6,
       "skill": 7,
-      "skillType": "axes",
+      "skillType": "axe",
       "phase": 1,
       "icon": "inv_helmet_18",
       "quality": "rare"
@@ -1444,7 +1444,7 @@
       "shadowRes": 5,
       "crit": 1,
       "skill": 5,
-      "skillType": "daggers",
+      "skillType": "dagger",
       "phase": 1,
       "icon": "inv_gauntlets_23",
       "quality": "epic"
@@ -1861,7 +1861,7 @@
       "sta": 16,
       "crit": 1,
       "skill": 5,
-      "skillType": "daggers",
+      "skillType": "dagger",
       "phase": 2,
       "icon": "inv_belt_02",
       "quality": "rare"

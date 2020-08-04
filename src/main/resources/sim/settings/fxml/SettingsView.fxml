@@ -5,78 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox spacing="30.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <VBox maxWidth="400.0" minWidth="400.0" stylesheets="@../css/Settings.css">
-      <children>
-         <HBox alignment="CENTER_LEFT" styleClass="settingsHBox">
-            <children>
-               <Label text="Race" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="raceSelect" editable="false">
-                  <cursor>
-                     <Cursor fx:constant="DEFAULT" />
-                  </cursor></JFXTextField>
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Fight Duration" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="fightDuration" text="60" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="35.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Target Level" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="targetLevel" text="63" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="60.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Target Armor" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="targetArmor" text="3731" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="85.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Target Resistance" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="targetResistance" text="0" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Initial Rage" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="initialRage" text="80" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Simulations" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXTextField fx:id="simulations" text="100000" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Heroic Strike Rank 9" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXCheckBox fx:id="heroicStrike9" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="185.0" styleClass="settingsHBox">
-            <children>
-               <Label text="Battle Shout Rank 7" />
-               <Region HBox.hgrow="ALWAYS" />
-               <JFXCheckBox fx:id="battleShout7" />
-            </children>
-         </HBox>
-      </children>
-   </VBox>
-   <ScrollPane maxHeight="300.0" minWidth="650.0" stylesheets="@../css/Settings.css">
+<HBox maxWidth="650.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <ScrollPane maxHeight="410.0" minWidth="650.0" stylesheets="@../css/Settings.css">
       <VBox spacing="30.0">
          <HBox spacing="30.0">
             <VBox fx:id="worldBuffs" styleClass="auraVBox"/>

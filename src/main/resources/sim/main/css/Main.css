@@ -1,0 +1,33 @@
+* {
+    baseColor: #282828;
+    secondaryColor: #383838;
+}
+
+.jfx-tab-pane .tab-header-background{
+    -fx-background-color: secondaryColor;
+}
+.jfx-tab-pane .tab{
+    -fx-min-width: 100;
+    -fx-background-color: baseColor;
+}
+
+.split-pane{
+    -fx-background-color: baseColor;
+}
+
+.split-pane:horizontal .split-pane-divider{
+    -fx-background-color: secondaryColor;
+}
+
+.scroll-pane{
+    -fx-background: baseColor;
+    -fx-background-color: baseColor;
+}
+
+.jfx-button{
+    -fx-background-color: #f1c566;
+    -fx-min-width: 300;
+    -fx-min-height: 50;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}

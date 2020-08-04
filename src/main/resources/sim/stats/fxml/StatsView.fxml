@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" >
+    <VBox stylesheets="@../css/Stats.css">
+        <HBox>
+            <Label text="Strength"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="str"/>
+        </HBox>
+        <HBox>
+            <Label text="Agility"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="agi"/>
+        </HBox>
+        <HBox>
+            <Label text="Stamina"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="sta"/>
+        </HBox>
+        <HBox>
+            <Label text="Health"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="hp"/>
+        </HBox>
+        <HBox>
+            <Label text="Armor"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="armor"/>
+        </HBox>
+        <HBox>
+            <Label text="Attack Power"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="ap"/>
+        </HBox>
+        <HBox>
+            <Label text="Weapon Skill"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="weaponSkill"/>
+        </HBox>
+        <HBox>
+            <Label text="Hit Chance"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="hitChance"/>
+        </HBox>
+        <HBox>
+            <Label text="Crit Chance"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="critChance"/>
+        </HBox>
+    </VBox>
+</HBox>

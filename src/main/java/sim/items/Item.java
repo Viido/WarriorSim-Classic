@@ -11,20 +11,16 @@ public class Item implements Serializable {
     private int id;
     private String name;
     private int armor;
-    @SerializedName(value = "str")
-    private int strength;
-    @SerializedName(value = "agi")
-    private int agility;
-    @SerializedName(value = "sta")
-    private int stamina;
+    private int str;
+    private int agi;
+    private int sta;
     @SerializedName(value = "int")
     private int intellect;
     @SerializedName(value = "spi")
     private int spirit;
     private int crit;
     private int hit;
-    @SerializedName(value = "ap")
-    private int attackPower;
+    private int ap;
     @SerializedName(value = "skill")
     private int weaponSkill;
     @SerializedName(value = "skillType")
@@ -76,16 +72,16 @@ public class Item implements Serializable {
         return armor;
     }
 
-    public int getStrength() {
-        return strength;
+    public int getStr() {
+        return str;
     }
 
-    public int getAgility() {
-        return agility;
+    public int getAgi() {
+        return agi;
     }
 
-    public int getStamina() {
-        return stamina;
+    public int getSta() {
+        return sta;
     }
 
     public int getIntellect() {
@@ -104,8 +100,8 @@ public class Item implements Serializable {
         return hit;
     }
 
-    public int getAttackPower() {
-        return attackPower;
+    public int getAp() {
+        return ap;
     }
 
     public int getWeaponSkill() {
@@ -244,7 +240,7 @@ public class Item implements Serializable {
             return "Equip: Increased Axes +7.\nEquip: Increased Daggers +7.\nEquip: Increased Swords +7.\n";
         }
 
-        return "Equip: Increased " + weaponSkillType.substring(0, 1).toUpperCase() + weaponSkillType.substring(1) + " +" + weaponSkill + ".\n";
+        return "Equip: Increased " + weaponSkillType.substring(0, 1).toUpperCase() + weaponSkillType.substring(1) + "s +" + weaponSkill + ".\n";
     }
 
     private String getTypeString(){
@@ -282,9 +278,9 @@ public class Item implements Serializable {
         tooltip += speed != 0 ? "(" + df.format((minDmg + maxDmg + eleDmgMin + eleDmgMax)/2/speed) + " damage per second)\n" : "";
         tooltip += shieldBlockValue != 0 ? shieldBlockValue + " Block\n" : "";
         tooltip += armor != 0 ? armor + " Armor\n" : "";
-        tooltip += strength != 0 ? "+" + strength + " Strength\n" : "";
-        tooltip += agility != 0 ? "+" + agility + " Agility\n" : "";
-        tooltip += stamina != 0 ? "+" + stamina + " Stamina\n" : "";
+        tooltip += str != 0 ? "+" + str + " Strength\n" : "";
+        tooltip += agi != 0 ? "+" + agi + " Agility\n" : "";
+        tooltip += sta != 0 ? "+" + sta + " Stamina\n" : "";
         tooltip += intellect != 0 ? "+" + intellect + " Intellect\n" : "";
         tooltip += spirit != 0 ? "+" + spirit + " Spirit\n" : "";
         tooltip += arcaneRes != 0 ? "+" + arcaneRes + " Arcane Resistance\n" : "";
@@ -294,7 +290,7 @@ public class Item implements Serializable {
         tooltip += shadowRes != 0 ? "+" + shadowRes + " Shadow Resistance\n" : "";
         tooltip += crit != 0 ? "Equip: Improves your chance to get a critical strike by " + crit + "%.\n" : "";
         tooltip += hit != 0 ? "Equip: Improves your chance to hit by " + hit + "%.\n" : "";
-        tooltip += attackPower != 0 ? "Equip: +" + attackPower + " Attack Power.\n" : "";
+        tooltip += ap != 0 ? "Equip: +" + ap + " Attack Power.\n" : "";
         tooltip += getWeaponSkillText();
         tooltip += block != 0 ? "Equip: Increases your chance to block attacks with a shield by " + block + "%.\n" : "";
         tooltip += blockValue != 0 ? "Equip: Increases the block value of your shield by " + blockValue + ".\n" : "";

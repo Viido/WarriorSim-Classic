@@ -6,30 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
+import sim.stats.StatsController;
 import sim.warrior.Warrior;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
 public class SettingsController implements Initializable {
-    @FXML
-    JFXTextField raceSelect;
-    @FXML
-    JFXTextField fightDuration;
-    @FXML
-    JFXTextField targetLevel;
-    @FXML
-    JFXTextField targetArmor;
-    @FXML
-    JFXTextField targetResistance;
-    @FXML
-    JFXTextField initialRage;
-    @FXML
-    JFXTextField simulations;
-    @FXML
-    JFXCheckBox heroicStrike9;
-    @FXML
-    JFXCheckBox battleShout7;
     @FXML
     VBox worldBuffs;
     @FXML
@@ -42,71 +25,26 @@ public class SettingsController implements Initializable {
     Auras auras;
     Warrior warrior;
     Settings settings;
+    Race[] races;
 
-    public SettingsController(Settings settings){
+    StatsController statsController;
+
+    public SettingsController(Settings settings, StatsController statsController){
         this.warrior = settings.getWarrior();
         this.settings = settings;
+        this.statsController = statsController;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadSettings();
-        initRaceSelect();
+        Gson gson = new Gson();
+        auras = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/auras.json")), Auras.class);
+        races = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/races.json")), Race[].class);
+
         initAuras();
     }
 
-    public void saveSettings(){
-        settings.setFightDuration(Integer.parseInt(fightDuration.getText()));
-        settings.setTargetLevel(Integer.parseInt(targetLevel.getText()));
-        settings.setTargetArmor(Integer.parseInt(targetArmor.getText()));
-        settings.setTargetResistance(Integer.parseInt(targetResistance.getText()));
-        settings.setInitialRage(Integer.parseInt(initialRage.getText()));
-        settings.setSimulations(Integer.parseInt(simulations.getText()));
-        settings.setHeroicStrike9(heroicStrike9.isSelected());
-        settings.setBattleShout7(battleShout7.isSelected());
-    }
-
-    private void loadSettings(){
-        raceSelect.setText(settings.getRace());
-        fightDuration.setText(settings.getFightDuration() + "");
-        targetLevel.setText(settings.getTargetLevel() + "");
-        targetArmor.setText(settings.getTargetArmor() + "");
-        targetResistance.setText(settings.getTargetResistance() + "");
-        initialRage.setText(settings.getInitialRage() + "");
-        simulations.setText(settings.getSimulations() + "");
-        heroicStrike9.setSelected(settings.isHeroicStrike9());
-        battleShout7.setSelected(settings.isBattleShout7());
-    }
-
-    private void initRaceSelect(){
-        String[] races = {"Human", "Dwarf", "Night Elf", "Gnome", "Orc", "Undead", "Tauren", "Troll"};
-
-        JFXListView<String> raceSelection = new JFXListView<>();
-        raceSelection.getStylesheets().add(this.getClass().getResource("/sim/settings/css/Settings.css").toExternalForm());
-        raceSelection.setItems(FXCollections.observableArrayList(races));
-
-        JFXPopup racePopUp = new JFXPopup();
-        racePopUp.setPopupContent(raceSelection);
-
-        raceSelect.setOnMouseClicked(e -> {
-            raceSelection.refresh();
-            racePopUp.setStyle("-fx-background-color: black");
-            racePopUp.show(raceSelect, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, 0, 25);
-        });
-
-        raceSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue != null){
-                raceSelect.setText(newValue);
-                settings.setRace(newValue);
-                racePopUp.hide();
-            }
-        });
-    }
-
     private void initAuras(){
-        Gson gson = new Gson();
-        auras = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/auras.json")), Auras.class);
-
         Map<String, List<AuraSelect>> buffGroups = new HashMap<>();
 
         for(Aura aura : auras.getAuras()){
@@ -138,6 +76,40 @@ public class SettingsController implements Initializable {
                     buffGroups.put(aura.getGroup(), buffs);
                 }
             }
+
+            auraSelect.getCheckBox().selectedProperty().addListener((obs, oldValue, newValue) -> {
+                if(newValue){
+                    if(auraSelect.getCheckBoxOH() != null){
+                        warrior.setTempEnchantMH(aura);
+                    }else{
+                        warrior.addAura(aura);
+                    }
+                }else{
+                    if(auraSelect.getCheckBoxOH() != null ){
+                        if(warrior.getTempEnchantMH().getId() == aura.getId()){
+                            warrior.setTempEnchantMH(null);
+                        }
+                    }else{
+                        warrior.removeAura(aura);
+                    }
+                }
+
+                statsController.refreshDisplay();
+            });
+
+            if(auraSelect.getCheckBoxOH() != null){
+                auraSelect.getCheckBoxOH().selectedProperty().addListener((obs, oldValue, newValue) -> {
+                    if(newValue){
+                        warrior.setTempEnchantOH(aura);
+                    }else if(warrior.getTempEnchantOH().getId() == aura.getId()){
+                        warrior.setTempEnchantOH(null);
+                    }
+
+                    statsController.refreshDisplay();
+                });
+            }
+
+
         }
 
         buffGroups.forEach((key, auraSelects) -> {

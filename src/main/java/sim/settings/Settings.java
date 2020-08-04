@@ -5,7 +5,6 @@ import sim.warrior.Warrior;
 import java.io.Serializable;
 
 public class Settings implements Serializable {
-    private String race = "Human";
     private int fightDuration = 60;
     private int targetLevel = 63;
     private int targetArmor = 3731;
@@ -15,14 +14,6 @@ public class Settings implements Serializable {
     private boolean heroicStrike9 = false;
     private boolean battleShout7 = false;
     private Warrior warrior = new Warrior();
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
 
     public int getFightDuration() {
         return fightDuration;

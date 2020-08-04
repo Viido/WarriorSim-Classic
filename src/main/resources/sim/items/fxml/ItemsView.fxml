@@ -5,10 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="5.0" styleClass="item-box" stylesheets="@../css/Items.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-    </padding>
+<VBox maxWidth="630.0" maxHeight="380.0" spacing="5.0" styleClass="item-box" stylesheets="@../css/Items.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="5.0">
         <VBox fx:id="leftItems" />
       <JFXTabPane fx:id="tabPane" maxHeight="378.0" maxWidth="276.0" minHeight="378.0" minWidth="276.0" tabClosingPolicy="UNAVAILABLE">
@@ -26,10 +23,7 @@
                  </content>
              </Tab>
          </tabs>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
       </JFXTabPane>
-        <VBox fx:id="rightItems" />
+        <VBox fx:id="rightItems"/>
     </HBox>
 </VBox>

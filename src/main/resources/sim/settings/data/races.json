@@ -1,0 +1,96 @@
+[
+  {
+    "id": 1,
+    "name": "Human",
+    "stats": {
+      "str": 120,
+      "sta": 110,
+      "agi": 80,
+      "ap": 160,
+      "hp": 1509
+    }
+  },
+  {
+    "id": 2,
+    "name": "Dwarf",
+    "stats": {
+      "str": 122,
+      "sta": 113,
+      "agi": 76,
+      "ap": 160,
+      "hp": 1509,
+      "frostRes": 10
+    }
+  },
+  {
+    "id": 3,
+    "name": "Night Elf",
+    "stats": {
+      "str": 117,
+      "sta": 109,
+      "agi": 85,
+      "ap": 160,
+      "hp": 1509,
+      "natureRes": 10,
+      "dodge": 1
+    }
+  },
+  {
+    "id": 4,
+    "name": "Gnome",
+    "stats": {
+      "str": 115,
+      "sta": 109,
+      "agi": 83,
+      "ap": 160,
+      "hp": 1509,
+      "arcaneRes": 10
+    }
+  },
+  {
+    "id": 5,
+    "name": "Orc",
+    "stats": {
+      "str": 123,
+      "sta": 112,
+      "agi": 77,
+      "ap": 160,
+      "hp": 1509
+    }
+  },
+  {
+    "id": 6,
+    "name": "Undead",
+    "stats": {
+      "str": 119,
+      "sta": 111,
+      "agi": 78,
+      "ap": 160,
+      "hp": 1509,
+      "shadowRes": 10
+    }
+  },
+  {
+    "id": 7,
+    "name": "Tauren",
+    "stats": {
+      "str": 125,
+      "sta": 112,
+      "agi": 75,
+      "ap": 160,
+      "hp": 1509,
+      "natureRes": 10
+    }
+  },
+  {
+    "id": 8,
+    "name": "Troll",
+    "stats": {
+      "str": 121,
+      "sta": 111,
+      "agi": 82,
+      "ap": 160,
+      "hp": 1509
+    }
+  }
+]
