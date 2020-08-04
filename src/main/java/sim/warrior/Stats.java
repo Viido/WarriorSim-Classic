@@ -15,6 +15,12 @@ public class Stats implements Serializable {
     private int ap;
     private int hit;
     private int crit;
+    private int defense;
+    private int block;
+    private int blockValue;
+    private int parry;
+    private int dodge;
+    private float haste;
     private Warrior warrior;
 
     public Stats(Warrior warrior){
@@ -85,6 +91,30 @@ public class Stats implements Serializable {
         this.crit = crit;
     }
 
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getBlock() {
+        return block;
+    }
+
+    public int getBlockValue() {
+        return blockValue;
+    }
+
+    public int getParry() {
+        return parry;
+    }
+
+    public int getDodge() {
+        return dodge;
+    }
+
+    public float getHaste() {
+        return haste;
+    }
+
     public void refreshStats(){
         str = 0;
         agi = 0;
@@ -94,6 +124,12 @@ public class Stats implements Serializable {
         crit = 0;
         armor = 0;
         hp = 0;
+        defense = 0;
+        block = 0;
+        blockValue = 0;
+        parry = 0;
+        dodge = 0;
+        haste = 1;
 
         for(Item item : warrior.getEquippedItems()){
             addStats(item);
@@ -116,6 +152,12 @@ public class Stats implements Serializable {
         hit -= item.getHit();
         crit -= item.getCrit();
         armor -= item.getArmor();
+        defense -= item.getDefense();
+        block -= item.getBlock();
+        blockValue -= item.getBlockValue();
+        blockValue -= item.getShieldBlockValue();
+        parry -= item.getParry();
+        dodge -= item.getDodge();
     }
 
     public void addStats(Item item){
@@ -127,6 +169,12 @@ public class Stats implements Serializable {
             hit += item.getHit();
             crit += item.getCrit();
             armor += item.getArmor();
+            defense += item.getDefense();
+            block += item.getBlock();
+            blockValue += item.getBlockValue();
+            blockValue += item.getShieldBlockValue();
+            parry += item.getParry();
+            dodge += item.getDodge();
         }
     }
 
@@ -137,6 +185,10 @@ public class Stats implements Serializable {
         ap -= enchant.getAp();
         hp -= enchant.getHp();
         crit -= enchant.getCrit();
+        defense -= enchant.getDefense();
+        block -= enchant.getBlock();
+        blockValue -= enchant.getBlockValue();
+        haste /= enchant.getHaste();
     }
 
     public void addStats(Enchant enchant){
@@ -147,6 +199,10 @@ public class Stats implements Serializable {
             ap += enchant.getAp();
             hp += enchant.getHp();
             crit += enchant.getCrit();
+            defense += enchant.getDefense();
+            block += enchant.getBlock();
+            blockValue += enchant.getBlockValue();
+            haste *= enchant.getHaste();
         }
     }
 
@@ -159,6 +215,7 @@ public class Stats implements Serializable {
             crit -= aura.getCrit();
             armor -= aura.getArmor();
             hp -= aura.getHp();
+            haste /= aura.getHaste();
         }
     }
 
@@ -171,6 +228,7 @@ public class Stats implements Serializable {
             crit += aura.getCrit();
             armor += aura.getArmor();
             hp += aura.getHp();
+            haste *= aura.getHaste();
         }
     }
 }

@@ -59,8 +59,8 @@ public class Enchant implements Serializable {
         this.slot = slot;
     }
 
-    public int getHaste() {
-        return haste;
+    public float getHaste() {
+        return 1 + haste/100.0f;
     }
 
     public void setHaste(int haste) {

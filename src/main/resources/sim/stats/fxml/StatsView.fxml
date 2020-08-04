@@ -53,5 +53,35 @@
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="critChance"/>
         </HBox>
+        <HBox>
+            <Label text="Haste"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="haste"/>
+        </HBox>
+        <HBox>
+            <Label text="Defense"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="defense"/>
+        </HBox>
+        <HBox>
+            <Label text="Block Chance"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="blockChance"/>
+        </HBox>
+        <HBox>
+            <Label text="Block Value"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="blockValue"/>
+        </HBox>
+        <HBox>
+            <Label text="Parry Chance"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="parryChance"/>
+        </HBox>
+        <HBox>
+            <Label text="Dodge Chance"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="dodgeChance"/>
+        </HBox>
     </VBox>
 </HBox>

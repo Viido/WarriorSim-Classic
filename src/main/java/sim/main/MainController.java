@@ -12,11 +12,13 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
 import sim.Main;
+import sim.items.ItemSlot;
 import sim.items.ItemsController;
 import sim.settings.Race;
 import sim.settings.Settings;
 import sim.settings.SettingsController;
 import sim.stats.StatsController;
+import sim.talents.TalentButton;
 import sim.talents.TalentsController;
 
 import java.io.*;
@@ -72,7 +74,7 @@ public class MainController implements Initializable {
         statsLoader.setController(statsController);
 
         try{
-            rightSection.getChildren().add(1, statsLoader.load());
+            rightSection.getChildren().add(rightSection.getChildren().size(), statsLoader.load());
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -118,6 +120,8 @@ public class MainController implements Initializable {
         SettingsController settingsController = new SettingsController(settings, statsController);
 
 
+
+
         itemsLoader.setController(itemsController);
         talentsLoader.setController(talentsController);
         settingsLoader.setController(settingsController);
@@ -141,13 +145,28 @@ public class MainController implements Initializable {
         }
         scrollPane.setContent(stackPane);
 
-        itemsController.getItemSelect().getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-            statsController.refreshDisplay();
-        });
+        for(ItemSlot itemSlot : itemsController.getItemSlots()){
+            itemSlot.selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+                statsController.refreshDisplay();
+            });
+            itemSlot.selectedEnchantProperty().addListener((obs, oldValue, newValue) -> {
+                statsController.refreshDisplay();
+            });
+        }
 
-        itemsController.getEnchantSelect().getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-            statsController.refreshDisplay();
-        });
+
+        for(TalentButton talentButton : talentsController.getTalentButtons().values()){
+            talentButton.pointsProperty().addListener((obs, oldValue, newValue) -> {
+                if(oldValue.intValue() >= 0){
+                    settings.getWarrior().getActiveTalents().put(talentButton.getTalent().getId(), newValue.intValue());
+                    statsController.refreshDisplay();
+                }
+                if(newValue.intValue() == 0){
+                    settings.getWarrior().getActiveTalents().remove(talentButton.getTalent().getId());
+                    statsController.refreshDisplay();
+                }
+            });
+        }
 
         Tab tab = new Tab("Set 1");
 
@@ -206,6 +225,7 @@ public class MainController implements Initializable {
             if(newValue != null){
                 raceSelect.setText(newValue.getName());
                 settings.getWarrior().setRace(newValue);
+                statsController.refreshDisplay();
                 racePopUp.hide();
             }
         });

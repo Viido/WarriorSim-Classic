@@ -7,6 +7,8 @@ import sim.warrior.Constants;
 import sim.warrior.Warrior;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ResourceBundle;
 
 public class StatsController implements Initializable {
@@ -28,6 +30,18 @@ public class StatsController implements Initializable {
     Label hitChance;
     @FXML
     Label critChance;
+    @FXML
+    Label haste;
+    @FXML
+    Label defense;
+    @FXML
+    Label blockChance;
+    @FXML
+    Label blockValue;
+    @FXML
+    Label parryChance;
+    @FXML
+    Label dodgeChance;
 
     Warrior warrior;
 
@@ -43,13 +57,28 @@ public class StatsController implements Initializable {
 
     private void setWeaponSkillText(){
         if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
-            weaponSkill.setText(warrior.getWeaponSkillMH() + "|"  + warrior.getWeaponSkillOH());
+            weaponSkill.setText(warrior.getWeaponSkillMH() + " | "  + warrior.getWeaponSkillOH());
         }else{
             weaponSkill.setText(warrior.getWeaponSkillMH() + "");
         }
     }
 
+    private void setCritChanceText(){
+        if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
+            critChance.setText(warrior.getCritMH() + "% | "  + warrior.getCritOH() + "%");
+        }else{
+            critChance.setText(warrior.getCritMH() + "%");
+        }
+    }
+
     public void refreshDisplay(){
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+
         str.setText(warrior.getStr() + "");
         agi.setText(warrior.getAgi() + "");
         sta.setText(warrior.getSta() + "");
@@ -57,7 +86,13 @@ public class StatsController implements Initializable {
         armor.setText(warrior.getArmor() + "");
         ap.setText(warrior.getAp() + "");
         setWeaponSkillText();
-        hitChance.setText(warrior.getHit() + "");
-        critChance.setText(warrior.getCrit() + "");
+        hitChance.setText(warrior.getHit() + "%");
+        setCritChanceText();
+        haste.setText(df.format(warrior.getHaste() * 100 - 100) + "%");
+        defense.setText(warrior.getDefense() + "");
+        blockChance.setText(warrior.getBlock() + "%");
+        blockValue.setText(warrior.getBlockValue() + "");
+        parryChance.setText(warrior.getParry() + "%");
+        dodgeChance.setText(warrior.getDodge() + "%");
     }
 }

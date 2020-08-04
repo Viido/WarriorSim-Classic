@@ -73,8 +73,8 @@ public class Aura implements Serializable {
         return hp;
     }
 
-    public int getHaste() {
-        return haste;
+    public float getHaste() {
+        return 1 + haste/100.0f;
     }
 
     public float getStatMod() {

@@ -14,6 +14,7 @@ import java.util.Map;
 import static sim.warrior.Constants.*;
 
 public class Warrior implements Serializable {
+    private int level = 60;
     Race race;
     Item[] equippedItems = new Item[17];
     Enchant[] equippedEnchants = new Enchant[17];
@@ -53,8 +54,10 @@ public class Warrior implements Serializable {
     }
 
     public void unequipEnchant(int slot){
-        stats.removeStats(equippedEnchants[slot]);
-        equippedEnchants[slot] = null;
+        if(equippedEnchants[slot] != null){
+            stats.removeStats(equippedEnchants[slot]);
+            equippedEnchants[slot] = null;
+        }
     }
 
     public Map<Integer, Aura> getActiveAuras() {
@@ -147,16 +150,70 @@ public class Warrior implements Serializable {
         return stats.getHit();
     }
 
-    public float getCrit(){
-        return stats.getCrit() + getAgi()/20.0f + (tempEnchantMH != null ? tempEnchantMH.getCrit() : 0) + (tempEnchantOH != null ? tempEnchantOH.getCrit() : 0);
+    public float getCritMH(){
+        return stats.getCrit() + getAgi()/20.0f
+                + (tempEnchantMH != null ? tempEnchantMH.getCrit() : 0)
+                + (tempEnchantOH != null ? tempEnchantOH.getCrit() : 0)
+                + (getWeaponTypeMH().equals("axe") ? activeTalents.getOrDefault(AXE_SPEC, 0) : 0)
+                + (getWeaponTypeMH().equals("polearm") ? activeTalents.getOrDefault(POLEARM_SPEC, 0) : 0)
+                + activeTalents.getOrDefault(CRUELTY, 0);
+    }
+
+    public float getCritOH(){
+        return stats.getCrit() + getAgi()/20.0f
+                + (tempEnchantMH != null ? tempEnchantMH.getCrit() : 0)
+                + (tempEnchantOH != null ? tempEnchantOH.getCrit() : 0)
+                + (getWeaponTypeOH().equals("axe") ? activeTalents.getOrDefault(AXE_SPEC, 0) : 0)
+                + (getWeaponTypeOH().equals("polearm") ? activeTalents.getOrDefault(POLEARM_SPEC, 0) : 0)
+                + activeTalents.getOrDefault(CRUELTY, 0);
+    }
+
+    public String getWeaponTypeMH(){
+        if(equippedItems[MAINHAND] !=  null){
+            return equippedItems[MAINHAND].getType();
+        }else{
+            return "";
+        }
+    }
+
+    public String getWeaponTypeOH(){
+        if(equippedItems[OFFHAND] !=  null){
+            return equippedItems[OFFHAND].getType();
+        }else{
+            return "";
+        }
     }
 
     public int getHp(){
         return (int) Math.floor((race.getBaseStats().getHp() + getSta() * 10 + stats.getHp()) * (race.getId() == TAUREN ? 1.05f : 1));
     }
 
+    public int getDefense(){
+        return level * 5 + stats.getDefense() + getActiveTalents().getOrDefault(ANTICIPATION, 0) * 2;
+    }
+
+    public int getBlock(){
+        return  5 + stats.getBlock() + getActiveTalents().getOrDefault(SHIELD_SPEC, 0);
+    }
+
+    public int getBlockValue(){
+        return (int) Math.floor(getStr()/20.0f + getStats().getBlockValue());
+    }
+
+    public int getParry(){
+        return 5 + stats.getParry() + getActiveTalents().getOrDefault(DEFLECTION, 0);
+    }
+
+    public float getDodge(){
+        return getAgi()/20.0f + getStats().getDodge() + race.getBaseStats().getDodge();
+    }
+
+    public float getHaste(){
+        return stats.getHaste();
+    }
+
     // TODO: Verify how Toughness talent works (only pure armor from items? enchants? agi from items?)
-    public float getArmor(){
+    public int getArmor(){
         int armorFromItems = 0;
 
         for(Item item : getEquippedItems()){
@@ -165,13 +222,11 @@ public class Warrior implements Serializable {
             }
         }
 
-        float toughnessMod = activeTalents.containsKey(TOUGHNESS) ? 0.02f * activeTalents.get(TOUGHNESS) : 0;
-
-        return stats.getArmor() + armorFromItems * toughnessMod + getAgi() * 2;
+        return (int) Math.floor(stats.getArmor() + armorFromItems * getActiveTalents().getOrDefault(TOUGHNESS, 0) * 0.02f + getAgi() * 2);
     }
 
     public int getWeaponSkillMH(){
-        int weaponSkill = 300;
+        int weaponSkill = level * 5;
 
         if(equippedItems[MAINHAND] == null){
             return weaponSkill;
@@ -211,7 +266,7 @@ public class Warrior implements Serializable {
     }
 
     public int getWeaponSkillOH(){
-        int weaponSkill = 300;
+        int weaponSkill = level * 5;
 
         if(equippedItems[OFFHAND] == null){
             return weaponSkill;
@@ -249,5 +304,9 @@ public class Warrior implements Serializable {
         }
 
         return weaponSkill;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

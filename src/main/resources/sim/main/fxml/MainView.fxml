@@ -8,11 +8,13 @@
 <SplitPane fx:id="mainPane" stylesheets="@../css/Main.css" dividerPositions="0.9" minWidth="1920.0" maxWidth="1920.0" minHeight="1080.0" maxHeight="1080.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <JFXTabPane fx:id="tabPane">
     </JFXTabPane>
-    <VBox fx:id="rightSection" minWidth="300.0" maxWidth="300.0">
+    <VBox minWidth="300.0" maxWidth="300.0">
 <!--        <fx:include fx:id="statsView" source="../../stats/fxml/StatsView.fxml" />-->
 
-        <VBox stylesheets="@../../settings/css/Settings.css">
+        <VBox fx:id="rightSection" stylesheets="@../../settings/css/Settings.css">
             <children>
+                <Label text="Settings" styleClass="headerLabel"/>
+                <Label styleClass="borderLabel"/>
                 <HBox alignment="CENTER_LEFT" styleClass="settingsHBox">
                     <children>
                         <Label text="Race" />
@@ -80,6 +82,9 @@
                     </children>
                 </HBox>
             </children>
+            <Region minHeight="30.0"/>
+            <Label text="Stats" styleClass="headerLabel"/>
+            <Label styleClass="borderLabel"/>
         </VBox>
         <Region VBox.vgrow="ALWAYS" />
         <JFXButton fx:id="simulateButton" text="Simulate" />

@@ -96,5 +96,24 @@
     -fx-background-color: secondaryColor;
 }
 
+.headerLabel{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-min-width: 300;
+    -fx-min-height: 34;
+    -fx-max-height: 34;
+    -fx-max-width: 300;
+}
+
+.borderLabel{
+    -fx-min-height: 3;
+    -fx-max-height: 3;
+    -fx-min-width: 300;
+    -fx-max-width: 300;
+    -fx-alignment: CENTER;
+    -fx-background-color: secondaryColor;
+}
+
 
 

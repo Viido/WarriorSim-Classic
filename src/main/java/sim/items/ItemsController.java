@@ -2,6 +2,7 @@ package sim.items;
 
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -10,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import sim.warrior.Constants;
 import sim.warrior.Warrior;
 
 import java.io.*;
@@ -115,6 +117,24 @@ public class ItemsController implements Initializable {
                 }
             }
         }));
+
+        itemSlots[Constants.MAINHAND].selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue != null){
+                if(newValue.getSlot().equals("2h")){
+                    if(itemSlots[Constants.OFFHAND].getSelectedItem() != null){
+                        Platform.runLater(() -> itemSlots[Constants.OFFHAND].clearSelection());
+                    }
+                }
+            }
+        });
+
+        itemSlots[Constants.OFFHAND].selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue != null){
+                if(itemSlots[Constants.MAINHAND].getSelectedItem().getSlot().equals("2h")){
+                    Platform.runLater(() -> itemSlots[Constants.MAINHAND].clearSelection());
+                }
+            }
+        });
     }
 
     private void initItems(){
@@ -181,6 +201,10 @@ public class ItemsController implements Initializable {
         }
 
         return "";
+    }
+
+    public ItemSlot[] getItemSlots(){
+        return itemSlots;
     }
 
     public JFXListView<Item> getItemSelect() {

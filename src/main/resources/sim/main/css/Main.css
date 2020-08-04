@@ -17,6 +17,7 @@
 
 .split-pane:horizontal .split-pane-divider{
     -fx-background-color: secondaryColor;
+    -fx-padding: 0 3 0 0;
 }
 
 .scroll-pane{

@@ -226,17 +226,6 @@ public class TalentsController implements Initializable {
                 });
             }
         }
-
-        for(TalentButton talentButton : talentButtons.values()){
-            talentButton.pointsProperty().addListener((obs, oldValue, newValue) -> {
-                if(oldValue.intValue() >= 0){
-                    warrior.getActiveTalents().put(talentButton.getTalent().getId(), newValue.intValue());
-                }
-                if(newValue.intValue() == 0){
-                    warrior.getActiveTalents().remove(talentButton.getTalent().getId());
-                }
-            });
-        }
     }
 
     private void loadValues(){
@@ -245,6 +234,10 @@ public class TalentsController implements Initializable {
                 talentButtons.get(talent.getId()).setPoints(warrior.getActiveTalents().get(talent.getId()));
             }
         }
+    }
+
+    public Map<Integer, TalentButton> getTalentButtons(){
+        return talentButtons;
     }
 }
 
