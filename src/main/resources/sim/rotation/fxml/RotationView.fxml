@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20" fx:id="selectionBox" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Rotation.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox fx:id="bloodthirst" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="bloodthirstCheckBox" />
+        <Label fx:id="bloodthirstLabel" text="${'Bloodthirst\t\t\tUse when above'}" />
+        <JFXTextField fx:id="bloodthirstInput" />
+        <Label text="rage." />
+    </HBox>
+    <HBox fx:id="whirlwind" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="whirlwindCheckBox" />
+        <Label fx:id="whirlwindLabel" text="${'Whirlwind\t\t\tUse when above'}" />
+        <JFXTextField fx:id="whirlwindInput" />
+        <Label text="rage." />
+    </HBox>
+    <HBox fx:id="heroicStrike" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="heroicStrikeCheckBox" />
+        <Label fx:id="heroicStrikeLabel" text="${'Heroic Strike\t\t\tUse when above'}" />
+        <JFXTextField fx:id="heroicStrikeInput" />
+        <Label text="rage." />
+    </HBox>
+    <HBox fx:id="overpower" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="overpowerCheckBox" />
+        <Label fx:id="overpowerLabel" text="${'Overpower\t\t\tUse when above'}" />
+        <JFXTextField fx:id="overpowerInput" />
+        <Label text="rage." />
+    </HBox>
+    <HBox fx:id="hamstring" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="hamstringCheckBox" />
+        <Label fx:id="hamstringLabel" text="${'Hamstring\t\t\tUse when above'}" />
+        <JFXTextField fx:id="hamstringInput" />
+        <Label text="rage." />
+    </HBox>
+    <HBox fx:id="deathWish" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="deathWishCheckBox" />
+        <Label fx:id="deathWishLabel" text="${'Death Wish\t\t\tUse when fight has'}" />
+        <JFXTextField fx:id="deathWishInput" accessibleText="useasgasd"/>
+        <Label text="seconds remaining." />
+    </HBox>
+    <HBox fx:id="mightyRage" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="mightyRageCheckBox" />
+        <Label fx:id="mightyRageLabel" text="${'Mighty Rage Potion\t\tUse when fight has'}" />
+        <JFXTextField fx:id="mightyRageInput" />
+        <Label text="seconds remaining." />
+    </HBox>
+    <HBox fx:id="recklessness" alignment="CENTER_LEFT" spacing="5">
+        <JFXCheckBox fx:id="recklessnessCheckBox" />
+        <Label fx:id="recklessnessLabel" text="${'Recklessness\t\t\tUse when fight has'}" />
+        <JFXTextField fx:id="recklessnessInput" />
+        <Label text="seconds remaining." />
+    </HBox>
+</VBox>

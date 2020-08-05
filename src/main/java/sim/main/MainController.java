@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import sim.Main;
 import sim.items.ItemSlot;
 import sim.items.ItemsController;
+import sim.rotation.RotationController;
 import sim.settings.Race;
 import sim.settings.Settings;
 import sim.settings.SettingsController;
@@ -110,6 +111,7 @@ public class MainController implements Initializable {
         FXMLLoader itemsLoader = new FXMLLoader(getClass().getResource("/sim/items/fxml/ItemsView.fxml"));
         FXMLLoader talentsLoader = new FXMLLoader(getClass().getResource("/sim/talents/fxml/Talents.fxml"));
         FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/sim/settings/fxml/SettingsView.fxml"));
+        FXMLLoader rotationLoader = new FXMLLoader(getClass().getResource("/sim/rotation/fxml/RotationView.fxml"));
 
 
         ItemsController itemsController = new ItemsController(settings.getWarrior());
@@ -118,6 +120,7 @@ public class MainController implements Initializable {
 
         TalentsController talentsController = new TalentsController(settings.getWarrior());
         SettingsController settingsController = new SettingsController(settings, statsController);
+        RotationController rotationController = new RotationController();
 
 
 
@@ -125,11 +128,13 @@ public class MainController implements Initializable {
         itemsLoader.setController(itemsController);
         talentsLoader.setController(talentsController);
         settingsLoader.setController(settingsController);
+        rotationLoader.setController(rotationController);
 
         try{
             stackPane.getChildren().add(itemsLoader.load());
             stackPane.getChildren().add(settingsLoader.load());
             stackPane.getChildren().add(talentsLoader.load());
+            stackPane.getChildren().add(rotationLoader.load());
             stackPane.setAlignment(Pos.TOP_LEFT);
 
             stackPane.getChildren().get(0).setTranslateX(700);
@@ -140,6 +145,9 @@ public class MainController implements Initializable {
 
             stackPane.getChildren().get(2).setTranslateX(0);
             stackPane.getChildren().get(2).setTranslateY(450);
+
+            stackPane.getChildren().get(3).setTranslateX(960);
+            stackPane.getChildren().get(3).setTranslateY(480);
         }catch(IOException e){
             e.printStackTrace();
         }

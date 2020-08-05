@@ -1,0 +1,14 @@
+.jfx-text-field{
+    -fx-text-fill: #d9d93a;
+    -fx-max-width: 20;
+    -fx-alignment: center;
+}
+
+.jfx-text-field .input-line{
+    -fx-translate-y: -2;
+}
+
+.jfx-text-field .input-focused-line{
+    -fx-background-color: #d9d93a;
+    -fx-translate-y: -3;
+}

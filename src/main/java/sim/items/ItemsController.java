@@ -36,7 +36,7 @@ public class ItemsController implements Initializable {
 
     Warrior warrior;
 
-    // TODO Blizzlike tooltips, faction restricted items, item filters and sorting options
+    // TODO Blizzlike tooltips, faction restricted items, item filters and sorting options, set bonuses
     public ItemsController(Warrior warrior){
         this.warrior = warrior;
     }
