@@ -53,4 +53,10 @@ public class Constants {
     public static final int IMP_SUNDER_ARMOR = 146;
     public static final int ONE_HANDED_WEAPON_SPEC = 702;
     public static final int SHIELD_SLAM = 148;
+
+    // Colors
+    public static final String COLOR_UNCOMMON = "#1eff00";
+    public static final String COLOR_RARE = "#0070dd";
+    public static final String COLOR_EPIC = "#a335ee";
+    public static final String COLOR_LEGENDARY = "#ff8000";
 }

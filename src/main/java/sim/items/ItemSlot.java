@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -14,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import sim.warrior.Warrior;
 
@@ -182,16 +180,13 @@ public class ItemSlot extends HBox {
         itemName.setText(getSelectedItem().getName());
         itemName.setTextFill(Paint.valueOf(getSelectedItem().getColor()));
 
-        if(tooltip == null){
-            addTooltip();
-        }
+        addTooltip();
 
         tooltip.setPos(Pos.TOP_RIGHT);
+        tooltip.setSkin(new ItemTooltipSkin(tooltip, item));
 
         itemSlot.setOnMouseEntered(e -> tooltip.showOnAnchors(itemSlot, 43, 0));
         itemSlot.setOnMouseExited(e -> tooltip.hide());
-
-        tooltip.setText(getSelectedItem().getTooltip());
 
         if(enchantName.getText().equals("")){
             enchantName.setText("No enchant");

@@ -36,7 +36,7 @@ public class ItemsController implements Initializable {
 
     Warrior warrior;
 
-    // TODO Blizzlike tooltips, faction restricted items, item filters and sorting options, set bonuses
+    // TODO faction restricted items, item filters and sorting options, set bonuses
     public ItemsController(Warrior warrior){
         this.warrior = warrior;
     }
@@ -62,7 +62,7 @@ public class ItemsController implements Initializable {
                             setText(item.getName());
                             setTextFill(Paint.valueOf(item.getColor()));
 
-                            tooltip.setText(item.getTooltip());
+                            tooltip.setSkin(new ItemTooltipSkin(tooltip, item));
                         } else {
                             setText("");
                         }
