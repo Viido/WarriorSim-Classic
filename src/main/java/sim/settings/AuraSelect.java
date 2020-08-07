@@ -59,14 +59,13 @@ public class AuraSelect extends HBox {
 
         JFXTooltip tooltip = new JFXTooltip();
         tooltip.setPos(Pos.TOP_RIGHT);
-        tooltip.setMargin(-30);
 
         tooltip.setShowDelay(Duration.ZERO);
 
         tooltip.setText(aura.getDescription());
 
         auraInfo.setOnMouseEntered(e -> {
-            tooltip.show(auraInfo, 0, 0);
+            tooltip.showOnAnchors(auraInfo, 33, 0);
         });
 
         auraInfo.setOnMouseExited(e -> {

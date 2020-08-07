@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -13,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import sim.warrior.Warrior;
 
@@ -29,6 +31,8 @@ public class ItemSlot extends HBox {
     List<Enchant> enchantList;
     @FXML
     Button itemSlot;
+    @FXML
+    Label label1;
     private int id;
     private Warrior warrior;
     private String defaultImage;
@@ -182,8 +186,11 @@ public class ItemSlot extends HBox {
             addTooltip();
         }
 
-        itemSlot.setOnMouseEntered(e -> tooltip.show(this, 0, 0));
+        tooltip.setPos(Pos.TOP_RIGHT);
+
+        itemSlot.setOnMouseEntered(e -> tooltip.showOnAnchors(itemSlot, 43, 0));
         itemSlot.setOnMouseExited(e -> tooltip.hide());
+
         tooltip.setText(getSelectedItem().getTooltip());
 
         if(enchantName.getText().equals("")){
@@ -221,9 +228,6 @@ public class ItemSlot extends HBox {
 
     private void addTooltip(){
         tooltip = new JFXTooltip();
-        tooltip.setPos(Pos.TOP_RIGHT);
-        tooltip.setMargin(-30);
-
         tooltip.setShowDelay(Duration.ZERO);
     }
 

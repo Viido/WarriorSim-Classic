@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="WarriorSim_Classic.main" options="--add-exports javafx.base/com.sun.javafx.event=warriorSim.Classic --add-exports javafx.graphics/com.sun.javafx.scene=warriorSim.Classic" />
+    </option>
+  </component>
+</project>

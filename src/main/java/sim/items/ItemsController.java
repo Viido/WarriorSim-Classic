@@ -51,7 +51,6 @@ public class ItemsController implements Initializable {
             public ListCell<Item> call(ListView<Item> param) {
                 JFXTooltip tooltip = new JFXTooltip();
                 tooltip.setPos(Pos.TOP_RIGHT);
-                tooltip.setMargin(-30);
                 tooltip.setShowDelay(Duration.ZERO);
 
 
@@ -70,7 +69,7 @@ public class ItemsController implements Initializable {
                     }
                 };
 
-                cell.setOnMouseEntered(e -> tooltip.show(cell, 0, 0));
+                cell.setOnMouseEntered(e -> tooltip.showOnAnchors(cell, 0, 0));
                 cell.setOnMouseExited(e -> tooltip.hide());
 
                 return cell;

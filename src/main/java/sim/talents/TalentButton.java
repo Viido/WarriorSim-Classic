@@ -98,7 +98,6 @@ public class TalentButton extends Button {
         // TODO: custom tooltip class
         JFXTooltip tooltip = new JFXTooltip();
         tooltip.setPos(Pos.TOP_RIGHT);
-        tooltip.setMargin(-30);
 
         tooltip.setShowDelay(Duration.ZERO);
 
@@ -108,7 +107,7 @@ public class TalentButton extends Button {
 
         tooltip.textProperty().bind(descriptionProperty);
 
-        this.setOnMouseEntered(e -> tooltip.show(this, 0, 0));
+        this.setOnMouseEntered(e -> tooltip.showOnAnchors(this, 43, 0));
         this.setOnMouseExited(e -> tooltip.hide());
     }
 
