@@ -2,18 +2,14 @@ package sim.items;
 
 import com.jfoenix.controls.JFXTooltip;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.*;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -24,22 +20,9 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
     private JFXTooltip tooltip;
     private Item item;
 
-
-
-    /***************************************************************************
-     *                                                                         *
-     * Constructors                                                            *
-     *                                                                         *
-     **************************************************************************/
-
-    /**
-     * Creates a new TooltipSkin instance for the given {@link Tooltip}.
-     * @param t the tooltip
-     */
     public ItemTooltipSkin(JFXTooltip t, Item item) {
         this.tooltip = t;
         this.item = item;
-
         container = new VBox();
 
         Border border = new Border(new BorderImage(new Image(getClass().getResource("/images/tooltip.png").toExternalForm()),
@@ -51,7 +34,6 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
                 BorderRepeat.STRETCH));
 
         container.setBorder(border);
-
         container.setMaxWidth(320);
         container.setPadding(new Insets(0, 3, 3, 3));
 
@@ -74,8 +56,7 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
         if(item.getType() != null){
             HBox typeInfo = new HBox();
 
-
-            String slot = "";
+            String slot;
 
             Region region = new Region();
             HBox.setHgrow(region, Priority.ALWAYS);
@@ -96,6 +77,7 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
             typeLabel.setPadding(new Insets(0, 0, 0, 48));
 
             typeInfo.getChildren().addAll(createText(slot), region, typeLabel);
+
             container.getChildren().add(typeInfo);
         }
 
@@ -108,10 +90,7 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
             Label speedLabel = createText("Speed " + df.format(item.getSpeed()));
             speedLabel.setPadding(new Insets(0, 0, 0, 48));
 
-            weaponInfo.getChildren().addAll(
-                    createText(item.getMinDmg() + " - " + item.getMaxDmg() + " Damage"),
-                    region,
-                    speedLabel);
+            weaponInfo.getChildren().addAll(createText(item.getMinDmg() + " - " + item.getMaxDmg() + " Damage"), region, speedLabel);
 
             container.getChildren().add(weaponInfo);
         }
@@ -185,7 +164,7 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
         }
 
         if(item.getWeaponSkill() != 0){
-            String string = "";
+            String string;
 
             if(item.getWeaponSkill() > 0 && item.getWeaponSkillType() == null){
                 string = "Equip: Increased " + item.getType().substring(0, 1).toUpperCase() + item.getType().substring(1) + "s +" + item.getWeaponSkill() + ".";
@@ -225,21 +204,14 @@ public class ItemTooltipSkin implements Skin<JFXTooltip> {
         text.setFont(new Font("Verdana", 12));
         text.setText(string);
         text.autosize();
-
         text.setWrapText(true);
-
 
         return text;
     }
 
     private Label createText(String string, String color){
-        Label text = new Label();
+        Label text = createText(string);
         text.setTextFill(Paint.valueOf(color));
-        text.setFont(new Font("Verdana", 12));
-        text.setText(string);
-        text.autosize();
-        text.setWrapText(true);
-
 
         return text;
     }
