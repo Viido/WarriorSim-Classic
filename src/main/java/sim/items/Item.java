@@ -50,7 +50,7 @@ public class Item implements Serializable {
     private int minDmg;
     @SerializedName(value = "max")
     private int maxDmg;
-    private float speed;
+    private double speed;
     private String eleDmgType;
     private int eleDmgMin;
     private int eleDmgMax;
@@ -196,7 +196,7 @@ public class Item implements Serializable {
         return maxDmg;
     }
 
-    public float getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 

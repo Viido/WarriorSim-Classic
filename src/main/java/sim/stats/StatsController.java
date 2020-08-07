@@ -45,19 +45,31 @@ public class StatsController implements Initializable {
 
     Warrior warrior;
 
+    DecimalFormat df = new DecimalFormat();
+
     public StatsController(Warrior warrior){
         this.warrior = warrior;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+
         warrior.getStats().refreshStats();
         refreshDisplay();
     }
 
     private void setWeaponSkillText(){
         if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
-            weaponSkill.setText(warrior.getWeaponSkillMH() + " | "  + warrior.getWeaponSkillOH());
+            if(!warrior.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
+                weaponSkill.setText(warrior.getWeaponSkillMH() + " | "  + warrior.getWeaponSkillOH());
+            }else{
+                weaponSkill.setText(warrior.getWeaponSkillMH() + "");
+            }
         }else{
             weaponSkill.setText(warrior.getWeaponSkillMH() + "");
         }
@@ -65,19 +77,18 @@ public class StatsController implements Initializable {
 
     private void setCritChanceText(){
         if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
-            critChance.setText(warrior.getCritMH() + "% | "  + warrior.getCritOH() + "%");
+            if(!warrior.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
+                critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "% | "  + df.format(warrior.getCritOH()) + "%");
+            }else{
+                critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "%");
+            }
         }else{
-            critChance.setText(warrior.getCritMH() + "%");
+            critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "%");
         }
     }
 
     public void refreshDisplay(){
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-        df.setMinimumFractionDigits(2);
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-        dfs.setDecimalSeparator('.');
-        df.setDecimalFormatSymbols(dfs);
+
 
         str.setText(warrior.getStr() + "");
         agi.setText(warrior.getAgi() + "");
@@ -90,9 +101,9 @@ public class StatsController implements Initializable {
         setCritChanceText();
         haste.setText(df.format(warrior.getHaste() * 100 - 100) + "%");
         defense.setText(warrior.getDefense() + "");
-        blockChance.setText(warrior.getBlock() + "%");
+        blockChance.setText(df.format(warrior.getBlock()) + "%");
         blockValue.setText(warrior.getBlockValue() + "");
-        parryChance.setText(warrior.getParry() + "%");
-        dodgeChance.setText(warrior.getDodge() + "%");
+        parryChance.setText(df.format(warrior.getParry()) + "%");
+        dodgeChance.setText(df.format(warrior.getDodge()) + "%");
     }
 }

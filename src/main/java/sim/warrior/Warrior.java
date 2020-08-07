@@ -106,8 +106,8 @@ public class Warrior implements Serializable {
         return stats;
     }
 
-    public float getStatMod(){
-        float mod = 1;
+    public double getStatMod(){
+        double mod = 1;
 
         if(getActiveAuras().containsKey(SPIRIT_OF_ZANDALAR)){
             mod *= getActiveAuras().get(SPIRIT_OF_ZANDALAR).getStatMod();
@@ -120,8 +120,8 @@ public class Warrior implements Serializable {
         return mod;
     }
 
-    public float getStaMod(){
-        float mod = 1;
+    public double getStaMod(){
+        double mod = 1;
 
         if(getActiveAuras().containsKey(DMT_STA)){
             mod *= getActiveAuras().get(DMT_STA).getStaMod();
@@ -150,8 +150,8 @@ public class Warrior implements Serializable {
         return stats.getHit();
     }
 
-    public float getCritMH(){
-        return stats.getCrit() + getAgi()/20.0f
+    public double getCritMH(){
+        return stats.getCrit() + getAgi()/20.0
                 + (tempEnchantMH != null ? tempEnchantMH.getCrit() : 0)
                 + (tempEnchantOH != null ? tempEnchantOH.getCrit() : 0)
                 + (getWeaponTypeMH().equals("axe") ? activeTalents.getOrDefault(AXE_SPEC, 0) : 0)
@@ -159,8 +159,8 @@ public class Warrior implements Serializable {
                 + activeTalents.getOrDefault(CRUELTY, 0);
     }
 
-    public float getCritOH(){
-        return stats.getCrit() + getAgi()/20.0f
+    public double getCritOH(){
+        return stats.getCrit() + getAgi()/20.0
                 + (tempEnchantMH != null ? tempEnchantMH.getCrit() : 0)
                 + (tempEnchantOH != null ? tempEnchantOH.getCrit() : 0)
                 + (getWeaponTypeOH().equals("axe") ? activeTalents.getOrDefault(AXE_SPEC, 0) : 0)
@@ -192,23 +192,23 @@ public class Warrior implements Serializable {
         return level * 5 + stats.getDefense() + getActiveTalents().getOrDefault(ANTICIPATION, 0) * 2;
     }
 
-    public int getBlock(){
-        return  5 + stats.getBlock() + getActiveTalents().getOrDefault(SHIELD_SPEC, 0);
+    public double getBlock(){
+        return  5 + stats.getBlock() + stats.getDefense() * 0.04 + getActiveTalents().getOrDefault(SHIELD_SPEC, 0);
     }
 
     public int getBlockValue(){
-        return (int) Math.floor(getStr()/20.0f + getStats().getBlockValue());
+        return (int) Math.floor(getStr()/20.0 + getStats().getBlockValue());
     }
 
-    public int getParry(){
-        return 5 + stats.getParry() + getActiveTalents().getOrDefault(DEFLECTION, 0);
+    public double getParry(){
+        return 5 + stats.getParry() + stats.getDefense() * 0.04 + getActiveTalents().getOrDefault(DEFLECTION, 0);
     }
 
-    public float getDodge(){
-        return getAgi()/20.0f + getStats().getDodge() + race.getBaseStats().getDodge();
+    public double getDodge(){
+        return getAgi()/20.0f + getStats().getDodge() + stats.getDefense() * 0.04 + race.getBaseStats().getDodge();
     }
 
-    public float getHaste(){
+    public double getHaste(){
         return stats.getHaste();
     }
 

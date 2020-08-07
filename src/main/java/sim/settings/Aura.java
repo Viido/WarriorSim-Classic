@@ -15,9 +15,9 @@ public class Aura implements Serializable {
     private int sta;
     private int hp;
     private int haste;
-    private float statMod;
-    private float staMod;
-    private float dmgMod;
+    private double statMod;
+    private double staMod;
+    private double dmgMod;
     private int fireRes;
     private int natureRes;
     private int frostRes;
@@ -73,19 +73,19 @@ public class Aura implements Serializable {
         return hp;
     }
 
-    public float getHaste() {
-        return 1 + haste/100.0f;
+    public double getHaste() {
+        return 1 + haste/100d;
     }
 
-    public float getStatMod() {
+    public double getStatMod() {
         return statMod;
     }
 
-    public float getStaMod() {
+    public double getStaMod() {
         return staMod;
     }
 
-    public float getDmgMod() {
+    public double getDmgMod() {
         return dmgMod;
     }
 
