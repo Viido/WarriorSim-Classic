@@ -134,14 +134,14 @@
       "quality": "uncommon"
     },
     {
-      "id": 13939,
-      "name": "Greater Strength",
+      "id": 20026,
+      "name": "Major Health",
       "slot": [
-        "wrist"
+        "chest"
       ],
-      "str": 7,
+      "health": 100,
       "phase": 1,
-      "description": "+7 Strength",
+      "description": "+100 Health",
       "quality": "uncommon"
     },
     {
@@ -153,6 +153,39 @@
       "str": 9,
       "phase": 1,
       "description": "+9 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13939,
+      "name": "Greater Strength",
+      "slot": [
+        "wrist"
+      ],
+      "str": 7,
+      "phase": 1,
+      "description": "+7 Strength",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20011,
+      "name": "Superior Stamina",
+      "slot": [
+        "wrist"
+      ],
+      "sta": 9,
+      "phase": 1,
+      "description": "+9 Stamina",
+      "quality": "uncommon"
+    },
+    {
+      "id": 13945,
+      "name": "Greater Stamina",
+      "slot": [
+        "wrist"
+      ],
+      "sta": 7,
+      "phase": 1,
+      "description": "+7 Stamina",
       "quality": "uncommon"
     },
     {
@@ -200,6 +233,17 @@
       "quality": "uncommon"
     },
     {
+      "id": 25072,
+      "spellid": true,
+      "name": "Threat",
+      "slot": [
+        "hands"
+      ],
+      "phase": 1,
+      "description": "+2% Threat",
+      "quality": "rare"
+    },
+    {
       "id": 20023,
       "name": "Greater Agility",
       "slot": [
@@ -208,6 +252,17 @@
       "agi": 7,
       "phase": 1,
       "description": "+7 Agility",
+      "quality": "uncommon"
+    },
+    {
+      "id": 20020,
+      "name": "Greater Stamina",
+      "slot": [
+        "feet"
+      ],
+      "sta": 7,
+      "phase": 1,
+      "description": "+7 Stamina",
       "quality": "uncommon"
     },
     {
