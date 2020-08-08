@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Item implements Serializable {
@@ -228,40 +229,34 @@ public class Item implements Serializable {
     }
 
     public String getWeaponSkillText(){
-        if(weaponSkill == 0){
-            return "";
-        }
-
         if(weaponSkill > 0 && weaponSkillType == null){
-            return "Equip: Increased " + type.substring(0, 1).toUpperCase() + type.substring(1) + "s +" + weaponSkill + ".\n";
+            return "Equip: Increased " + type.substring(0, 1).toUpperCase() + type.substring(1) + "s +" + weaponSkill + ".";
         }
 
         if(weaponSkillType.equals("varied")){
-            return "Equip: Increased Axes +7.\nEquip: Increased Daggers +7.\nEquip: Increased Swords +7.\n";
+            return "Equip: Increased Axes +7.\nEquip: Increased Daggers +7.\nEquip: Increased Swords +7.";
         }
 
-        return "Equip: Increased " + weaponSkillType.substring(0, 1).toUpperCase() + weaponSkillType.substring(1) + "s +" + weaponSkill + ".\n";
+        return "Equip: Increased " + weaponSkillType.substring(0, 1).toUpperCase() + weaponSkillType.substring(1) + "s +" + weaponSkill + ".";
     }
 
-    private String getTypeString(){
-        if(type == null){
-            return "";
-        }
-
+    public String getSlotString(){
         if(slot.equals("main")){
-            return "Main Hand " + type.substring(0, 1).toUpperCase() + type.substring(1) + "\n";
+            return "Main Hand";
         }else if(slot.equals("off") || type.equals("shield")){
-            return "Off Hand " + type.substring(0, 1).toUpperCase() + type.substring(1) + "\n";
+            return "Off Hand";
         }else if(slot.equals("2h")){
-            return "Two-Hand " + type.substring(0, 1).toUpperCase() + type.substring(1) + "\n";
+            return "Two-Hand";
         }else if(type.equals("bow") || type.equals("crossbow") || type.equals("gun")){
-            return "Ranged " + type.substring(0, 1).toUpperCase() + type.substring(1) + "\n";
+            return "Ranged";
         }else{
-            return "One-Hand " + type.substring(0, 1).toUpperCase() + type.substring(1) + "\n";
+            return "One-Hand";
         }
     }
 
-    public String getTooltip() {
+    public List<String> getTooltip() {
+        List<String> tooltip = new ArrayList<>();
+
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
         df.setMinimumFractionDigits(2);
@@ -269,34 +264,106 @@ public class Item implements Serializable {
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
 
-        String tooltip = "";
+        tooltip.add(name);
 
-        tooltip += name + "\n";
-        tooltip += getTypeString();
-        tooltip += speed != 0 ? minDmg + " - " + maxDmg + " Damage\t\tSpeed " + df.format(speed) + "\n" : "";
-        tooltip += eleDmgType != null ? "+ " + eleDmgMin + " - " + eleDmgMax + " " + eleDmgType.substring(0, 1).toUpperCase() + eleDmgType.substring(1) + " Damage\n" : "";
-        tooltip += speed != 0 ? "(" + df.format((minDmg + maxDmg + eleDmgMin + eleDmgMax)/2/speed) + " damage per second)\n" : "";
-        tooltip += shieldBlockValue != 0 ? shieldBlockValue + " Block\n" : "";
-        tooltip += armor != 0 ? armor + " Armor\n" : "";
-        tooltip += str != 0 ? "+" + str + " Strength\n" : "";
-        tooltip += agi != 0 ? "+" + agi + " Agility\n" : "";
-        tooltip += sta != 0 ? "+" + sta + " Stamina\n" : "";
-        tooltip += intellect != 0 ? "+" + intellect + " Intellect\n" : "";
-        tooltip += spirit != 0 ? "+" + spirit + " Spirit\n" : "";
-        tooltip += arcaneRes != 0 ? "+" + arcaneRes + " Arcane Resistance\n" : "";
-        tooltip += fireRes != 0 ? "+" + fireRes + " Fire Resistance\n" : "";
-        tooltip += frostRes != 0 ? "+" + frostRes + " Frost Resistance\n" : "";
-        tooltip += natureRes != 0 ? "+" + natureRes + " Nature Resistance\n" : "";
-        tooltip += shadowRes != 0 ? "+" + shadowRes + " Shadow Resistance\n" : "";
-        tooltip += crit != 0 ? "Equip: Improves your chance to get a critical strike by " + crit + "%.\n" : "";
-        tooltip += hit != 0 ? "Equip: Improves your chance to hit by " + hit + "%.\n" : "";
-        tooltip += ap != 0 ? "Equip: +" + ap + " Attack Power.\n" : "";
-        tooltip += getWeaponSkillText();
-        tooltip += block != 0 ? "Equip: Increases your chance to block attacks with a shield by " + block + "%.\n" : "";
-        tooltip += blockValue != 0 ? "Equip: Increases the block value of your shield by " + blockValue + ".\n" : "";
-        tooltip += parry != 0 ? "Equip: Increases your chance to parry an attack by " + parry + "%.\n" : "";
-        tooltip += dodge != 0 ? "Equip: Increases your chance to dodge an attack by " + dodge + "%.\n" : "";
-        tooltip += defense != 0 ? "Equip: Increased Defense +" + defense + ".\n" : "";
+        if(getType() != null){
+            tooltip.add(getSlotString() + "\t" + type.substring(0, 1).toUpperCase() + type.substring(1));
+        }
+
+        if(speed != 0){
+            tooltip.add(minDmg + " - " + maxDmg + " Damage" + "\t" + "Speed " + df.format(speed));
+        }
+
+        if(eleDmgType != null){
+            tooltip.add("+ " + eleDmgMin + " - " + eleDmgMax + " " + eleDmgType.substring(0, 1).toUpperCase() + eleDmgType.substring(1) + " Damage");
+        }
+
+        if(speed != 0){
+            tooltip.add("(" + df.format((minDmg + maxDmg + eleDmgMin + eleDmgMax)/2.0/speed) + " damage per second)");
+        }
+
+        if(shieldBlockValue != 0){
+            tooltip.add(shieldBlockValue + " Block");
+        }
+
+        if(armor != 0){
+            tooltip.add(armor + " Armor");
+        }
+
+        if(str != 0){
+            tooltip.add("+" + str + " Strength");
+        }
+
+        if(agi != 0){
+            tooltip.add("+" + agi + " Agility");
+        }
+
+        if(sta != 0){
+            tooltip.add("+" + sta + " Stamina");
+        }
+
+        if(intellect != 0){
+            tooltip.add("+" + intellect + " Intellect");
+        }
+
+        if(spirit != 0){
+            tooltip.add("+" + spirit + " Spirit");
+        }
+
+        if(arcaneRes != 0){
+            tooltip.add("+" + arcaneRes + " Arcane Resistance");
+        }
+
+        if(fireRes != 0){
+            tooltip.add("+" + fireRes + " Fire Resistance");
+        }
+
+        if(frostRes != 0){
+            tooltip.add("+" + frostRes + " Frost Resistance");
+        }
+
+        if(natureRes != 0){
+            tooltip.add("+" + natureRes + " Nature Resistance");
+        }
+
+        if(shadowRes != 0){
+            tooltip.add("+" + shadowRes + " Shadow Resistance");
+        }
+
+        if(crit != 0){
+            tooltip.add("Equip: Improves your chance to get a critical strike by " + crit + "%.");
+        }
+
+        if(hit != 0){
+            tooltip.add("Equip: Improves your chance to hit by " + hit + "%.");
+        }
+
+        if(ap != 0){
+            tooltip.add("Equip: +" + ap + " Attack Power.");
+        }
+
+        if(weaponSkill != 0){
+            tooltip.add(getWeaponSkillText());
+        }
+
+        if(block != 0){
+            tooltip.add("Equip: Increases your chance to block attacks with a shield by " + block + "%.");
+        }
+
+        if(blockValue != 0){
+            tooltip.add("Equip: Increases the block value of your shield by " + blockValue + ".");
+        }
+        if(parry != 0){
+            tooltip.add("Equip: Increases your chance to parry an attack by " + parry + "%.");
+        }
+
+        if(dodge != 0){
+            tooltip.add("Equip: Increases your chance to dodge an attack by " + dodge + "%.");
+        }
+
+        if(defense != 0){
+            tooltip.add("Equip: Increased Defense +" + defense + ".");
+        }
 
         return tooltip;
     }

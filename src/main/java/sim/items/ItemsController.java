@@ -3,14 +3,13 @@ package sim.items;
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import sim.warrior.Constants;
 import sim.warrior.Warrior;
 
@@ -49,32 +48,36 @@ public class ItemsController implements Initializable {
         itemSelect.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Item> call(ListView<Item> param) {
-                JFXTooltip tooltip = new JFXTooltip();
-                tooltip.setPos(Pos.TOP_RIGHT);
-                tooltip.setShowDelay(Duration.ZERO);
+                ItemTooltip itemTooltip = new ItemTooltip();
 
-
-                ListCell<Item> cell = new ListCell<>() {
+                return new ListCell<>() {
                     @Override
                     protected void updateItem(Item item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item != null) {
+
+                        if (empty || item == null) {
+                            setText(null);
+                            setTextFill(null);
+                        } else {
                             setText(item.getName());
                             setTextFill(Paint.valueOf(item.getColor()));
-
-                            tooltip.setSkin(new ItemTooltipSkin(tooltip, item));
-                        } else {
-                            setText("");
+                            itemTooltip.setItem(item);
                         }
+
+                        this.setOnMouseEntered(e -> {
+                            itemTooltip.show(this, 260, 0);
+                        });
+
+                        this.setOnMouseExited(e -> {
+                            itemTooltip.hide();
+                        });
                     }
                 };
-
-                cell.setOnMouseEntered(e -> tooltip.showOnAnchors(cell, 0, 0));
-                cell.setOnMouseExited(e -> tooltip.hide());
-
-                return cell;
             }
         });
+
+        itemSelect.setItems(FXCollections.observableArrayList(items.getHead()));
+        itemSelect.setId("0");
 
         enchantSelect.setCellFactory(new Callback<>() {
             @Override
@@ -94,6 +97,9 @@ public class ItemsController implements Initializable {
                 return cell;
             }
         });
+
+        enchantSelect.setItems(FXCollections.observableArrayList(enchants.getHeadEnchants()));
+        enchantSelect.setId("0");
 
         enchantSelect.idProperty().addListener((obs, oldValue, newValue) -> {
             if(tabPane.getSelectionModel().getSelectedIndex() == 1){

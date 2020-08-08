@@ -41,7 +41,7 @@ public class ItemSlot extends HBox {
 
     Label itemName = new Label();
     Label enchantName = new Label();
-    JFXTooltip tooltip = new JFXTooltip();
+    ItemTooltip tooltip;
 
     public ItemSlot(List<Item> itemList, List<Enchant> enchantList, JFXListView<Item> itemView, JFXListView<Enchant> enchantView, String defaultImage, int id, Warrior warrior){
         try {
@@ -123,8 +123,6 @@ public class ItemSlot extends HBox {
         }));
     }
 
-
-
     private List<Enchant> get1hEnchants(){
         List<Enchant> result = new ArrayList<>();
 
@@ -180,12 +178,10 @@ public class ItemSlot extends HBox {
         itemName.setText(getSelectedItem().getName());
         itemName.setTextFill(Paint.valueOf(getSelectedItem().getColor()));
 
-        addTooltip();
+        tooltip = new ItemTooltip();
+        tooltip.setItem(item);
 
-        tooltip.setPos(Pos.TOP_RIGHT);
-        tooltip.setSkin(new ItemTooltipSkin(tooltip, item));
-
-        itemSlot.setOnMouseEntered(e -> tooltip.showOnAnchors(itemSlot, 43, 0));
+        itemSlot.setOnMouseEntered(e -> tooltip.show(itemSlot, 40, 0));
         itemSlot.setOnMouseExited(e -> tooltip.hide());
 
         if(enchantName.getText().equals("")){
@@ -216,14 +212,10 @@ public class ItemSlot extends HBox {
         if(tooltip.isShowing()){
             tooltip.hide();
         }
+
         tooltip = null;
         itemSlot.setOnMouseEntered(null);
         itemSlot.setOnMouseExited(null);
-    }
-
-    private void addTooltip(){
-        tooltip = new JFXTooltip();
-        tooltip.setShowDelay(Duration.ZERO);
     }
 
     public void setSelectedEnchant(Enchant enchant){
