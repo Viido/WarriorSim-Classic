@@ -78,7 +78,7 @@ public class StatsController implements Initializable {
     private void setCritChanceText(){
         if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
             if(!warrior.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
-                critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "% | "  + df.format(warrior.getCritOH()) + "%");
+                critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "% | "  + df.format(warrior.getCritOH() + (warrior.getWeaponSkillOH() - 300) * 0.04) + "%");
             }else{
                 critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "%");
             }
@@ -88,8 +88,6 @@ public class StatsController implements Initializable {
     }
 
     public void refreshDisplay(){
-
-
         str.setText(warrior.getStr() + "");
         agi.setText(warrior.getAgi() + "");
         sta.setText(warrior.getSta() + "");

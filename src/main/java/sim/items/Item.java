@@ -36,6 +36,7 @@ public class Item implements Serializable {
     private int shadowRes;
     private int natureRes;
     private int arcaneRes;
+    private int mp5;
     private int phase;
     @SerializedName(value = "spell")
     private int spellId;
@@ -56,6 +57,7 @@ public class Item implements Serializable {
     private int eleDmgMin;
     private int eleDmgMax;
     private int shieldBlockValue;
+    private int itemSetId;
 
     public Item(){
         slot = "";
@@ -153,6 +155,10 @@ public class Item implements Serializable {
         return arcaneRes;
     }
 
+    public int getMp5() {
+        return mp5;
+    }
+
     public int getPhase() {
         return phase;
     }
@@ -215,6 +221,10 @@ public class Item implements Serializable {
 
     public int getShieldBlockValue() {
         return shieldBlockValue;
+    }
+
+    public int getItemSetId() {
+        return itemSetId;
     }
 
     public String getColor(){
@@ -363,6 +373,10 @@ public class Item implements Serializable {
 
         if(defense != 0){
             tooltip.add("Equip: Increased Defense +" + defense + ".");
+        }
+
+        if(mp5 != 0){
+            tooltip.add("Equip: Restores " + mp5 + " mana per 5 sec.");
         }
 
         return tooltip;

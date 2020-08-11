@@ -1,6 +1,9 @@
 package sim.items;
 
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,14 +17,21 @@ import javafx.stage.PopupWindow;
 
 import java.util.List;
 
+import static sim.main.SimDB.ITEMS;
+import static sim.main.SimDB.ITEM_SETS;
 import static sim.warrior.Constants.COLOR_UNCOMMON;
+
+// TODO rewrite as a base tooltip class, change item class and stats to be able to be ordered, add missing fields to items.json for more blizzlike tooltips
 
 public class ItemTooltip extends PopupControl {
     private VBox container;
+    private VBox itemSetContainer;
     private SimpleObjectProperty<Item> item = new SimpleObjectProperty<>();
+    private SimpleListProperty<Integer> itemSetIds = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     public ItemTooltip() {
         container = new VBox();
+        itemSetContainer = new VBox();
 
         Border border = new Border(new BorderImage(new Image(getClass().getResource("/images/tooltip.png").toExternalForm()),
                 new BorderWidths(6),
@@ -38,10 +48,21 @@ public class ItemTooltip extends PopupControl {
         this.setAnchorLocation(PopupWindow.AnchorLocation.CONTENT_BOTTOM_LEFT);
         this.getScene().setRoot(container);
 
+        container.getChildren().add(itemSetContainer);
+
         itemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != oldValue && newValue != null){
                 generateTooltip();
+                if(newValue.getItemSetId() != 0){
+                    addItemSetTooltip();
+                }else{
+                    itemSetContainer.getChildren().clear();
+                }
             }
+        });
+
+        itemSetIds.addListener((obs, oldValue, newValue) -> {
+            addItemSetTooltip();
         });
     }
 
@@ -83,6 +104,54 @@ public class ItemTooltip extends PopupControl {
 
         Label label = (Label) container.getChildren().get(0);
         label.setTextFill(Paint.valueOf(item.get().getColor()));
+
+        container.getChildren().add(itemSetContainer);
+    }
+
+    private void addItemSetTooltip(){
+        itemSetContainer.getChildren().clear();
+
+        ItemSet itemSet = ITEM_SETS.get(item.get().getItemSetId());
+
+        if(itemSetIds.size() > 0){
+            Label setName = createText();
+            setName.setText("\n" + itemSet.getName() + " (" + itemSetIds.size() + "/" + itemSet.getItemIds().size() + ")");
+            setName.setTextFill(Paint.valueOf("#ffd100"));
+
+            itemSetContainer.getChildren().add(setName);
+
+            for(Integer i : itemSet.getItemIds()){
+                Label itemName = createText();
+                itemName.setText(ITEMS.get(i).getName());
+                if(itemSetIds.contains(i)){
+                    itemName.setTextFill(Paint.valueOf("#e4e78f"));
+                }else{
+                    itemName.setTextFill(Paint.valueOf("#9d9d9d"));
+                }
+
+                itemName.setPadding(new Insets(0, 0, 0, 5));
+
+                itemSetContainer.getChildren().add(itemName);
+            }
+
+            for(int i = 0; i < itemSet.getSetBonuses().size(); i++){
+                ItemSet.ItemSetBonus setBonus = itemSet.getSetBonuses().get(i);
+
+                Label setBonusText = createText();
+                if(itemSetIds.size() >= setBonus.getCount()){
+                    setBonusText.setTextFill(Paint.valueOf(COLOR_UNCOMMON));
+                }else{
+                    setBonusText.setTextFill(Paint.valueOf("#9d9d9d"));
+                }
+
+                setBonusText.setText("(" + setBonus.getCount() + ") Set : " + setBonus.getDescription());
+                if(i == 0){
+                    setBonusText.setText("\n" + setBonusText.getText());
+                }
+
+                itemSetContainer.getChildren().add(setBonusText);
+            }
+        }
     }
 
     private Label createText(){
@@ -111,6 +180,10 @@ public class ItemTooltip extends PopupControl {
 
     public void setItem(Item item) {
         this.item.set(item);
+    }
+
+    public void setItemSetIds(ObservableList<Integer> itemSetIds) {
+        this.itemSetIds.set(itemSetIds);
     }
 }
 

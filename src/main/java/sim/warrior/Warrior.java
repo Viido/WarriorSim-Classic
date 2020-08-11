@@ -6,9 +6,7 @@ import sim.settings.Aura;
 import sim.settings.Race;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static sim.warrior.Constants.*;
@@ -23,6 +21,7 @@ public class Warrior implements Serializable {
     Aura tempEnchantMH; // TODO find a better way to handle dual-wield temp enchants
     Aura tempEnchantOH;
     Stats stats = new Stats(this);
+    Map<Integer, SetBonusControl> setBonuses = new HashMap<>();
 
     public Item[] getEquippedItems() {
         return equippedItems;
@@ -31,13 +30,35 @@ public class Warrior implements Serializable {
     public void equipItem(int slot, Item newItem){
         if(equippedItems[slot] != null){
             stats.removeStats(equippedItems[slot]);
+
+            if(equippedItems[slot].getItemSetId() != 0){
+                setBonuses.get(equippedItems[slot].getItemSetId()).removeItem(equippedItems[slot]);
+
+                if(setBonuses.get(equippedItems[slot].getItemSetId()).getActiveItems().size() == 0){
+                    setBonuses.remove(equippedItems[slot].getItemSetId());
+                }
+            }
         }
+
         equippedItems[slot] = newItem;
         stats.addStats(newItem);
+
+        if(newItem.getItemSetId() != 0){
+            setBonuses.computeIfAbsent(newItem.getItemSetId(), k -> new SetBonusControl(this, newItem.getItemSetId())).addItem(newItem);
+        }
     }
 
     public void unequipItem(int slot){
         stats.removeStats(equippedItems[slot]);
+
+        if(equippedItems[slot].getItemSetId() != 0){
+            setBonuses.get(equippedItems[slot].getItemSetId()).removeItem(equippedItems[slot]);
+
+            if(setBonuses.get(equippedItems[slot].getItemSetId()).getActiveItems().size() == 0){
+                setBonuses.remove(equippedItems[slot].getItemSetId());
+            }
+        }
+
         equippedItems[slot] = null;
     }
 
@@ -245,6 +266,12 @@ public class Warrior implements Serializable {
             }
         }
 
+        if(setBonuses.containsKey(WARBLADES_SET)){
+            if(setBonuses.get(WARBLADES_SET).getActiveSetBonuses().size() == 1){
+                weaponSkill += 6;
+            }
+        }
+
         weaponSkill += equippedItems[MAINHAND].getWeaponSkill();
 
         if(equippedItems[OFFHAND] != null){
@@ -285,6 +312,12 @@ public class Warrior implements Serializable {
             }
         }
 
+        if(setBonuses.containsKey(WARBLADES_SET)){
+            if(setBonuses.get(WARBLADES_SET).getActiveSetBonuses().size() == 1){
+                weaponSkill += 6;
+            }
+        }
+
 
         weaponSkill += equippedItems[OFFHAND].getWeaponSkill();
 
@@ -308,5 +341,13 @@ public class Warrior implements Serializable {
 
     public int getLevel() {
         return level;
+    }
+
+    public SetBonusControl getSetBonusControl(Integer itemSetId){
+        return setBonuses.get(itemSetId);
+    }
+
+    public Map<Integer, SetBonusControl> getSetBonuses(){
+        return setBonuses;
     }
 }

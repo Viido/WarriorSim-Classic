@@ -11,7 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
-import sim.Main;
 import sim.items.ItemSlot;
 import sim.items.ItemsController;
 import sim.rotation.RotationController;
@@ -181,10 +180,6 @@ public class MainController implements Initializable {
         tab.setContent(scrollPane);
 
         return tab;
-    }
-
-    public void setDividerPosition(){
-        mainPane.setDividerPosition(0, 0.9);
     }
 
     public void saveSettings(){

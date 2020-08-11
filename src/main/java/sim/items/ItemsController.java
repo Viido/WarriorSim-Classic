@@ -16,6 +16,7 @@ import sim.warrior.Warrior;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import static sim.warrior.Constants.MAINHAND;
 
 public class ItemsController implements Initializable {
     Items items;
@@ -82,7 +83,7 @@ public class ItemsController implements Initializable {
         enchantSelect.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Enchant> call(ListView<Enchant> param) {
-                ListCell<Enchant> cell = new ListCell<>(){
+                return new ListCell<>(){
                     @Override
                     protected void updateItem(Enchant enchant, boolean empty){
                         super.updateItem(enchant, empty);
@@ -94,7 +95,6 @@ public class ItemsController implements Initializable {
                         }
                     }
                 };
-                return cell;
             }
         });
 
@@ -123,7 +123,7 @@ public class ItemsController implements Initializable {
             }
         }));
 
-        itemSlots[Constants.MAINHAND].selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+        itemSlots[MAINHAND].selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null){
                 if(newValue.getSlot().equals("2h")){
                     if(itemSlots[Constants.OFFHAND].getSelectedItem() != null){
@@ -135,11 +135,23 @@ public class ItemsController implements Initializable {
 
         itemSlots[Constants.OFFHAND].selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null){
-                if(itemSlots[Constants.MAINHAND].getSelectedItem().getSlot().equals("2h")){
-                    Platform.runLater(() -> itemSlots[Constants.MAINHAND].clearSelection());
+                if(itemSlots[MAINHAND].getSelectedItem() != null){
+                    if(itemSlots[MAINHAND].getSelectedItem().getSlot().equals("2h")){
+                        Platform.runLater(() -> itemSlots[MAINHAND].clearSelection());
+                    }
                 }
             }
         });
+
+        refreshSetBonuses();
+    }
+
+    private void refreshSetBonuses(){
+        for(ItemSlot itemSlot : itemSlots){
+            if(itemSlot.getSelectedItem() != null){
+                updateSetBonusTooltip(itemSlot.getSelectedItem());
+            }
+        }
     }
 
     private void initItems(){
@@ -148,23 +160,48 @@ public class ItemsController implements Initializable {
         enchants = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/enchants.json")), Enchants.class);
     }
 
-    private void initItemSlots(){
+    private void initItemSlots() {
 
         String[] images = {
                 "itemslot_head.jpg", "itemslot_neck.jpg", "itemslot_shoulder.jpg", "itemslot_chest.jpg", "itemslot_chest.jpg", "itemslot_wrists.jpg", "itemslot_mainhand.jpg",
-                "itemslot_offhand.jpg", "itemslot_ranged.jpg","itemslot_hands.jpg", "itemslot_waist.jpg", "itemslot_legs.jpg", "itemslot_feet.jpg", "itemslot_finger.jpg",
+                "itemslot_offhand.jpg", "itemslot_ranged.jpg", "itemslot_hands.jpg", "itemslot_waist.jpg", "itemslot_legs.jpg", "itemslot_feet.jpg", "itemslot_finger.jpg",
                 "itemslot_finger.jpg", "itemslot_trinket.jpg", "itemslot_trinket.jpg"
-                };
+        };
 
-        for(int i = 0; i < 17; i++){
+        for (int i = 0; i < 17; i++) {
             ItemSlot itemSlot = new ItemSlot(items.getItemsBySlot(i), enchants.getEnchantsBySlot(i), itemSelect, enchantSelect, images[i], i, warrior);
             itemSlots[i] = itemSlot;
+
             itemSlot.refresh();
 
-            if(i < 9){
+            if (i < 9) {
                 leftItems.getChildren().add(itemSlot);
-            }else{
+            } else {
                 rightItems.getChildren().add(itemSlot);
+            }
+
+            itemSlot.selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+                if(newValue != null){
+                    updateSetBonusTooltip(newValue);
+                }
+
+                if(oldValue != null){
+                    updateSetBonusTooltip(oldValue);
+                }
+            });
+        }
+    }
+
+    private void updateSetBonusTooltip(Item item){
+        if(item.getItemSetId() != 0){
+            for(ItemSlot itemSlot1 : itemSlots){
+                if(itemSlot1 != null){
+                    if(itemSlot1.getSelectedItem() != null){
+                        if(itemSlot1.getSelectedItem().getItemSetId() == item.getItemSetId()){
+                            itemSlot1.getTooltip().setItemSetIds(FXCollections.observableArrayList(warrior.getSetBonusControl(item.getItemSetId()).getActiveItems()));
+                        }
+                    }
+                }
             }
         }
     }
@@ -210,13 +247,5 @@ public class ItemsController implements Initializable {
 
     public ItemSlot[] getItemSlots(){
         return itemSlots;
-    }
-
-    public JFXListView<Item> getItemSelect() {
-        return itemSelect;
-    }
-
-    public JFXListView<Enchant> getEnchantSelect() {
-        return enchantSelect;
     }
 }

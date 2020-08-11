@@ -1,0 +1,621 @@
+[
+  {
+    "id": 545,
+    "name": "Lieutenant Commander's Battlearmor",
+    "setBonuses": [
+      {
+        "count": 2,
+        "ap": 40
+      },
+      {
+        "count": 4,
+        "spellId": 22738,
+        "description": "Reduces the cooldown of your intercept ability by 5 sec."
+      },
+      {
+        "count": 6,
+        "sta": 20
+      }
+    ],
+    "itemIds": [
+      23300,
+      23301,
+      23286,
+      23287,
+      23314,
+      23315
+    ]
+  },
+  {
+    "id": 496,
+    "name": "Conqueror's Battlegear",
+    "setBonuses": [
+      {
+        "count": 3,
+        "spellId": 26109,
+        "description": "Decreases the rage cost of all Warrior shouts by 35%."
+      },
+      {
+        "count": 5,
+        "spellId": 26110,
+        "description": "Increase the Slow effect and damage of Thunder Clap by 50%."
+      }
+    ],
+    "itemIds": [
+      21331,
+      21329,
+      21333,
+      21332,
+      21330
+    ]
+  },
+  {
+    "id": 511,
+    "name": "Battlegear of Heroism",
+    "setBonuses": [
+      {
+        "count": 2,
+        "allRes": 8
+      },
+      {
+        "count": 4,
+        "spellId": 27419,
+        "description": "Chance on melee attack to heal you for 88 to 132."
+      },
+      {
+        "count": 6,
+        "ap": 40
+      },
+      {
+        "count": 8,
+        "armor": 200
+      }
+    ],
+    "itemIds": [
+      21994,
+      21995,
+      21996,
+      21997,
+      21998,
+      21999,
+      22000,
+      22001
+    ]
+  },
+  {
+    "id": 523,
+    "name": "Dreadnaught's Battlegear",
+    "setBonuses": [
+      {
+        "count": 2,
+        "spellId": 28844,
+        "description": "Increases the damage done by your Revenge ability by 75."
+      },
+      {
+        "count": 4,
+        "spellId": 28843,
+        "description": "Improves your chance to hit with Taunt and Challenging Shout by 5%."
+      },
+      {
+        "count": 6,
+        "spellId": 28842,
+        "description": "Improves your chance to hit with Sunder Armor, Heroic Strike, Revenge, and Shield Slam by 5%."
+      },
+      {
+        "count": 8,
+        "spellId": 28845,
+        "description": "When your health drops below 20%, for the next 5 seconds healing spells cast on you help you to Cheat Death, increasing healing done by up to 160."
+      }
+    ],
+    "itemIds": [
+      22423,
+      22416,
+      22421,
+      22422,
+      22418,
+      22417,
+      22419,
+      22420,
+      23059
+    ]
+  },
+  {
+    "id": 143,
+    "name": "Devilsaur Armor",
+    "setBonuses": [
+      {
+        "count": 2,
+        "hit": 2
+      }
+    ],
+    "itemIds": [
+      15062,
+      15063
+    ]
+  },
+  {
+    "id": 189,
+    "name": "Battlegear of Valor",
+    "setBonuses": [
+      {
+        "count": 2,
+        "armor": 200
+      },
+      {
+        "count": 4,
+        "ap": 40
+      },
+      {
+        "count": 6,
+        "spellId": 27419,
+        "description": "Chance on melee attack to heal you for 88 to 132."
+      },
+      {
+        "count": 8,
+        "allRes": 8
+      }
+    ],
+    "itemIds": [
+      16736,
+      16734,
+      16735,
+      16730,
+      16737,
+      16731,
+      16732,
+      16733
+    ]
+  },
+  {
+    "id": 218,
+    "name": "Battlegear of Wrath",
+    "setBonuses": [
+      {
+        "count": 3,
+        "spellId": 23563,
+        "description": "Increases the attack power granted by Battle Shout by 30."
+      },
+      {
+        "count": 5,
+        "spellId": 21890,
+        "description": "20% chance after using an offensive ability requiring rage that your next offensive ability requires 5 less rage to use."
+      },
+      {
+        "count": 8,
+        "spellId": 23548,
+        "description": "4% chance to parry the next attack after a block."
+      }
+    ],
+    "itemIds": [
+      16959,
+      16966,
+      16964,
+      16963,
+      16962,
+      16961,
+      16965,
+      16960
+    ]
+  },
+  {
+    "id": 384,
+    "name": "Field Marshal's Battlegear",
+    "setBonuses": [
+      {
+        "count": 2,
+        "sta": 20
+      },
+      {
+        "count": 3,
+        "spellId": 22738,
+        "description": "Reduces the cooldown of your Intercept ability by 5 sec."
+      },
+      {
+        "count": 6,
+        "ap": 40
+      }
+    ],
+    "itemIds": [
+      16477,
+      16478,
+      16480,
+      16483,
+      16484,
+      16479
+    ]
+  },
+  {
+    "id": 495,
+    "name": "Battlegear of Unyielding Strength",
+    "setBonuses": [
+      {
+        "count": 3,
+        "spellId": 26111,
+        "description": "-2 rage cost to Intercept."
+      }
+    ],
+    "itemIds": [
+      21394,
+      21392,
+      21393
+    ]
+  },
+  {
+    "id": 474,
+    "name": "Vindicator's Battlegear",
+    "setBonuses": [
+      {
+        "count": 2,
+        "block": 2
+      },
+      {
+        "count": 3,
+        "spellId": 24456,
+        "description": "Decreases the cooldown of Intimidating Shout by 15 sec."
+      },
+      {
+        "count": 5,
+        "spellId": 24431,
+        "description": "Decrease the rage cost of Whirlwind by 3."
+      }
+    ],
+    "itemIds": [
+      19951,
+      19577,
+      19824,
+      19823,
+      19822
+    ]
+  },
+  {
+    "id": 383,
+    "name": "Warlord's Battlegear",
+    "setBonuses": [
+      {
+        "count": 2,
+        "sta": 20
+      },
+      {
+        "count": 3,
+        "spellId": 22738,
+        "description": "Reduces the cooldown of your Intercept ability by 5 sec."
+      },
+      {
+        "count": 6,
+        "ap": 40
+      }
+    ],
+    "itemIds": [
+      16541,
+      16542,
+      16544,
+      16545,
+      16548,
+      16543
+    ]
+  },
+  {
+    "id": 209,
+    "name": "Battlegear of Might",
+    "setBonuses": [
+      {
+        "count": 3,
+        "blockValue": 30
+      },
+      {
+        "count": 5,
+        "spellId": 21838,
+        "description": "Gives you a 20% chance to generate an additional Rage point whenever damage is dealt to you."
+      },
+      {
+        "count": 8,
+        "spellId": 23561,
+        "description": "Increases the threat generated by Sunder Armor by 15%."
+      }
+    ],
+    "itemIds": [
+      16864,
+      16861,
+      16865,
+      16863,
+      16866,
+      16867,
+      16868,
+      16862
+    ]
+  },
+  {
+    "id": 489,
+    "name": "Black Dragon Mail",
+    "setBonuses": [
+      {
+        "count": 2,
+        "hit": 1
+      },
+      {
+        "count": 3,
+        "crit": 2
+      },
+      {
+        "count": 4,
+        "fireRes": 10
+      }
+    ],
+    "itemIds": [
+      16984,
+      15050,
+      15052,
+      15051
+    ]
+  },
+  {
+    "id": 461,
+    "name": "The Twin Blades of Hakkari",
+    "setBonuses": [
+      {
+        "count": 2,
+        "weaponSkill": 6,
+        "weaponSkillType": "sword"
+      }
+    ],
+    "itemIds": [
+      19865,
+      19866
+    ]
+  },
+  {
+    "id": 537,
+    "name": "Champion's Battlearmor",
+    "setBonuses": [
+      {
+        "count": 2,
+        "ap": 40
+      },
+      {
+        "count": 4,
+        "spellId": 22738,
+        "description": "Reduces the cooldown of your Intercept ability by 5 sec."
+      },
+      {
+        "count": 6,
+        "sta": 20
+      }
+    ],
+    "itemIds": [
+      22868,
+      22858,
+      22872,
+      22873,
+      23244,
+      23243
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Dal'Rend's Arms",
+    "setBonuses": [
+      {
+        "count": 2,
+        "ap": 50
+      }
+    ],
+    "itemIds": [
+      12940,
+      12939
+    ]
+  },
+  {
+    "id": 124,
+    "name": "Deathbone Guardian",
+    "setBonuses": [
+      {
+        "count": 2,
+        "defense": 3
+      },
+      {
+        "count": 3,
+        "armor": 50
+      },
+      {
+        "count": 4,
+        "allRes": 15
+      },
+      {
+        "count": 5,
+        "parry": 1
+      }
+    ],
+    "itemIds": [
+      14624,
+      14622,
+      14620,
+      14623,
+      14621
+    ]
+  },
+  {
+    "id": 261,
+    "name": "Spirit of Eskhandar",
+    "setBonuses": [
+      {
+        "count": 4,
+        "spellId": 22648,
+        "description": "1% chance on a melee critical hit to call forth the spirit of Eskhandar to protect you in battle for 2 min."
+      }
+    ],
+    "itemIds": [
+      18203,
+      18202,
+      18204,
+      18205
+    ]
+  },
+  {
+    "id": 463,
+    "name": "Primal Blessing",
+    "setBonuses": [
+      {
+        "count": 2,
+        "spellId": 24256,
+        "description": "Grants a small chance when ranged or melee damage is dealt to infuse the wielder with a blessing from the Primal Gods. Ranged and melee attack power increased by 300 for 12 seconds."
+      }
+    ],
+    "itemIds": [
+      19896,
+      19910
+    ]
+  },
+  {
+    "id": 1,
+    "name": "The Gladiator",
+    "setBonuses": [
+      {
+        "count": 2,
+        "armor": 200
+      },
+      {
+        "count": 3,
+        "defense": 2
+      },
+      {
+        "count": 4,
+        "ap": 10
+      },
+      {
+        "count": 5,
+        "crit": 1
+      }
+    ],
+    "itemIds": [
+      11729,
+      11726,
+      11728,
+      11731,
+      11730
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Cadaverous Garb",
+    "setBonuses": [
+      {
+        "count": 2,
+        "defense": 3
+      },
+      {
+        "count": 3,
+        "ap": 10
+      },
+      {
+        "count": 4,
+        "allRes": 15
+      },
+      {
+        "count": 5,
+        "hit": 2
+      }
+    ],
+    "itemIds": [
+      14637,
+      14636,
+      14640,
+      14638,
+      14641
+    ]
+  },
+  {
+    "id": 466,
+    "name": "Major Mojo Infusion",
+    "setBonuses": [
+      {
+        "count": 2,
+        "ap": 30
+      }
+    ],
+    "itemIds": [
+      19898,
+      19925
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Bloodmail Regalia",
+    "setBonuses": [
+      {
+        "count": 2,
+        "defense": 3
+      },
+      {
+        "count": 3,
+        "ap": 10
+      },
+      {
+        "count": 4,
+        "allRes": 15
+      },
+      {
+        "count": 5,
+        "parry": 1
+      }
+    ],
+    "itemIds": [
+      14614,
+      14616,
+      14615,
+      14611,
+      14612
+    ]
+  },
+  {
+    "id": 467,
+    "name": "The Highlander's Resolution",
+    "setBonuses": [
+      {
+        "count": 2,
+        "sta": 5
+      },
+      {
+        "count": 3,
+        "crit": 1
+      }
+    ],
+    "itemIds": [
+      20041,
+      20048,
+      20057
+    ]
+  },
+  {
+    "id": 487,
+    "name": "The Defiler's Resolution",
+    "setBonuses": [
+      {
+        "count": 2,
+        "sta": 5
+      },
+      {
+        "count": 3,
+        "crit": 1
+      }
+    ],
+    "itemIds": [
+      20204,
+      20208,
+      20212
+    ]
+  },
+  {
+    "id": 464,
+    "name": "Overlord's Resolution",
+    "setBonuses": [
+      {
+        "count": 2,
+        "dodge": 1
+      }
+    ],
+    "itemIds": [
+      19873,
+      19912
+    ]
+  }
+]

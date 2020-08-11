@@ -2,9 +2,12 @@ package sim.warrior;
 
 import sim.items.Enchant;
 import sim.items.Item;
+import sim.items.ItemSet;
 import sim.settings.Aura;
 
 import java.io.Serializable;
+
+import static sim.main.SimDB.ITEM_SETS;
 
 public class Stats implements Serializable {
     private int str;
@@ -142,6 +145,12 @@ public class Stats implements Serializable {
         for(Aura aura : warrior.getActiveAuras().values()){
             addStats(aura);
         }
+
+        for(SetBonusControl setBonusControl : warrior.getSetBonuses().values()){
+            for(Integer i : setBonusControl.getActiveSetBonuses()){
+                addStats(ITEM_SETS.get(setBonusControl.getItemSetId()).getSetBonuses().get(i));
+            }
+        }
     }
 
     public void removeStats(Item item){
@@ -230,5 +239,31 @@ public class Stats implements Serializable {
             hp += aura.getHp();
             haste *= aura.getHaste();
         }
+    }
+
+    public void addStats(ItemSet.ItemSetBonus itemSetBonus){
+        sta += itemSetBonus.getSta();
+        armor += itemSetBonus.getArmor();
+        ap += itemSetBonus.getAp();
+        hit += itemSetBonus.getHit();
+        crit += itemSetBonus.getCrit();
+        defense += itemSetBonus.getDefense();
+        block += itemSetBonus.getBlock();
+        blockValue += itemSetBonus.getBlockValue();
+        parry += itemSetBonus.getParry();
+        dodge += itemSetBonus.getDodge();
+    }
+
+    public void removeStats(ItemSet.ItemSetBonus itemSetBonus){
+        sta -= itemSetBonus.getSta();
+        armor -= itemSetBonus.getArmor();
+        ap -= itemSetBonus.getAp();
+        hit -= itemSetBonus.getHit();
+        crit -= itemSetBonus.getCrit();
+        defense -= itemSetBonus.getDefense();
+        block -= itemSetBonus.getBlock();
+        blockValue -= itemSetBonus.getBlockValue();
+        parry -= itemSetBonus.getParry();
+        dodge -= itemSetBonus.getDodge();
     }
 }

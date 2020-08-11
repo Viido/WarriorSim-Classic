@@ -59,4 +59,6 @@ public class Constants {
     public static final String COLOR_RARE = "#0070dd";
     public static final String COLOR_EPIC = "#a335ee";
     public static final String COLOR_LEGENDARY = "#ff8000";
+
+    public static final int WARBLADES_SET = 461;
 }
