@@ -247,66 +247,48 @@ public class Warrior implements Serializable {
     }
 
     public int getWeaponSkillMH(){
-        int weaponSkill = level * 5;
-
-        if(equippedItems[MAINHAND] == null){
-            return weaponSkill;
-        }
-
-        for(Item item : getEquippedItems()){
-            if(item != null){
-                if(item.getWeaponSkillType() != null){
-                    if(item.getWeaponSkillType().equals(equippedItems[MAINHAND].getType())){
-                        weaponSkill += item.getWeaponSkill();
-                    }
-                    if(item.getWeaponSkillType().equals("varied") && equippedItems[MAINHAND].getType().equals("axe") || equippedItems[MAINHAND].getType().equals("dagger") || equippedItems[MAINHAND].getType().equals("sword")){
-                        weaponSkill += item.getWeaponSkill();
-                    }
-                }
-            }
-        }
-
-        if(setBonuses.containsKey(WARBLADES_SET)){
-            if(setBonuses.get(WARBLADES_SET).getActiveSetBonuses().size() == 1){
-                weaponSkill += 6;
-            }
-        }
-
-        weaponSkill += equippedItems[MAINHAND].getWeaponSkill();
-
-        if(equippedItems[OFFHAND] != null){
-            weaponSkill += (equippedItems[OFFHAND].getType().equals(equippedItems[MAINHAND].getType()) ? equippedItems[OFFHAND].getWeaponSkill() : 0);
-        }
-
-        if(race.getId() == HUMAN){
-            if(equippedItems[MAINHAND].getType().equals("mace") || equippedItems[MAINHAND].getType().equals("sword")){
-                weaponSkill += 5;
-            }
-        }
-        if(race.getId() == ORC){
-            if(equippedItems[MAINHAND].getType().equals("axe")){
-                weaponSkill += 5;
-            }
-        }
-
-        return weaponSkill;
+        return getWeaponSkill(MAINHAND);
     }
 
     public int getWeaponSkillOH(){
+        return getWeaponSkill(OFFHAND);
+    }
+
+    private int getWeaponSkill(int slot){
         int weaponSkill = level * 5;
 
-        if(equippedItems[OFFHAND] == null){
+        if(equippedItems[slot] == null){
+            return weaponSkill;
+        }
+
+        weaponSkill += equippedItems[slot].getWeaponSkill();
+
+        if(race.getId() == HUMAN){
+            if(equippedItems[slot].getType().equals("mace") || equippedItems[slot].getType().equals("sword")){
+                weaponSkill += 5;
+            }
+        }
+
+        if(race.getId() == ORC){
+            if(equippedItems[slot].getType().equals("axe")){
+                weaponSkill += 5;
+            }
+        }
+
+        if(equippedItems[slot].getSlot().equals("2h")){
             return weaponSkill;
         }
 
         for(Item item : getEquippedItems()){
             if(item != null){
                 if(item.getWeaponSkillType() != null){
-                    if(item.getWeaponSkillType().equals(equippedItems[OFFHAND].getType())){
+                    if(item.getWeaponSkillType().equals(equippedItems[slot].getType())){
                         weaponSkill += item.getWeaponSkill();
                     }
-                    if(item.getWeaponSkillType().equals("varied") && equippedItems[OFFHAND].getType().equals("axe") || equippedItems[OFFHAND].getType().equals("dagger") || equippedItems[OFFHAND].getType().equals("sword")){
-                        weaponSkill += item.getWeaponSkill();
+                    if(item.getWeaponSkillType().equals("varied")){
+                        if(equippedItems[slot].getType().equals("axe") || equippedItems[slot].getType().equals("dagger") || equippedItems[slot].getType().equals("sword")){
+                            weaponSkill += item.getWeaponSkill();
+                        }
                     }
                 }
             }
@@ -318,21 +300,13 @@ public class Warrior implements Serializable {
             }
         }
 
-
-        weaponSkill += equippedItems[OFFHAND].getWeaponSkill();
-
-        if(equippedItems[MAINHAND] != null){
-            weaponSkill += (equippedItems[MAINHAND].getType().equals(equippedItems[OFFHAND].getType()) ? equippedItems[MAINHAND].getWeaponSkill() : 0);
-        }
-
-        if(race.getId() == HUMAN){
-            if(equippedItems[OFFHAND].getType().equals("mace") || equippedItems[OFFHAND].getType().equals("sword")){
-                weaponSkill += 5;
+        if(slot == MAINHAND){
+            if(equippedItems[OFFHAND] != null){
+                weaponSkill += (equippedItems[OFFHAND].getType().equals(equippedItems[MAINHAND].getType()) ? equippedItems[OFFHAND].getWeaponSkill() : 0);
             }
-        }
-        if(race.getId() == ORC){
-            if(equippedItems[OFFHAND].getType().equals("axe")){
-                weaponSkill += 5;
+        }else{
+            if(equippedItems[MAINHAND] != null){
+                weaponSkill += (equippedItems[MAINHAND].getType().equals(equippedItems[OFFHAND].getType()) ? equippedItems[MAINHAND].getWeaponSkill() : 0);
             }
         }
 
