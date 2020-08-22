@@ -1,4 +1,6 @@
-package sim.items;
+package sim.data;
+
+import sim.items.Enchant;
 
 import java.util.ArrayList;
 import java.util.List;

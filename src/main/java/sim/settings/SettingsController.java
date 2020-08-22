@@ -1,14 +1,11 @@
 package sim.settings;
 
-import com.google.gson.Gson;
-import com.jfoenix.controls.*;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
+import sim.data.SimDB;
 import sim.stats.StatsController;
 import sim.warrior.Warrior;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
@@ -22,10 +19,8 @@ public class SettingsController implements Initializable {
     @FXML
     VBox raidBuffs;
 
-    Auras auras;
     Warrior warrior;
     Settings settings;
-    Race[] races;
 
     StatsController statsController;
 
@@ -37,17 +32,13 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Gson gson = new Gson();
-        auras = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/auras.json")), Auras.class);
-        races = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/races.json")), Race[].class);
-
         initAuras();
     }
 
     private void initAuras(){
         Map<String, List<AuraSelect>> buffGroups = new HashMap<>();
 
-        for(Aura aura : auras.getAuras()){
+        for(Aura aura : SimDB.AURAS.getAuras()){
             AuraSelect auraSelect = new AuraSelect(aura, warrior);
 
             if(aura.getType().equals("world")){

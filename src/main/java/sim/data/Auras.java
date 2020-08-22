@@ -1,6 +1,6 @@
-package sim.settings;
+package sim.data;
 
-import javafx.fxml.FXML;
+import sim.settings.Aura;
 
 import java.util.List;
 import java.util.stream.Collectors;

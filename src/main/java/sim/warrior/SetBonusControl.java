@@ -1,13 +1,12 @@
 package sim.warrior;
 
+import sim.data.SimDB;
 import sim.items.Item;
 import sim.items.ItemSet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import static sim.main.SimDB.ITEM_SETS;
 
 public class SetBonusControl implements Serializable {
     private Warrior warrior;
@@ -23,8 +22,8 @@ public class SetBonusControl implements Serializable {
     public void addItem(Item item){
         activeItems.add(item.getId());
 
-        for(int i = 0; i < ITEM_SETS.get(itemSetId).getSetBonuses().size(); i++){
-            ItemSet.ItemSetBonus itemSetBonus = ITEM_SETS.get(itemSetId).getSetBonuses().get(i);
+        for(int i = 0; i < SimDB.ITEM_SETS.get(itemSetId).getSetBonuses().size(); i++){
+            ItemSet.ItemSetBonus itemSetBonus = SimDB.ITEM_SETS.get(itemSetId).getSetBonuses().get(i);
 
             if(activeItems.size() >= itemSetBonus.getCount() && !activeSetBonuses.contains(i)){
                 activeSetBonuses.add(i);
@@ -37,8 +36,8 @@ public class SetBonusControl implements Serializable {
     public void removeItem(Item item){
         activeItems.remove(Integer.valueOf(item.getId()));
 
-        for(int i = 0; i < ITEM_SETS.get(itemSetId).getSetBonuses().size(); i++){
-            ItemSet.ItemSetBonus itemSetBonus = ITEM_SETS.get(itemSetId).getSetBonuses().get(i);
+        for(int i = 0; i < SimDB.ITEM_SETS.get(itemSetId).getSetBonuses().size(); i++){
+            ItemSet.ItemSetBonus itemSetBonus = SimDB.ITEM_SETS.get(itemSetId).getSetBonuses().get(i);
 
             if(activeItems.size() < itemSetBonus.getCount() && activeSetBonuses.contains(i)){
                 activeSetBonuses.remove(Integer.valueOf(i));

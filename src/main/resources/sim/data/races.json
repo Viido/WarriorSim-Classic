@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "Human",
+    "faction": "alliance",
     "stats": {
       "str": 120,
       "sta": 110,
@@ -13,6 +14,7 @@
   {
     "id": 2,
     "name": "Dwarf",
+    "faction": "alliance",
     "stats": {
       "str": 122,
       "sta": 113,
@@ -25,6 +27,7 @@
   {
     "id": 3,
     "name": "Night Elf",
+    "faction": "alliance",
     "stats": {
       "str": 117,
       "sta": 109,
@@ -38,6 +41,7 @@
   {
     "id": 4,
     "name": "Gnome",
+    "faction": "alliance",
     "stats": {
       "str": 115,
       "sta": 109,
@@ -50,6 +54,7 @@
   {
     "id": 5,
     "name": "Orc",
+    "faction": "horde",
     "stats": {
       "str": 123,
       "sta": 112,
@@ -61,6 +66,7 @@
   {
     "id": 6,
     "name": "Undead",
+    "faction": "horde",
     "stats": {
       "str": 119,
       "sta": 111,
@@ -73,6 +79,7 @@
   {
     "id": 7,
     "name": "Tauren",
+    "faction": "horde",
     "stats": {
       "str": 125,
       "sta": 112,
@@ -85,6 +92,7 @@
   {
     "id": 8,
     "name": "Troll",
+    "faction": "horde",
     "stats": {
       "str": 121,
       "sta": 111,

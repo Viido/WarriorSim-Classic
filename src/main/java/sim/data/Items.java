@@ -1,12 +1,12 @@
-package sim.items;
+package sim.data;
 
 import com.google.gson.annotations.SerializedName;
+import sim.items.Item;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Items {
+public class Items{
     private List<Item> head;
     private List<Item> neck;
     private List<Item> shoulder;
@@ -24,6 +24,7 @@ public class Items {
     @SerializedName(value = "ranged")
     private List<Item> rangedWeapons;
     private List<Item> shields;
+    private Map<Integer, Item> itemMap;
 
     public List<Item> getHead() {
         return head;
@@ -165,11 +166,54 @@ public class Items {
         return null;
     }
 
-    public List<Item> getOneHandedWeaponsByType(String type){
-        return oneHandedWeapons.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    public List<Item> getOHItemsByType(String type){
+        if(type.equals("shield")){
+            return shields;
+        }
+
+        return oneHandedWeapons.stream().filter(x -> x.getType().equals(type) && !x.getSlot().equals("main")).collect(Collectors.toList());
+    }
+
+    public List<Item> getMHOneHandedWeaponsByType(String type){
+        if(type.equals("all")){
+            return oneHandedWeapons.stream().filter(x -> !x.getSlot().equals("off")).collect(Collectors.toList());
+        }
+
+        return oneHandedWeapons.stream().filter(x -> x.getType().equals(type) && !x.getSlot().equals("off")).collect(Collectors.toList());
     }
 
     public List<Item> getTwoHandedWeaponsByType(String type){
         return twoHandedWeapons.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    }
+
+    public Item getItemById(int id){
+        if(itemMap == null){
+            itemMap = new HashMap<>();
+
+            for(Item item : getAllItems()){
+                itemMap.put(item.getId(), item);
+            }
+        }
+
+        return itemMap.get(id);
+    }
+
+    public void sortItems(){
+       Collections.sort(head);
+       Collections.sort(neck);
+       Collections.sort(shoulder);
+       Collections.sort(back);
+       Collections.sort(chest);
+       Collections.sort(wrist);
+       Collections.sort(hands);
+       Collections.sort(waist);
+       Collections.sort(legs);
+       Collections.sort(feet);
+       Collections.sort(rings);
+       Collections.sort(trinkets);
+       Collections.sort(oneHandedWeapons);
+       Collections.sort(twoHandedWeapons);
+       Collections.sort(rangedWeapons);
+       Collections.sort(shields);
     }
 }

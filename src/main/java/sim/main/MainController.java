@@ -1,6 +1,5 @@
 package sim.main;
 
-import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -11,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
+import sim.data.SimDB;
 import sim.items.ItemSlot;
 import sim.items.ItemsController;
 import sim.rotation.RotationController;
@@ -56,9 +56,9 @@ public class MainController implements Initializable {
     VBox rightSection;
 
     Settings settings;
-    Race[] races;
 
     StatsController statsController;
+    ItemsController itemsController;
 
     public MainController(Settings settings){
         this.settings = settings;
@@ -66,8 +66,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Gson gson = new Gson();
-        races = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("/sim/settings/data/races.json")), Race[].class);
+        if(settings.getWarrior().getRace() == null){
+            settings.getWarrior().setRace(SimDB.RACES[0]);
+        }
 
         FXMLLoader statsLoader = new FXMLLoader(getClass().getResource("/sim/stats/fxml/StatsView.fxml"));
         statsController = new StatsController(settings.getWarrior());
@@ -77,10 +78,6 @@ public class MainController implements Initializable {
             rightSection.getChildren().add(rightSection.getChildren().size(), statsLoader.load());
         }catch(IOException e){
             e.printStackTrace();
-        }
-
-        if(settings.getWarrior().getRace() == null){
-            settings.getWarrior().setRace(races[0]);
         }
 
         loadSettings();
@@ -105,24 +102,15 @@ public class MainController implements Initializable {
 
         stackPane.setMinSize(1600, 920);
 
-
-
         FXMLLoader itemsLoader = new FXMLLoader(getClass().getResource("/sim/items/fxml/ItemsView.fxml"));
         FXMLLoader talentsLoader = new FXMLLoader(getClass().getResource("/sim/talents/fxml/Talents.fxml"));
         FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/sim/settings/fxml/SettingsView.fxml"));
         FXMLLoader rotationLoader = new FXMLLoader(getClass().getResource("/sim/rotation/fxml/RotationView.fxml"));
 
-
-        ItemsController itemsController = new ItemsController(settings.getWarrior());
-
-
-
+        itemsController = new ItemsController(settings.getWarrior());
         TalentsController talentsController = new TalentsController(settings.getWarrior());
         SettingsController settingsController = new SettingsController(settings, statsController);
         RotationController rotationController = new RotationController();
-
-
-
 
         itemsLoader.setController(itemsController);
         talentsLoader.setController(talentsController);
@@ -150,6 +138,7 @@ public class MainController implements Initializable {
         }catch(IOException e){
             e.printStackTrace();
         }
+
         scrollPane.setContent(stackPane);
 
         for(ItemSlot itemSlot : itemsController.getItemSlots()){
@@ -160,7 +149,6 @@ public class MainController implements Initializable {
                 statsController.refreshDisplay();
             });
         }
-
 
         for(TalentButton talentButton : talentsController.getTalentButtons().values()){
             talentButton.pointsProperty().addListener((obs, oldValue, newValue) -> {
@@ -195,7 +183,7 @@ public class MainController implements Initializable {
 
     private void loadSettings(){
         if(settings.getWarrior().getRace() == null){
-            settings.getWarrior().setRace(races[0]);
+            settings.getWarrior().setRace(SimDB.RACES[0]);
         }
 
         raceSelect.setText(settings.getWarrior().getRace().getName());
@@ -210,26 +198,27 @@ public class MainController implements Initializable {
     }
 
     private void initRaceSelect(){
-
         JFXListView<Race> raceSelection = new JFXListView<>();
         raceSelection.getStylesheets().add(this.getClass().getResource("/sim/settings/css/Settings.css").toExternalForm());
-        raceSelection.setItems(FXCollections.observableArrayList(races));
+        raceSelection.setItems(FXCollections.observableArrayList(SimDB.RACES));
 
-        JFXPopup racePopUp = new JFXPopup();
-        racePopUp.setPopupContent(raceSelection);
+        CustomPopup racePopup = new CustomPopup();
+        racePopup.setContent(raceSelection);
+
+        raceSelection.setMaxWidth(75);
 
         raceSelect.setOnMouseClicked(e -> {
             raceSelection.refresh();
-            racePopUp.setStyle("-fx-background-color: black");
-            racePopUp.show(raceSelect, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, 0, 25);
+            racePopup.show(raceSelect, 0, raceSelect.getHeight());
         });
 
         raceSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null){
                 raceSelect.setText(newValue.getName());
                 settings.getWarrior().setRace(newValue);
+                itemsController.refreshItemSelect();
                 statsController.refreshDisplay();
-                racePopUp.hide();
+                racePopup.hide();
             }
         });
     }

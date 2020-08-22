@@ -8,22 +8,13 @@
 <VBox maxWidth="630.0" maxHeight="380.0" spacing="5.0" styleClass="item-box" stylesheets="@../css/Items.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="5.0">
         <VBox fx:id="leftItems" />
-      <JFXTabPane fx:id="tabPane" maxHeight="378.0" maxWidth="276.0" minHeight="378.0" minWidth="276.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab text="Items">
-               <content>
-                   <JFXListView fx:id="itemSelect" styleClass="item-select">
-                   </JFXListView>
-               </content>
-            </Tab>
-             <Tab text="Enchants">
-                 <content>
-                     <JFXListView fx:id="enchantSelect" styleClass="item-select">
-                     </JFXListView>
-                 </content>
-             </Tab>
-         </tabs>
-      </JFXTabPane>
+        <VBox minWidth="275.0" maxHeight="378.0">
+            <HBox minHeight="30.0" fx:id="filtersMenu" spacing="5">
+                <Label fx:id="selectionName"/>
+            </HBox>
+            <JFXListView fx:id="itemSelect" styleClass="item-select" maxHeight="348.0" minHeight="348.0">
+            </JFXListView>
+        </VBox>
         <VBox fx:id="rightItems"/>
     </HBox>
 </VBox>

@@ -27,43 +27,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         loadData();
-//
-//        ScrollPane scrollPane = new ScrollPane();
-//
-//        JFXMasonryPane root = new JFXMasonryPane();
-//        root.setMinHeight(1080);
-//        root.setMinWidth(1920);
-//        scrollPane.setContent(root);
-//
-        if(settings.getWarrior().getRace() == null){
-            Gson gson = new Gson();
-            Race[] races = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("settings/data/races.json")), Race[].class);
-            settings.getWarrior().setRace(races[0]);
-        }
-//
-//
-//        FXMLLoader statsLoader = new FXMLLoader(getClass().getResource("stats/fxml/StatsView.fxml"));
-//        FXMLLoader itemsLoader = new FXMLLoader(getClass().getResource("items/fxml/ItemsView.fxml"));
-//        FXMLLoader talentsLoader = new FXMLLoader(getClass().getResource("talents/fxml/Talents.fxml"));
-//        FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("settings/fxml/SettingsView.fxml"));
-//
-//        StatsController statsController = new StatsController(settings.getWarrior());
-//        ItemsController itemsController = new ItemsController(settings.getWarrior());
-//        TalentsController talentsController = new TalentsController(settings.getWarrior());
-//    SettingsController settingsController = new SettingsController(settings);
-//
-//        statsLoader.setController(statsController);
-//        itemsLoader.setController(itemsController);
-//        talentsLoader.setController(talentsController);
-//   settingsLoader.setController(settingsController);
-//
-//        root.getChildren().add(statsLoader.load());
-//        root.getChildren().add(itemsLoader.load());
-//        root.getChildren().add(talentsLoader.load());
-//        root.getChildren().add(settingsLoader.load());
-//
-//        root.setStyle("-fx-background-color: #282828");
-
 
         primaryStage.setMaximized(true);
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("main/fxml/MainView.fxml"));
@@ -71,12 +34,9 @@ public class Main extends Application {
         MainController mainController = new MainController(settings);
         mainLoader.setController(mainController);
 
-
         primaryStage.setTitle("WarriorSim Classic");
         primaryStage.setScene(new Scene(mainLoader.load()));
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/app/warrior-wow-icon.png").toExternalForm()));
-
-
 
         primaryStage.setOnCloseRequest(e -> {
             mainController.saveSettings();
@@ -85,8 +45,6 @@ public class Main extends Application {
         });
 
         primaryStage.show();
-
-        //mainController.setDividerPosition();
     }
 
 

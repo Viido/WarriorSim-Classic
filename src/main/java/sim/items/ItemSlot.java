@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -20,28 +19,26 @@ import java.util.List;
 
 public class ItemSlot extends HBox {
     @FXML
-    JFXListView<Item> itemView;
+    private JFXListView<Item> itemView;
     @FXML
-    JFXListView<Enchant> enchantView;
-    List<Item> itemList;
-    List<Enchant> enchantList;
+    private ListView<Enchant> enchantView;
+    private List<Item> itemList;
+    private List<Enchant> enchantList;
     @FXML
-    Button itemSlot;
-    @FXML
-    Label label1;
+    private Button itemButton;
+
+    private Label itemName = new Label();
+    private Label enchantName = new Label();
+    private ItemTooltip tooltip = new ItemTooltip();
+
     private Warrior warrior;
     private String defaultImage;
-    private int id;
+    private int slot;
 
     private SimpleObjectProperty<Item> selectedItem = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Enchant> selectedEnchant = new SimpleObjectProperty<>();
 
-
-    Label itemName = new Label();
-    Label enchantName = new Label();
-    ItemTooltip tooltip = new ItemTooltip();
-
-    public ItemSlot(List<Item> itemList, List<Enchant> enchantList, JFXListView<Item> itemView, JFXListView<Enchant> enchantView, String defaultImage, int id, Warrior warrior){
+    public ItemSlot(List<Item> itemList, List<Enchant> enchantList, JFXListView<Item> itemView, ListView<Enchant> enchantView, String defaultImage, int slot, Warrior warrior){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ItemSlot.fxml"));
             loader.setRoot(this);
@@ -50,11 +47,12 @@ public class ItemSlot extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
         this.itemList = itemList;
         this.enchantList = enchantList;
         this.itemView = itemView;
         this.enchantView = enchantView;
-        this.id = id;
+        this.slot = slot;
         this.warrior = warrior;
         this.defaultImage = defaultImage;
         this.setMaxSize(300, 42);
@@ -73,7 +71,7 @@ public class ItemSlot extends HBox {
             itemInfo.getChildren().add(itemName);
         }
         
-        if(id < 9){
+        if(slot < 9){
             this.getChildren().add(0, itemInfo);
             this.setAlignment(Pos.TOP_RIGHT);
             itemInfo.setAlignment(Pos.TOP_RIGHT);
@@ -87,35 +85,18 @@ public class ItemSlot extends HBox {
             enchantName.setStyle("-fx-padding: 0 0 0 5");
         }
 
-
-        itemSlot.setOnMouseClicked(e -> {
-            if(e.getButton().equals(MouseButton.PRIMARY)){
-                itemView.getSelectionModel().clearSelection();
-                itemView.setId(String.valueOf(id));
-                itemView.setItems(FXCollections.observableArrayList(itemList));
-
-                enchantView.setId(String.valueOf(id));
-                setEnchantList();
-            }
-            if(e.getButton().equals(MouseButton.SECONDARY)){
-                clearSelection();
-            }
-        });
-
-        itemSlot.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
+        itemButton.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
         itemView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != oldValue && newValue != null){
-                if(itemView.getId().equals(String.valueOf(id))){
+                if(itemView.getId().equals(String.valueOf(slot))){
                     setSelectedItem(newValue);
-
-                    setEnchantList();
                 }
             }
 
         });
 
         enchantView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if(enchantView.getId().equals(String.valueOf(id)) && newValue != null){
+            if(enchantView.getId().equals(String.valueOf(slot)) && newValue != null){
                 setSelectedEnchant(newValue);
             }
         }));
@@ -149,16 +130,14 @@ public class ItemSlot extends HBox {
         return result;
     }
 
-    private void setEnchantList(){
-        enchantView.getItems().clear();
-
-        if(id == 6 && getSelectedItem() != null){
+    public void setEnchantList(){
+        if(slot == 6 && getSelectedItem() != null){
             if(!getSelectedItem().getSlot().equals("2h")){
                 enchantView.setItems(FXCollections.observableArrayList(get1hEnchants()));
             }else{
                 enchantView.setItems(FXCollections.observableArrayList(enchantList));
             }
-        }else if(id == 7 && getSelectedItem() != null){
+        }else if(slot == 7 && getSelectedItem() != null){
             if(getSelectedItem().getType().equals("shield")){
                 enchantView.setItems(FXCollections.observableArrayList(getShieldEnchants()));
             }else{
@@ -170,16 +149,16 @@ public class ItemSlot extends HBox {
     }
 
     public void setSelectedItem(Item item){
-        warrior.equipItem(id, item);
+        warrior.equipItem(slot, item);
         tooltip.setItem(item);
         selectedItem.set(item);
-        itemSlot.setStyle("-fx-background-image: url(/images/items/" + item.getIcon() + ".png)");
+        itemButton.setStyle("-fx-background-image: url(/images/items/" + item.getIcon() + ".png)");
         itemName.setText(getSelectedItem().getName());
         itemName.setTextFill(Paint.valueOf(getSelectedItem().getColor()));
 
 
-        itemSlot.setOnMouseEntered(e -> tooltip.show(itemSlot, 40, 0));
-        itemSlot.setOnMouseExited(e -> tooltip.hide());
+        itemButton.setOnMouseEntered(e -> tooltip.show(itemButton, 40, 0));
+        itemButton.setOnMouseExited(e -> tooltip.hide());
 
         if(enchantName.getText().equals("")){
             enchantName.setText("No enchant");
@@ -189,16 +168,16 @@ public class ItemSlot extends HBox {
     public void clearSelection(){
         if(getSelectedItem() != null){
             itemView.getSelectionModel().clearSelection();
-            warrior.unequipItem(id);
+            warrior.unequipItem(slot);
             removeTooltip();
             selectedItem.set(null);
-            itemSlot.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
+            itemButton.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
             itemName.setText("");
         }
 
         if(getSelectedEnchant() != null){
             enchantView.getSelectionModel().clearSelection();
-            warrior.unequipEnchant(id);
+            warrior.unequipEnchant(slot);
             selectedEnchant.set(null);
         }
 
@@ -209,22 +188,22 @@ public class ItemSlot extends HBox {
         if(tooltip.isShowing()){
             tooltip.hide();
         }
-        itemSlot.setOnMouseEntered(null);
-        itemSlot.setOnMouseExited(null);
+        itemButton.setOnMouseEntered(null);
+        itemButton.setOnMouseExited(null);
     }
 
     public void setSelectedEnchant(Enchant enchant){
-        warrior.equipEnchant(id, enchant);
+        warrior.equipEnchant(slot, enchant);
         selectedEnchant.set(enchant);
         enchantName.setText(getSelectedEnchant().getDescription());
     }
 
     public void refresh(){
-        if(warrior.getEquippedItems()[id] != null){
-            setSelectedItem(warrior.getEquippedItems()[id]);
+        if(warrior.getEquippedItems()[slot] != null){
+            setSelectedItem(warrior.getEquippedItems()[slot]);
         }
-        if(warrior.getEquippedEnchants()[id] != null){
-            setSelectedEnchant(warrior.getEquippedEnchants()[id]);
+        if(warrior.getEquippedEnchants()[slot] != null){
+            setSelectedEnchant(warrior.getEquippedEnchants()[slot]);
         }
     }
 
@@ -246,5 +225,21 @@ public class ItemSlot extends HBox {
 
     public ItemTooltip getTooltip(){
         return tooltip;
+    }
+
+    public Label getEnchantName() {
+        return enchantName;
+    }
+
+    public int getSlot(){
+        return slot;
+    }
+
+    public Button getItemButton() {
+        return itemButton;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
     }
 }

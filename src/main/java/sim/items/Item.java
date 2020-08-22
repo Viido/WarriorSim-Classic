@@ -8,7 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item implements Serializable {
+public class Item implements Serializable, Comparable<Item> {
     private int id;
     private String name;
     private int armor;
@@ -380,5 +380,14 @@ public class Item implements Serializable {
         }
 
         return tooltip;
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        if(o == null){
+            return 1;
+        }else{
+            return name.compareTo(o.getName());
+        }
     }
 }

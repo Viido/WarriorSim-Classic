@@ -1,13 +1,12 @@
 package sim.warrior;
 
+import sim.data.SimDB;
 import sim.items.Enchant;
 import sim.items.Item;
 import sim.items.ItemSet;
 import sim.settings.Aura;
 
 import java.io.Serializable;
-
-import static sim.main.SimDB.ITEM_SETS;
 
 public class Stats implements Serializable {
     private int str;
@@ -148,7 +147,7 @@ public class Stats implements Serializable {
 
         for(SetBonusControl setBonusControl : warrior.getSetBonuses().values()){
             for(Integer i : setBonusControl.getActiveSetBonuses()){
-                addStats(ITEM_SETS.get(setBonusControl.getItemSetId()).getSetBonuses().get(i));
+                addStats(SimDB.ITEM_SETS.get(setBonusControl.getItemSetId()).getSetBonuses().get(i));
             }
         }
     }

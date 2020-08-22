@@ -3,6 +3,12 @@
     secondaryColor: #383838;
 }
 
+.label{
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-padding: 0 0 0 7;
+}
+
 .item-button{
     -fx-pref-width: 38px;
     -fx-pref-height: 38px;
@@ -38,14 +44,12 @@
 }
 
 .item-select{
-    -fx-background-color: baseColor;
-    -fx-border-color: secondaryColor;
+    -fx-background-color: secondaryColor, baseColor;
+    -fx-background-insets: 0, 1;
 }
 
 .item-select .list-cell{
     -fx-background-color: baseColor;
-    -fx-border-color: secondaryColor;
-    -fx-border-insets: -1 -1 -1 -1;
 }
 
 .item-select .list-cell:hover{
@@ -62,4 +66,33 @@
 
 .jfx-tab-pane .tab-header-background{
     -fx-background-color: baseColor;
+}
+
+.jfx-combo-box{
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    -fx-background-color: baseColor;
+    -fx-border-color: secondaryColor;
+}
+
+.jfx-combo-box .cell{
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-padding: 0 0 0 7;
+    -fx-background-color: baseColor;
+    -fx-border-color: baseColor;
+}
+
+.jfx-combo-box .cell:hover{
+    -fx-background-color: secondaryColor;
+    -fx-background-insets: 0;
+}
+
+.jfx-combo-box .combo-box-popup .list-view{
+    -fx-translate-y: 1;
+    -fx-background-color: secondaryColor;
+}
+
+.jfx-combo-box .combo-box-popup .list-view .cell{
+    -fx-font-size: 14;
 }

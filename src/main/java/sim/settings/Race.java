@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Race implements Serializable {
     private int id;
     private String name;
+    private String faction;
     @SerializedName(value = "stats")
     private Stats baseStats;
 
@@ -21,6 +22,10 @@ public class Race implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public String getFaction() {
+        return faction;
     }
 
     @Override

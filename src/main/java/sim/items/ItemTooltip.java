@@ -5,25 +5,23 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.PopupControl;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.*;
 import javafx.stage.PopupWindow;
+import sim.data.SimDB;
+import sim.main.CustomPopup;
 
 import java.util.List;
 
-import static sim.main.SimDB.ITEMS;
-import static sim.main.SimDB.ITEM_SETS;
 import static sim.warrior.Constants.COLOR_UNCOMMON;
 
-// TODO rewrite as a base tooltip class, change item class and stats to be able to be ordered, add missing fields to items.json for more blizzlike tooltips
+// TODO change item class and stats to be able to be ordered, add missing fields to items.json for more blizzlike tooltips
 
-public class ItemTooltip extends PopupControl {
+public class ItemTooltip extends CustomPopup {
     private VBox container;
     private VBox itemSetContainer;
     private SimpleObjectProperty<Item> item = new SimpleObjectProperty<>();
@@ -111,46 +109,44 @@ public class ItemTooltip extends PopupControl {
     private void addItemSetTooltip(){
         itemSetContainer.getChildren().clear();
 
-        ItemSet itemSet = ITEM_SETS.get(item.get().getItemSetId());
+        ItemSet itemSet = SimDB.ITEM_SETS.get(item.get().getItemSetId());
 
-        if(itemSetIds.size() > 0){
-            Label setName = createText();
-            setName.setText("\n" + itemSet.getName() + " (" + itemSetIds.size() + "/" + itemSet.getItemIds().size() + ")");
-            setName.setTextFill(Paint.valueOf("#ffd100"));
+        Label setName = createText();
+        setName.setText("\n" + itemSet.getName() + " (" + itemSetIds.size() + "/" + itemSet.getItemIds().size() + ")");
+        setName.setTextFill(Paint.valueOf("#ffd100"));
 
-            itemSetContainer.getChildren().add(setName);
+        itemSetContainer.getChildren().add(setName);
 
-            for(Integer i : itemSet.getItemIds()){
-                Label itemName = createText();
-                itemName.setText(ITEMS.get(i).getName());
-                if(itemSetIds.contains(i)){
-                    itemName.setTextFill(Paint.valueOf("#e4e78f"));
-                }else{
-                    itemName.setTextFill(Paint.valueOf("#9d9d9d"));
-                }
-
-                itemName.setPadding(new Insets(0, 0, 0, 5));
-
-                itemSetContainer.getChildren().add(itemName);
+        for(Integer i : itemSet.getItemIds()){
+            Label itemName = createText();
+            itemName.setText(SimDB.ITEMS.getItemById(i).getName());
+            if(itemSetIds.contains(i)){
+                itemName.setTextFill(Paint.valueOf("#e4e78f"));
+            }else{
+                itemName.setTextFill(Paint.valueOf("#9d9d9d"));
             }
 
-            for(int i = 0; i < itemSet.getSetBonuses().size(); i++){
-                ItemSet.ItemSetBonus setBonus = itemSet.getSetBonuses().get(i);
+            itemName.setPadding(new Insets(0, 0, 0, 5));
 
-                Label setBonusText = createText();
-                if(itemSetIds.size() >= setBonus.getCount()){
-                    setBonusText.setTextFill(Paint.valueOf(COLOR_UNCOMMON));
-                }else{
-                    setBonusText.setTextFill(Paint.valueOf("#9d9d9d"));
-                }
+            itemSetContainer.getChildren().add(itemName);
+        }
 
-                setBonusText.setText("(" + setBonus.getCount() + ") Set : " + setBonus.getDescription());
-                if(i == 0){
-                    setBonusText.setText("\n" + setBonusText.getText());
-                }
+        for(int i = 0; i < itemSet.getSetBonuses().size(); i++){
+            ItemSet.ItemSetBonus setBonus = itemSet.getSetBonuses().get(i);
 
-                itemSetContainer.getChildren().add(setBonusText);
+            Label setBonusText = createText();
+            if(itemSetIds.size() >= setBonus.getCount()){
+                setBonusText.setTextFill(Paint.valueOf(COLOR_UNCOMMON));
+            }else{
+                setBonusText.setTextFill(Paint.valueOf("#9d9d9d"));
             }
+
+            setBonusText.setText("(" + setBonus.getCount() + ") Set : " + setBonus.getDescription());
+            if(i == 0){
+                setBonusText.setText("\n" + setBonusText.getText());
+            }
+
+            itemSetContainer.getChildren().add(setBonusText);
         }
     }
 
@@ -162,12 +158,6 @@ public class ItemTooltip extends PopupControl {
         text.setWrapText(true);
 
         return text;
-    }
-
-    public void show(Node ownerNode, double offsetX, double offsetY){
-        super.show(ownerNode,
-                ownerNode.localToScene(0, 0).getX() + ownerNode.getScene().getX() + ownerNode.getScene().getWindow().getX() + offsetX,
-                ownerNode.localToScene(0, 0).getY() + ownerNode.getScene().getY() + ownerNode.getScene().getWindow().getY() + offsetY);
     }
 
     public Item getItem() {

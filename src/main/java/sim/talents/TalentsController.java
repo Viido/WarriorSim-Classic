@@ -1,6 +1,5 @@
 package sim.talents;
 
-import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.IntegerProperty;
@@ -14,9 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import sim.data.SimDB;
 import sim.warrior.Warrior;
 
-import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -52,7 +51,6 @@ public class TalentsController implements Initializable {
     @FXML
     Button resetTree3;
 
-    Talent[] talents;
     Map<Integer, TalentButton> talentButtons = new HashMap<>();
     Warrior warrior;
     List<TalentTree> talentTrees = new ArrayList<>();
@@ -76,9 +74,6 @@ public class TalentsController implements Initializable {
     }
 
     private void initModel(){
-        Gson gson = new Gson();
-        talents = gson.fromJson(new InputStreamReader(getClass().getResourceAsStream("data/talents.json")), Talent[].class);
-
         for(int i = 0; i < 3; i++){
             TalentTree talentTree = new TalentTree();
             talentTrees.add(talentTree);
@@ -110,7 +105,7 @@ public class TalentsController implements Initializable {
     private void initTalentButtons(){
         GridPane[] talentGrids = {tree1, tree2, tree3};
 
-        for(Talent talent : talents){
+        for(Talent talent : SimDB.TALENTS){
             TalentButton talentButton = new TalentButton(talent, talentTrees.get(talent.getTree()).getTalentTiers().get(talent.getRow()), totalPoints);
 
             talentButtons.put(talent.getId(), talentButton);
@@ -229,7 +224,7 @@ public class TalentsController implements Initializable {
     }
 
     private void loadValues(){
-        for(Talent talent : talents){
+        for(Talent talent : SimDB.TALENTS){
             if(warrior.getActiveTalents().containsKey(talent.getId())){
                 talentButtons.get(talent.getId()).setPoints(warrior.getActiveTalents().get(talent.getId()));
             }
