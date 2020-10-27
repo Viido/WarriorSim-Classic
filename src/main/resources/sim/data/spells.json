@@ -1,0 +1,1169 @@
+[
+  {
+    "id": 24428,
+    "name": "Improved Hamstring",
+    "type": "passive",
+    "effect": "RAGE_COST_REDUCTION_HAMSTRING",
+    "value": 2,
+    "description": "Reduces the cost of your Hamstring ability by 2 rage points."
+  },
+  {
+    "id": 27518,
+    "name": "Spell Damage Reduction",
+    "type": "passive",
+    "effect": "SPELL_DAMAGE_REDUCTION",
+    "value": 10,
+    "description": "Spell Damage received is reduced by 10."
+  },
+  {
+    "id": 22778,
+    "name": "Hamstring Rage Reduction",
+    "type": "passive",
+    "effect": "RAGE_COST_REDUCTION_HAMSTRING",
+    "value": 3,
+    "description": "Hamstring Rage cost reduced by 3."
+  },
+  {
+    "id": 7219,
+    "name": "Immune to Disarm",
+    "type": "passive",
+    "description": "Immune to Disarm."
+  },
+  {
+    "id": 18787,
+    "name": "Heaven's Blessing",
+    "type": "use",
+    "effect": "INCREASE_ATTACK_POWER",
+    "cooldown": 900,
+    "duration": 30,
+    "gcd": false,
+    "value": 100,
+    "description": "Increases Attack Power by 100 for 30 sec.",
+    "icon": "spell_holy_fistofjustice"
+  },
+  {
+    "id": 23990,
+    "name": "Item - Minor Run Speed",
+    "type": "passive",
+    "description": "Run speed increased slightly."
+  },
+  {
+    "id": 25901,
+    "name": "Weapon Damage 04",
+    "type": "passive",
+    "effect": "INCREASE_WEAPON_DAMAGE",
+    "value": 4,
+    "description": "+4 Weapon Damage."
+  },
+  {
+    "id": 15438,
+    "name": "Thorns",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT",
+    "value": 3,
+    "school": "arcane",
+    "description": "When struck in combat inflicts 3 Arcane damage to the attacker.",
+    "icon": "spell_nature_lightningshield"
+  },
+  {
+    "id": 26480,
+    "name": "Badge of the Swarmguard",
+    "type": "use",
+    "effect": "ARMOR_PENETRATION",
+    "stacks": 6,
+    "value": 200,
+    "cooldown": 180,
+    "duration": 30,
+    "gcd": false,
+    "description": "Gives a chance on melee or ranged attack to apply an armor penetration effect on you for 30 sec, lowering the target's physical armor by 200 to your own attacks. The armor penetration effect can be applied up to 6 times.",
+    "icon": "inv_qirajidol_death"
+  },
+  {
+    "id": 23686,
+    "name": "Lightning Strike",
+    "type": "passive",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 200,
+    "maxDamage": 300,
+    "school": "nature",
+    "gcd": false,
+    "description": "Chance to strike your melee target with lightning for 200 to 300 Nature damage.",
+    "icon": "spell_lightning_lightningbolt01"
+  },
+  {
+    "id": 24427,
+    "name": "Diamond Flask",
+    "type": "use",
+    "effect": "INCREASE_STRENGTH",
+    "cooldown": 360,
+    "duration": 60,
+    "value": 75,
+    "gcd": true,
+    "description": "Restores 9 health every 5 sec and increases your Strength by 75. Lasts 1 min.",
+    "icon": "inv_drink_01"
+  },
+  {
+    "id": 25891,
+    "name": "Earthstrike",
+    "type": "use",
+    "effect": "INCREASE_ATTACK_POWER",
+    "cooldown": 120,
+    "duration": 20,
+    "value": 280,
+    "gcd": false,
+    "description": "Increases your melee and ranged attack power by 280. Effect lasts for 20 sec.",
+    "icon": "spell_nature_abolishmagic"
+  },
+  {
+    "id": 24571,
+    "name": "Blood Fury",
+    "type": "use",
+    "effect": "INCREASE_RAGE",
+    "value": 30,
+    "cooldown": 180,
+    "gcd": false,
+    "description": "Instantly increases your rage by 30.",
+    "icon": "spell_shadow_lifedrain"
+  },
+  {
+    "id": 15600,
+    "name": "Hand of Justice",
+    "type": "passive",
+    "effect": "EXTRA_ATTACKS",
+    "value": 1,
+    "procChance": 0.02,
+    "gcd": false,
+    "description": "2% chance on melee hit to gain 1 extra attack.",
+    "icon": "inv_jewelry_talisman_01"
+  },
+  {
+    "id": 27656,
+    "name": "Flame Lash",
+    "type": "passive",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 120,
+    "maxDamage": 180,
+    "school": "fire",
+    "description": "Chance to bathe your melee target in flames for 120 to 180 Fire damage.",
+    "icon": "spell_fire_flameshock"
+  },
+  {
+    "id": 29602,
+    "name": "Jom Gabbar",
+    "type": "use",
+    "effect": "INCREASE_ATTACK_POWER_INCREMENTAL",
+    "value": 65,
+    "gcd": false,
+    "cooldown": 120,
+    "duration": 20,
+    "description": "Increases attack power by 65 and an additional 65 every 2 sec. Lasts 20 sec.",
+    "icon": "ability_poisons"
+  },
+  {
+    "id": 28866,
+    "name": "Kiss of the Spider",
+    "type": "use",
+    "effect": "MOD_HASTE",
+    "value": 20,
+    "cooldown": 120,
+    "duration": 20,
+    "gcd": false,
+    "description": "Increases your attack speed by 20% for 15 sec.",
+    "icon": "inv_trinket_naxxramas04"
+  },
+  {
+    "id": 23930,
+    "name": "Seal of the Dawn",
+    "type": "passive",
+    "effect": "INCREASE_ATTACK_POWER_UNDEAD",
+    "value": 81,
+    "description": "+81 Attack Power when fighting Undead. It also allows the acquisition of Scourgestones on behalf of the Argent Dawn."
+  },
+  {
+    "id": 28777,
+    "name": "Slayer's Crest",
+    "type": "use",
+    "effect": "INCREASE_ATTACK_POWER",
+    "value": 260,
+    "cooldown": 120,
+    "duration": 20,
+    "gcd": false,
+    "description": "Increases Attack Power by 260 for 20 sec.",
+    "icon": " inv_trinket_naxxramas03"
+  },
+  {
+    "id": 24585,
+    "name": "Drain Life",
+    "type": "proc",
+    "effect": "DRAIN_HEALTH",
+    "minDamage": 48,
+    "maxDamage": 54,
+    "gcd": false,
+    "school": "shadow",
+    "description": "Steals 48 to 54 life from target enemy.",
+    "icon": "spell_shadow_lifedrain02"
+  },
+  {
+    "id": 16928,
+    "name": "Armor Shatter",
+    "type": "proc",
+    "description": "Reduces an enemy's armor by 200.  Stacks up to 3 times."
+  },
+  {
+    "id": 18104,
+    "name": "Wrath",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 90,
+    "maxDamage": 126,
+    "gcd": true,
+    "school": "nature",
+    "description": "Blasts a target for 90 to 126 Nature damage.",
+    "icon": "spell_nature_lightning"
+  },
+  {
+    "id": 18138,
+    "name": "Shadow Bolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 110,
+    "maxDamage": 140,
+    "gcd": true,
+    "school": "shadow",
+    "description": "Sends a shadowy bolt at the enemy causing 110 to 140 Shadow damage.",
+    "icon": "spell_shadow_shadowbolt"
+  },
+  {
+    "id": 18797,
+    "name": "Flurry Axe",
+    "type": "proc",
+    "effect": "EXTRA_ATTACKS",
+    "value": 1,
+    "gcd": false,
+    "description": "Grants 1 extra attack on your next swing.",
+    "icon": "ability_warrior_punishingblow"
+  },
+  {
+    "id": 17315,
+    "name": "Puncture Armor",
+    "type": "proc",
+    "description": "Punctures target's armor lowering it by 200. Can be applied up to 3 times."
+  },
+  {
+    "id": 18833,
+    "name": "Firebolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 75,
+    "maxDamage": 105,
+    "gcd": false,
+    "school": "fire",
+    "description": "Blasts a target for 75 to 105 Fire damage.",
+    "icon": "spell_fire_fireball"
+  },
+  {
+    "id": 23604,
+    "name": "Reduce Threat",
+    "type": "proc",
+    "effect": "THREAT_REDUCTION_FLAT",
+    "value": 540,
+    "gcd": false,
+    "description": "Reduce your threat to the current target making them less likely to attack you.",
+    "icon": "ability_physical_taunt"
+  },
+  {
+    "id": 18276,
+    "name": "Frost Blast",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 90,
+    "maxDamage": 90,
+    "gcd": false,
+    "school": "frost",
+    "description": "Blasts a target for 90 Frost damage.",
+    "icon": "spell_frost_frostbolt02"
+  },
+  {
+    "id": 24993,
+    "name": "Acid Blast",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 87,
+    "maxDamage": 105,
+    "gcd": false,
+    "school": "nature",
+    "description": "Blasts the enemy with acid for 87 to 105 Nature damage.",
+    "icon": "classic_temp"
+  },
+  {
+    "id": 16551,
+    "name": "Felstriker",
+    "type": "proc",
+    "effect": "FELSTRIKER_BUFF",
+    "gcd": false,
+    "duration": 3,
+    "description": "All attacks are guaranteed to land and will be critical strikes for the next 3 sec.",
+    "icon": "ability_backstab"
+  },
+  {
+    "id": 16718,
+    "name": "Finkle's Skinner",
+    "type": "passive",
+    "description": "Skinning +10."
+  },
+  {
+    "id": 18067,
+    "name": "Beast Slaying 45",
+    "type": "passive",
+    "effect": "INCREASE_ATTACK_POWER_BEASTS",
+    "value": 45,
+    "description": "+45 Attack Power when fighting Beasts."
+  },
+  {
+    "id": 18398,
+    "name": "Frost Blast",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 45,
+    "maxDamage": 45,
+    "gcd": false,
+    "school": "frost",
+    "description": "Blasts a target for 45 Frost damage.",
+    "icon": "spell_frost_frostbolt02"
+  },
+  {
+    "id": 23592,
+    "name": "Lightning Bolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 45,
+    "maxDamage": 45,
+    "gcd": true,
+    "school": "nature",
+    "description": "Blasts a target for 45 Nature damage.",
+    "icon": "spell_nature_lightning"
+  },
+  {
+    "id": 21151,
+    "name": "Gutgore Ripper",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 75,
+    "maxDamage": 75,
+    "gcd": true,
+    "school": "shadow",
+    "description": "Sends a shadowy bolt at the enemy causing 75 Shadow damage and lowering all stats by 25 for 30 sec.",
+    "icon": "spell_shadow_shadowbolt"
+  },
+  {
+    "id": 23267,
+    "name": "Firebolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 40,
+    "maxDamage": 56,
+    "gcd": false,
+    "school": "fire",
+    "description": "Blasts a target for 40 to 56 Fire damage.",
+    "icon": "spell_fire_fireball"
+  },
+  {
+    "id": 24388,
+    "name": "Brain Damage",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 200,
+    "maxDamage": 300,
+    "gcd": false,
+    "school": "physical",
+    "description": "Wounds the target for 200 to 300 damage and lowers Intellect of target by 25 for 30 sec.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 18205,
+    "name": "Shadow Bolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 55,
+    "maxDamage": 85,
+    "gcd": true,
+    "school": "shadow",
+    "description": "Sends a shadowy bolt at the enemy causing 55 to 85 Shadow damage.",
+    "icon": "spell_shadow_shadowbolt"
+  },
+  {
+    "id": 22639,
+    "name": "Eskhandar's Rake",
+    "type": "proc",
+    "description": "Slows enemy's movement by 60% and causes them to bleed for 150 damage over 30 sec."
+  },
+  {
+    "id": 22640,
+    "name": "Eskhandar's Rage",
+    "type": "proc",
+    "effect": "MOD_HASTE",
+    "value": 30,
+    "gcd": false,
+    "duration": 5,
+    "description": "Increases your attack speed by 30% for 5 sec.",
+    "icon": "inv_misc_monsterclaw_03"
+  },
+  {
+    "id": 24697,
+    "name": "Attack Power - Feral (+280)",
+    "type": "passive",
+    "description": "+280 Attack Power in Cat, Bear, and Dire Bear forms only."
+  },
+  {
+    "id": 18211,
+    "name": "Shadow Bolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 125,
+    "maxDamage": 275,
+    "gcd": true,
+    "school": "shadow",
+    "description": "Sends a shadowy bolt at the enemy causing 125 to 275 Shadow damage.",
+    "icon": "spell_shadow_shadowbolt"
+  },
+  {
+    "id": 21165,
+    "name": "Haste",
+    "type": "proc",
+    "effect": "MOD_HASTE",
+    "value": 20,
+    "gcd": false,
+    "duration": 10,
+    "description": "Increases your attack speed by 20% for 10 sec.",
+    "icon": "spell_nature_invisibilty"
+  },
+  {
+    "id": 15494,
+    "name": "Fury of Forgewright",
+    "type": "proc",
+    "effect": "EXTRA_ATTACKS",
+    "value": 2,
+    "gcd": false,
+    "description": "Grants 2 extra attacks on your next swing.",
+    "icon": "spell_fire_incinerate"
+  },
+  {
+    "id": 24994,
+    "name": "Attack Power - Feral (+154)",
+    "type": "passive",
+    "description": "+154 Attack Power in Cat, Bear, and Dire Bear forms only."
+  },
+  {
+    "id": 29150,
+    "name": "Electric Discharge",
+    "type": "passive",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 100,
+    "maxDamage": 150,
+    "gcd": false,
+    "school": "nature",
+    "description": "Chance to discharge electricity causing 100 to 150 Nature damage to your target.",
+    "icon": "spell_lightning_lightningbolt01"
+  },
+  {
+    "id": 24254,
+    "name": "Serpent's Hiss",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 63,
+    "maxDamage": 93,
+    "gcd": false,
+    "school": "nature",
+    "description": "Blasts the enemy with poison for 63 to 93 Nature damage.",
+    "icon": "classic_temp"
+  },
+  {
+    "id": 7711,
+    "name": "Add Fire Dam - Weap 02",
+    "type": "passive",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 2,
+    "maxDamage": 2,
+    "procChance": 1,
+    "gcd": false,
+    "school": "fire",
+    "description": "Adds 2 fire damage to your melee attacks.",
+    "icon": "spell_shadow_shadowbolt"
+  },
+  {
+    "id": 15602,
+    "name": "Lord General's Sword",
+    "type": "proc",
+    "effect": "INCREASE_ATTACK_POWER",
+    "value": 50,
+    "duration": 30,
+    "gcd": true,
+    "description": "Increases attack power by 50 for 30 sec.",
+    "icon": "ability_racial_avatar"
+  },
+  {
+    "id": 22850,
+    "name": "Sanctuary",
+    "type": "proc",
+    "effect": "QUELSERRAR_BUFF",
+    "duration": 10,
+    "gcd": false,
+    "description": "When active, grants the wielder 13 defense and 300 armor for 10 sec.",
+    "icon": "spell_fire_sealoffire"
+  },
+  {
+    "id": 17484,
+    "name": "Skullforge Brand",
+    "type": "proc",
+    "description": "Drains target for 2 Shadow damage every 1 sec and transfers it to the caster. Lasts for 30 sec."
+  },
+  {
+    "id": 8191,
+    "name": "Zeal",
+    "type": "proc",
+    "effect": "SWORD_OF_ZEAL_BUFF",
+    "duration": 15,
+    "gcd": true,
+    "description": "A burst of energy fills the caster, increasing his damage by 10 and armor by 150 for 15 sec.",
+    "icon": "spell_holy_innerfire"
+  },
+  {
+    "id": 24251,
+    "name": "Zulian Slice",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 72,
+    "maxDamage": 96,
+    "gcd": false,
+    "school": "nature",
+    "description": "Slices the enemy for 72 to 96 Nature damage.",
+    "icon": "classic_temp"
+  },
+  {
+    "id": 24591,
+    "name": "Improved Skinning",
+    "type": "passive",
+    "description": "Skinning +10."
+  },
+  {
+    "id": 18086,
+    "name": "Firebolt",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 150,
+    "maxDamage": 150,
+    "gcd": false,
+    "school": "fire",
+    "description": "Blasts a target for 150 Fire damage.",
+    "icon": "spell_fire_firebolt02"
+  },
+  {
+    "id": 21919,
+    "name": "Thrash",
+    "type": "proc",
+    "effect": "EXTRA_ATTACKS",
+    "value": 1,
+    "gcd": false,
+    "description": "Grants an extra attack on your next swing.",
+    "icon": "ability_warrior_punishingblow"
+  },
+  {
+    "id": 21992,
+    "name": "Thunderfury",
+    "type": "proc",
+    "effect": "THUNDERFURY_PROC",
+    "gcd": false,
+    "school": "nature",
+    "description": "Blasts your enemy with lightning, dealing 300 Nature damage and then jumping to additional nearby enemies. Each jump reduces that victim's Nature resistance by 25. Affects 5 targets. Your primary target is also consumed by a cyclone, slowing its attack speed by 20% for 12 sec.",
+    "icon": "spell_nature_cyclone"
+  },
+  {
+    "id": 21140,
+    "name": "Fatal Wound",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 240,
+    "maxDamage": 240,
+    "gcd": false,
+    "school": "physical",
+    "description": "Delivers a fatal wound for 240 damage.",
+    "icon": "ability_backstab"
+  },
+  {
+    "id": 17148,
+    "name": "Brain Hacker",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 200,
+    "maxDamage": 300,
+    "gcd": false,
+    "school": "physical",
+    "description": "Wounds the target for 200 to 300 damage and lowers Intellect of target by 25 for 30 sec.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 26108,
+    "name": "Glimpse of Madness",
+    "type": "proc",
+    "description": "Disorients the target, causing it to wander aimlessly for up to 3 sec."
+  },
+  {
+    "id": 18289,
+    "name": "Creeping Mold",
+    "type": "proc",
+    "description": "Diseases target enemy for 55 Nature damage every 3 sec for 15 sec."
+  },
+  {
+    "id": 24292,
+    "name": "Dragon Slaying 117",
+    "type": "passive",
+    "description": "+117 Attack Power when fighting Dragonkin."
+  },
+  {
+    "id": 26693,
+    "name": "Drain Life",
+    "type": "proc",
+    "effect": "DRAIN_HEALTH",
+    "minDamage": 141,
+    "maxDamage": 163,
+    "gcd": false,
+    "school": "shadow",
+    "description": "Steals 141 to 163 life from target enemy.",
+    "icon": "spell_shadow_lifedrain02"
+  },
+  {
+    "id": 23605,
+    "name": "Spell Vulnerability",
+    "type": "proc",
+    "description": "Spell damage taken by target increased by 15% for 5 sec."
+  },
+  {
+    "id": 21185,
+    "name": "Spinal Reaper",
+    "type": "passive",
+    "description": "Restores 150 mana or 20 rage when you kill a target that gives experience; this effect cannot occur more than once every 10 seconds."
+  },
+  {
+    "id": 17407,
+    "name": "Wound",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 50,
+    "maxDamage": 150,
+    "gcd": false,
+    "school": "physical",
+    "description": "Wounds the target for 50 to 150 damage and deals an additional 6 damage every 1 sec for 25 sec.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 21152,
+    "name": "Earthshaker",
+    "type": "proc",
+    "description": "Knocks down all nearby enemies for 3 sec."
+  },
+  {
+    "id": 56,
+    "name": "Stun",
+    "type": "proc",
+    "description": "Stuns target for 3 sec."
+  },
+  {
+    "id": 24257,
+    "name": "Jeklik's Crushing Blow",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 200,
+    "maxDamage": 220,
+    "gcd": false,
+    "school": "physical",
+    "description": "Wounds the target for 200 to 220 damage.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 17196,
+    "name": "Seeping Willow",
+    "type": "proc",
+    "description": "Lowers all stats by 20 and deals 20 Nature damage every 3 sec to all enemies within an 8 yard radius of the caster for 30 sec."
+  },
+  {
+    "id": 21162,
+    "name": "Fireball",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 273,
+    "maxDamage": 333,
+    "gcd": true,
+    "school": "fire",
+    "description": "Hurls a fiery ball that causes 273 to 333 Fire damage and an additional 75 damage over 10 sec.",
+    "icon": "spell_fire_firebolt02"
+  },
+  {
+    "id": 21142,
+    "name": "Immolation",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT",
+    "value": 5,
+    "school": "fire",
+    "description": "Deals 5 Fire damage to anyone who strikes you with a melee attack.",
+    "icon": "spell_fire_immolation"
+  },
+  {
+    "id": 21159,
+    "name": "Fireball",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 83,
+    "maxDamage": 101,
+    "gcd": true,
+    "school": "fire",
+    "description": "Hurls a fiery ball that causes 83 to 101 Fire damage and an additional 16 damage over 8 sec.",
+    "icon": "spell_fire_firebolt02"
+  },
+  {
+    "id": 23454,
+    "name": "Stun",
+    "type": "proc",
+    "description": "Stuns target for 1 sec."
+  },
+  {
+    "id": 13494,
+    "name": "Haste",
+    "type": "use",
+    "effect": "MOD_HASTE",
+    "value": 50,
+    "duration": 30,
+    "cooldown": 0,
+    "gcd": false,
+    "description": "Increases your attack speed by 50% for 30 sec.",
+    "icon": "spell_nature_invisibilty"
+  },
+  {
+    "id": 16549,
+    "name": "Wound",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 324,
+    "maxDamage": 540,
+    "gcd": false,
+    "school": "physical",
+    "description": "Wounds the target for 324 to 540 damage.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 25669,
+    "name": "Wound",
+    "type": "passive",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 452,
+    "maxDamage": 676,
+    "gcd": false,
+    "school": "physical",
+    "description": "Chance to decapitate the target on a melee swing, causing 452 to 676 damage.",
+    "icon": "ability_gouge"
+  },
+  {
+    "id": 21179,
+    "name": "Chain Lightning",
+    "type": "proc",
+    "effect": "DAMAGE_PROC_CHAIN",
+    "value": 3,
+    "minDamage": 150,
+    "maxDamage": 250,
+    "gcd": false,
+    "school": "nature",
+    "description": "Blasts up to 3 targets for 150 to 250 Nature damage. Each target after the first takes less damage.",
+    "icon": "spell_nature_lightning"
+  },
+  {
+    "id": 21181,
+    "name": "Summon Shadowstrike",
+    "type": "use",
+    "cooldown": 60,
+    "description": "Transforms Thunderstrike into Shadowstrike."
+  },
+  {
+    "id": 21170,
+    "name": "Drain Life",
+    "type": "proc",
+    "effect": "DRAIN_HEALTH",
+    "minDamage": 100,
+    "maxDamage": 180,
+    "gcd": false,
+    "school": "shadow",
+    "description": "Steals 100 to 180 life from target enemy.",
+    "icon": "spell_shadow_lifedrain02"
+  },
+  {
+    "id": 21180,
+    "name": "Summon Thunderstrike",
+    "type": "use",
+    "cooldown": 60,
+    "description": "Transforms Shadowstrike into Thunderstrike."
+  },
+  {
+    "id": 14098,
+    "name": "Demon Slaying 117",
+    "type": "passive",
+    "effect": "INCREASE_ATTACK_POWER_DEMONS",
+    "value": 117,
+    "description": "+117 Attack Power when fighting Demons."
+  },
+  {
+    "id": 18207,
+    "name": "Beast Slaying 60",
+    "type": "passive",
+    "effect": "INCREASE_ATTACK_POWER_BEASTS",
+    "value": 60,
+    "description": "+60 Attack Power when fighting Beasts."
+  },
+  {
+    "id": 16602,
+    "name": "Shahram",
+    "type": "proc",
+    "description": "Summons the infernal spirit of Shahram."
+  },
+  {
+    "id": 21153,
+    "name": "Bonereaver's Edge",
+    "type": "proc",
+    "effect": "ARMOR_PENETRATION",
+    "stacks": 3,
+    "value": 700,
+    "duration": 10,
+    "gcd": false,
+    "description": "Your attacks ignore 700 of your enemies' armor for 10 sec. This effect stacks up to 3 times.",
+    "icon": "spell_shadow_curseofsargeras"
+  },
+  {
+    "id": 28282,
+    "name": "Ashbringer",
+    "type": "passive",
+    "description": "Inflicts the will of the Ashbringer upon the wielder."
+  },
+  {
+    "id": 29155,
+    "name": "Drain Life",
+    "type": "proc",
+    "effect": "DRAIN_HEALTH",
+    "minDamage": 185,
+    "maxDamage": 215,
+    "gcd": false,
+    "school": "shadow",
+    "description": "Steals 185 to 215 life from target enemy.",
+    "icon": "spell_shadow_lifedrain02"
+  },
+  {
+    "id": 17152,
+    "name": "Destiny",
+    "type": "proc",
+    "effect": "INCREASE_STRENGTH",
+    "value": 200,
+    "duration": 10,
+    "gcd": false,
+    "description": "Increases Strength by 200 for 10 sec.",
+    "icon": "spell_nature_strength"
+  },
+  {
+    "id": 26415,
+    "name": "Shock",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 239,
+    "maxDamage": 277,
+    "gcd": false,
+    "school": "nature",
+    "description": "Instantly lightning shocks the target for 239 to 277 Nature damage.",
+    "icon": "spell_nature_wispheal"
+  },
+  {
+    "id": 17625,
+    "name": "Unholy Aura",
+    "type": "passive",
+    "description": "Increases movement speed and life regeneration rate."
+  },
+  {
+    "id": 23719,
+    "name": "Destiny",
+    "type": "proc",
+    "effect": "INCREASE_STRENGTH",
+    "value": 300,
+    "duration": 8,
+    "gcd": false,
+    "description": "Increases Strength by 300 for 8 sec.",
+    "icon": "spell_nature_bloodlust"
+  },
+  {
+    "id": 29626,
+    "name": "Shadowbolt",
+    "type": "passive",
+    "description": "Chance to strike your ranged target with a Shadowbolt for 13 to 19 Shadow damage."
+  },
+  {
+    "id": 22618,
+    "name": "Force Reactive Disk",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_BLOCK",
+    "minDamage": 25,
+    "maxDamage": 35,
+    "aoe": true,
+    "gcd": false,
+    "school": "nature",
+    "description": "When the shield blocks it releases an electrical charge that damages all nearby enemies. This also has a chance of damaging the shield.",
+    "icon": "spell_lightning_lightningbolt01"
+  },
+  {
+    "id": 13959,
+    "name": "Electrostatic Charge",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_PROC",
+    "procChance": 0.05,
+    "minDamage": 35,
+    "maxDamage": 65,
+    "gcd": false,
+    "school": "nature",
+    "description": "When struck in combat has a 5% chance of inflicting 35 to 65 Nature damage to the attacker.",
+    "icon": "spell_nature_lightning"
+  },
+  {
+    "id": 17350,
+    "name": "Argent Dawn",
+    "type": "passive",
+    "effect": "ARGENT_DEFENDER_PROC",
+    "procChance": 0.01,
+    "duration": 10,
+    "gcd": false,
+    "description": "Has a 1% chance when struck in combat of increasing chance to block by 50% for 10 sec.",
+    "icon": "spell_holy_devotionaura"
+  },
+  {
+    "id": 17495,
+    "name": "Crest of Retribution",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_BLOCK",
+    "minDamage": 5,
+    "maxDamage": 35,
+    "gcd": false,
+    "school": "physical",
+    "description": "Deals 5 to 35 damage every time you block.",
+    "icon": "inv_shield_19"
+  },
+  {
+    "id": 18815,
+    "name": "Drain Life",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_DRAIN_HEALTH",
+    "procChance": 0.03,
+    "minDamage": 35,
+    "maxDamage": 35,
+    "gcd": false,
+    "school": "shadow",
+    "description": "When struck in combat has a 3% chance of stealing 35 life from target enemy.",
+    "icon": "spell_shadow_lifedrain02"
+  },
+  {
+    "id": 18816,
+    "name": "Flamestrike",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_PROC",
+    "procChance": 0.01,
+    "minDamage": 75,
+    "maxDamage": 125,
+    "aoe": true,
+    "gcd": false,
+    "school": "fire",
+    "description": "When struck in combat has a 1% chance of dealing 75 to 125 Fire damage to all targets around you.",
+    "icon": "spell_fire_selfdestruct"
+  },
+  {
+    "id": 22738,
+    "name": "Intercept Cooldown",
+    "type": "passive",
+    "effect": "COOLDOWN_REDUCTION_INTERCEPT",
+    "value": 5,
+    "description": "Reduces the cooldown of your Intercept ability by 5 sec."
+  },
+  {
+    "id": 26109,
+    "name": "Conqueror Shout Bonus",
+    "type": "passive",
+    "effect": "CONQUEROR_SHOUT_BONUS",
+    "description": "Decreases the rage cost of all Warrior shouts by 35%."
+  },
+  {
+    "id": 26110,
+    "name": "Conqueror Thunder Clap Bonus",
+    "type": "passive",
+    "effect": "CONQUEROR_THUNDER_CLAP_BONUS",
+    "description": "Increase the Slow effect and damage of Thunder Clap by 50%."
+  },
+  {
+    "id": 27419,
+    "name": "Warrior's Resolve",
+    "type": "passive",
+    "effect": "HEAL_PROC",
+    "minDamage": 88,
+    "maxDamage": 132,
+    "gcd": false,
+    "description": "Chance on melee attack to heal you for 88 to 132.",
+    "icon": "spell_holy_renew"
+  },
+  {
+    "id": 28844,
+    "name": "Revenge",
+    "type": "passive",
+    "effect": "T3_SET2",
+    "description": "Increases the damage done by your Revenge ability by 75."
+  },
+  {
+    "id": 28843,
+    "name": "Increased Spell Hit Chance",
+    "type": "passive",
+    "effect": "T3_SET4",
+    "description": "Improves your chance to hit with Taunt and Challenging Shout by 5%."
+  },
+  {
+    "id": 28842,
+    "name": "Increased Hit Chance",
+    "type": "passive",
+    "effect": "T3_SET6",
+    "description": "Improves your chance to hit with Sunder Armor, Heroic Strike, Revenge, and Shield Slam by 5%."
+  },
+  {
+    "id": 28845,
+    "name": "Cheat Death",
+    "type": "passive",
+    "effect": "T3_SET8",
+    "description": "When your health drops below 20%, for the next 5 seconds healing spells cast on you help you to Cheat Death, increasing healing done by up to 160.",
+    "icon": "spell_shadow_animatedead"
+  },
+  {
+    "id": 23563,
+    "name": "Enhanced Battle Shout",
+    "type": "passive",
+    "effect": "T2_SET3",
+    "description": "Increases the attack power granted by Battle Shout by 30."
+  },
+  {
+    "id": 21890,
+    "name": "Warrior's Wrath",
+    "type": "passive",
+    "effect": "T2_SET5",
+    "procChance": 0.2,
+    "gcd": false,
+    "description": "20% chance after using an offensive ability requiring rage that your next offensive ability requires 5 less rage to use.",
+    "icon": "ability_warrior_savageblow"
+  },
+  {
+    "id": 23548,
+    "name": "Parry",
+    "type": "passive",
+    "effect": "T2_SET8",
+    "procChance": 0.04,
+    "gcd": false,
+    "description": "4% chance to parry the next attack after a block.",
+    "icon": "ability_parry"
+  },
+  {
+    "id": 26111,
+    "name": "Battlegear of Unyielding Strength Intercept Bonus",
+    "type": "passive",
+    "effect": "RAGE_COST_REDUCTION_INTERCEPT",
+    "value": 2,
+    "description": "-2 rage cost to Intercept."
+  },
+  {
+    "id": 24456,
+    "name": "Improved Intimidating Shout",
+    "type": "passive",
+    "description": "Decreases the cooldown of Intimidating Shout by 15 sec."
+  },
+  {
+    "id": 24431,
+    "name": "Improved Whirlwind",
+    "type": "passive",
+    "effect": "RAGE_COST_REDUCTION_WHIRLWIND",
+    "value": 3,
+    "description": "Decrease the rage cost of Whirlwind by 3."
+  },
+  {
+    "id": 21838,
+    "name": "Battlegear of Might",
+    "type": "passive",
+    "effect": "T1_SET5",
+    "procChance": 0.2,
+    "description": "Gives you a 20% chance to generate an additional Rage point whenever damage is dealt to you.",
+    "icon": "spell_nature_stoneclawtotem"
+  },
+  {
+    "id": 23561,
+    "name": "Enhanced Sunder Armor",
+    "type": "passive",
+    "effect": "T1_SET8",
+    "description": "Increases the threat generated by Sunder Armor by 15%."
+  },
+  {
+    "id": 22648,
+    "name": "Call of Eskhandar",
+    "type": "passive",
+    "description": "1% chance on a melee critical hit to call forth the spirit of Eskhandar to protect you in battle for 2 min."
+  },
+  {
+    "id": 24256,
+    "name": "Primal Blessing",
+    "type": "passive",
+    "effect": "ATTACK_POWER_PROC",
+    "value": 300,
+    "duration": 12,
+    "gcd": false,
+    "procChance": 0.01,
+    "description": "Grants a small chance when ranged or melee damage is dealt to infuse the wielder with a blessing from the Primal Gods. Ranged and melee attack power increased by 300 for 12 seconds.",
+    "icon": "ability_hunter_harass"
+  },
+  {
+    "id": 20034,
+    "name": "Holy Strength",
+    "type": "proc",
+    "effect": "CRUSADER",
+    "duration": 15,
+    "ppm": 1,
+    "gcd": false,
+    "description": "Heal self for 75 to 125 and Increases Strength by 100 for 15 sec.",
+    "icon": "spell_holy_blessingofstrength"
+  },
+  {
+    "id": 13898,
+    "name": "Fiery Weapon",
+    "type": "proc",
+    "effect": "DAMAGE_PROC",
+    "minDamage": 40,
+    "maxDamage": 40,
+    "school": "fire",
+    "gcd": false,
+    "description": "Strikes your target for 40 additional fire damage.",
+    "icon": "classic_temp"
+  },
+  {
+    "id": 20032,
+    "name": "Life Steal",
+    "type": "proc",
+    "effect": "DRAIN_HEALTH",
+    "minDamage": 30,
+    "maxDamage": 30,
+    "school": "shadow",
+    "gcd": false,
+    "description": "Steals 30 life from target enemy.",
+    "icon": "classic_temp"
+  },
+  {
+    "id": 16623,
+    "name": "Thorium Shield Spike",
+    "type": "passive",
+    "effect": "DAMAGE_REFLECT_BLOCK",
+    "minDamage": 20,
+    "maxDamage": 30,
+    "school": "physical",
+    "gcd": false,
+    "description": "Deals 20 to 30 damage every time you block.",
+    "icon": "inv_misc_armorkit_20"
+  }
+]

@@ -1,6 +1,7 @@
 package sim.items;
 
 import com.google.gson.annotations.SerializedName;
+import sim.data.SimDB;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -38,10 +39,7 @@ public class Item implements Serializable, Comparable<Item> {
     private int arcaneRes;
     private int mp5;
     private int phase;
-    @SerializedName(value = "spell")
-    private int spellId;
-    @SerializedName(value = "spell2")
-    private int spell2Id;
+    private List<Integer> spellIds;
     private String icon;
     private String quality;
     private String faction;
@@ -175,12 +173,8 @@ public class Item implements Serializable, Comparable<Item> {
         return faction;
     }
 
-    public int getSpellId() {
-        return spellId;
-    }
-
-    public int getSpell2Id() {
-        return spell2Id;
+    public List<Integer> getSpellIds() {
+        return spellIds;
     }
 
     public boolean isUnique() {
@@ -301,23 +295,43 @@ public class Item implements Serializable, Comparable<Item> {
         }
 
         if(str != 0){
-            tooltip.add("+" + str + " Strength");
+            if(str > 0){
+                tooltip.add("+" + str + " Strength");
+            }else{
+                tooltip.add(str + " Strength");
+            }
         }
 
         if(agi != 0){
-            tooltip.add("+" + agi + " Agility");
+            if(agi > 0 ) {
+                tooltip.add("+" + agi + " Agility");
+            }else{
+                tooltip.add(agi + " Agility");
+            }
         }
 
         if(sta != 0){
-            tooltip.add("+" + sta + " Stamina");
+            if(sta > 0){
+                tooltip.add("+" + sta + " Stamina");
+            }else{
+                tooltip.add(sta + " Stamina");
+            }
         }
 
         if(intellect != 0){
-            tooltip.add("+" + intellect + " Intellect");
+            if(intellect > 0){
+                tooltip.add("+" + intellect + " Intellect");
+            }else{
+                tooltip.add(intellect + " Intellect");
+            }
         }
 
         if(spirit != 0){
-            tooltip.add("+" + spirit + " Spirit");
+            if(spirit > 0){
+                tooltip.add("+" + spirit + " Spirit");
+            }else{
+                tooltip.add(spirit + " Spirit");
+            }
         }
 
         if(arcaneRes != 0){
@@ -377,6 +391,24 @@ public class Item implements Serializable, Comparable<Item> {
 
         if(mp5 != 0){
             tooltip.add("Equip: Restores " + mp5 + " mana per 5 sec.");
+        }
+
+        if(spellIds != null){
+            for(Integer i : spellIds){
+                Spell spell = SimDB.SPELLS.get(i);
+
+                if(spell.getType().equals("use")){
+                    tooltip.add("Use: " + spell.getDescription() + " (" + spell.getCooldown()/60 + " Min Cooldown)");
+                }
+
+                if(spell.getType().equals("proc")){
+                    tooltip.add("Chance on hit: " + spell.getDescription());
+                }
+
+                if(spell.getType().equals("passive")){
+                    tooltip.add("Equip: " + spell.getDescription());
+                }
+            }
         }
 
         return tooltip;

@@ -90,7 +90,7 @@ public class ItemTooltip extends CustomPopup {
             } else {
                 Label label = createText();
 
-                if (string.startsWith("Equip:")) {
+                if (string.startsWith("Equip:") || string.startsWith("Use:") || string.startsWith("Chance on hit:")) {
                     label.setTextFill(Paint.valueOf(COLOR_UNCOMMON));
                 }
 

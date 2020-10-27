@@ -381,7 +381,9 @@
       "sta": 13,
       "defense": 6,
       "block": 2,
-      "spell": 24428,
+      "spellIds": [
+        24428
+      ],
       "itemSetId": 474,
       "phase": 4,
       "icon": "inv_jewelry_necklace_26",
@@ -1146,7 +1148,9 @@
       "armor": 458,
       "ap": 76,
       "crit": 1,
-      "spell": 27518,
+      "spellIds": [
+        27518
+      ],
       "phase": 5,
       "icon": "inv_chest_chain_17",
       "quality": "epic"
@@ -1748,7 +1752,9 @@
       "armor": 532,
       "str": 20,
       "sta": 23,
-      "spell": 22778,
+      "spellIds": [
+        22778
+      ],
       "crit": 1,
       "itemSetId": 384,
       "phase": 2,
@@ -1762,7 +1768,9 @@
       "armor": 532,
       "str": 20,
       "sta": 23,
-      "spell": 22778,
+      "spellIds": [
+        22778
+      ],
       "crit": 1,
       "itemSetId": 383,
       "phase": 2,
@@ -1776,7 +1784,9 @@
       "armor": 429,
       "str": 17,
       "sta": 17,
-      "spell": 22778,
+      "spellIds": [
+        22778
+      ],
       "itemSetId": 545,
       "phase": 2,
       "icon": "inv_gauntlets_26",
@@ -1789,7 +1799,9 @@
       "armor": 429,
       "str": 17,
       "sta": 17,
-      "spell": 22778,
+      "spellIds": [
+        22778
+      ],
       "itemSetId": 537,
       "phase": 2,
       "icon": "inv_gauntlets_26",
@@ -1836,7 +1848,9 @@
       "name": "Stronghold Gauntlets",
       "armor": 441,
       "sta": 12,
-      "spell": 7219,
+      "spellIds": [
+        7219
+      ],
       "parry": 1,
       "crit": 1,
       "phase": 1,
@@ -2243,7 +2257,9 @@
       "str": 20,
       "agi": 20,
       "sta": 20,
-      "spell": 18787,
+      "spellIds": [
+        18787
+      ],
       "phase": 1,
       "icon": "inv_pants_04",
       "quality": "epic"
@@ -2591,7 +2607,9 @@
       "str": 14,
       "agi": 12,
       "sta": 12,
-      "spell": 23990,
+      "spellIds": [
+        23990
+      ],
       "itemSetId": 467,
       "phase": 4,
       "icon": "inv_boots_plate_04",
@@ -2605,7 +2623,9 @@
       "str": 14,
       "agi": 12,
       "sta": 12,
-      "spell": 23990,
+      "spellIds": [
+        23990
+      ],
       "itemSetId": 487,
       "phase": 4,
       "icon": "inv_boots_plate_04",
@@ -3062,7 +3082,9 @@
       "name": "Might of Cenarius",
       "unique": true,
       "sta": 8,
-      "spell": 25901,
+      "spellIds": [
+        25901
+      ],
       "hit": 1,
       "phase": 5,
       "icon": "inv_jewelry_ring_41",
@@ -3074,7 +3096,9 @@
       "unique": true,
       "armor": 50,
       "sta": 10,
-      "spell": 15438,
+      "spellIds": [
+        15438
+      ],
       "defense": 5,
       "phase": 1,
       "icon": "inv_jewelry_ring_05",
@@ -3290,7 +3314,10 @@
       "id": 21670,
       "name": "Badge of the Swarmguard",
       "unique": true,
-      "spell": 26480,
+      "spellIds": [
+        26480
+      ],
+      "ppm": 15,
       "phase": 5,
       "icon": "inv_misc_ahnqirajtrinket_04",
       "quality": "epic"
@@ -3317,7 +3344,10 @@
       "id": 19289,
       "name": "Darkmoon Card: Maelstrom",
       "unique": true,
-      "spell": 23686,
+      "spellIds": [
+        23686
+      ],
+      "ppm": 1,
       "phase": 3,
       "icon": "inv_misc_ticket_tarot_maelstrom_01",
       "quality": "epic"
@@ -3326,7 +3356,9 @@
       "id": 20130,
       "name": "Diamond Flask",
       "unique": true,
-      "spell": 24427,
+      "spellIds": [
+        24427
+      ],
       "phase": 3,
       "icon": "inv_drink_01",
       "quality": "rare"
@@ -3346,7 +3378,9 @@
       "id": 21180,
       "name": "Earthstrike",
       "unique": true,
-      "spell": 25891,
+      "spellIds": [
+        25891
+      ],
       "phase": 5,
       "icon": "spell_nature_abolishmagic",
       "quality": "epic"
@@ -3355,7 +3389,9 @@
       "id": 19951,
       "name": "Gri'lek's Charm of Might",
       "unique": true,
-      "spell": 24571,
+      "spellIds": [
+        24571
+      ],
       "itemSetId": 474,
       "phase": 4,
       "icon": "inv_jewelry_necklace_19",
@@ -3365,7 +3401,9 @@
       "id": 11815,
       "name": "Hand of Justice",
       "unique": true,
-      "spell": 15600,
+      "spellIds": [
+        15600
+      ],
       "ap": 20,
       "phase": 1,
       "icon": "inv_jewelry_talisman_01",
@@ -3375,7 +3413,10 @@
       "id": 22321,
       "name": "Heart of Wyrmthalak",
       "unique": true,
-      "spell": 27656,
+      "spellIds": [
+        27656
+      ],
+      "ppm": 1,
       "phase": 5,
       "icon": "inv_misc_gem_bloodstone_01",
       "quality": "rare"
@@ -3384,7 +3425,9 @@
       "id": 23570,
       "name": "Jom Gabbar",
       "unique": true,
-      "spell": 29602,
+      "spellIds": [
+        29602
+      ],
       "phase": 5,
       "icon": "inv_misc_enggizmos_19",
       "quality": "epic"
@@ -3395,7 +3438,9 @@
       "unique": true,
       "crit": 1,
       "hit": 1,
-      "spell": 28866,
+      "spellIds": [
+        28866
+      ],
       "phase": 6,
       "icon": "inv_trinket_naxxramas04",
       "quality": "epic"
@@ -3415,7 +3460,9 @@
       "id": 13209,
       "name": "Seal of the Dawn",
       "unique": true,
-      "spell": 23930,
+      "spellIds": [
+        23930
+      ],
       "phase": 1,
       "icon": "inv_misc_armorkit_18",
       "quality": "rare"
@@ -3425,7 +3472,9 @@
       "name": "Slayer's Crest",
       "unique": true,
       "ap": 64,
-      "spell": 28777,
+      "spellIds": [
+        28777
+      ],
       "phase": 6,
       "icon": "inv_trinket_naxxramas03",
       "quality": "epic"
@@ -3439,7 +3488,10 @@
       "min": 69,
       "max": 130,
       "speed": 2,
-      "spell": 24585,
+      "spellIds": [
+        24585
+      ],
+      "ppm": 1,
       "phase": 4,
       "icon": "inv_axe_35",
       "quality": "epic"
@@ -3452,7 +3504,9 @@
       "min": 49,
       "max": 92,
       "speed": 1.7,
-      "spell": 16928,
+      "spellIds": [
+        16928
+      ],
       "phase": 1,
       "icon": "inv_axe_12",
       "quality": "rare"
@@ -3465,7 +3519,10 @@
       "min": 78,
       "max": 146,
       "speed": 2.7,
-      "spell": 18104,
+      "spellIds": [
+        18104
+      ],
+      "ppm": 0.8,
       "phase": 1,
       "icon": "inv_axe_07",
       "quality": "epic"
@@ -3533,7 +3590,10 @@
       "min": 114,
       "max": 213,
       "speed": 2.9,
-      "spell": 18138,
+      "spellIds": [
+        18138
+      ],
+      "ppm": 0.8,
       "phase": 1,
       "icon": "inv_axe_09",
       "quality": "epic"
@@ -3560,7 +3620,10 @@
       "min": 37,
       "max": 69,
       "speed": 1.5,
-      "spell": 18797,
+      "spellIds": [
+        18797
+      ],
+      "ppm": 1.85,
       "phase": 1,
       "icon": "inv_axe_17",
       "quality": "epic"
@@ -3645,7 +3708,9 @@
       "min": 77,
       "max": 144,
       "speed": 2.9,
-      "spell": 17315,
+      "spellIds": [
+        17315
+      ],
       "phase": 1,
       "icon": "inv_pick_05",
       "quality": "rare"
@@ -3719,7 +3784,6 @@
       "icon": "inv_axe_08",
       "quality": "rare"
     },
-
     {
       "id": 14555,
       "name": "Alcor's Sunrazor",
@@ -3728,7 +3792,10 @@
       "max": 77,
       "speed": 1.3,
       "fireRes": 10,
-      "spell": 18833,
+      "spellIds": [
+        18833
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_34",
       "quality": "epic"
@@ -3740,7 +3807,10 @@
       "min": 53,
       "max": 100,
       "speed": 1.6,
-      "spell": 23604,
+      "spellIds": [
+        23604
+      ],
+      "ppm": 1.6,
       "phase": 3,
       "icon": "inv_weapon_shortblade_12",
       "quality": "epic"
@@ -3795,7 +3865,10 @@
       "min": 43,
       "max": 81,
       "speed": 1.5,
-      "spell": 18276,
+      "spellIds": [
+        18276
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_shortblade_21",
       "quality": "rare"
@@ -3851,7 +3924,10 @@
       "max": 123,
       "speed": 1.8,
       "agi": 12,
-      "spell": 24993,
+      "spellIds": [
+        24993
+      ],
+      "ppm": 1,
       "phase": 4,
       "icon": "inv_weapon_shortblade_22",
       "quality": "epic"
@@ -3877,7 +3953,10 @@
       "min": 54,
       "max": 101,
       "speed": 1.7,
-      "spell": 16551,
+      "spellIds": [
+        16551
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_shortblade_25",
       "quality": "epic"
@@ -3890,8 +3969,10 @@
       "min": 37,
       "max": 70,
       "speed": 1.3,
-      "spell": 16718,
-      "spell2": 18067,
+      "spellIds": [
+        16718,
+        18067
+      ],
       "phase": 1,
       "icon": "inv_sword_33",
       "quality": "rare"
@@ -3905,7 +3986,10 @@
       "max": 100,
       "speed": 1.8,
       "agi": 10,
-      "spell": 18398,
+      "spellIds": [
+        18398
+      ],
+      "ppm": 1.4,
       "phase": 2,
       "icon": "inv_weapon_shortblade_06",
       "quality": "rare",
@@ -3920,7 +4004,10 @@
       "max": 100,
       "speed": 1.8,
       "agi": 10,
-      "spell": 23592,
+      "spellIds": [
+        23592
+      ],
+      "ppm": 1,
       "phase": 2,
       "icon": "inv_weapon_shortblade_15",
       "quality": "rare",
@@ -3933,7 +4020,10 @@
       "min": 63,
       "max": 119,
       "speed": 1.8,
-      "spell": 21151,
+      "spellIds": [
+        21151
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_shortblade_18",
       "quality": "epic"
@@ -4036,7 +4126,10 @@
       "min": 73,
       "max": 137,
       "speed": 1.8,
-      "spell": 23267,
+      "spellIds": [
+        23267
+      ],
+      "ppm": 2,
       "phase": 1,
       "icon": "inv_sword_48",
       "quality": "epic"
@@ -4122,7 +4215,10 @@
       "min": 59,
       "max": 111,
       "speed": 1.8,
-      "spell": 24388,
+      "spellIds": [
+        24388
+      ],
+      "ppm": 1,
       "phase": 2,
       "icon": "inv_sword_29",
       "quality": "epic"
@@ -4149,7 +4245,10 @@
       "min": 42,
       "max": 85,
       "speed": 1.5,
-      "spell": 18205,
+      "spellIds": [
+        18205
+      ],
+      "ppm": 1,
       "itemSetId": 463,
       "phase": 4,
       "icon": "inv_weapon_hand_01",
@@ -4195,7 +4294,9 @@
       "max": 94,
       "speed": 1.5,
       "agi": 4,
-      "spell": 22639,
+      "spellIds": [
+        22639
+      ],
       "itemSetId": 261,
       "phase": 2,
       "icon": "inv_misc_monsterclaw_04",
@@ -4210,7 +4311,10 @@
       "max": 94,
       "speed": 1.5,
       "agi": 4,
-      "spell": 22640,
+      "spellIds": [
+        22640
+      ],
+      "ppm": 1,
       "itemSetId": 261,
       "phase": 1,
       "icon": "inv_misc_monsterclaw_04",
@@ -4360,7 +4464,9 @@
       "armor": 70,
       "str": 10,
       "sta": 12,
-      "spell": 24697,
+      "spellIds": [
+        24697
+      ],
       "defense": 8,
       "phase": 5,
       "icon": "inv_mace_24",
@@ -4375,7 +4481,10 @@
       "speed": 2.5,
       "sta": 9,
       "fireRes": 7,
-      "spell": 18211,
+      "spellIds": [
+        18211
+      ],
+      "ppm": 1,
       "phase": 3,
       "icon": "inv_hammer_19",
       "quality": "epic"
@@ -4388,7 +4497,10 @@
       "min": 94,
       "max": 175,
       "speed": 2.8,
-      "spell": 21165,
+      "spellIds": [
+        21165
+      ],
+      "ppm": 1,
       "phase": 2,
       "icon": "inv_hammer_05",
       "quality": "epic"
@@ -4401,7 +4513,10 @@
       "min": 73,
       "max": 136,
       "speed": 2.4,
-      "spell": 15494,
+      "spellIds": [
+        15494
+      ],
+      "ppm": 0.8,
       "phase": 1,
       "icon": "spell_frost_frostbrand",
       "quality": "epic"
@@ -4417,7 +4532,9 @@
       "armor": 90,
       "str": 13,
       "sta": 12,
-      "spell": 24994,
+      "spellIds": [
+        24994
+      ],
       "phase": 4,
       "icon": "inv_mace_20",
       "quality": "epic"
@@ -4473,7 +4590,10 @@
       "min": 128,
       "max": 238,
       "speed": 2.8,
-      "spell": 29150,
+      "spellIds": [
+        29150
+      ],
+      "ppm": 2,
       "phase": 6,
       "icon": "inv_mace_28",
       "quality": "epic"
@@ -4516,7 +4636,10 @@
       "max": 145,
       "speed": 2.6,
       "skill": 2,
-      "spell": 24254,
+      "spellIds": [
+        24254
+      ],
+      "ppm": 1,
       "phase": 4,
       "icon": "inv_mace_08",
       "quality": "rare"
@@ -4719,7 +4842,9 @@
       "armor": 60,
       "str": 7,
       "defense": 5,
-      "spell": 7711,
+      "spellIds": [
+        7711
+      ],
       "phase": 4,
       "icon": "inv_sword_01",
       "quality": "rare"
@@ -4776,7 +4901,10 @@
       "min": 67,
       "max": 125,
       "speed": 2.6,
-      "spell": 15602,
+      "spellIds": [
+        15602
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_25",
       "quality": "rare"
@@ -4833,7 +4961,10 @@
       "max": 126,
       "speed": 2,
       "sta": 12,
-      "spell": 22850,
+      "spellIds": [
+        22850
+      ],
+      "ppm": 1.5,
       "phase": 2,
       "icon": "inv_sword_01",
       "quality": "epic"
@@ -4934,7 +5065,9 @@
       "min": 72,
       "max": 135,
       "speed": 2.5,
-      "spell": 17484,
+      "spellIds": [
+        17484
+      ],
       "phase": 1,
       "icon": "inv_sword_12",
       "quality": "rare"
@@ -4947,7 +5080,10 @@
       "min": 81,
       "max": 151,
       "speed": 2.8,
-      "spell": 8191,
+      "spellIds": [
+        8191
+      ],
+      "ppm": 1.8,
       "phase": 1,
       "icon": "inv_sword_39",
       "quality": "rare"
@@ -4959,8 +5095,11 @@
       "min": 78,
       "max": 146,
       "speed": 2.5,
-      "spell": 24251,
-      "spell2": 24591,
+      "spellIds": [
+        24251,
+        24591
+      ],
+      "ppm": 1,
       "ap": 12,
       "phase": 4,
       "icon": "inv_sword_35",
@@ -4974,7 +5113,10 @@
       "min": 96,
       "max": 178,
       "speed": 2.9,
-      "spell": 18086,
+      "spellIds": [
+        18086
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_22",
       "quality": "epic"
@@ -5002,7 +5144,10 @@
       "min": 66,
       "max": 124,
       "speed": 2.7,
-      "spell": 21919,
+      "spellIds": [
+        21919
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_36",
       "quality": "rare"
@@ -5022,7 +5167,10 @@
       "sta": 8,
       "fireRes": 8,
       "natureRes": 9,
-      "spell": 21992,
+      "spellIds": [
+        21992
+      ],
+      "ppm": 6,
       "phase": 3,
       "icon": "inv_sword_39",
       "quality": "legendary"
@@ -5079,7 +5227,10 @@
       "min": 100,
       "max": 187,
       "speed": 2.6,
-      "spell": 21140,
+      "spellIds": [
+        21140
+      ],
+      "ppm": 0.6,
       "phase": 1,
       "icon": "inv_sword_18",
       "quality": "epic"
@@ -5138,7 +5289,10 @@
       "min": 95,
       "max": 143,
       "speed": 2.1,
-      "spell": 17148,
+      "spellIds": [
+        17148
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_halberd_10",
       "quality": "epic"
@@ -5154,7 +5308,9 @@
       "str": 35,
       "agi": 19,
       "sta": 25,
-      "spell": 26108,
+      "spellIds": [
+        26108
+      ],
       "phase": 5,
       "icon": "inv_axe_24",
       "quality": "epic"
@@ -5184,7 +5340,10 @@
       "speed": 3.4,
       "str": 22,
       "sta": 17,
-      "spell": 21140,
+      "spellIds": [
+        21140
+      ],
+      "ppm": 1,
       "phase": 3,
       "icon": "inv_axe_10",
       "quality": "epic"
@@ -5212,7 +5371,9 @@
       "min": 144,
       "max": 217,
       "speed": 3.4,
-      "spell": 18289,
+      "spellIds": [
+        18289
+      ],
       "phase": 1,
       "icon": "inv_weapon_halberd_09",
       "quality": "rare"
@@ -5225,7 +5386,9 @@
       "min": 182,
       "max": 274,
       "speed": 3.9,
-      "spell": 24292,
+      "spellIds": [
+        24292
+      ],
       "phase": 4,
       "icon": "inv_axe_24",
       "quality": "rare"
@@ -5286,7 +5449,10 @@
       "speed": 3.7,
       "str": 21,
       "sta": 16,
-      "spell": 26693,
+      "spellIds": [
+        26693
+      ],
+      "ppm": 1,
       "phase": 5,
       "icon": "inv_axe_09",
       "quality": "epic"
@@ -5299,7 +5465,9 @@
       "min": 187,
       "max": 282,
       "speed": 3.5,
-      "spell": 23605,
+      "spellIds": [
+        23605
+      ],
       "phase": 3,
       "icon": "inv_axe_12",
       "quality": "epic"
@@ -5327,7 +5495,9 @@
       "min": 203,
       "max": 305,
       "speed": 3.4,
-      "spell": 21185,
+      "spellIds": [
+        21185
+      ],
       "ap": 34,
       "phase": 1,
       "icon": "inv_axe_09",
@@ -5341,7 +5511,10 @@
       "min": 159,
       "max": 239,
       "speed": 4,
-      "spell": 17407,
+      "spellIds": [
+        17407
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_halberd_11",
       "quality": "rare"
@@ -5442,7 +5615,9 @@
       "min": 175,
       "max": 263,
       "speed": 3.5,
-      "spell": 21152,
+      "spellIds": [
+        21152
+      ],
       "ap": 22,
       "phase": 1,
       "icon": "inv_hammer_04",
@@ -5471,7 +5646,9 @@
       "max": 246,
       "speed": 3.8,
       "str": 15,
-      "spell": 56,
+      "spellIds": [
+        56
+      ],
       "phase": 1,
       "icon": "inv_hammer_09",
       "quality": "rare"
@@ -5516,7 +5693,10 @@
       "min": 159,
       "max": 248,
       "speed": 3.6,
-      "spell": 24257,
+      "spellIds": [
+        24257
+      ],
+      "ppm": 1,
       "phase": 4,
       "icon": "inv_mace_19",
       "quality": "epic"
@@ -5544,7 +5724,9 @@
       "min": 155,
       "max": 233,
       "speed": 3.6,
-      "spell": 17196,
+      "spellIds": [
+        17196
+      ],
       "phase": 1,
       "icon": "inv_hammer_17",
       "quality": "rare"
@@ -5560,8 +5742,11 @@
       "str": 12,
       "sta": 12,
       "fireRes": 30,
-      "spell": 21162,
-      "spell2": 21142,
+      "spellIds": [
+        21162,
+        21142
+      ],
+      "ppm": 0.7,
       "phase": 1,
       "icon": "inv_hammer_unique_sulfuras",
       "quality": "legendary"
@@ -5574,7 +5759,10 @@
       "min": 176,
       "max": 295,
       "speed": 3.7,
-      "spell": 21159,
+      "spellIds": [
+        21159
+      ],
+      "ppm": 0.7,
       "phase": 1,
       "icon": "inv_hammer_unique_sulfuras",
       "quality": "epic"
@@ -5590,7 +5778,9 @@
       "str": 19,
       "sta": 15,
       "crit": 2,
-      "spell": 23454,
+      "spellIds": [
+        23454
+      ],
       "phase": 2,
       "icon": "inv_hammer_13",
       "quality": "epic"
@@ -5605,7 +5795,9 @@
       "speed": 2,
       "str": 16,
       "agi": 5,
-      "spell": 13494,
+      "spellIds": [
+        13494
+      ],
       "phase": 1,
       "icon": "inv_mace_14",
       "quality": "rare"
@@ -5648,7 +5840,10 @@
       "min": 151,
       "max": 227,
       "speed": 3.5,
-      "spell": 16549,
+      "spellIds": [
+        16549
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_weapon_halberd_04",
       "quality": "rare"
@@ -5661,7 +5856,10 @@
       "min": 175,
       "max": 263,
       "speed": 3.5,
-      "spell": 25669,
+      "spellIds": [
+        25669
+      ],
+      "ppm": 1,
       "phase": 4,
       "icon": "inv_weapon_halberd_12",
       "quality": "epic"
@@ -5749,8 +5947,11 @@
       "min": 147,
       "max": 221,
       "speed": 3.1,
-      "spell": 21179,
-      "spell2": 21181,
+      "spellIds": [
+        21179,
+        21181
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_spear_08",
       "quality": "epic"
@@ -5763,8 +5964,11 @@
       "min": 147,
       "max": 221,
       "speed": 3.1,
-      "spell": 21170,
-      "spell2": 21180,
+      "spellIds": [
+        21170,
+        21180
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_spear_08",
       "quality": "epic"
@@ -5791,7 +5995,9 @@
       "min": 163,
       "max": 246,
       "speed": 3.5,
-      "spell": 14098,
+      "spellIds": [
+        14098
+      ],
       "phase": 4,
       "icon": "inv_spear_03",
       "quality": "rare"
@@ -5836,7 +6042,9 @@
       "speed": 3.3,
       "sta": 20,
       "hit": 2,
-      "spell": 18207,
+      "spellIds": [
+        18207
+      ],
       "phase": 4,
       "icon": "inv_spear_04",
       "quality": "rare"
@@ -5877,7 +6085,10 @@
       "min": 166,
       "max": 250,
       "speed": 3.5,
-      "spell": 16602,
+      "spellIds": [
+        16602
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_29",
       "quality": "epic"
@@ -5908,7 +6119,10 @@
       "max": 310,
       "speed": 3.4,
       "sta": 16,
-      "spell": 21153,
+      "spellIds": [
+        21153
+      ],
+      "ppm": 2,
       "crit": 1,
       "phase": 1,
       "icon": "inv_sword_12",
@@ -5937,8 +6151,11 @@
       "max": 389,
       "speed": 3.6,
       "sta": -25,
-      "spell": 28282,
-      "spell2": 29155,
+      "spellIds": [
+        28282,
+        29155
+      ],
+      "ppm": 1,
       "crit": 2,
       "hit": 1,
       "phase": 6,
@@ -5967,7 +6184,10 @@
       "min": 112,
       "max": 168,
       "speed": 2.6,
-      "spell": 17152,
+      "spellIds": [
+        17152
+      ],
+      "ppm": 1,
       "phase": 1,
       "icon": "inv_sword_19",
       "quality": "epic"
@@ -6014,7 +6234,10 @@
       "speed": 3.2,
       "str": 24,
       "sta": 18,
-      "spell": 26415,
+      "spellIds": [
+        26415
+      ],
+      "ppm": 1,
       "phase": 5,
       "icon": "inv_sword_56",
       "quality": "epic"
@@ -6072,7 +6295,9 @@
       "min": 171,
       "max": 257,
       "speed": 3.6,
-      "spell": 17625,
+      "spellIds": [
+        17625
+      ],
       "phase": 1,
       "icon": "inv_sword_17",
       "quality": "epic"
@@ -6087,7 +6312,10 @@
       "speed": 3.4,
       "agi": 22,
       "sta": 16,
-      "spell": 23719,
+      "spellIds": [
+        23719
+      ],
+      "ppm": 1,
       "phase": 3,
       "icon": "inv_sword_50",
       "quality": "epic"
@@ -6199,7 +6427,9 @@
       "armor": 2539,
       "shieldBlockValue": 46,
       "sta": 10,
-      "spell": 15438,
+      "spellIds": [
+        15438
+      ],
       "block": 2,
       "blockValue": 23,
       "phase": 1,
@@ -6240,7 +6470,7 @@
       "shieldBlockValue": 52,
       "int": 12,
       "sta": 9,
-      "spell": 21365,
+      "mp5": 9,
       "phase": 1,
       "icon": "inv_shield_08",
       "quality": "epic"
@@ -6290,7 +6520,9 @@
       "armor": 2548,
       "shieldBlockValue": 44,
       "sta": 11,
-      "spell": 22618,
+      "spellIds": [
+        22618
+      ],
       "phase": 1,
       "icon": "spell_arcane_portaldarnassus",
       "quality": "epic"
@@ -6303,7 +6535,9 @@
       "shieldBlockValue": 55,
       "str": 10,
       "sta": 23,
-      "spell": 13959,
+      "spellIds": [
+        13959
+      ],
       "phase": 2,
       "icon": "inv_shield_05",
       "quality": "epic",
@@ -6317,7 +6551,9 @@
       "shieldBlockValue": 55,
       "str": 10,
       "sta": 23,
-      "spell": 13959,
+      "spellIds": [
+        13959
+      ],
       "phase": 2,
       "icon": "inv_shield_19",
       "quality": "epic",
@@ -6365,7 +6601,9 @@
       "type": "shield",
       "armor": 2121,
       "shieldBlockValue": 39,
-      "spell": 17350,
+      "spellIds": [
+        17350
+      ],
       "phase": 1,
       "icon": "inv_shield_05",
       "quality": "rare"
@@ -6376,7 +6614,9 @@
       "type": "shield",
       "armor": 2057,
       "shieldBlockValue": 38,
-      "spell": 17495,
+      "spellIds": [
+        17495
+      ],
       "phase": 1,
       "icon": "inv_shield_19",
       "quality": "rare"
@@ -6415,8 +6655,10 @@
       "shieldBlockValue": 40,
       "fireRes": 10,
       "shadowRes": 10,
-      "spell": 18815,
-      "spell2": 18816,
+      "spellIds": [
+        18815,
+        18816
+      ],
       "phase": 1,
       "icon": "inv_shield_01",
       "quality": "epic"
@@ -6682,7 +6924,9 @@
       "speed": 3.1,
       "agi": 9,
       "sta": 4,
-      "spell": 29626,
+      "spellIds": [
+        29626
+      ],
       "phase": 1,
       "icon": "inv_weapon_crossbow_04",
       "quality": "rare"
