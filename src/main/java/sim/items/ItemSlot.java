@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
-import sim.warrior.Warrior;
+import sim.settings.CharacterSetup;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +31,14 @@ public class ItemSlot extends HBox {
     private Label enchantName = new Label();
     private ItemTooltip tooltip = new ItemTooltip();
 
-    private Warrior warrior;
+    private CharacterSetup characterSetup;
     private String defaultImage;
     private int slot;
 
     private SimpleObjectProperty<Item> selectedItem = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Enchant> selectedEnchant = new SimpleObjectProperty<>();
 
-    public ItemSlot(List<Item> itemList, List<Enchant> enchantList, JFXListView<Item> itemView, ListView<Enchant> enchantView, String defaultImage, int slot, Warrior warrior){
+    public ItemSlot(List<Item> itemList, List<Enchant> enchantList, JFXListView<Item> itemView, ListView<Enchant> enchantView, String defaultImage, int slot, CharacterSetup characterSetup){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ItemSlot.fxml"));
             loader.setRoot(this);
@@ -53,7 +53,7 @@ public class ItemSlot extends HBox {
         this.itemView = itemView;
         this.enchantView = enchantView;
         this.slot = slot;
-        this.warrior = warrior;
+        this.characterSetup = characterSetup;
         this.defaultImage = defaultImage;
         this.setMaxSize(300, 42);
         this.setMinSize(300, 42);
@@ -149,7 +149,7 @@ public class ItemSlot extends HBox {
     }
 
     public void setSelectedItem(Item item){
-        warrior.equipItem(slot, item);
+        characterSetup.equipItem(slot, item);
         tooltip.setItem(item);
         selectedItem.set(item);
         itemButton.setStyle("-fx-background-image: url(/images/items/" + item.getIcon() + ".png)");
@@ -168,7 +168,7 @@ public class ItemSlot extends HBox {
     public void clearSelection(){
         if(getSelectedItem() != null){
             itemView.getSelectionModel().clearSelection();
-            warrior.unequipItem(slot);
+            characterSetup.unequipItem(slot);
             removeTooltip();
             selectedItem.set(null);
             itemButton.setStyle("-fx-background-image: url(/images/itemslots/" + defaultImage + ")");
@@ -177,7 +177,7 @@ public class ItemSlot extends HBox {
 
         if(getSelectedEnchant() != null){
             enchantView.getSelectionModel().clearSelection();
-            warrior.unequipEnchant(slot);
+            characterSetup.unequipEnchant(slot);
             selectedEnchant.set(null);
         }
 
@@ -193,17 +193,17 @@ public class ItemSlot extends HBox {
     }
 
     public void setSelectedEnchant(Enchant enchant){
-        warrior.equipEnchant(slot, enchant);
+        characterSetup.equipEnchant(slot, enchant);
         selectedEnchant.set(enchant);
         enchantName.setText(getSelectedEnchant().getDescription());
     }
 
     public void refresh(){
-        if(warrior.getEquippedItems()[slot] != null){
-            setSelectedItem(warrior.getEquippedItems()[slot]);
+        if(characterSetup.getEquippedItems()[slot] != null){
+            setSelectedItem(characterSetup.getEquippedItems()[slot]);
         }
-        if(warrior.getEquippedEnchants()[slot] != null){
-            setSelectedEnchant(warrior.getEquippedEnchants()[slot]);
+        if(characterSetup.getEquippedEnchants()[slot] != null){
+            setSelectedEnchant(characterSetup.getEquippedEnchants()[slot]);
         }
     }
 

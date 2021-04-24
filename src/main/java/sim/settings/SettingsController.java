@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import sim.data.SimDB;
 import sim.stats.StatsController;
-import sim.warrior.Warrior;
+
 import java.net.URL;
 import java.util.*;
 
@@ -19,13 +19,13 @@ public class SettingsController implements Initializable {
     @FXML
     VBox raidBuffs;
 
-    Warrior warrior;
+    CharacterSetup characterSetup;
     Settings settings;
 
     StatsController statsController;
 
     public SettingsController(Settings settings, StatsController statsController){
-        this.warrior = settings.getWarrior();
+        this.characterSetup = settings.getCharacterSetup();
         this.settings = settings;
         this.statsController = statsController;
     }
@@ -39,7 +39,7 @@ public class SettingsController implements Initializable {
         Map<String, List<AuraSelect>> buffGroups = new HashMap<>();
 
         for(Aura aura : SimDB.AURAS.getAuras()){
-            AuraSelect auraSelect = new AuraSelect(aura, warrior);
+            AuraSelect auraSelect = new AuraSelect(aura, characterSetup);
 
             if(aura.getType().equals("world")){
                 worldBuffs.getChildren().add(auraSelect);
@@ -71,17 +71,17 @@ public class SettingsController implements Initializable {
             auraSelect.getCheckBox().selectedProperty().addListener((obs, oldValue, newValue) -> {
                 if(newValue){
                     if(auraSelect.getCheckBoxOH() != null){
-                        warrior.setTempEnchantMH(aura);
+                        characterSetup.setTempEnchantMH(aura);
                     }else{
-                        warrior.addAura(aura);
+                        characterSetup.addAura(aura);
                     }
                 }else{
                     if(auraSelect.getCheckBoxOH() != null ){
-                        if(warrior.getTempEnchantMH().getId() == aura.getId()){
-                            warrior.setTempEnchantMH(null);
+                        if(characterSetup.getTempEnchantMH().getId() == aura.getId()){
+                            characterSetup.setTempEnchantMH(null);
                         }
                     }else{
-                        warrior.removeAura(aura);
+                        characterSetup.removeAura(aura);
                     }
                 }
 
@@ -91,9 +91,9 @@ public class SettingsController implements Initializable {
             if(auraSelect.getCheckBoxOH() != null){
                 auraSelect.getCheckBoxOH().selectedProperty().addListener((obs, oldValue, newValue) -> {
                     if(newValue){
-                        warrior.setTempEnchantOH(aura);
-                    }else if(warrior.getTempEnchantOH().getId() == aura.getId()){
-                        warrior.setTempEnchantOH(null);
+                        characterSetup.setTempEnchantOH(aura);
+                    }else if(characterSetup.getTempEnchantOH().getId() == aura.getId()){
+                        characterSetup.setTempEnchantOH(null);
                     }
 
                     statsController.refreshDisplay();

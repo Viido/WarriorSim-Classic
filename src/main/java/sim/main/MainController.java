@@ -6,11 +6,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sim.data.SimDB;
+import sim.engine.FightResult;
+import sim.engine.Simulation;
 import sim.items.ItemSlot;
 import sim.items.ItemsController;
 import sim.rotation.RotationController;
@@ -51,7 +57,11 @@ public class MainController implements Initializable {
     @FXML
     JFXTabPane tabPane;
     @FXML
-    JFXButton simulate;
+    JFXButton resultsButton;
+    @FXML
+    JFXButton simulateButton;
+    @FXML
+    JFXProgressBar simulationProgress;
     @FXML
     VBox rightSection;
 
@@ -60,18 +70,20 @@ public class MainController implements Initializable {
     StatsController statsController;
     ItemsController itemsController;
 
+    private FightResult fightResult;
+
     public MainController(Settings settings){
         this.settings = settings;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(settings.getWarrior().getRace() == null){
-            settings.getWarrior().setRace(SimDB.RACES[0]);
+        if(settings.getCharacterSetup().getRace() == null){
+            settings.getCharacterSetup().setRace(SimDB.RACES[0]);
         }
 
         FXMLLoader statsLoader = new FXMLLoader(getClass().getResource("/sim/stats/fxml/StatsView.fxml"));
-        statsController = new StatsController(settings.getWarrior());
+        statsController = new StatsController(settings.getCharacterSetup());
         statsLoader.setController(statsController);
 
         try{
@@ -94,6 +106,30 @@ public class MainController implements Initializable {
         });
 
         tabPane.getTabs().add(newTab);
+        simulationProgress.setVisible(false);
+
+        simulateButton.setOnMouseClicked(e -> {
+            saveSettings();
+            Simulation simulation = new Simulation(settings);
+
+            fightResult = simulation.run(simulationProgress);
+        });
+
+        resultsButton.setOnMouseClicked(e -> {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("fxml/ResultsView.fxml"));
+            fxmlLoader.setController(new ResultsController(fightResult));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 600, 400);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            Stage stage = new Stage();
+            stage.setTitle("Fight Results");
+            stage.setScene(scene);
+            stage.show();
+        });
     }
 
     private Tab createNewTab(){
@@ -107,8 +143,8 @@ public class MainController implements Initializable {
         FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource("/sim/settings/fxml/SettingsView.fxml"));
         FXMLLoader rotationLoader = new FXMLLoader(getClass().getResource("/sim/rotation/fxml/RotationView.fxml"));
 
-        itemsController = new ItemsController(settings.getWarrior());
-        TalentsController talentsController = new TalentsController(settings.getWarrior());
+        itemsController = new ItemsController(settings.getCharacterSetup());
+        TalentsController talentsController = new TalentsController(settings.getCharacterSetup());
         SettingsController settingsController = new SettingsController(settings, statsController);
         RotationController rotationController = new RotationController();
 
@@ -153,11 +189,11 @@ public class MainController implements Initializable {
         for(TalentButton talentButton : talentsController.getTalentButtons().values()){
             talentButton.pointsProperty().addListener((obs, oldValue, newValue) -> {
                 if(oldValue.intValue() >= 0){
-                    settings.getWarrior().getActiveTalents().put(talentButton.getTalent().getId(), newValue.intValue());
+                    settings.getCharacterSetup().getActiveTalents().put(talentButton.getTalent().getId(), newValue.intValue());
                     statsController.refreshDisplay();
                 }
                 if(newValue.intValue() == 0){
-                    settings.getWarrior().getActiveTalents().remove(talentButton.getTalent().getId());
+                    settings.getCharacterSetup().getActiveTalents().remove(talentButton.getTalent().getId());
                     statsController.refreshDisplay();
                 }
             });
@@ -176,23 +212,23 @@ public class MainController implements Initializable {
         settings.setTargetArmor(Integer.parseInt(targetArmor.getText()));
         settings.setTargetResistance(Integer.parseInt(targetResistance.getText()));
         settings.setInitialRage(Integer.parseInt(initialRage.getText()));
-        settings.setSimulations(Integer.parseInt(simulations.getText()));
+        settings.setIterations(Integer.parseInt(simulations.getText()));
         settings.setHeroicStrike9(heroicStrike9.isSelected());
         settings.setBattleShout7(battleShout7.isSelected());
     }
 
     private void loadSettings(){
-        if(settings.getWarrior().getRace() == null){
-            settings.getWarrior().setRace(SimDB.RACES[0]);
+        if(settings.getCharacterSetup().getRace() == null){
+            settings.getCharacterSetup().setRace(SimDB.RACES[0]);
         }
 
-        raceSelect.setText(settings.getWarrior().getRace().getName());
+        raceSelect.setText(settings.getCharacterSetup().getRace().getName());
         fightDuration.setText(settings.getFightDuration() + "");
         targetLevel.setText(settings.getTargetLevel() + "");
         targetArmor.setText(settings.getTargetArmor() + "");
         targetResistance.setText(settings.getTargetResistance() + "");
         initialRage.setText(settings.getInitialRage() + "");
-        simulations.setText(settings.getSimulations() + "");
+        simulations.setText(settings.getIterations() + "");
         heroicStrike9.setSelected(settings.isHeroicStrike9());
         battleShout7.setSelected(settings.isBattleShout7());
     }
@@ -215,7 +251,7 @@ public class MainController implements Initializable {
         raceSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null){
                 raceSelect.setText(newValue.getName());
-                settings.getWarrior().setRace(newValue);
+                settings.getCharacterSetup().setRace(newValue);
                 itemsController.refreshItemSelect();
                 statsController.refreshDisplay();
                 racePopup.hide();

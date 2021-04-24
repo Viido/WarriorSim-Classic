@@ -17,7 +17,7 @@ import sim.main.CustomPopup;
 
 import java.util.List;
 
-import static sim.warrior.Constants.COLOR_UNCOMMON;
+import static sim.data.Constants.COLOR_UNCOMMON;
 
 // TODO change item class and stats to be able to be ordered, add missing fields to items.json for more blizzlike tooltips
 

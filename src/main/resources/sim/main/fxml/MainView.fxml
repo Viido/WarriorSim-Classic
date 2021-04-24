@@ -87,6 +87,8 @@
             <Label styleClass="borderLabel"/>
         </VBox>
         <Region VBox.vgrow="ALWAYS" />
+        <JFXButton fx:id="resultsButton" text="Results"/>
+        <JFXProgressBar fx:id="simulationProgress" minWidth="300.0" maxWidth="300.0" minHeight="10.0" maxHeight="10.0"/>
         <JFXButton fx:id="simulateButton" text="Simulate" />
     </VBox>
 </SplitPane>

@@ -32,3 +32,25 @@
     -fx-font-size: 20;
     -fx-font-weight: bold;
 }
+
+.resultsView{
+    -fx-background-color: baseColor;
+}
+
+.chart-pie-label{
+    -fx-fill: white;
+}
+
+.chart-pie-label-line{
+    -fx-fill: white;
+}
+
+.chart-pie{
+    -fx-border-color: secondaryColor;
+    -fx-border-width: 1px;
+    -fx-background-insets: 0px;
+}
+
+.jfx-progress-bar{
+
+}

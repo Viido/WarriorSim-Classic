@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import sim.data.SimDB;
-import sim.warrior.Warrior;
+import sim.settings.CharacterSetup;
 
 import java.net.URL;
 import java.util.*;
@@ -52,13 +52,13 @@ public class TalentsController implements Initializable {
     Button resetTree3;
 
     Map<Integer, TalentButton> talentButtons = new HashMap<>();
-    Warrior warrior;
+    CharacterSetup characterSetup;
     List<TalentTree> talentTrees = new ArrayList<>();
 
     IntegerProperty totalPoints = new SimpleIntegerProperty(0);
 
-    public TalentsController(Warrior warrior){
-        this.warrior = warrior;
+    public TalentsController(CharacterSetup characterSetup){
+        this.characterSetup = characterSetup;
     }
 
     @Override
@@ -225,8 +225,8 @@ public class TalentsController implements Initializable {
 
     private void loadValues(){
         for(Talent talent : SimDB.TALENTS){
-            if(warrior.getActiveTalents().containsKey(talent.getId())){
-                talentButtons.get(talent.getId()).setPoints(warrior.getActiveTalents().get(talent.getId()));
+            if(characterSetup.getActiveTalents().containsKey(talent.getId())){
+                talentButtons.get(talent.getId()).setPoints(characterSetup.getActiveTalents().get(talent.getId()));
             }
         }
     }

@@ -1,7 +1,5 @@
 package sim.settings;
 
-import sim.warrior.Warrior;
-
 import java.io.Serializable;
 
 public class Settings implements Serializable {
@@ -10,10 +8,10 @@ public class Settings implements Serializable {
     private int targetArmor = 3731;
     private int targetResistance = 0;
     private int initialRage = 80;
-    private int simulations = 100000;
+    private int iterations = 100000;
     private boolean heroicStrike9 = false;
     private boolean battleShout7 = false;
-    private Warrior warrior = new Warrior();
+    private CharacterSetup characterSetup = new CharacterSetup();
 
     public int getFightDuration() {
         return fightDuration;
@@ -55,12 +53,12 @@ public class Settings implements Serializable {
         this.initialRage = initialRage;
     }
 
-    public int getSimulations() {
-        return simulations;
+    public int getIterations() {
+        return iterations;
     }
 
-    public void setSimulations(int simulations) {
-        this.simulations = simulations;
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 
     public boolean isHeroicStrike9() {
@@ -79,11 +77,11 @@ public class Settings implements Serializable {
         this.battleShout7 = battleShout7;
     }
 
-    public Warrior getWarrior() {
-        return warrior;
+    public CharacterSetup getCharacterSetup() {
+        return characterSetup;
     }
 
-    public void setWarrior(Warrior warrior) {
-        this.warrior = warrior;
+    public void setCharacterSetup(CharacterSetup characterSetup) {
+        this.characterSetup = characterSetup;
     }
 }

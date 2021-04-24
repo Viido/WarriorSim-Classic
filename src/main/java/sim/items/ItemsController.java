@@ -12,14 +12,14 @@ import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import sim.main.CustomPopup;
 import sim.data.SimDB;
-import sim.warrior.Constants;
-import sim.warrior.Warrior;
+import sim.data.Constants;
+import sim.settings.CharacterSetup;
 
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static sim.warrior.Constants.MAINHAND;
+import static sim.data.Constants.MAINHAND;
 
 public class ItemsController implements Initializable {
     @FXML
@@ -37,13 +37,13 @@ public class ItemsController implements Initializable {
 
     ItemSlot[] itemSlots = new ItemSlot[17];
 
-    Warrior warrior;
+    CharacterSetup characterSetup;
     JFXComboBox<String> xHandedWeapon = new JFXComboBox<>();
     JFXComboBox<String> weaponType = new JFXComboBox<>();
     Map<String, String> weaponTypes = new HashMap<>();
 
-    public ItemsController(Warrior warrior){
-        this.warrior = warrior;
+    public ItemsController(CharacterSetup characterSetup){
+        this.characterSetup = characterSetup;
     }
 
     @Override
@@ -76,8 +76,8 @@ public class ItemsController implements Initializable {
                             itemTooltip.setItem(item);
 
                             if(item.getItemSetId() != 0){
-                                if(warrior.getSetBonusControl(item.getItemSetId()) != null){
-                                    itemTooltip.setItemSetIds(FXCollections.observableArrayList(warrior.getSetBonusControl(item.getItemSetId()).getActiveItems()));
+                                if(characterSetup.getSetBonusControl(item.getItemSetId()) != null){
+                                    itemTooltip.setItemSetIds(FXCollections.observableArrayList(characterSetup.getSetBonusControl(item.getItemSetId()).getActiveItems()));
                                 }else{
                                     itemTooltip.setItemSetIds(null);
                                 }
@@ -166,7 +166,7 @@ public class ItemsController implements Initializable {
         enchantPopup.getScene().setRoot(enchantSelect);
 
         for (int i = 0; i < 17; i++) {
-            ItemSlot itemSlot = new ItemSlot(SimDB.ITEMS.getItemsBySlot(i), SimDB.ENCHANTS.getEnchantsBySlot(i), itemSelect, enchantSelect, images[i], i, warrior);
+            ItemSlot itemSlot = new ItemSlot(SimDB.ITEMS.getItemsBySlot(i), SimDB.ENCHANTS.getEnchantsBySlot(i), itemSelect, enchantSelect, images[i], i, characterSetup);
             itemSlots[i] = itemSlot;
 
             itemSlot.refresh();
@@ -229,7 +229,7 @@ public class ItemsController implements Initializable {
         }
 
         itemSelect.setItems(FXCollections.observableArrayList(displayedItems.stream()
-                .filter(i -> i.getFaction() == null || i.getFaction().equals(warrior.getRace().getFaction()))
+                .filter(i -> i.getFaction() == null || i.getFaction().equals(characterSetup.getRace().getFaction()))
                 .collect(Collectors.toList())));
     }
 
@@ -342,7 +342,7 @@ public class ItemsController implements Initializable {
                 if(itemSlot1 != null){
                     if(itemSlot1.getSelectedItem() != null){
                         if(itemSlot1.getSelectedItem().getItemSetId() == item.getItemSetId()){
-                            itemSlot1.getTooltip().setItemSetIds(FXCollections.observableArrayList(warrior.getSetBonusControl(item.getItemSetId()).getActiveItems()));
+                            itemSlot1.getTooltip().setItemSetIds(FXCollections.observableArrayList(characterSetup.getSetBonusControl(item.getItemSetId()).getActiveItems()));
                         }
                     }
                 }

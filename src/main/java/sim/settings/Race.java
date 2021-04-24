@@ -1,7 +1,7 @@
 package sim.settings;
 
 import com.google.gson.annotations.SerializedName;
-import sim.warrior.Stats;
+import sim.engine.warrior.Stats;
 
 import java.io.Serializable;
 

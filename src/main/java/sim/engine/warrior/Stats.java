@@ -1,14 +1,18 @@
-package sim.warrior;
+package sim.engine.warrior;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import sim.data.SimDB;
 import sim.items.Enchant;
 import sim.items.Item;
 import sim.items.ItemSet;
 import sim.settings.Aura;
+import sim.settings.CharacterSetup;
+import sim.settings.SetBonusControl;
 
 import java.io.Serializable;
 
-public class Stats implements Serializable {
+public class Stats implements Serializable{
     private int str;
     private int agi;
     private int sta;
@@ -22,11 +26,25 @@ public class Stats implements Serializable {
     private int blockValue;
     private int parry;
     private int dodge;
-    private float haste;
-    private Warrior warrior;
+    private double haste = 1.0;
 
-    public Stats(Warrior warrior){
-        this.warrior = warrior;
+    public Stats(){}
+
+    public Stats(Stats stats) {
+        this.str = stats.str;
+        this.agi = stats.agi;
+        this.sta = stats.sta;
+        this.hp = stats.hp;
+        this.armor = stats.armor;
+        this.ap = stats.ap;
+        this.hit = stats.hit;
+        this.crit = stats.crit;
+        this.defense = stats.defense;
+        this.block = stats.block;
+        this.blockValue = stats.blockValue;
+        this.parry = stats.parry;
+        this.dodge = stats.dodge;
+        this.haste = stats.haste;
     }
 
     public int getStr() {
@@ -113,11 +131,15 @@ public class Stats implements Serializable {
         return dodge;
     }
 
-    public float getHaste() {
+    public double getHaste() {
         return haste;
     }
 
-    public void refreshStats(){
+    public void setHaste(double haste) {
+        this.haste = haste;
+    }
+
+    /*public void refreshStats(){
         str = 0;
         agi = 0;
         sta = 0;
@@ -133,24 +155,24 @@ public class Stats implements Serializable {
         dodge = 0;
         haste = 1;
 
-        for(Item item : warrior.getEquippedItems()){
+        for(Item item : characterSetup.getEquippedItems()){
             addStats(item);
         }
 
-        for(Enchant enchant : warrior.getEquippedEnchants()){
+        for(Enchant enchant : characterSetup.getEquippedEnchants()){
             addStats(enchant);
         }
 
-        for(Aura aura : warrior.getActiveAuras().values()){
+        for(Aura aura : characterSetup.getActiveAuras().values()){
             addStats(aura);
         }
 
-        for(SetBonusControl setBonusControl : warrior.getSetBonuses().values()){
+        for(SetBonusControl setBonusControl : characterSetup.getSetBonuses().values()){
             for(Integer i : setBonusControl.getActiveSetBonuses()){
                 addStats(SimDB.ITEM_SETS.get(setBonusControl.getItemSetId()).getSetBonuses().get(i));
             }
         }
-    }
+    }*/
 
     public void removeStats(Item item){
         str -= item.getStr();

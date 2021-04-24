@@ -1,28 +1,21 @@
 package sim;
 
-import com.google.gson.Gson;
-import com.jfoenix.controls.JFXMasonryPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import sim.items.ItemsController;
 import sim.main.MainController;
-import sim.settings.Race;
 import sim.settings.Settings;
-import sim.stats.StatsController;
-import sim.warrior.Warrior;
-import sim.settings.SettingsController;
-import sim.talents.TalentsController;
 
 import java.io.*;
 
 public class Main extends Application {
     Settings settings = new Settings();
+
+    static{
+        System.setProperty("log4j.configurationFile", "log4j2.xml");
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{

@@ -1,21 +1,22 @@
-package sim.warrior;
+package sim.settings;
 
 import sim.data.SimDB;
 import sim.items.Item;
 import sim.items.ItemSet;
+import sim.settings.CharacterSetup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SetBonusControl implements Serializable {
-    private Warrior warrior;
+    private CharacterSetup characterSetup;
     private Integer itemSetId;
     private List<Integer> activeItems = new ArrayList<>();
     private List<Integer> activeSetBonuses = new ArrayList<>();
 
-    public SetBonusControl(Warrior warrior, Integer itemSetId){
-        this.warrior = warrior;
+    public SetBonusControl(CharacterSetup characterSetup, Integer itemSetId){
+        this.characterSetup = characterSetup;
         this.itemSetId = itemSetId;
     }
 
@@ -28,7 +29,7 @@ public class SetBonusControl implements Serializable {
             if(activeItems.size() >= itemSetBonus.getCount() && !activeSetBonuses.contains(i)){
                 activeSetBonuses.add(i);
 
-                warrior.getStats().addStats(itemSetBonus);
+                characterSetup.getWarrior().getStats().addStats(itemSetBonus);
             }
         }
     }
@@ -42,13 +43,13 @@ public class SetBonusControl implements Serializable {
             if(activeItems.size() < itemSetBonus.getCount() && activeSetBonuses.contains(i)){
                 activeSetBonuses.remove(Integer.valueOf(i));
 
-                warrior.getStats().removeStats(itemSetBonus);
+                characterSetup.getWarrior().getStats().removeStats(itemSetBonus);
             }
         }
     }
 
-    public Warrior getWarrior() {
-        return warrior;
+    public CharacterSetup getCharacterSetup() {
+        return characterSetup;
     }
 
     public Integer getItemSetId() {

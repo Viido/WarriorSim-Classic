@@ -1,4 +1,4 @@
-package sim.warrior;
+package sim.data;
 
 public class Constants {
     // buffs

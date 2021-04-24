@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import sim.warrior.Warrior;
 
 import java.io.IOException;
 
@@ -24,9 +23,9 @@ public class AuraSelect extends HBox {
     JFXCheckBox checkBoxOH;
 
     Aura aura;
-    Warrior warrior;
+    CharacterSetup characterSetup;
 
-    public AuraSelect(Aura aura, Warrior warrior){
+    public AuraSelect(Aura aura, CharacterSetup characterSetup){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/AuraSelect.fxml"));
             loader.setRoot(this);
@@ -37,7 +36,7 @@ public class AuraSelect extends HBox {
         }
 
         this.aura = aura;
-        this.warrior = warrior;
+        this.characterSetup = characterSetup;
 
         if(aura.getGroup() != null){
             if(aura.getGroup().equals("weapon")){
@@ -81,17 +80,17 @@ public class AuraSelect extends HBox {
     }
 
     private void loadData(){
-        if(warrior.getActiveAuras().containsKey(aura.getId())){
+        if(characterSetup.getActiveAuras().containsKey(aura.getId())){
             checkBox.setSelected(true);
 
         }else if (checkBoxOH != null){
-            if(warrior.getTempEnchantMH() != null){
-                if(warrior.getTempEnchantMH().getId() == aura.getId()){
+            if(characterSetup.getTempEnchantMH() != null){
+                if(characterSetup.getTempEnchantMH().getId() == aura.getId()){
                     checkBox.setSelected(true);
                 }
             }
-            if(warrior.getTempEnchantOH() != null){
-                if(warrior.getTempEnchantOH().getId() == aura.getId()){
+            if(characterSetup.getTempEnchantOH() != null){
+                if(characterSetup.getTempEnchantOH().getId() == aura.getId()){
                     checkBoxOH.setSelected(true);
                 }
             }

@@ -3,8 +3,15 @@ package sim.stats;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import sim.warrior.Constants;
-import sim.warrior.Warrior;
+import sim.data.SimDB;
+import sim.engine.warrior.Stats;
+import sim.engine.warrior.Warrior;
+import sim.items.Enchant;
+import sim.items.Item;
+import sim.settings.Aura;
+import sim.settings.CharacterSetup;
+import sim.data.Constants;
+import sim.settings.SetBonusControl;
 
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -43,12 +50,14 @@ public class StatsController implements Initializable {
     @FXML
     Label dodgeChance;
 
+    CharacterSetup characterSetup;
     Warrior warrior;
 
     DecimalFormat df = new DecimalFormat();
 
-    public StatsController(Warrior warrior){
-        this.warrior = warrior;
+    public StatsController(CharacterSetup characterSetup){
+        this.characterSetup = characterSetup;
+        this.warrior = characterSetup.getWarrior();
     }
 
     @Override
@@ -59,13 +68,35 @@ public class StatsController implements Initializable {
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
 
-        warrior.getStats().refreshStats();
+        loadStats();
         refreshDisplay();
     }
 
+    private void loadStats(){
+        Stats stats = warrior.getStats();
+
+        for(Item item : characterSetup.getEquippedItems()){
+            stats.addStats(item);
+        }
+
+        for(Enchant enchant : characterSetup.getEquippedEnchants()){
+            stats.addStats(enchant);
+        }
+
+        for(Aura aura : characterSetup.getActiveAuras().values()){
+            stats.addStats(aura);
+        }
+
+        for(SetBonusControl setBonusControl : characterSetup.getSetBonuses().values()){
+            for(Integer i : setBonusControl.getActiveSetBonuses()){
+                stats.addStats(SimDB.ITEM_SETS.get(setBonusControl.getItemSetId()).getSetBonuses().get(i));
+            }
+        }
+    }
+
     private void setWeaponSkillText(){
-        if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
-            if(!warrior.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
+        if(characterSetup.getEquippedItems()[Constants.OFFHAND] != null){
+            if(!characterSetup.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
                 weaponSkill.setText(warrior.getWeaponSkillMH() + " | "  + warrior.getWeaponSkillOH());
             }else{
                 weaponSkill.setText(warrior.getWeaponSkillMH() + "");
@@ -76,8 +107,8 @@ public class StatsController implements Initializable {
     }
 
     private void setCritChanceText(){
-        if(warrior.getEquippedItems()[Constants.OFFHAND] != null){
-            if(!warrior.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
+        if(characterSetup.getEquippedItems()[Constants.OFFHAND] != null){
+            if(!characterSetup.getEquippedItems()[Constants.OFFHAND].getType().equals("shield")){
                 critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "% | "  + df.format(warrior.getCritOH() + (warrior.getWeaponSkillOH() - 300) * 0.04) + "%");
             }else{
                 critChance.setText(df.format(warrior.getCritMH() + (warrior.getWeaponSkillMH() - 300) * 0.04) + "%");
