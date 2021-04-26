@@ -125,7 +125,7 @@ public class Enchants {
 
         for(Enchant enchant : enchants){
             for(String slot : enchant.getSlot()){
-                if(slot.equals("weapon") || slot.equals("2h")){
+                if(slot.equals("weapon") || slot.equals("2h") || slot.equals("mainhand")){
                     result.add(enchant);
                 }
             }
@@ -139,7 +139,7 @@ public class Enchants {
 
         for(Enchant enchant : enchants){
             for(String slot : enchant.getSlot()){
-                if(slot.equals("weapon") || slot.equals("shield")){
+                if(slot.equals("weapon") || slot.equals("shield") || slot.equals("offhand")){
                     result.add(enchant);
                 }
             }

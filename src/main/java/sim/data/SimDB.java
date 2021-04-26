@@ -23,6 +23,10 @@ public final class SimDB {
 
     private SimDB(){}
 
+    public enum SpellEffect{
+        STAT_BUFF
+    }
+
     static{
         Gson gson = new Gson();
         ITEMS = gson.fromJson(new InputStreamReader(SimDB.class.getResourceAsStream("/sim/data/items.json")), Items.class);
@@ -45,5 +49,9 @@ public final class SimDB {
         }
 
         ITEMS.sortItems();
+    }
+
+    public Spell getOffHandProcSpell(Spell spell){
+        return SPELLS.get(spell.getId() + 100000);
     }
 }

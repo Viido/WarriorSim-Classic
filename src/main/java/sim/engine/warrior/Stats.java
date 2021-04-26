@@ -174,6 +174,40 @@ public class Stats implements Serializable{
         }
     }*/
 
+    public void addStats(Stats stats){
+        str += stats.getStr();
+        agi += stats.getAgi();
+        sta += stats.getSta();
+        hp += stats.getHp();
+        armor += stats.getArmor();
+        ap += stats.getAp();
+        hit += stats.getHit();
+        crit += stats.getCrit();
+        defense += stats.getDefense();
+        block += stats.getBlock();
+        blockValue += stats.getBlockValue();
+        parry += stats.getParry();
+        dodge += stats.getDodge();
+        haste *= stats.getHaste();
+    }
+
+    public void removeStats(Stats stats){
+        str -= stats.getStr();
+        agi -= stats.getAgi();
+        sta -= stats.getSta();
+        hp -= stats.getHp();
+        armor -= stats.getArmor();
+        ap -= stats.getAp();
+        hit -= stats.getHit();
+        crit -= stats.getCrit();
+        defense -= stats.getDefense();
+        block -= stats.getBlock();
+        blockValue -= stats.getBlockValue();
+        parry -= stats.getParry();
+        dodge -= stats.getDodge();
+        haste /= stats.getHaste();
+    }
+
     public void removeStats(Item item){
         str -= item.getStr();
         agi -= item.getAgi();

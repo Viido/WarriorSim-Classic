@@ -8,6 +8,7 @@ import sim.items.Item;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,5 +141,20 @@ public class CharacterSetup implements Serializable {
 
     public Map<Integer, SetBonusControl> getSetBonuses(){
         return setBonuses;
+    }
+
+    @Override
+    public String toString() {
+        return "CharacterSetup{" +
+                "race=" + race +
+                ", equippedItems=" + Arrays.toString(equippedItems) +
+                ", equippedEnchants=" + Arrays.toString(equippedEnchants) +
+                ", activeAuras=" + activeAuras +
+                ", activeTalents=" + activeTalents +
+                ", tempEnchantMH=" + tempEnchantMH +
+                ", tempEnchantOH=" + tempEnchantOH +
+                ", setBonuses=" + setBonuses +
+                ", warrior=" + warrior +
+                '}';
     }
 }

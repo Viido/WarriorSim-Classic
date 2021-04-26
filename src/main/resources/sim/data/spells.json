@@ -1123,7 +1123,24 @@
     "id": 20034,
     "name": "Holy Strength",
     "type": "proc",
-    "effect": "CRUSADER",
+    "effect": "STAT_BUFF",
+    "stats": {
+      "str": 100
+    },
+    "duration": 15,
+    "ppm": 1,
+    "gcd": false,
+    "description": "Heal self for 75 to 125 and Increases Strength by 100 for 15 sec.",
+    "icon": "spell_holy_blessingofstrength"
+  },
+  {
+    "id": 120034,
+    "name": "Holy Strength",
+    "type": "proc",
+    "effect": "STAT_BUFF",
+    "stats": {
+      "str": 100
+    },
     "duration": 15,
     "ppm": 1,
     "gcd": false,

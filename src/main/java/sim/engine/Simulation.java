@@ -20,6 +20,8 @@ public class Simulation {
     public Simulation(Settings settings) {
         this.settings = settings;
         this.characterSetup = settings.getCharacterSetup();
+
+        logger.debug("Simulation created." + characterSetup.toString());
     }
 
     public FightResult run(JFXProgressBar progressBar){
@@ -46,6 +48,7 @@ public class Simulation {
 
         for(int i = 0; i < cores; i++){
             int chunk = iterationsPerCore[i];
+            logger.debug("Chunk size: {}", chunk);
 
 
             Task<FightResult> task = new Task<>(){
@@ -53,28 +56,30 @@ public class Simulation {
                 protected FightResult call() throws Exception {
                     FightResult result = new FightResult();
 
-                    int counter = 0;
+                    try{
+                        int counter = 0;
 
-                    for(int j= 0; j < chunk; j++){
-                        Fight fight = new Fight(settings);
+                        for(int j= 0; j < chunk; j++){
 
-                        if(counter % 10000 == 0){
-                            Thread.sleep(1);
-                            Platform.runLater(() -> progressBar.setProgress(simulationProgress.addAndGet(10000)/(double)settings.getIterations()));
+                            Fight fight = new Fight(settings);
+
+                            if(counter % 10000 == 0){
+                                Thread.sleep(1);
+                                Platform.runLater(() -> progressBar.setProgress(simulationProgress.addAndGet(10000)/(double)settings.getIterations()));
+                            }
+
+                            counter ++;
+
+                            FightResult result2 = fight.run();
+
+                            result.merge(result2);
                         }
 
+                        result.averageResults(chunk);
 
-                        counter ++;
-
-                        FightResult result2 = fight.run();
-
-
-                        result.merge(result2);
-
-
+                    }catch (Throwable t){
+                        t.printStackTrace();
                     }
-
-                    result.averageResults(chunk);
 
                     return result;
                 }
@@ -96,6 +101,7 @@ public class Simulation {
                     logger.info("Crit: " + characterSetup.getWarrior().getCritMH() + " Hit: " +  characterSetup.getWarrior().getHit() + " Weapon Skill: " + characterSetup.getWarrior().getWeaponSkillMH());
                     logger.info(result);
                     logger.info("Sample size: " + settings.getIterations() + " Completed in: " + (end - start)/1000.0 + " seconds");
+
                     LogManager.shutdown();
                 }
             });

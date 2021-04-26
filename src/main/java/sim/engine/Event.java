@@ -1,10 +1,13 @@
 package sim.engine;
 
+import sim.items.Spell;
+
 import java.util.List;
 
 public class Event implements Comparable<Event>{
     private EventType type;
     private double time;
+    private Spell spell;
 
     public enum EventType{
         AUTOATTACK_MH,
@@ -14,12 +17,20 @@ public class Event implements Comparable<Event>{
         BLOODTHIRST,
         BLOODTHIRST_CD,
         WHIRLWIND,
-        WHIRLWIND_CD
+        WHIRLWIND_CD,
+        SPELL_FADE,
+        SPELL_PROC
     }
 
     public Event(EventType type, int time) {
         this.type = type;
         this.time = time;
+    }
+
+    public Event(EventType type, int time, Spell spell){
+        this.type = type;
+        this.time = time;
+        this.spell = spell;
     }
 
     public EventType getType() {
@@ -34,6 +45,13 @@ public class Event implements Comparable<Event>{
         this.time = time;
     }
 
+    public Spell getSpell() {
+        return spell;
+    }
+
+    public void setSpell(Spell spell) {
+        this.spell = spell;
+    }
 
     @Override
     public int compareTo(Event o) {

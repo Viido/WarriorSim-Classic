@@ -72,6 +72,8 @@ public class MainController implements Initializable {
 
     private FightResult fightResult;
 
+    private static final Logger logger = LogManager.getLogger(MainController.class);
+
     public MainController(Settings settings){
         this.settings = settings;
     }
@@ -109,10 +111,12 @@ public class MainController implements Initializable {
         simulationProgress.setVisible(false);
 
         simulateButton.setOnMouseClicked(e -> {
+            logger.debug("Simulate Button clicked.");
             saveSettings();
             Simulation simulation = new Simulation(settings);
 
             fightResult = simulation.run(simulationProgress);
+            logger.debug("Simulation done.");
         });
 
         resultsButton.setOnMouseClicked(e -> {

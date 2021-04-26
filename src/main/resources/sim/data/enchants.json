@@ -302,7 +302,18 @@
       "spellid": true,
       "name": "Crusader",
       "slot": [
-        "weapon"
+        "mainhand"
+      ],
+      "phase": 1,
+      "description": "Crusader",
+      "quality": "uncommon"
+    },
+    {
+      "id": 120034,
+      "spellid": true,
+      "name": "Crusader",
+      "slot": [
+        "offhand"
       ],
       "phase": 1,
       "description": "Crusader",

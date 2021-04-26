@@ -2,11 +2,19 @@ package sim.engine;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sim.data.SimDB;
 import sim.engine.warrior.Warrior;
+import sim.items.Spell;
 import sim.settings.Settings;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static sim.data.SimDB.SPELLS;
+import static sim.engine.Event.EventType.*;
+import sim.engine.Event.EventType;
+
 
 public class Fight{
     private Logger logger = LogManager.getLogger(Fight.class);
@@ -15,14 +23,17 @@ public class Fight{
     private Warrior warrior;
     private Target target;
     private FightResult results = new FightResult();
-    private Event autoAttackMH = new Event(Event.EventType.AUTOATTACK_MH, 0);
-    private Event autoAttackOH = new Event(Event.EventType.AUTOATTACK_OH, 0);
-    private Event heroicStrike = new Event(Event.EventType.HEROIC_STRIKE, 0);
-    private Event globalCooldown = new Event(Event.EventType.GLOBAL_COOLDOWN, 0);
-    private Event bloodthirst = new Event(Event.EventType.BLOODTHIRST, 0);
-    private Event bloodthirstCD = new Event(Event.EventType.BLOODTHIRST_CD, 0);
-    private Event whirlwind = new Event(Event.EventType.WHIRLWIND, 0);
-    private Event whirlwindCD = new Event(Event.EventType.WHIRLWIND_CD, 0);
+    private Event autoAttackMH = new Event(AUTOATTACK_MH, 0);
+    private Event autoAttackOH = new Event(AUTOATTACK_OH, 0);
+    private Event heroicStrike = new Event(HEROIC_STRIKE, 0);
+    private Event globalCooldown = new Event(GLOBAL_COOLDOWN, 0);
+    private Event bloodthirst = new Event(BLOODTHIRST, 0);
+    private Event bloodthirstCD = new Event(BLOODTHIRST_CD, 0);
+    private Event whirlwind = new Event(WHIRLWIND, 0);
+    private Event whirlwindCD = new Event(WHIRLWIND_CD, 0);
+
+    private Map<Integer, Event> spellEvents = new HashMap<>();
+    private Map<Integer, Event> spellFadeEvents = new HashMap<>();
 
     private Queue<Event> eventQueue = new PriorityQueue<>();
     private double currentTime = 0;
@@ -35,6 +46,7 @@ public class Fight{
     private double previousSwingOH = 0;
 
     public Fight(Settings settings) {
+        logger.debug("Fight constructor entered.");
         this.settings = settings;
 
         target = new Target(settings.getTargetLevel(), settings.getTargetArmor(), settings.getTargetResistance());
@@ -42,6 +54,27 @@ public class Fight{
         warrior = new Warrior(settings.getCharacterSetup(), target, settings.isHeroicStrike9());
         warrior.setRage(settings.getInitialRage());
 
+        logger.debug("New Fight created.");
+
+        initEvents();
+    }
+
+    private void initEvents(){
+        for(Spell spell : warrior.getMainHandProcs()){
+            if(spell.getDuration() > 0){
+                spellFadeEvents.put(spell.getId(), new Event(SPELL_FADE, 0, spell));
+            }
+            spellEvents.put(spell.getId(), new Event(SPELL_PROC, 0, spell));
+        }
+
+        if(warrior.isDualWielding()){
+            for(Spell spell : warrior.getOffHandProcs()){
+                if(spell.getDuration() > 0){
+                    spellFadeEvents.put(spell.getId(), new Event(SPELL_FADE, 0, spell));
+                }
+                spellEvents.put(spell.getId(), new Event(SPELL_PROC, 0, spell));
+            }
+        }
     }
 
     public FightResult run() {
@@ -119,11 +152,50 @@ public class Fight{
         return null;
     }
 
+    private void rollMainHandProcs(){
+        List<Spell> procs = warrior.getMainHandProcs();
 
+        for(Spell spell : procs){
+            double procChance;
+
+            if(spell.getProcChance() != 0){
+                procChance = spell.getProcChance();
+            }else {
+                procChance = spell.getPpm() * warrior.getMainHand().getBaseSpeed() / 60.0;
+            }
+
+            double roll = ThreadLocalRandom.current().nextDouble(0, 1);
+
+            if(roll < procChance){
+                changeEventTime(spellEvents.get(spell.getId()), currentTime);
+            }
+        }
+    }
+
+    private void rollOffHandProcs(){
+        List<Spell> procs = warrior.getOffHandProcs();
+
+        for(Spell spell : procs){
+            double procChance;
+
+            if(spell.getProcChance() != 0){
+                procChance = spell.getProcChance();
+            }else {
+                procChance = spell.getPpm() * warrior.getOffHand().getBaseSpeed() / 60.0;
+            }
+
+            double roll = ThreadLocalRandom.current().nextDouble(0, 1);
+
+            if(roll < procChance){
+                changeEventTime(spellEvents.get(spell.getId()), currentTime);
+            }
+        }
+    }
 
     private void handleEvent(Event event){
-        logger.info("Time: " + currentTime + " Flurry stacks: " + warrior.getFlurryStacks() + " haste: " + warrior.getHaste() + " rage: " + warrior.getRage());
-        if(event.getType() == Event.EventType.AUTOATTACK_MH){
+        logger.info("Time: {}, strength: {}, attack power: {}", currentTime, warrior.getStr(), warrior.getAp());
+        //logger.info("Time: " + currentTime + " Flurry stacks: " + warrior.getFlurryStacks() + " haste: " + warrior.getHaste() + " rage: " + warrior.getRage());
+        if(event.getType() == AUTOATTACK_MH){
             AttackTable.RollType roll;
             double damage;
 
@@ -138,7 +210,7 @@ public class Fight{
                 roll = warrior.getMainHandTable().rollTable();
                 damage = warrior.autoAttackMH(roll);
 
-                results.addAttackResult(Event.EventType.AUTOATTACK_MH, roll, damage);
+                results.addAttackResult(AUTOATTACK_MH, roll, damage);
                 logger.info("Auto-attack MH " + roll + " " + damage + " " + (currentTime - previousSwingMH) + "\n");
             }
 
@@ -150,6 +222,10 @@ public class Fight{
                 }else{
                     warrior.decrementFlurry();
                 }
+            }
+
+            if(damage > 0){
+                rollMainHandProcs();
             }
 
             warrior.setHeroicStrikeQueued(warrior.getRage() >= HEROIC_STRIKE_THRESHOLD);
@@ -182,6 +258,10 @@ public class Fight{
                 }
             }
 
+            if(damage > 0){
+                rollOffHandProcs();
+            }
+
             warrior.setHeroicStrikeQueued(warrior.getRage() >= HEROIC_STRIKE_THRESHOLD);
 
             changeEventTime(autoAttackOH, currentTime + warrior.getOffHand().getCurrentSpeed() * 1000);
@@ -201,9 +281,13 @@ public class Fight{
                     warrior.applyFlurry();
                 }
             }
+
+            if(damage > 0){
+                rollMainHandProcs();
+            }
         }
 
-        if(event.getType() == Event.EventType.WHIRLWIND){
+        if(event.getType() == WHIRLWIND){
             AttackTable.RollType roll = warrior.getYellowTable().rollTable();
 
             double damage = warrior.whirlwind(roll);
@@ -218,18 +302,43 @@ public class Fight{
                 }
             }
 
+            if(damage > 0){
+                rollMainHandProcs();
+            }
         }
 
         if(event.getType() == Event.EventType.BLOODTHIRST_CD){
-            logger.info("BLOODTHIRST COOLDOWN DONE");
+            logger.info("BLOODTHIRST COOLDOWN DONE\n");
         }
 
         if(event.getType() == Event.EventType.WHIRLWIND_CD){
-            logger.info("WHIRLWIND COOLDOWN DONE");
+            logger.info("WHIRLWIND COOLDOWN DONE\n");
         }
 
         if(event.getType() == Event.EventType.GLOBAL_COOLDOWN){
-            logger.info("GLOBAL COOLDOWN DONE");
+            logger.info("GLOBAL COOLDOWN DONE\n");
+        }
+
+        if(event.getType() == SPELL_PROC){
+            Spell spell = event.getSpell();
+
+            switch(spell.getEffect()){
+                case STAT_BUFF:
+                    Event fadeEvent = spellFadeEvents.get(spell.getId());
+
+                    if(!eventQueue.contains(fadeEvent)){
+                        warrior.getStats().addStats(spell.getStats());
+                    }
+
+                    changeEventTime(fadeEvent, currentTime + spell.getDuration() * 1000);
+            }
+
+            logger.info("{} ({}) procced . Fading at {}\n", event.getSpell().getName(), event.getSpell().getId(), currentTime + spell.getDuration() * 1000);
+        }
+
+        if(event.getType() == SPELL_FADE){
+            warrior.getStats().removeStats(event.getSpell().getStats());
+            logger.info("{} ({}) faded .\n", event.getSpell().getName(), event.getSpell().getId());
         }
 
         changeEventTime(calculateNextAbility(), currentTime);

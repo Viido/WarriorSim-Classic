@@ -422,4 +422,8 @@ public class Item implements Serializable, Comparable<Item> {
             return name.compareTo(o.getName());
         }
     }
+
+    public String toString(){
+        return name;
+    }
 }

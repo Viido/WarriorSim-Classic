@@ -1,11 +1,15 @@
 package sim.items;
 
+import sim.data.SimDB.SpellEffect;
+import sim.engine.warrior.Stats;
+
 public class Spell {
     private int id;
     private String name;
     private String type;
-    private String effect;
+    private SpellEffect effect;
     private String school;
+    private Stats stats;
     private int value;
     private int stacks;
     private int minDamage;
@@ -14,6 +18,7 @@ public class Spell {
     private int duration;
     private double ppm;
     private double procChance;
+    private boolean unique;
     private boolean gcd;
     private boolean aoe;
     private String description;
@@ -31,7 +36,7 @@ public class Spell {
         return type;
     }
 
-    public String getEffect() {
+    public SpellEffect getEffect() {
         return effect;
     }
 
@@ -85,5 +90,13 @@ public class Spell {
 
     public String getIcon() {
         return icon;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public boolean isUnique() {
+        return unique;
     }
 }

@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sim.data.Constants.MAINHAND;
+import static sim.data.Constants.OFFHAND;
+
 public class ItemSlot extends HBox {
     @FXML
     private JFXListView<Item> itemView;
@@ -108,6 +111,12 @@ public class ItemSlot extends HBox {
         for(Enchant enchant : enchantList){
             for(String slot : enchant.getSlot()){
                 if(slot.equals("weapon")){
+                    result.add(enchant);
+                }
+                if(slot.equals("mainhand") && this.slot == MAINHAND){
+                    result.add(enchant);
+                }
+                if(slot.equals("offhand") && this.slot == OFFHAND){
                     result.add(enchant);
                 }
             }

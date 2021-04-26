@@ -2,11 +2,18 @@ package sim.engine.warrior;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sim.data.SimDB;
 import sim.engine.AttackTable;
 import sim.engine.Target;
+import sim.items.Enchant;
 import sim.items.Item;
+import sim.items.Spell;
 import sim.settings.CharacterSetup;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static sim.data.Constants.*;
@@ -37,7 +44,14 @@ public class Warrior {
 
     private boolean flurryTalented = false;
 
+    private List<Spell> mainHandProcs;
+    private List<Spell> offHandProcs;
+
+    private Logger logger = LogManager.getLogger(Warrior.class);
+
     public Warrior(CharacterSetup characterSetup, Target target, boolean heroicStrike9) {
+        logger.debug("Warrior constructor entered.");
+        logger.debug("Warrior level: {}", level);
         this.characterSetup = characterSetup;
         stats = new Stats(characterSetup.getWarrior().getStats());
         this.target = target;
@@ -46,8 +60,6 @@ public class Warrior {
         if(characterSetup.getEquippedItems()[MAINHAND] != null){
             mainHand = new Weapon(characterSetup.getEquippedItems()[MAINHAND], this);
             mainHand.setSkill(getWeaponSkillMH());
-        }else{
-
         }
 
         if(characterSetup.getEquippedItems()[OFFHAND] != null){
@@ -75,6 +87,33 @@ public class Warrior {
         }
 
         haste.set(stats.getHaste());
+
+        initProcs();
+    }
+
+    private void initProcs(){
+        logger.debug("Initializing proc lists.");
+        mainHandProcs = new ArrayList<>();
+
+        if(dualWielding){
+            offHandProcs = new ArrayList<>();
+        }
+
+        Enchant mainHandEnchant = characterSetup.getEquippedEnchants()[MAINHAND];
+        if(mainHandEnchant != null){
+            if(mainHandEnchant.isSpellId()){
+                mainHandProcs.add(SimDB.SPELLS.get(characterSetup.getEquippedEnchants()[MAINHAND].getId()));
+                logger.debug("Mainhand proc added: {}", mainHandProcs.get(mainHandProcs.size()-1).getId());
+            }
+        }
+
+        Enchant offHandEnchant = characterSetup.getEquippedEnchants()[OFFHAND];
+        if(offHandEnchant != null){
+            if(offHandEnchant.isSpellId()){
+                offHandProcs.add(SimDB.SPELLS.get(characterSetup.getEquippedEnchants()[OFFHAND].getId()));
+                logger.debug("Offhand proc added: {}", offHandProcs.get(offHandProcs.size()-1).getId());
+            }
+        }
     }
 
     public Warrior(CharacterSetup characterSetup){
@@ -241,7 +280,6 @@ public class Warrior {
 
         return applyArmorMitigation(damage);
     }
-
 
     public void generateRage(double damage){
         int rage = (int) (damage / rageConversionFactor * 7.5);
@@ -522,5 +560,13 @@ public class Warrior {
 
     public void setHaste(double haste) {
         this.haste.set(haste);
+    }
+
+    public List<Spell> getMainHandProcs() {
+        return mainHandProcs;
+    }
+
+    public List<Spell> getOffHandProcs() {
+        return offHandProcs;
     }
 }
