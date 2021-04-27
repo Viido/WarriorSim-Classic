@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
@@ -53,17 +54,25 @@ public class MainController implements Initializable {
     @FXML
     JFXCheckBox battleShout7;
     @FXML
+    JFXCheckBox multiTarget;
+    @FXML
+    JFXTextField extraTargets;
+    @FXML
+    JFXTextField extraTargetLevel;
+    @FXML
+    JFXTextField extraTargetArmor;
+    @FXML
     SplitPane mainPane;
     @FXML
     JFXTabPane tabPane;
-    @FXML
-    JFXButton resultsButton;
     @FXML
     JFXButton simulateButton;
     @FXML
     JFXProgressBar simulationProgress;
     @FXML
     VBox rightSection;
+    @FXML
+    Label averageDPS;
 
     Settings settings;
 
@@ -115,24 +124,9 @@ public class MainController implements Initializable {
             saveSettings();
             Simulation simulation = new Simulation(settings);
 
-            fightResult = simulation.run(simulationProgress);
-            logger.debug("Simulation done.");
-        });
+            fightResult = simulation.run(simulationProgress, averageDPS);
 
-        resultsButton.setOnMouseClicked(e -> {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("fxml/ResultsView.fxml"));
-            fxmlLoader.setController(new ResultsController(fightResult));
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load(), 600, 400);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            Stage stage = new Stage();
-            stage.setTitle("Fight Results");
-            stage.setScene(scene);
-            stage.show();
+            logger.debug("Simulation done.");
         });
     }
 
@@ -219,6 +213,10 @@ public class MainController implements Initializable {
         settings.setIterations(Integer.parseInt(simulations.getText()));
         settings.setHeroicStrike9(heroicStrike9.isSelected());
         settings.setBattleShout7(battleShout7.isSelected());
+        settings.setMultitarget(multiTarget.isSelected());
+        settings.setExtraTargets(Integer.parseInt(extraTargets.getText()));
+        settings.setExtraTargetLevel(Integer.parseInt(extraTargetLevel.getText()));
+        settings.setExtraTargetArmor(Integer.parseInt(extraTargetArmor.getText()));
     }
 
     private void loadSettings(){
@@ -235,6 +233,10 @@ public class MainController implements Initializable {
         simulations.setText(settings.getIterations() + "");
         heroicStrike9.setSelected(settings.isHeroicStrike9());
         battleShout7.setSelected(settings.isBattleShout7());
+        multiTarget.setSelected(settings.isMultitarget());
+        extraTargets.setText(settings.getExtraTargets() + "");
+        extraTargetLevel.setText(settings.getExtraTargetLevel() + "");
+        extraTargetArmor.setText(settings.getExtraTargetArmor() + "");
     }
 
     private void initRaceSelect(){

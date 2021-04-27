@@ -11,6 +11,10 @@ public class Settings implements Serializable {
     private int iterations = 100000;
     private boolean heroicStrike9 = false;
     private boolean battleShout7 = false;
+    private boolean multitarget = false;
+    private int extraTargets = 3;
+    private int extraTargetLevel = 60;
+    private int extraTargetArmor = 3000;
     private CharacterSetup characterSetup = new CharacterSetup();
 
     public int getFightDuration() {
@@ -83,5 +87,37 @@ public class Settings implements Serializable {
 
     public void setCharacterSetup(CharacterSetup characterSetup) {
         this.characterSetup = characterSetup;
+    }
+
+    public boolean isMultitarget() {
+        return multitarget;
+    }
+
+    public void setMultitarget(boolean multitarget) {
+        this.multitarget = multitarget;
+    }
+
+    public int getExtraTargets() {
+        return extraTargets;
+    }
+
+    public void setExtraTargets(int extraTargets) {
+        this.extraTargets = extraTargets;
+    }
+
+    public int getExtraTargetLevel() {
+        return extraTargetLevel;
+    }
+
+    public void setExtraTargetLevel(int extraTargetsLevel) {
+        this.extraTargetLevel = extraTargetsLevel;
+    }
+
+    public int getExtraTargetArmor() {
+        return extraTargetArmor;
+    }
+
+    public void setExtraTargetArmor(int extraTargetArmor) {
+        this.extraTargetArmor = extraTargetArmor;
     }
 }

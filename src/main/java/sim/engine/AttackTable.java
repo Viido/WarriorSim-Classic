@@ -162,4 +162,16 @@ public class AttackTable {
 
         return RollType.HIT;
     }
+
+    @Override
+    public String toString() {
+        return "AttackTable{" +
+                "miss=" + miss +
+                ", parry=" + parry +
+                ", dodge=" + dodge +
+                ", block=" + block +
+                ", glancing=" + glancing +
+                ", crit=" + crit +
+                '}';
+    }
 }

@@ -13,11 +13,13 @@ public class Event implements Comparable<Event>{
         AUTOATTACK_MH,
         AUTOATTACK_OH,
         HEROIC_STRIKE,
+        CLEAVE,
         GLOBAL_COOLDOWN,
         BLOODTHIRST,
         BLOODTHIRST_CD,
         WHIRLWIND,
         WHIRLWIND_CD,
+        EXECUTE,
         SPELL_FADE,
         SPELL_PROC
     }

@@ -11,11 +11,13 @@ import sim.items.Enchant;
 import sim.items.Item;
 import sim.items.Spell;
 import sim.settings.CharacterSetup;
+import sim.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static sim.Main.loggingEnabled;
 import static sim.data.Constants.*;
 
 
@@ -29,6 +31,7 @@ public class Warrior {
     private AttackTable mainHandTable;
     private AttackTable offHandTable;
     private AttackTable yellowTable;
+    private AttackTable extraTargetTable;
     private boolean dualWielding = false;
     private double rageConversionFactor;
     private boolean isHeroicStrikeQueued = false;
@@ -47,15 +50,18 @@ public class Warrior {
     private List<Spell> mainHandProcs;
     private List<Spell> offHandProcs;
 
-    private Logger logger = LogManager.getLogger(Warrior.class);
+    private Logger logger;
 
-    public Warrior(CharacterSetup characterSetup, Target target, boolean heroicStrike9) {
-        logger.debug("Warrior constructor entered.");
-        logger.debug("Warrior level: {}", level);
-        this.characterSetup = characterSetup;
+    public Warrior(Settings settings, Target target, Target extraTarget) {
+        if(loggingEnabled) logger = LogManager.getLogger(Warrior.class);
+        if(loggingEnabled) logger.debug("Warrior constructor entered.");
+        if(loggingEnabled) logger.debug("Warrior level: {}", level);
+
+        this.characterSetup = settings.getCharacterSetup();
         stats = new Stats(characterSetup.getWarrior().getStats());
         this.target = target;
-        this.heroicStrike9 = heroicStrike9;
+        this.heroicStrike9 = settings.isHeroicStrike9();
+        this.rage = settings.getInitialRage();
 
         if(characterSetup.getEquippedItems()[MAINHAND] != null){
             mainHand = new Weapon(characterSetup.getEquippedItems()[MAINHAND], this);
@@ -79,6 +85,10 @@ public class Warrior {
 
         yellowTable = new AttackTable(mainHand.getSkill(), target.getLevel(), level, getHit(), getCritMH(), getAgi(), dualWielding, true);
 
+        if(settings.isMultitarget()){
+            extraTargetTable = new AttackTable(mainHand.getSkill(), extraTarget.getLevel(), level, getHit(), getCritMH(), getAgi(), dualWielding, true);
+        }
+
         rageConversionFactor = 0.0091107836 * Math.pow(level, 2) + 3.225598133 * level + 4.2652911;
 
         if(characterSetup.getActiveTalents().getOrDefault(FLURRY, 0) > 0){
@@ -92,7 +102,7 @@ public class Warrior {
     }
 
     private void initProcs(){
-        logger.debug("Initializing proc lists.");
+        if(loggingEnabled) logger.debug("Initializing proc lists.");
         mainHandProcs = new ArrayList<>();
 
         if(dualWielding){
@@ -103,7 +113,7 @@ public class Warrior {
         if(mainHandEnchant != null){
             if(mainHandEnchant.isSpellId()){
                 mainHandProcs.add(SimDB.SPELLS.get(characterSetup.getEquippedEnchants()[MAINHAND].getId()));
-                logger.debug("Mainhand proc added: {}", mainHandProcs.get(mainHandProcs.size()-1).getId());
+                if(loggingEnabled) logger.debug("Mainhand proc added: {}", mainHandProcs.get(mainHandProcs.size()-1).getId());
             }
         }
 
@@ -111,7 +121,7 @@ public class Warrior {
         if(offHandEnchant != null){
             if(offHandEnchant.isSpellId()){
                 offHandProcs.add(SimDB.SPELLS.get(characterSetup.getEquippedEnchants()[OFFHAND].getId()));
-                logger.debug("Offhand proc added: {}", offHandProcs.get(offHandProcs.size()-1).getId());
+                if(loggingEnabled) logger.debug("Offhand proc added: {}", offHandProcs.get(offHandProcs.size()-1).getId());
             }
         }
     }
@@ -188,10 +198,6 @@ public class Warrior {
 
         damage *= damageMod;
 
-        damage = applyArmorMitigation(damage);
-
-        generateRage(damage);
-
         return damage;
     }
 
@@ -216,10 +222,6 @@ public class Warrior {
 
         damage *= damageMod;
 
-        damage = applyArmorMitigation(damage);
-
-        generateRage(damage);
-
         return damage;
     }
 
@@ -238,9 +240,25 @@ public class Warrior {
 
         damage *= damageMod;
 
-        removeRage(15 - characterSetup.getActiveTalents().getOrDefault(IMP_HEROIC_STRIKE, 0));
+        return damage;
+    }
 
-        return applyArmorMitigation(damage);
+    public double cleave(AttackTable.RollType rollType){
+        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
+            return 0;
+        }
+
+        int baseDamage = ThreadLocalRandom.current().nextInt(mainHand.getMinDmg(), mainHand.getMaxDmg() + 1);
+
+        double damage = baseDamage + 50 + characterSetup.getActiveTalents().getOrDefault(IMP_CLEAVE, 0) * 20 + getAp() / 14.0 * mainHand.getBaseSpeed();
+
+        if(rollType == AttackTable.RollType.CRIT){
+            damage *= 2 + characterSetup.getActiveTalents().getOrDefault(IMPALE, 0) * 0.1;
+        }
+
+        damage *= damageMod;
+
+        return damage;
     }
 
     public double bloodthirst(AttackTable.RollType rollType){
@@ -256,9 +274,7 @@ public class Warrior {
 
         damage *= damageMod;
 
-        removeRage(30);
-
-        return applyArmorMitigation(damage);
+        return damage;
     }
 
     public double whirlwind(AttackTable.RollType rollType){
@@ -276,9 +292,7 @@ public class Warrior {
 
         damage *= damageMod;
 
-        removeRage(25);
-
-        return applyArmorMitigation(damage);
+        return damage;
     }
 
     public void generateRage(double damage){
@@ -334,12 +348,6 @@ public class Warrior {
         double highEnd = Math.max(Math.min(1.2 - 0.03 * (target.getDefense() - weapon.getSkill()), 0.99), 0.2);
 
         return (ThreadLocalRandom.current().nextInt(0, 10001) * (highEnd - lowEnd) + lowEnd * 10000.0) / 10000.0;
-    }
-
-    public double applyArmorMitigation(double damage) {
-        double armorMitigation = target.getArmor() / (target.getArmor() + 400 + 85.0 * level);
-
-        return damage * (1 - armorMitigation);
     }
 
     public double getFlurryHaste() {
@@ -568,5 +576,9 @@ public class Warrior {
 
     public List<Spell> getOffHandProcs() {
         return offHandProcs;
+    }
+
+    public AttackTable getExtraTargetTable() {
+        return extraTargetTable;
     }
 }

@@ -4,16 +4,16 @@
         <!--<Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>-->
-        <File name="debugLog" fileName="debug.log" immediateFlush="true" append="false">
+        <RandomAccessFile name="debugLog" fileName="debug.log" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <LevelRangeFilter minLevel="debug" maxLevel="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-        </File>
-        <File name="combatLog" fileName="combat.log" immediateFlush="true" append="false">
+        </RandomAccessFile>
+        <RandomAccessFile name="combatLog" fileName="combat.log" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </File>
+        </RandomAccessFile>
     </Appenders>
     <Loggers>
-        <Root level="debug">
+        <Root level="debug" includeLocation="false">
             <AppenderRef ref="combatLog" level="INFO"/>
             <AppenderRef ref="debugLog" level="DEBUG"/>
         </Root>

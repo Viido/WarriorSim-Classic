@@ -10,11 +10,16 @@ import sim.settings.Settings;
 
 import java.io.*;
 
+
+
 public class Main extends Application {
     Settings settings = new Settings();
 
+    public static boolean loggingEnabled = false;
+
     static{
-        System.setProperty("log4j.configurationFile", "log4j2.xml");
+        System.setProperty("log4j2.configurationFile", "log4j2.xml");
+        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
     }
 
     @Override

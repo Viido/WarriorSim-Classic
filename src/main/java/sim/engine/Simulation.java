@@ -3,8 +3,10 @@ package sim.engine;
 import com.jfoenix.controls.JFXProgressBar;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.control.Label;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sim.Main;
 import sim.settings.Settings;
 import sim.settings.CharacterSetup;
 
@@ -24,7 +26,9 @@ public class Simulation {
         logger.debug("Simulation created." + characterSetup.toString());
     }
 
-    public FightResult run(JFXProgressBar progressBar){
+    public FightResult run(JFXProgressBar progressBar, Label averageDPS){
+        Main.loggingEnabled = settings.getIterations() == 1;
+
         long start = System.currentTimeMillis();
 
         int cores;
@@ -100,8 +104,10 @@ public class Simulation {
 
                     logger.info("Crit: " + characterSetup.getWarrior().getCritMH() + " Hit: " +  characterSetup.getWarrior().getHit() + " Weapon Skill: " + characterSetup.getWarrior().getWeaponSkillMH());
                     logger.info(result);
+                    logger.info("Average DPS: {}", result.getAverageDamage() / settings.getFightDuration());
                     logger.info("Sample size: " + settings.getIterations() + " Completed in: " + (end - start)/1000.0 + " seconds");
 
+                    averageDPS.setText(Math.round(result.getAverageDamage() / settings.getFightDuration() * 100.0) / 100.0 + " DPS");
                     LogManager.shutdown();
                 }
             });

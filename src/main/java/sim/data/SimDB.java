@@ -50,8 +50,4 @@ public final class SimDB {
 
         ITEMS.sortItems();
     }
-
-    public Spell getOffHandProcSpell(Spell spell){
-        return SPELLS.get(spell.getId() + 100000);
-    }
 }

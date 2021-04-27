@@ -54,3 +54,10 @@
 .jfx-progress-bar{
 
 }
+
+.averageDPS{
+    -fx-font-size: 20;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+    -fx-alignment: CENTER;
+}

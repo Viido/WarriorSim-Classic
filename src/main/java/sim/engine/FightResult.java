@@ -38,6 +38,16 @@ public class FightResult {
         }
     }
 
+    public double getAverageDamage(){
+        double damage = 0;
+
+        for(AttackTableResult attackTableResult : attackTableResults.values()){
+            damage += attackTableResult.getDamage();
+        }
+
+        return damage;
+    }
+
     @Override
     public String toString() {
         String result = "";

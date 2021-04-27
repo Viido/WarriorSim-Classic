@@ -81,13 +81,42 @@
                         <JFXCheckBox fx:id="battleShout7" />
                     </children>
                 </HBox>
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="185.0" styleClass="settingsHBox">
+                    <children>
+                        <Label text="Multi-target" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <JFXCheckBox fx:id="multiTarget" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" styleClass="settingsHBox">
+                    <children>
+                        <Label text="Extra targets" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="extraTargets"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" styleClass="settingsHBox">
+                    <children>
+                        <Label text="Extra target level" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="extraTargetLevel"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" styleClass="settingsHBox">
+                    <children>
+                        <Label text="Extra target armor" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="extraTargetArmor"/>
+                    </children>
+                </HBox>
             </children>
             <Region minHeight="30.0"/>
             <Label text="Stats" styleClass="headerLabel"/>
             <Label styleClass="borderLabel"/>
         </VBox>
         <Region VBox.vgrow="ALWAYS" />
-        <JFXButton fx:id="resultsButton" text="Results"/>
+        <Label fx:id="averageDPS" text="0.0 DPS" minWidth="300.0" maxWidth="300.0" styleClass="averageDPS"/>
+<!--        <JFXButton fx:id="resultsButton" text="Results"/>-->
         <JFXProgressBar fx:id="simulationProgress" minWidth="300.0" maxWidth="300.0" minHeight="10.0" maxHeight="10.0"/>
         <JFXButton fx:id="simulateButton" text="Simulate" />
     </VBox>

@@ -2,35 +2,35 @@ package sim.engine;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sim.data.SimDB;
 import sim.engine.warrior.Warrior;
 import sim.items.Spell;
 import sim.settings.Settings;
 
-import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static sim.data.SimDB.SPELLS;
+import static sim.Main.loggingEnabled;
+import static sim.data.Constants.IMP_HEROIC_STRIKE;
 import static sim.engine.Event.EventType.*;
-import sim.engine.Event.EventType;
 
 
 public class Fight{
-    private Logger logger = LogManager.getLogger(Fight.class);
+    private Logger logger;
 
     private Settings settings;
     private Warrior warrior;
     private Target target;
+    private Target extraTarget;
     private FightResult results = new FightResult();
     private Event autoAttackMH = new Event(AUTOATTACK_MH, 0);
     private Event autoAttackOH = new Event(AUTOATTACK_OH, 0);
-    private Event heroicStrike = new Event(HEROIC_STRIKE, 0);
     private Event globalCooldown = new Event(GLOBAL_COOLDOWN, 0);
     private Event bloodthirst = new Event(BLOODTHIRST, 0);
     private Event bloodthirstCD = new Event(BLOODTHIRST_CD, 0);
     private Event whirlwind = new Event(WHIRLWIND, 0);
     private Event whirlwindCD = new Event(WHIRLWIND_CD, 0);
+    private Event execute = new Event(EXECUTE, 0);
 
     private Map<Integer, Event> spellEvents = new HashMap<>();
     private Map<Integer, Event> spellFadeEvents = new HashMap<>();
@@ -38,23 +38,24 @@ public class Fight{
     private Queue<Event> eventQueue = new PriorityQueue<>();
     private double currentTime = 0;
 
-    private final int BATCH = 400;
-
     private int HEROIC_STRIKE_THRESHOLD = 50;
 
     private double previousSwingMH = 0;
     private double previousSwingOH = 0;
 
     public Fight(Settings settings) {
-        logger.debug("Fight constructor entered.");
+        if(loggingEnabled) logger = LogManager.getLogger(Fight.class);
+
         this.settings = settings;
 
         target = new Target(settings.getTargetLevel(), settings.getTargetArmor(), settings.getTargetResistance());
 
-        warrior = new Warrior(settings.getCharacterSetup(), target, settings.isHeroicStrike9());
-        warrior.setRage(settings.getInitialRage());
+        if(settings.isMultitarget()){
+            extraTarget = new Target(settings.getExtraTargetLevel(), settings.getExtraTargetArmor(), 0);
+        }
 
-        logger.debug("New Fight created.");
+
+        warrior = new Warrior(settings, target, extraTarget);
 
         initEvents();
     }
@@ -91,9 +92,7 @@ public class Fight{
             if(!oldValue.equals(newValue)){
                 if(autoAttackMH.getTime() != currentTime){
                     double remainingTime = autoAttackMH.getTime() - currentTime;
-                    logger.info("MH remaining: " + remainingTime + " oldValue: "+ oldValue + " newValue: " + newValue + "getTime(): " + autoAttackMH.getTime() + " currentTime: " + currentTime);
                     remainingTime = remainingTime * oldValue.doubleValue() / newValue.doubleValue();
-                    logger.info(remainingTime + "");
 
                     changeEventTime(autoAttackMH, currentTime + remainingTime);
                 }
@@ -101,9 +100,7 @@ public class Fight{
                 if(warrior.isDualWielding()){
                     if(autoAttackOH.getTime() != currentTime){
                         double remainingTime = autoAttackOH.getTime() - currentTime;
-                        logger.info("OH remaining:" + remainingTime + " oldValue: "+ oldValue + " newValue: " + newValue + "getTime(): " + autoAttackOH.getTime() + " currentTime: " + currentTime);
                         remainingTime = remainingTime * oldValue.doubleValue() / newValue.doubleValue();
-                        logger.info(remainingTime + "");
 
                         changeEventTime(autoAttackOH, currentTime + remainingTime);
                     }
@@ -192,26 +189,59 @@ public class Fight{
         }
     }
 
+    public double applyArmorMitigation(double damage, Target target) {
+        double armorMitigation = target.getArmor() / (target.getArmor() + 400 + 85.0 * warrior.getLevel());
+
+        return damage * (1 - armorMitigation);
+    }
+
     private void handleEvent(Event event){
-        logger.info("Time: {}, strength: {}, attack power: {}", currentTime, warrior.getStr(), warrior.getAp());
-        //logger.info("Time: " + currentTime + " Flurry stacks: " + warrior.getFlurryStacks() + " haste: " + warrior.getHaste() + " rage: " + warrior.getRage());
+        log("Strength: " + warrior.getStr() + " rage: " + warrior.getRage() + " HS queue: " + warrior.isHeroicStrikeQueued());
+
         if(event.getType() == AUTOATTACK_MH){
             AttackTable.RollType roll;
             double damage;
 
             if(warrior.isHeroicStrikeQueued()){
-                roll = warrior.getYellowTable().rollTable();
-                damage = warrior.heroicStrike(roll);
+                if(settings.isMultitarget()){
+                    roll = warrior.getYellowTable().rollTable();
+                    damage = warrior.cleave(roll);
 
-                results.addAttackResult(Event.EventType.HEROIC_STRIKE, roll, damage);
+                    damage = applyArmorMitigation(damage, target);
 
-                logger.info("Heroic Strike " + roll + " " + damage + " " + (currentTime - previousSwingMH) + "\n");
+                    results.addAttackResult(Event.EventType.CLEAVE, roll, damage);
+
+                    log("Cleave " + roll + " " + damage + " " + (currentTime - previousSwingMH));
+
+                    roll = warrior.getExtraTargetTable().rollTable();
+                    damage = warrior.cleave(roll);
+
+                    damage = applyArmorMitigation(damage, extraTarget);
+
+                    results.addAttackResult(Event.EventType.CLEAVE, roll, damage);
+
+                    warrior.removeRage(20);
+
+                    log("Cleave offtarget " + roll + " " + damage + " " + (currentTime - previousSwingMH));
+                }else{
+                    roll = warrior.getYellowTable().rollTable();
+                    damage = warrior.heroicStrike(roll);
+                    damage = applyArmorMitigation(damage, target);
+
+                    results.addAttackResult(Event.EventType.HEROIC_STRIKE, roll, damage);
+
+                    warrior.removeRage(15 - settings.getCharacterSetup().getActiveTalents().getOrDefault(IMP_HEROIC_STRIKE, 0));
+
+                    log("Heroic Strike " + roll + " " + damage + " " + (currentTime - previousSwingMH));
+                }
             }else{
                 roll = warrior.getMainHandTable().rollTable();
                 damage = warrior.autoAttackMH(roll);
+                damage = applyArmorMitigation(damage, target);
+                warrior.generateRage(damage);
 
                 results.addAttackResult(AUTOATTACK_MH, roll, damage);
-                logger.info("Auto-attack MH " + roll + " " + damage + " " + (currentTime - previousSwingMH) + "\n");
+                log("Auto-attack MH " + roll + " " + damage + " " + (currentTime - previousSwingMH));
             }
 
             previousSwingMH = currentTime;
@@ -238,15 +268,17 @@ public class Fight{
 
             AttackTable.RollType roll = warrior.getOffHandTable().rollTable();
 
-            if(roll == AttackTable.RollType.GLANCING && warrior.isHeroicStrikeQueued()){
-                logger.error("Glancing while HS queued");
+            if(roll == AttackTable.RollType.MISS && warrior.isHeroicStrikeQueued()){
+                logError("Attack missed while HS queued");
             }
 
             double damage = warrior.autoAttackOH(roll);
+            damage = applyArmorMitigation(damage, target);
+            warrior.generateRage(damage);
 
             results.addAttackResult(event.getType(), roll, damage);
 
-            logger.info("Auto-attack OH " + roll + " " + damage + " " + (currentTime - previousSwingOH) + "\n");
+            log("Auto-attack OH " + roll + " " + damage + " " + (currentTime - previousSwingOH));
 
             previousSwingOH = currentTime;
 
@@ -271,10 +303,12 @@ public class Fight{
             AttackTable.RollType roll = warrior.getYellowTable().rollTable();
 
             double damage = warrior.bloodthirst(roll);
+            damage = applyArmorMitigation(damage, target);
+            warrior.removeRage(30);
 
             results.addAttackResult(event.getType(), roll, damage);
 
-            logger.info("Bloodthirst " + roll + " " + damage + " " + "\n");
+            log("Bloodthirst " + roll + " " + damage);
 
             if(warrior.isFlurryTalented()){
                 if(roll == AttackTable.RollType.CRIT){
@@ -291,10 +325,11 @@ public class Fight{
             AttackTable.RollType roll = warrior.getYellowTable().rollTable();
 
             double damage = warrior.whirlwind(roll);
+            damage = applyArmorMitigation(damage, target);
 
             results.addAttackResult(event.getType(), roll, damage);
 
-            logger.info("Whirlwind " + roll + " " + damage + " " + "\n");
+            log("Whirlwind " + roll + " " + damage);
 
             if(warrior.isFlurryTalented()){
                 if(roll == AttackTable.RollType.CRIT){
@@ -305,18 +340,40 @@ public class Fight{
             if(damage > 0){
                 rollMainHandProcs();
             }
+
+            if(settings.isMultitarget()){
+                for(int i = 0; i < settings.getExtraTargets(); i++){
+                    roll = warrior.getExtraTargetTable().rollTable();
+
+                    damage = warrior.whirlwind(roll);
+
+                    damage = applyArmorMitigation(damage, extraTarget);
+
+                    results.addAttackResult(event.getType(), roll, damage);
+
+                    log("Whirlwind offtarget " + roll + " " + damage);
+
+                    if(warrior.isFlurryTalented()){
+                        if(roll == AttackTable.RollType.CRIT){
+                            warrior.applyFlurry();
+                        }
+                    }
+                }
+            }
+
+            warrior.removeRage(25);
         }
 
         if(event.getType() == Event.EventType.BLOODTHIRST_CD){
-            logger.info("BLOODTHIRST COOLDOWN DONE\n");
+            log("BLOODTHIRST COOLDOWN DONE");
         }
 
         if(event.getType() == Event.EventType.WHIRLWIND_CD){
-            logger.info("WHIRLWIND COOLDOWN DONE\n");
+            log("WHIRLWIND COOLDOWN DONE");
         }
 
         if(event.getType() == Event.EventType.GLOBAL_COOLDOWN){
-            logger.info("GLOBAL COOLDOWN DONE\n");
+            log("GLOBAL COOLDOWN DONE");
         }
 
         if(event.getType() == SPELL_PROC){
@@ -333,14 +390,24 @@ public class Fight{
                     changeEventTime(fadeEvent, currentTime + spell.getDuration() * 1000);
             }
 
-            logger.info("{} ({}) procced . Fading at {}\n", event.getSpell().getName(), event.getSpell().getId(), currentTime + spell.getDuration() * 1000);
+            log(event.getSpell().getName() + " " + event.getSpell().getId() + " procced. Fading at " + currentTime + spell.getDuration() * 1000);
         }
 
         if(event.getType() == SPELL_FADE){
             warrior.getStats().removeStats(event.getSpell().getStats());
-            logger.info("{} ({}) faded .\n", event.getSpell().getName(), event.getSpell().getId());
+            log(event.getSpell().getName() + " " + event.getSpell().getId() + " faded");
         }
 
         changeEventTime(calculateNextAbility(), currentTime);
+    }
+
+    private void log(String message){
+        DecimalFormat df = new DecimalFormat("0.00");
+        if(loggingEnabled) logger.info(df.format(currentTime) + " " + message);
+    }
+
+    private void logError(String message){
+        DecimalFormat df = new DecimalFormat("0.00");
+        if(loggingEnabled) logger.error(df.format(currentTime) + " " + message);
     }
 }

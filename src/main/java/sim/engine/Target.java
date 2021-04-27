@@ -14,6 +14,11 @@ public class Target {
         defense = level * 5;
     }
 
+    public Target(int level){
+        this.level = level;
+
+    }
+
     public int getLevel() {
         return level;
     }
