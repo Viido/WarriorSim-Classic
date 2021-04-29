@@ -41,6 +41,8 @@ public class MainController implements Initializable {
     @FXML
     JFXTextField fightDuration;
     @FXML
+    JFXTextField executeDuration;
+    @FXML
     JFXTextField targetLevel;
     @FXML
     JFXTextField targetArmor;
@@ -257,6 +259,7 @@ public class MainController implements Initializable {
 
     public void saveSettings(){
         settings.setFightDuration(Integer.parseInt(fightDuration.getText()));
+        settings.setExecuteDuration(Integer.parseInt(executeDuration.getText()));
         settings.setTargetLevel(Integer.parseInt(targetLevel.getText()));
         settings.setTargetArmor(Integer.parseInt(targetArmor.getText()));
         settings.setTargetResistance(Integer.parseInt(targetResistance.getText()));
@@ -279,6 +282,7 @@ public class MainController implements Initializable {
 
         raceSelect.setText(settings.getCharacterSetup().getRace().getName());
         fightDuration.setText(settings.getFightDuration() + "");
+        executeDuration.setText(settings.getExecuteDuration() + "");
         targetLevel.setText(settings.getTargetLevel() + "");
         targetArmor.setText(settings.getTargetArmor() + "");
         targetResistance.setText(settings.getTargetResistance() + "");

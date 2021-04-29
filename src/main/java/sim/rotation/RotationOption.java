@@ -18,7 +18,8 @@ public class RotationOption implements Serializable {
     public enum ThresholdType{
         RAGE_ABOVE,
         RAGE_BELOW,
-        TIME_REMAINING
+        TIME_REMAINING,
+        EXECUTE_PHASE
     }
 
     public String getImage() {

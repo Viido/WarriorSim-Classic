@@ -80,10 +80,19 @@
     "type": "RAGE_ABOVE"
   },
   {
+    "image": "inv_sword_48",
+    "name": "Execute",
+    "event": "EXECUTE",
+    "index": 5,
+    "selected": true,
+    "enabled": true,
+    "type": "EXECUTE_PHASE"
+  },
+  {
     "image": "spell_shadow_deathpact",
     "name": "Death Wish",
     "event": "DEATH_WISH",
-    "index": 5,
+    "index": 6,
     "selected": true,
     "enabled": false,
     "timeThreshold": 30,
@@ -93,7 +102,7 @@
     "image": "inv_potion_41",
     "name": "Mighty Rage Potion",
     "event": "MIGHTY_RAGE",
-    "index": 6,
+    "index": 7,
     "selected": true,
     "enabled": true,
     "timeThreshold": 20,
@@ -103,7 +112,7 @@
     "image": "ability_criticalstrike",
     "name": "Recklessness",
     "event": "RECKLESSNESS",
-    "index": 7,
+    "index": 8,
     "selected": false,
     "enabled": true,
     "timeThreshold": 15,

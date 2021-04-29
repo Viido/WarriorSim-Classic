@@ -32,6 +32,13 @@
                         <JFXTextField fx:id="fightDuration"/>
                     </children>
                 </HBox>
+                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" styleClass="settingsHBox">
+                    <children>
+                        <Label text="Execute phase duration (%)" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="executeDuration"/>
+                    </children>
+                </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="35.0" styleClass="settingsHBox">
                     <children>
                         <Label text="Target Level" />

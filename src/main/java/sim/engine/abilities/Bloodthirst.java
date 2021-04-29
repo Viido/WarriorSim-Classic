@@ -7,7 +7,7 @@ public class Bloodthirst extends Ability {
     public Bloodthirst(Fight fight, RotationOption rotationOption) {
         super(6000, 30, fight, rotationOption);
         setType(EventType.BLOODTHIRST);
-        getCooldownEvent().setType(EventType.BLOODTHIRST_CD);
+        cooldownEvent.setType(EventType.BLOODTHIRST_CD);
     }
 
     @Override

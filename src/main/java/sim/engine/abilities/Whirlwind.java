@@ -9,7 +9,7 @@ public class Whirlwind extends Ability{
     public Whirlwind(Fight fight, RotationOption rotationOption) {
         super(12000, 25, fight, rotationOption);
         setType(EventType.WHIRLWIND);
-        getCooldownEvent().setType(EventType.WHIRLWIND_CD);
+        cooldownEvent.setType(EventType.WHIRLWIND_CD);
     }
 
     @Override

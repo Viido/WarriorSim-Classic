@@ -10,13 +10,13 @@ import sim.rotation.RotationOption;
 import static sim.data.Constants.IMPALE;
 
 public abstract class Ability extends Event{
-    private int cooldown;
-    private int rageCost;
+    protected int cooldown;
+    protected int rageCost;
     protected boolean nextSwing = false;
     protected Warrior warrior;
     protected Fight fight;
 
-    private Event cooldownEvent = new Event();
+    protected Event cooldownEvent = new Event();
 
     private boolean onCooldown = false;
     private RotationOption rotationOption;
@@ -71,7 +71,6 @@ public abstract class Ability extends Event{
                 warrior.decrementFlurry();
             }
         }else{
-            warrior.startGlobalCooldown();
             onCooldown = true;
         }
 
@@ -99,11 +98,16 @@ public abstract class Ability extends Event{
     public boolean isOverThreshold(){
         if(rotationOption.getType() == RotationOption.ThresholdType.RAGE_ABOVE){
             return warrior.getRage() >= rotationOption.getRageThreshold();
-        }else if(rotationOption.getType() == RotationOption.ThresholdType.RAGE_BELOW){
+        }
+
+        if(rotationOption.getType() == RotationOption.ThresholdType.RAGE_BELOW){
             return warrior.getRage() <= rotationOption.getRageThreshold();
-        }else{
+        }
+        if(rotationOption.getType() == RotationOption.ThresholdType.TIME_REMAINING){
             return fight.getCurrentTime() <= rotationOption.getTimeThreshold();
         }
+
+        return true;
     }
 
     public void finishCooldown(){

@@ -50,6 +50,10 @@ public class RotationControl extends HBox {
             input.setText(rotationOption.getTimeThreshold() + "");
             this.getChildren().add(new Label("seconds remaining."));
         }
+
+        if(rotationOption.getType() == RotationOption.ThresholdType.EXECUTE_PHASE){
+            this.getChildren().add(new Label("Use during execute phase."));
+        }
     }
 
     public RotationOption getRotationOption() {

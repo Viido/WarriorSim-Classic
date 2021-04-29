@@ -25,15 +25,17 @@ public class Event implements Comparable<Event>{
         ABILITY,
         ABILITY_CD,
         EXECUTE,
+        EXECUTE_RAGE_DRAIN,
+        EXECUTE_PHASE_START,
         MORTAL_STRIKE,
         SHIELD_SLAM,
         SPELL_FADE,
         SPELL_PROC
     }
 
-    public Event(EventType type, int time) {
-        this.type = type;
-        this.time = time;
+    public Event(EventType eventType){
+        this.type = eventType;
+        this.time = 0;
     }
 
     public Event(EventType type, int time, Spell spell){

@@ -24,7 +24,9 @@ public class Fight{
     private Target extraTarget;
     private FightResult results = new FightResult();
 
-    private Event globalCooldown = new Event(GLOBAL_COOLDOWN, 0);
+    private Event globalCooldown = new Event(GLOBAL_COOLDOWN);
+    private Event executeRageDrain = new Event(EXECUTE_RAGE_DRAIN);
+    private Event executePhaseStart = new Event(EXECUTE_PHASE_START);
 
     private Ability bloodthirst;
     private Ability whirlwind;
@@ -32,12 +34,14 @@ public class Fight{
     private Ability heroicStrike;
     private Ability autoAttackMH;
     private Ability autoAttackOH;
+    private Ability execute;
 
     private Map<Integer, Event> spellEvents = new HashMap<>();
     private Map<Integer, Event> spellFadeEvents = new HashMap<>();
 
     private Queue<Event> eventQueue = new PriorityQueue<>();
     private double currentTime = 0;
+    private boolean executePhase = false;
 
     DecimalFormat df = new DecimalFormat("0.00");
 
@@ -59,6 +63,7 @@ public class Fight{
         cleave = new Cleave(this, settings.getRotationOptions().get(CLEAVE));
         heroicStrike = new HeroicStrike(this, settings.getRotationOptions().get(HEROIC_STRIKE));
         autoAttackMH = new AutoAttackMH(this);
+        execute = new Execute(this, settings.getRotationOptions().get(EXECUTE));
 
         if(warrior.isDualWielding()){
             autoAttackOH = new AutoAttackOH(this);
@@ -101,6 +106,8 @@ public class Fight{
 
         bloodthirst.finishCooldown();
         whirlwind.finishCooldown();
+
+        executePhase = false;
     }
 
     private void initEvents(){
@@ -128,11 +135,17 @@ public class Fight{
             eventQueue.add(autoAttackOH);
         }
 
+        changeEventTime(executePhaseStart, settings.getFightDuration() * 1000 * (1 - settings.getExecuteDuration() / 100.0));
+
         changeEventTime(calculateNextAbility(), currentTime);
 
         while(true){
             Event event = eventQueue.remove();
             currentTime = event.getTime();
+
+            if(currentTime == executePhaseStart.getTime()){
+                executePhase = true;
+            }
 
             if(currentTime <= settings.getFightDuration() * 1000){
                 handleEvent(event);
@@ -153,14 +166,24 @@ public class Fight{
     }
 
     private Event calculateNextAbility(){
-        if(bloodthirst.isUsable()){
-            queueAbility(bloodthirst);
-            return bloodthirst;
-        }
+        if(executePhase){
+            if(execute.isUsable()){
+                queueAbility(execute);
 
-        if(whirlwind.isUsable()){
-            queueAbility(whirlwind);
-            return whirlwind;
+                return execute;
+            }
+        }else{
+            if(bloodthirst.isUsable()){
+                queueAbility(bloodthirst);
+
+                return bloodthirst;
+            }
+
+            if(whirlwind.isUsable()){
+                queueAbility(whirlwind);
+
+                return whirlwind;
+            }
         }
 
         return null;
@@ -169,7 +192,11 @@ public class Fight{
     private void queueAbility(Ability ability){
         if(!eventQueue.contains(ability)){
             changeEventTime(globalCooldown, currentTime + 1500);
-            changeEventTime(ability.getCooldownEvent(), currentTime + ability.getCooldown());
+            warrior.startGlobalCooldown();
+
+            if(ability.getCooldown() > 0){
+                changeEventTime(ability.getCooldownEvent(), currentTime + ability.getCooldown());
+            }
         }
     }
 
@@ -213,8 +240,20 @@ public class Fight{
         }
     }
 
+    private void setNextMHSwingType(){
+        if(!executePhase){
+            if(settings.isMultitarget()) {
+                warrior.setHeroicStrikeQueued(cleave.isUsable());
+            }else{
+                warrior.setHeroicStrikeQueued(heroicStrike.isUsable());
+            }
+        }else{
+            warrior.setHeroicStrikeQueued(false);
+        }
+    }
+
     private void handleEvent(Event event){
-        log("Flurry stacks: " + warrior.getFlurryStacks() + " haste: " + warrior.getHaste() + " rage: " + warrior.getRage() + " HS queue: " + warrior.isHeroicStrikeQueued());
+        log("Flurry stacks: " + warrior.getFlurryStacks() + " haste: " + warrior.getHaste() + " rage: " + warrior.getRage() + " HS queue: " + warrior.isHeroicStrikeQueued() + " " + event.getType());
 
         if(event.getType() == AUTOATTACK_MH){
             if(warrior.isHeroicStrikeQueued()){
@@ -227,11 +266,7 @@ public class Fight{
                 autoAttackMH.useAbility();
             }
 
-            if(settings.isMultitarget()){
-                warrior.setHeroicStrikeQueued(cleave.isUsable());
-            }else{
-                warrior.setHeroicStrikeQueued(heroicStrike.isUsable());
-            }
+            setNextMHSwingType();
 
             changeEventTime(autoAttackMH, currentTime + warrior.getMainHand().getCurrentSpeed() * 1000);
         }
@@ -239,11 +274,7 @@ public class Fight{
         if(event.getType() == Event.EventType.AUTOATTACK_OH){
             autoAttackOH.useAbility();
 
-            if(settings.isMultitarget()){
-                warrior.setHeroicStrikeQueued(cleave.isUsable());
-            }else{
-                warrior.setHeroicStrikeQueued(heroicStrike.isUsable());
-            }
+            setNextMHSwingType();
 
             changeEventTime(autoAttackOH, currentTime + warrior.getOffHand().getCurrentSpeed() * 1000);
         }
@@ -254,6 +285,17 @@ public class Fight{
 
         if(event.getType() == WHIRLWIND){
             whirlwind.useAbility();
+        }
+
+        if(event.getType() == EXECUTE){
+            execute.useAbility();
+
+            changeEventTime(executeRageDrain, currentTime + 20);
+        }
+
+        if(event.getType() == EXECUTE_RAGE_DRAIN){
+            warrior.setRage(0);
+            log("EXECUTE DRAINED RAGE");
         }
 
         if(event.getType() == Event.EventType.BLOODTHIRST_CD){
@@ -326,5 +368,9 @@ public class Fight{
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public boolean isExecutePhase() {
+        return executePhase;
     }
 }
