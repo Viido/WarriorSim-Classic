@@ -25,6 +25,7 @@ public class Warrior {
     private int rage;
     private int level = 60;
     private CharacterSetup characterSetup;
+    private Settings settings;
     private Target target;
     private Weapon mainHand;
     private Weapon offHand;
@@ -47,6 +48,8 @@ public class Warrior {
 
     private boolean flurryTalented = false;
 
+    private boolean onGlobalCooldown = false;
+
     private List<Spell> mainHandProcs;
     private List<Spell> offHandProcs;
 
@@ -58,6 +61,7 @@ public class Warrior {
         if(loggingEnabled) logger.debug("Warrior level: {}", level);
 
         this.characterSetup = settings.getCharacterSetup();
+        this.settings = settings;
         stats = new Stats(characterSetup.getWarrior().getStats());
         this.target = target;
         this.heroicStrike9 = settings.isHeroicStrike9();
@@ -99,6 +103,14 @@ public class Warrior {
         haste.set(stats.getHaste());
 
         initProcs();
+    }
+
+    public void reset(){
+        finishGlobalCooldown();
+        stats = new Stats(characterSetup.getWarrior().getStats());
+        this.rage = settings.getInitialRage();
+        haste.set(stats.getHaste());
+        flurryStacks = 0;
     }
 
     private void initProcs(){
@@ -179,122 +191,6 @@ public class Warrior {
         isHeroicStrikeQueued = heroicStrikeQueued;
     }
 
-    public double autoAttackMH(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        int baseDamage = ThreadLocalRandom.current().nextInt(mainHand.getMinDmg(), mainHand.getMaxDmg() + 1);
-
-        double damage = baseDamage + getAp() / 14.0 * mainHand.getBaseSpeed();
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2;
-        }
-
-        if(rollType == AttackTable.RollType.GLANCING){
-            damage *= glancingBlow(mainHand);
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
-    public double autoAttackOH(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        int baseDamage = ThreadLocalRandom.current().nextInt(offHand.getMinDmg(), offHand.getMaxDmg() + 1);
-
-        double damage = baseDamage + getAp() / 14.0 * offHand.getBaseSpeed();
-
-        damage *= (0.5 * (1 + characterSetup.getActiveTalents().getOrDefault(DUAL_WIELD_SPEC, 0) * 0.05));
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2;
-        }
-
-        if(rollType == AttackTable.RollType.GLANCING){
-            damage *= glancingBlow(offHand);
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
-    public double heroicStrike(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        int baseDamage = ThreadLocalRandom.current().nextInt(mainHand.getMinDmg(), mainHand.getMaxDmg() + 1);
-
-        double damage = baseDamage + (heroicStrike9 ? 157 : 138) + getAp() / 14.0 * mainHand.getBaseSpeed();
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2 + characterSetup.getActiveTalents().getOrDefault(IMPALE, 0) * 0.1;
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
-    public double cleave(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        int baseDamage = ThreadLocalRandom.current().nextInt(mainHand.getMinDmg(), mainHand.getMaxDmg() + 1);
-
-        double damage = baseDamage + 50 + characterSetup.getActiveTalents().getOrDefault(IMP_CLEAVE, 0) * 20 + getAp() / 14.0 * mainHand.getBaseSpeed();
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2 + characterSetup.getActiveTalents().getOrDefault(IMPALE, 0) * 0.1;
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
-    public double bloodthirst(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        double damage = getAp() * 0.45;
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2 + characterSetup.getActiveTalents().getOrDefault(IMPALE, 0) * 0.1;
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
-    public double whirlwind(AttackTable.RollType rollType){
-        if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
-            return 0;
-        }
-
-        int baseDamage = ThreadLocalRandom.current().nextInt(mainHand.getMinDmg(), mainHand.getMaxDmg() + 1);
-
-        double damage = baseDamage + getAp() / 14.0 * mainHand.getNormalizedSpeed();
-
-        if(rollType == AttackTable.RollType.CRIT){
-            damage *= 2 + characterSetup.getActiveTalents().getOrDefault(IMPALE, 0) * 0.1;
-        }
-
-        damage *= damageMod;
-
-        return damage;
-    }
-
     public void generateRage(double damage){
         int rage = (int) (damage / rageConversionFactor * 7.5);
 
@@ -343,7 +239,7 @@ public class Warrior {
         return glancingBlow(mainHand);
     }
 
-    private double glancingBlow(Weapon weapon){
+    public double glancingBlow(Weapon weapon){
         double lowEnd = Math.min(1.3 - 0.05 * (target.getDefense() - weapon.getSkill()), 0.91);
         double highEnd = Math.max(Math.min(1.2 - 0.03 * (target.getDefense() - weapon.getSkill()), 0.99), 0.2);
 
@@ -552,6 +448,18 @@ public class Warrior {
         }
 
         return weaponSkill;
+    }
+
+    public boolean isOnGlobalCooldown() {
+        return onGlobalCooldown;
+    }
+
+    public void startGlobalCooldown(){
+        onGlobalCooldown = true;
+    }
+
+    public void finishGlobalCooldown(){
+        onGlobalCooldown = false;
     }
 
     public void setStats(Stats stats) {

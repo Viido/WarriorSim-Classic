@@ -2,6 +2,8 @@ package sim.engine;
 
 import com.jfoenix.controls.JFXProgressBar;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +13,6 @@ import sim.settings.Settings;
 import sim.settings.CharacterSetup;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Simulation {
     private Settings settings;
@@ -46,42 +47,46 @@ public class Simulation {
 
         FightResult result = new FightResult();
 
-        final AtomicInteger simulationProgress = new AtomicInteger(0);
+        DoubleProperty simulationProgress = new SimpleDoubleProperty(0);
 
-        progressBar.setVisible(true);
+        progressBar.progressProperty().bind(simulationProgress.divide(settings.getIterations()));
+
+        int delta = 100;
 
         for(int i = 0; i < cores; i++){
             int chunk = iterationsPerCore[i];
             logger.debug("Chunk size: {}", chunk);
 
-
             Task<FightResult> task = new Task<>(){
                 @Override
                 protected FightResult call() throws Exception {
                     FightResult result = new FightResult();
+                    Fight fight = new Fight(settings);
 
                     try{
-                        int counter = 0;
 
-                        for(int j= 0; j < chunk; j++){
-
-                            Fight fight = new Fight(settings);
-
-                            if(counter % 10000 == 0){
-                                Thread.sleep(1);
-                                Platform.runLater(() -> progressBar.setProgress(simulationProgress.addAndGet(10000)/(double)settings.getIterations()));
-                            }
-
-                            counter ++;
-
+                        for(int j = 1; j <= chunk; j++){
                             FightResult result2 = fight.run();
 
                             result.merge(result2);
+
+                            fight.reset();
+
+                            if(j % delta == 0){
+                                Thread.sleep(1);
+                                Platform.runLater(() -> {
+                                    simulationProgress.set(simulationProgress.get() + delta);
+                                });
+                            }
                         }
 
-                        result.averageResults(chunk);
+                        Platform.runLater(() -> {
+                            simulationProgress.set(simulationProgress.get() + chunk % delta);
+                        });
 
+                        result.averageResults(chunk);
                     }catch (Throwable t){
+                        logger.error(t.getMessage());
                         t.printStackTrace();
                     }
 
@@ -90,7 +95,6 @@ public class Simulation {
             };
 
             Thread thread = new Thread(task);
-            thread.setDaemon(true);
             thread.start();
 
             task.setOnSucceeded(e -> {

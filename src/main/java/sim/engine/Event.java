@@ -2,8 +2,6 @@ package sim.engine;
 
 import sim.items.Spell;
 
-import java.util.List;
-
 public class Event implements Comparable<Event>{
     private EventType type;
     private double time;
@@ -19,7 +17,16 @@ public class Event implements Comparable<Event>{
         BLOODTHIRST_CD,
         WHIRLWIND,
         WHIRLWIND_CD,
+        OVERPOWER,
+        HAMSTRING,
+        DEATH_WISH,
+        MIGHTY_RAGE,
+        RECKLESSNESS,
+        ABILITY,
+        ABILITY_CD,
         EXECUTE,
+        MORTAL_STRIKE,
+        SHIELD_SLAM,
         SPELL_FADE,
         SPELL_PROC
     }
@@ -33,6 +40,14 @@ public class Event implements Comparable<Event>{
         this.type = type;
         this.time = time;
         this.spell = spell;
+    }
+
+    public Event(){
+        this.time = 0;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     public EventType getType() {

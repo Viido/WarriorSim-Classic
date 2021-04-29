@@ -1,5 +1,7 @@
 package sim.engine;
 
+import sim.engine.abilities.AbilityResult;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,10 @@ public class FightResult {
             attackTableResult.addAttack(rollType, damage);
             attackTableResults.put(eventType, attackTableResult);
         }
+    }
+
+    public void addAbilityResult(AbilityResult abilityResult){
+        addAttackResult(abilityResult.getEventType(), abilityResult.getRollType(), abilityResult.getDamage());
     }
 
     public void merge(FightResult fightResult){

@@ -1,6 +1,14 @@
 package sim.settings;
 
+import com.google.gson.Gson;
+import sim.data.SimDB;
+import sim.engine.Event;
+import sim.rotation.RotationOption;
+
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Settings implements Serializable {
     private int fightDuration = 60;
@@ -16,6 +24,7 @@ public class Settings implements Serializable {
     private int extraTargetLevel = 60;
     private int extraTargetArmor = 3000;
     private CharacterSetup characterSetup = new CharacterSetup();
+    private Map<Event.EventType, RotationOption> rotationOptions = new HashMap<>();
 
     public int getFightDuration() {
         return fightDuration;
@@ -119,5 +128,9 @@ public class Settings implements Serializable {
 
     public void setExtraTargetArmor(int extraTargetArmor) {
         this.extraTargetArmor = extraTargetArmor;
+    }
+
+    public Map<Event.EventType, RotationOption> getRotationOptions() {
+        return rotationOptions;
     }
 }

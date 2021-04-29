@@ -1,0 +1,112 @@
+[
+  {
+    "image": "spell_nature_bloodlust",
+    "name": "Bloodthirst",
+    "event": "BLOODTHIRST",
+    "index": 0,
+    "selected": true,
+    "enabled": false,
+    "rageThreshold": 30,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "ability_warrior_savageblow",
+    "name": "Mortal Strike",
+    "event": "MORTAL_STRIKE",
+    "index": 0,
+    "selected": true,
+    "enabled": false,
+    "rageThreshold": 30,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "inv_shield_05",
+    "name": "Shield Slam",
+    "event": "SHIELD_SLAM",
+    "index": 0,
+    "selected": true,
+    "enabled": false,
+    "rageThreshold": 20,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "ability_whirlwind",
+    "name": "Whirlwind",
+    "event": "WHIRLWIND",
+    "index": 1,
+    "selected": true,
+    "enabled": true,
+    "rageThreshold": 25,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "ability_rogue_ambush",
+    "name": "Heroic Strike",
+    "event": "HEROIC_STRIKE",
+    "index": 2,
+    "selected": true,
+    "enabled": true,
+    "rageThreshold": 50,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "ability_warrior_cleave",
+    "name": "Cleave",
+    "event": "CLEAVE",
+    "index": 2,
+    "selected": true,
+    "enabled": false,
+    "rageThreshold": 50,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "ability_meleedamage",
+    "name": "Overpower",
+    "event": "OVERPOWER",
+    "index": 3,
+    "selected": false,
+    "enabled": true,
+    "rageThreshold": 50,
+    "type": "RAGE_BELOW"
+  },
+  {
+    "image": "ability_shockwave",
+    "name": "Hamstring",
+    "event": "HAMSTRING",
+    "index": 4,
+    "selected": false,
+    "enabled": true,
+    "rageThreshold": 80,
+    "type": "RAGE_ABOVE"
+  },
+  {
+    "image": "spell_shadow_deathpact",
+    "name": "Death Wish",
+    "event": "DEATH_WISH",
+    "index": 5,
+    "selected": true,
+    "enabled": false,
+    "timeThreshold": 30,
+    "type": "TIME_REMAINING"
+  },
+  {
+    "image": "inv_potion_41",
+    "name": "Mighty Rage Potion",
+    "event": "MIGHTY_RAGE",
+    "index": 6,
+    "selected": true,
+    "enabled": true,
+    "timeThreshold": 20,
+    "type": "TIME_REMAINING"
+  },
+  {
+    "image": "ability_criticalstrike",
+    "name": "Recklessness",
+    "event": "RECKLESSNESS",
+    "index": 7,
+    "selected": false,
+    "enabled": true,
+    "timeThreshold": 15,
+    "type": "TIME_REMAINING"
+  }
+]

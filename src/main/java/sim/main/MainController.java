@@ -6,16 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sim.data.SimDB;
+import sim.engine.Event;
 import sim.engine.FightResult;
 import sim.engine.Simulation;
 import sim.items.ItemSlot;
@@ -31,6 +30,8 @@ import sim.talents.TalentsController;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static sim.data.Constants.*;
 
 public class MainController implements Initializable {
     @FXML
@@ -78,6 +79,7 @@ public class MainController implements Initializable {
 
     StatsController statsController;
     ItemsController itemsController;
+    RotationController rotationController;
 
     private FightResult fightResult;
 
@@ -103,8 +105,7 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 
-        loadSettings();
-        initRaceSelect();
+
 
         tabPane.getTabs().add(createNewTab());
         Tab newTab = new Tab("+");
@@ -117,7 +118,8 @@ public class MainController implements Initializable {
         });
 
         tabPane.getTabs().add(newTab);
-        simulationProgress.setVisible(false);
+        simulationProgress.setProgress(0);
+        simulationProgress.setVisible(true);
 
         simulateButton.setOnMouseClicked(e -> {
             logger.debug("Simulate Button clicked.");
@@ -128,6 +130,19 @@ public class MainController implements Initializable {
 
             logger.debug("Simulation done.");
         });
+
+        multiTarget.selectedProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue){
+                rotationController.disableOption(Event.EventType.HEROIC_STRIKE);
+                rotationController.enableOption(Event.EventType.CLEAVE);
+            }else{
+                rotationController.disableOption(Event.EventType.CLEAVE);
+                rotationController.enableOption(Event.EventType.HEROIC_STRIKE);
+            }
+        });
+
+        loadSettings();
+        initRaceSelect();
     }
 
     private Tab createNewTab(){
@@ -144,7 +159,7 @@ public class MainController implements Initializable {
         itemsController = new ItemsController(settings.getCharacterSetup());
         TalentsController talentsController = new TalentsController(settings.getCharacterSetup());
         SettingsController settingsController = new SettingsController(settings, statsController);
-        RotationController rotationController = new RotationController();
+        rotationController = new RotationController(settings);
 
         itemsLoader.setController(itemsController);
         talentsLoader.setController(talentsController);
@@ -197,6 +212,42 @@ public class MainController implements Initializable {
             });
         }
 
+        talentsController.getTalentButtons().get(BLOODTHIRST).pointsProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.intValue() == 0){
+                rotationController.disableOption(Event.EventType.BLOODTHIRST);
+            }
+            if(newValue.intValue() == 1){
+                rotationController.enableOption(Event.EventType.BLOODTHIRST);
+            }
+        });
+
+        talentsController.getTalentButtons().get(MORTAL_STRIKE).pointsProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.intValue() == 0){
+                rotationController.disableOption(Event.EventType.MORTAL_STRIKE);
+            }
+            if(newValue.intValue() == 1){
+                rotationController.enableOption(Event.EventType.MORTAL_STRIKE);
+            }
+        });
+
+        talentsController.getTalentButtons().get(SHIELD_SLAM).pointsProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.intValue() == 0){
+                rotationController.disableOption(Event.EventType.SHIELD_SLAM);
+            }
+            if(newValue.intValue() == 1){
+                rotationController.enableOption(Event.EventType.SHIELD_SLAM);
+            }
+        });
+
+        talentsController.getTalentButtons().get(DEATH_WISH).pointsProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.intValue() == 0){
+                rotationController.disableOption(Event.EventType.DEATH_WISH);
+            }
+            if(newValue.intValue() == 1){
+                rotationController.enableOption(Event.EventType.DEATH_WISH);
+            }
+        });
+
         Tab tab = new Tab("Set 1");
 
         tab.setContent(scrollPane);
@@ -217,6 +268,8 @@ public class MainController implements Initializable {
         settings.setExtraTargets(Integer.parseInt(extraTargets.getText()));
         settings.setExtraTargetLevel(Integer.parseInt(extraTargetLevel.getText()));
         settings.setExtraTargetArmor(Integer.parseInt(extraTargetArmor.getText()));
+
+        rotationController.saveRotationOptions();
     }
 
     private void loadSettings(){

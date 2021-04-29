@@ -5,10 +5,15 @@
 }
 
 .jfx-text-field .input-line{
-    -fx-translate-y: -2;
+    -fx-translate-y: -4;
 }
 
 .jfx-text-field .input-focused-line{
     -fx-background-color: #d9d93a;
-    -fx-translate-y: -3;
+    -fx-translate-y: -4;
+}
+
+.label{
+    -fx-font-size: 12;
+    -fx-text-fill: white;
 }
