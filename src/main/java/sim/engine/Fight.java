@@ -46,10 +46,10 @@ public class Fight{
 
         this.settings = settings;
 
-        target = new Target(settings.getTargetLevel(), settings.getTargetArmor(), settings.getTargetResistance());
+        target = new Target(settings.getTargetLevel(), settings.getTargetArmor() - settings.getCharacterSetup().getArmorReduction(), settings.getTargetResistance());
 
         if(settings.isMultitarget()){
-            extraTarget = new Target(settings.getExtraTargetLevel(), settings.getExtraTargetArmor(), 0);
+            extraTarget = new Target(settings.getExtraTargetLevel(), settings.getExtraTargetArmor() - settings.getCharacterSetup().getArmorReduction(), 0);
         }
 
         warrior = new Warrior(settings, target, extraTarget);
@@ -94,7 +94,11 @@ public class Fight{
         eventQueue = new PriorityQueue<>();
         currentTime = 0;
         autoAttackMH.setTime(0);
-        autoAttackOH.setTime(0);
+
+        if(warrior.isDualWielding()){
+            autoAttackOH.setTime(0);
+        }
+
         bloodthirst.finishCooldown();
         whirlwind.finishCooldown();
     }

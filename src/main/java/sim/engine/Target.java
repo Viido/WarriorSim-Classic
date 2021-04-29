@@ -8,7 +8,7 @@ public class Target {
 
     public Target(int level, int armor, int resistance) {
         this.level = level;
-        this.armor = armor;
+        this.armor = Math.max(armor, 0);
         this.resistance = resistance;
 
         defense = level * 5;

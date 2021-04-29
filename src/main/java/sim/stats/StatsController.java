@@ -128,7 +128,7 @@ public class StatsController implements Initializable {
         setWeaponSkillText();
         hitChance.setText(warrior.getHit() + "%");
         setCritChanceText();
-        haste.setText(df.format(warrior.getHaste() * 100 - 100) + "%");
+        haste.setText(df.format(warrior.getStats().getHaste() * 100 - 100) + "%");
         defense.setText(warrior.getDefense() + "");
         blockChance.setText(df.format(warrior.getBlock()) + "%");
         blockValue.setText(warrior.getBlockValue() + "");

@@ -103,6 +103,18 @@ public class CharacterSetup implements Serializable {
         warrior.getStats().removeStats(aura);
     }
 
+    public int getArmorReduction(){
+        int armorReduction = 0;
+
+        for(Aura aura : activeAuras.values()){
+            if(aura.getType().equals("debuff")){
+                armorReduction += aura.getArmor();
+            }
+        }
+
+        return armorReduction;
+    }
+
     public Map<Integer, Integer> getActiveTalents() {
         return activeTalents;
     }
