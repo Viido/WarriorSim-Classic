@@ -65,9 +65,20 @@ jlink{
     forceMerge('log4j-api')
 
     jpackage {
-        // Set the environment property BADASS_JLINK_JPACKAGE_HOME or explicitly configure the below property
-        jpackageHome = 'C:/Program Files/AdoptOpenJDK/jdk-14.0.0.36-hotspot'
-        installerOptions = ['--win-per-user-install', '--win-dir-chooser']
         imageOptions = ['--icon', 'src/main/resources/images/app/warrior_wow_icon.ico']
+
+        def currentOs = org.gradle.internal.os.OperatingSystem.current()
+        def imgType = currentOs.windows ? 'ico' : currentOs.macOsX ? 'icns' : 'png'
+        imageOptions += ['--icon', "src/main/resources/images/app/warrior_wow_icon.$imgType"]
+
+        if(currentOs.windows) {
+            installerOptions += ['--win-per-user-install', '--win-dir-chooser']
+        }
+        else if (currentOs.linux) {
+            installerOptions += ['--linux-package-name', 'WarriorSim Classic']
+        }
+        else if (currentOs.macOsX) {
+            installerOptions += ['--mac-package-name', 'WarriorSim Classic']
+        }
     }
 }
