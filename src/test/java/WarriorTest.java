@@ -4,6 +4,7 @@ import sim.engine.warrior.Warrior;
 import sim.engine.Target;
 import sim.items.Item;
 import sim.settings.CharacterSetup;
+import sim.settings.Settings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static sim.data.Constants.MAINHAND;
@@ -12,13 +13,13 @@ public class WarriorTest {
 
     @Test
     public void testGlancingBlow(){
+        Settings settings = new Settings();
         Item item = SimDB.ITEMS.getItemById(17068);
-        CharacterSetup characterSetup = new CharacterSetup();
-        characterSetup.setRace(SimDB.RACES[0]);
-        characterSetup.equipItem(MAINHAND, item);
+        settings.getCharacterSetup().equipItem(MAINHAND, item);
 
         Target target = new Target(63, 3731, 0);
-        Warrior warrior = new Warrior(characterSetup, target, true);
+        Target extraTarget = new Target(60, 3000, 0);
+        Warrior warrior = new Warrior(settings, target, extraTarget);
 
         double sum = 0;
         double min = 1;

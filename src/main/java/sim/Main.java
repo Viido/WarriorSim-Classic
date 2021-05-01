@@ -17,11 +17,6 @@ public class Main extends Application {
 
     public static boolean loggingEnabled = false;
 
-    static{
-        System.setProperty("log4j2.configurationFile", "log4j2.xml");
-        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         loadData();
