@@ -42,5 +42,5 @@ jobs:
     - name: Upload RPM as an artifact
       uses: actions/upload-artifact@v2
       with:
-        name: hellofx-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
+        name: WarriorSim-Classic-${{ matrix.os }}-rpm
         path: build/jpackage/*.rpm
