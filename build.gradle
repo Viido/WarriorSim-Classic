@@ -73,7 +73,7 @@ jlink{
             installerOptions += ['--win-per-user-install', '--win-dir-chooser']
         }
         else if (currentOs.linux) {
-            installerOptions += ['--linux-package-name', 'WarriorSim Classic']
+            installerOptions += ['--linux-package-name', 'warriorsim-classic']
         }
         else if (currentOs.macOsX) {
             installerOptions += ['--mac-package-name', 'WarriorSim Classic']
