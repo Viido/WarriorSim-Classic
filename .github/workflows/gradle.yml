@@ -40,7 +40,7 @@ jobs:
         name: WarriorSim-Classic-${{ matrix.os }}-deb
         path: build/jpackage/*.deb
     - name: Upload RPM as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: hellofx-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
-          path: build/jpackage/*.rpm
+      uses: actions/upload-artifact@v2
+      with:
+        name: hellofx-jdk${{ matrix.java }}-${{ matrix.os }}-rpm
+        path: build/jpackage/*.rpm
