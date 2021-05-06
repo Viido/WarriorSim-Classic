@@ -1,5 +1,4 @@
-[![Build Status](https://github.com/Viido/WarriorSim-Classic/workflows/Gradle%20Build/badge.svg)](https://github.com/Viidot/WarriorSim-Classic/actions?query=workflow%3A%22Gradle+Build%22)
-
+![Gradle Build](https://github.com/Viido/WarriorSim-Classic/actions/workflows/gradle.yml/badge.svg)
 # WarriorSim Classic
 This is an event-driven simulator for Classic World of Warcraft Warrior class written in Java. 
 
