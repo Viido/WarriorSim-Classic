@@ -15,7 +15,7 @@ import java.util.Map;
 import static sim.data.Constants.*;
 
 public class CharacterSetup implements Serializable {
-    private Race race;
+    private Race race = SimDB.RACES[0];
     private Item[] equippedItems = new Item[17];
     private Enchant[] equippedEnchants = new Enchant[17];
     private Map<Integer, Aura> activeAuras = new HashMap<>();

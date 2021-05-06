@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/Viido/WarriorSim-Classic/workflows/Gradle%20Build/badge.svg)](https://github.com/Viidot/WarriorSim-Classic/actions?query=workflow%3A%22Gradle+Build%22)
+
 # WarriorSim Classic
 This is an event-driven simulator for Classic World of Warcraft Warrior class written in Java. 
 
@@ -21,21 +23,23 @@ These features are being worked on:
 * Support for Burning Crusade expansion
 
 ## Setup 
-Run project with Gradle
+Run project with Gradle. JDK version must be 11+, 16 is not support by this gradle version.
 ```
 git clone https://github.com/Viido/WarriorSim-Classic.git
-gradlew run
+./gradlew run
 ```
 
 Create runtime image
 ```
-gradlew jlink
+./gradlew jlink
 ```
 
 Create installer
 ```
-gradlew jpackage
+./gradlew jpackage
 ```
+
+On windows, use gradlew.bat instead.
 
 ## Tools used
 [OpenJFX](https://github.com/openjdk/jfx)
