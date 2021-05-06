@@ -156,9 +156,9 @@ public class ItemsController implements Initializable {
 
     private void initItemSlots() {
         String[] images = {
-                "itemslot_head.jpg", "itemslot_neck.jpg", "itemslot_shoulder.jpg", "itemslot_chest.jpg", "itemslot_chest.jpg", "itemslot_wrists.jpg", "itemslot_mainhand.jpg",
-                "itemslot_offhand.jpg", "itemslot_ranged.jpg", "itemslot_hands.jpg", "itemslot_waist.jpg", "itemslot_legs.jpg", "itemslot_feet.jpg", "itemslot_finger.jpg",
-                "itemslot_finger.jpg", "itemslot_trinket.jpg", "itemslot_trinket.jpg"
+                "itemslot_head.png", "itemslot_neck.png", "itemslot_shoulder.png", "itemslot_chest.png", "itemslot_chest.png", "itemslot_wrists.png", "itemslot_mainhand.png",
+                "itemslot_offhand.png", "itemslot_ranged.png", "itemslot_hands.png", "itemslot_waist.png", "itemslot_legs.png", "itemslot_feet.png", "itemslot_finger.png",
+                "itemslot_finger.png", "itemslot_trinket.png", "itemslot_trinket.png"
         };
 
         CustomPopup enchantPopup = new CustomPopup();

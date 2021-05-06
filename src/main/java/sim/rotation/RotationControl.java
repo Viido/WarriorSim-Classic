@@ -22,7 +22,7 @@ public class RotationControl extends HBox {
         this.setSpacing(5.0);
 
         Label label = new Label();
-        label.setGraphic(new ImageView(new Image("images/icons/" + rotationOption.getImage() + ".jpg")));
+        label.setGraphic(new ImageView(new Image("images/icons/" + rotationOption.getImage() + ".png")));
         label.setText(rotationOption.getName());
         label.setMinWidth(150);
 

@@ -137,14 +137,14 @@ public class TalentButton extends Button {
     }
 
     public void setAvailable(){
-        this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ ".jpg);");
+        this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ ".png);");
         label1.setStyle("-fx-background-position: -84px, 0px;");
         label2.setVisible(true);
     }
 
     public void setUnavailable(){
         label1.setStyle("-fx-background-position: 0px, 0px;");
-        this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ "_grey.jpg);");
+        this.setStyle("-fx-background-image: url(/images/icons/" + talent.getImg().toLowerCase()+ "_grey.png);");
         label2.setVisible(false);
     }
 

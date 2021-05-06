@@ -27,7 +27,7 @@
                                 <children>
                                     <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
                                         <image>
-                                            <Image url="@/images/talent/classes/backgrounds/warrior_1.jpg" />
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_1.png" />
                                         </image>
                                     </ImageView>
                                     <GridPane fx:id="tree1" pickOnBounds="false">
@@ -67,7 +67,7 @@
                                 <children>
                                     <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
                                         <image>
-                                            <Image url="@/images/talent/classes/backgrounds/warrior_2.jpg" />
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_2.png" />
                                         </image>
                                     </ImageView>
                               <GridPane fx:id="tree2" pickOnBounds="false">
@@ -103,7 +103,7 @@
                                 <children>
                                     <ImageView fitHeight="420.0" fitWidth="240.0" pickOnBounds="true">
                                         <image>
-                                            <Image url="@/images/talent/classes/backgrounds/warrior_3.jpg" />
+                                            <Image url="@/images/talent/classes/backgrounds/warrior_3.png" />
                                         </image>
                                     </ImageView>
                               <GridPane fx:id="tree3" pickOnBounds="false">
