@@ -5,6 +5,8 @@ This is an event-driven simulator for Classic World of Warcraft Warrior class wr
 ## Installation
 Windows/Linux/macOS: Download the respective installer from [releases](https://github.com/Viido/WarriorSim-Classic/releases).
 
+See the [User Manual](https://github.com/Viido/WarriorSim-Classic/wiki/User-Manual).
+
 ## Features
 * Talent calculator
 * World buffs and consumables
@@ -56,3 +58,6 @@ On windows, use gradlew.bat instead.
 [JUnit5](https://github.com/junit-team/junit5)
 
 [Gson](https://github.com/google/gson)
+
+## Disclaimer
+All art assets belong to Blizzard Entertainment®
