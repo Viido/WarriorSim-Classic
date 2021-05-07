@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -67,7 +68,7 @@ public class MainController implements Initializable {
     @FXML
     SplitPane mainPane;
     @FXML
-    JFXTabPane tabPane;
+    ScrollPane leftSection;
     @FXML
     JFXButton simulateButton;
     @FXML
@@ -93,10 +94,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(settings.getCharacterSetup().getRace() == null){
-            settings.getCharacterSetup().setRace(SimDB.RACES[0]);
-        }
-
         FXMLLoader statsLoader = new FXMLLoader(getClass().getResource("/sim/stats/fxml/StatsView.fxml"));
         statsController = new StatsController(settings.getCharacterSetup());
         statsLoader.setController(statsController);
@@ -107,19 +104,8 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 
+        initLeftSection();
 
-
-        tabPane.getTabs().add(createNewTab());
-        Tab newTab = new Tab("+");
-
-        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue == newTab){
-                tabPane.getSelectionModel().select(oldValue);
-                tabPane.getTabs().add(tabPane.getTabs().size() - 1, new Tab("test"));
-            }
-        });
-
-        tabPane.getTabs().add(newTab);
         simulationProgress.setProgress(0);
         simulationProgress.setVisible(true);
 
@@ -147,8 +133,8 @@ public class MainController implements Initializable {
         initRaceSelect();
     }
 
-    private Tab createNewTab(){
-        ScrollPane scrollPane = new ScrollPane();
+    private void initLeftSection(){
+        leftSection.setPadding(new Insets(20, 0, 0, 0));
         StackPane stackPane = new StackPane();
 
         stackPane.setMinSize(1600, 920);
@@ -190,7 +176,7 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 
-        scrollPane.setContent(stackPane);
+        leftSection.setContent(stackPane);
 
         for(ItemSlot itemSlot : itemsController.getItemSlots()){
             itemSlot.selectedItemProperty().addListener((obs, oldValue, newValue) -> {
@@ -250,11 +236,7 @@ public class MainController implements Initializable {
             }
         });
 
-        Tab tab = new Tab("Set 1");
-
-        tab.setContent(scrollPane);
-
-        return tab;
+        leftSection.setContent(stackPane);
     }
 
     public void saveSettings(){

@@ -17,6 +17,12 @@ public class Constants {
     public static final int TROLL = 8;
 
     // item slots
+    public static final int HEAD = 0;
+    public static final int NECK = 1;
+    public static final int SHOULDERS = 2;
+    public static final int BACK = 3;
+    public static final int CHEST = 4;
+    public static final int WRIST = 5;
     public static final int MAINHAND = 6;
     public static final int OFFHAND = 7;
 

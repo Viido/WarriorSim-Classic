@@ -11,6 +11,27 @@
     -fx-background-color: baseColor;
 }
 
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar{
+    -fx-background-color: baseColor;
+}
+
+.scroll-pane .scroll-bar .thumb{
+    -fx-background-color: secondaryColor;
+}
+
+.scroll-pane .scroll-bar .increment-button:hover,
+.scroll-pane .scroll-bar .decrement-button:hover{
+    -fx-background-color: secondaryColor;
+}
+
 .split-pane{
     -fx-background-color: baseColor;
 }
@@ -49,10 +70,6 @@
     -fx-border-color: secondaryColor;
     -fx-border-width: 1px;
     -fx-background-insets: 0px;
-}
-
-.jfx-progress-bar{
-
 }
 
 .averageDPS{

@@ -11,7 +11,7 @@ public class Overpower extends Ability{
     }
 
     @Override
-    protected double calcBaseDamage() {
+    public double calcBaseDamage() {
         int baseDamage = ThreadLocalRandom.current().nextInt(warrior.getMainHand().getMinDmg(), warrior.getMainHand().getMaxDmg() + 1) + 45;
         return baseDamage + (warrior.isHeroicStrike9() ? 157 : 138) + warrior.getAp() / 14.0 * warrior.getMainHand().getBaseSpeed();
     }

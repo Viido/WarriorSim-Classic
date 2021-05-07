@@ -13,7 +13,7 @@ public class Whirlwind extends Ability{
     }
 
     @Override
-    protected double calcBaseDamage() {
+    public double calcBaseDamage() {
         int baseDamage = ThreadLocalRandom.current().nextInt(warrior.getMainHand().getMinDmg(), warrior.getMainHand().getMaxDmg() + 1);
 
         return baseDamage + warrior.getAp() / 14.0 * warrior.getMainHand().getNormalizedSpeed();

@@ -19,14 +19,14 @@ public class AutoAttackOH extends Ability{
     }
 
     @Override
-    protected double calcBaseDamage() {
+    public double calcBaseDamage() {
         int baseDamage = ThreadLocalRandom.current().nextInt(warrior.getOffHand().getMinDmg(), warrior.getOffHand().getMaxDmg() + 1);
 
         return baseDamage + warrior.getAp() / 14.0 * warrior.getOffHand().getBaseSpeed();
     }
 
     @Override
-    protected AbilityResult calculateResult(Target target, AttackTable.RollType rollType) {
+    public AbilityResult calculateResult(Target target, AttackTable.RollType rollType) {
         if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
             return new AbilityResult(getType(), rollType, 0);
         }

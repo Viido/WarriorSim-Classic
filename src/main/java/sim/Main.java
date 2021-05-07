@@ -64,8 +64,7 @@ public class Main extends Application {
             settings = (Settings) in.readObject();
             in.close();
             fileIn.close();
-        } catch (IOException | ClassNotFoundException c) {
-            c.printStackTrace();
+        } catch (IOException | ClassNotFoundException ignored) {
         }
     }
 }

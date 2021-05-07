@@ -373,4 +373,56 @@ public class Fight{
     public boolean isExecutePhase() {
         return executePhase;
     }
+
+    public Event getGlobalCooldown() {
+        return globalCooldown;
+    }
+
+    public Event getExecuteRageDrain() {
+        return executeRageDrain;
+    }
+
+    public Event getExecutePhaseStart() {
+        return executePhaseStart;
+    }
+
+    public Ability getBloodthirst() {
+        return bloodthirst;
+    }
+
+    public Ability getWhirlwind() {
+        return whirlwind;
+    }
+
+    public Ability getCleave() {
+        return cleave;
+    }
+
+    public Ability getHeroicStrike() {
+        return heroicStrike;
+    }
+
+    public Ability getAutoAttackMH() {
+        return autoAttackMH;
+    }
+
+    public Ability getAutoAttackOH() {
+        return autoAttackOH;
+    }
+
+    public Ability getExecute() {
+        return execute;
+    }
+
+    public Map<Integer, Event> getSpellEvents() {
+        return spellEvents;
+    }
+
+    public Map<Integer, Event> getSpellFadeEvents() {
+        return spellFadeEvents;
+    }
+
+    public Queue<Event> getEventQueue() {
+        return eventQueue;
+    }
 }

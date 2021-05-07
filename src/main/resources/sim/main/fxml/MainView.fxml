@@ -6,11 +6,9 @@
 
 <?import javafx.scene.Cursor?>
 <SplitPane fx:id="mainPane" stylesheets="@../css/Main.css" dividerPositions="0.9" minWidth="1920.0" maxWidth="1920.0" minHeight="1080.0" maxHeight="1080.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-    <JFXTabPane fx:id="tabPane">
-    </JFXTabPane>
+    <ScrollPane fx:id="leftSection">
+    </ScrollPane>
     <VBox minWidth="300.0" maxWidth="300.0">
-<!--        <fx:include fx:id="statsView" source="../../stats/fxml/StatsView.fxml" />-->
-
         <VBox fx:id="rightSection" stylesheets="@../../settings/css/Settings.css">
             <children>
                 <Label text="Settings" styleClass="headerLabel"/>

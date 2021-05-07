@@ -235,10 +235,6 @@ public class Warrior {
         return flurryStacks;
     }
 
-    public double testGlancing(){
-        return glancingBlow(mainHand);
-    }
-
     public double glancingBlow(Weapon weapon){
         double lowEnd = Math.min(1.3 - 0.05 * (target.getDefense() - weapon.getSkill()), 0.91);
         double highEnd = Math.max(Math.min(1.2 - 0.03 * (target.getDefense() - weapon.getSkill()), 0.99), 0.2);

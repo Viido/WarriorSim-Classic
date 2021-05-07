@@ -30,13 +30,13 @@ public abstract class Ability extends Event{
         this.rotationOption = rotationOption;
     }
 
-    protected abstract double calcBaseDamage();
+    public abstract double calcBaseDamage();
 
     public boolean isUsable(){
         return isEnabled() && isReady() && isOverThreshold() && warrior.getRage() >= rageCost;
     }
 
-    protected AbilityResult calculateResult(Target target, AttackTable.RollType rollType){
+    public AbilityResult calculateResult(Target target, AttackTable.RollType rollType){
         if(rollType == AttackTable.RollType.DODGE || rollType == AttackTable.RollType.MISS){
             return new AbilityResult(getType(), rollType, 0);
         }

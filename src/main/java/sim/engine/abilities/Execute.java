@@ -21,7 +21,7 @@ public class Execute extends Ability{
     }
 
     @Override
-    protected double calcBaseDamage() {
+    public double calcBaseDamage() {
         return 600 + (warrior.getRage() - rageCost) * 15;
     }
 

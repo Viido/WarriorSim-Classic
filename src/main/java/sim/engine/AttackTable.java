@@ -107,7 +107,7 @@ public class AttackTable {
         }
 
         if(dualWielding && !yellowTable){
-            miss = miss * 0.8 + 20;
+            miss = miss + 19;
         }
 
         if(skillDiff > 10){
