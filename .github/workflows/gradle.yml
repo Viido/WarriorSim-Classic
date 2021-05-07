@@ -14,10 +14,9 @@ jobs:
     - name: Git checkout
       uses: actions/checkout@v2
     - name: Set up JDK
-      uses: actions/setup-java@v2
+      uses: AdoptOpenJDK/install-jdk@v1
       with:
-        java-version: 15
-        distribution: 'adopt'
+        version: 14
     - name: Echo JAVA_HOME
       run: echo $JAVA_HOME
     - name: Verify Gradle Wrapper
